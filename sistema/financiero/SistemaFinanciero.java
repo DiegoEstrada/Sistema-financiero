@@ -5,6 +5,7 @@
  */
 package sistema.financiero;
 
+import Modelo.Resultados;
 import Modelo.SituacionFinanciera;
 
 /**
@@ -17,6 +18,10 @@ public class SistemaFinanciero {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        /*
+        Comentada toda la parte pare crear un estado de situación finaciera balanceado "
+        
         SituacionFinanciera edo1 = new SituacionFinanciera("Walmart.txt");
         edo1.agregarcuenta("Activo", "Circulante", "Caja", "200000");
         edo1.agregarcuenta("Activo", "Circulante", "Bancos", "250000");
@@ -36,6 +41,21 @@ public class SistemaFinanciero {
             System.out.println("Los saldos de las cuentas no estan balanceados por favor revisa las cantidades rehistradas en las cuentas");
         
         //edo1.mostrarcuentas();
+
+        */
+        
+        Resultados  edores1 = new Resultados("Estado de Resultados Wamlart de 2015.txt");
+        edores1.agregarCuentas("Ventas", "150000");
+        edores1.agregarCuentas("Costo de ventas", "25000");
+        edores1.agregarCuentas("Gastos de venta", "10000");
+        edores1.agregarCuentas("Gastos de administracion", "5000");
+        edores1.agregarCuentas("Otros productos financieros", "5000");
+        edores1.agregarCuentas("ISR", "12560");
+        edores1.agregarCuentas("PTU", "8900");
+        
+        edores1.crearEstadoFinanciero();
+        edores1.mostrarCuentas();
+        
     }
     
 }

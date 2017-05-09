@@ -282,7 +282,7 @@ public class SituacionFinanciera {
     
     public static ArrayList obtenercuentasde(Map cuentas, String cuentabuscada, String tipobuscado)
     {
-        ArrayList<String> coincidencias = new ArrayList<String>();
+        ArrayList<String> coincidencias = new ArrayList<>();
         
         Iterator it = cuentas.keySet().iterator();
         ArrayList <String> cuenta;
