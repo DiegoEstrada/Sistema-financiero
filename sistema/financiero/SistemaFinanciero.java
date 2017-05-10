@@ -7,6 +7,8 @@ package sistema.financiero;
 
 import Modelo.Resultados;
 import Modelo.SituacionFinanciera;
+import java.util.ArrayList;
+import java.util.Map;
 
 /**
  *
@@ -17,6 +19,8 @@ public class SistemaFinanciero {
     /**
      * @param args the command line arguments
      */
+    private static Map<String,ArrayList<String>> cuentas;
+    
     public static void main(String[] args) {
         
         /*
@@ -25,6 +29,7 @@ public class SistemaFinanciero {
         SituacionFinanciera edo1 = new SituacionFinanciera("Walmart.txt");
         edo1.agregarcuenta("Activo", "Circulante", "Caja", "200000");
         edo1.agregarcuenta("Activo", "Circulante", "Bancos", "250000");
+       
         edo1.agregarcuenta("Activo", "Circulante", "Clientes", "300000");
         edo1.agregarcuenta("Activo", "Fijo", "Equipo de computo", "1000000");
         edo1.agregarcuenta("Activo", "Diferido", "Gastos de instalacion", "250000");
@@ -45,6 +50,7 @@ public class SistemaFinanciero {
         */
         
         Resultados  edores1 = new Resultados("Estado de Resultados Wamlart de 2015.txt");
+        /*
         edores1.agregarCuentas("Ventas", "150000");
         edores1.agregarCuentas("Costo de ventas", "25000");
         edores1.agregarCuentas("Gastos de venta", "10000");
@@ -52,9 +58,11 @@ public class SistemaFinanciero {
         edores1.agregarCuentas("Otros productos financieros", "5000");
         edores1.agregarCuentas("ISR", "12560");
         edores1.agregarCuentas("PTU", "8900");
+        */
         
-        edores1.crearEstadoFinanciero();
+        edores1.leerEstadoFinanciero();
         edores1.mostrarCuentas();
+        cuentas = edores1.importarCuentas();
         
     }
     

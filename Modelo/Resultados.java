@@ -1,12 +1,19 @@
 package Modelo;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -182,6 +189,7 @@ public class Resultados implements EstadoFinanciero {
     @Override
     public void mostrarCuentas() {
         Iterator it = CUENTAS.keySet().iterator();
+        
         ArrayList <String> cuenta;
         int i,tam;
         String nombre;
@@ -206,6 +214,33 @@ public class Resultados implements EstadoFinanciero {
     @Override
     public void leerEstadoFinanciero() {
         
+        File f;
+        FileReader r;
+        BufferedReader br;
+        String linea;
+            //PrintWriter wr;
+        
+        f = new File(nomEdoFin);
+        
+        try {
+            
+            r = new FileReader(f);
+            br=new BufferedReader(r);
+            
+            while((linea=br.readLine())!=null)
+            {
+                asignarCuentas(linea);
+            }
+            
+            
+            r.close();
+            br.close();
+            
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        } catch (IOException ex) {
+            Logger.getLogger(Resultados.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -229,7 +264,7 @@ public class Resultados implements EstadoFinanciero {
     
     /*
     La importancia de tener en el nombre de la forma Abc dfg, es decir que solo la pimer letra comienza con mayuscula
-    permite identifica de manera precisa la distincion entre las cuentas Ventas y Costo de ventas que contienen la palabra
+    permite identificar de manera precisa la distincion entre las cuentas Ventas y Costo de ventas que contienen la palabra
     ventas pero de diferente manera
     */
 
@@ -261,6 +296,47 @@ public class Resultados implements EstadoFinanciero {
     @Override
     public void agregarCuentas(String cuenta, String tipo, String nombre, String saldo) {
         //Este metodo esta vacio con la intencion de implementar mas detalles al HashMapal agregar cuentas 
+    }
+    
+    public static void asignarCuentas(String linea)
+    {
+        /*
+        Para este metodo de clase se debe considerar que si se quiere leer un estado de resultados hecho por el usuario
+        en lugar de crearlo con el sistema se corre el riesgo de la perdida de fidelidad en la lectura de informacion
+        debido a que la condicion para asignar los saldo admite todo lo que no sea en letras de a-z, A-Z o espacios
+        */
+        int t = linea.length();
+        ArrayList<String> aux = new ArrayList();
+        String cuenta = "";
+        String saldo = "";
+        
+    if (!linea.contains("Menos") && !linea.contains("Mas") && !linea.contains("Estado"))
+        { 
+        for (int i = 0; i < t; i++) {
+            
+                if((linea.charAt(i)==32) ||(linea.charAt(i)>=65 && linea.charAt(i)<=90) || ((linea.charAt(i)>=97 && linea.charAt(i)<=122))) //Mentras este leyendo un caracter en lugar de un numero en codigo ascii
+                {
+                    cuenta += linea.charAt(i);
+                }
+                else
+                {
+                    saldo += linea.charAt(i);
+                }
+            }
+        aux.clear();
+        aux.add(saldo);
+            
+        CUENTAS.put(cuenta, aux);
+            //System.out.println("Esta es el nombre de la cuenta :"+cuenta);
+            //System.out.println("Este es el saldo de la cuenta "+saldo);
+                
+        }
+    }
+    
+    @Override
+    public Map<String,ArrayList<String>> importarCuentas()
+    {
+        return CUENTAS;
     }
     
     

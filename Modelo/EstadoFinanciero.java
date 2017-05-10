@@ -20,5 +20,6 @@ public interface EstadoFinanciero {
     public void mostrarCuentas();
     public float obtenerSaldode(String cuentabuscada, String tipobuscado);
     public ArrayList<String> obtenerCuentasde(String cuentabuscada, String tipobuscado);
+    public Map<String,ArrayList<String>> importarCuentas();
     
 }
