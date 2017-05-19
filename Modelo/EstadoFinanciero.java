@@ -14,11 +14,12 @@ public interface EstadoFinanciero {
     
     public void crearEstadoFinanciero();
     public void leerEstadoFinanciero();
-    public void agregarCuentas(String cuenta, String tipo, String nombre, String saldo);
-    public void agregarCuentas(String nombre, String saldo);
+    public void agregarCuenta(String cuenta, String tipo, String nombre, String saldo);
+    public void agregarCuenta(String nombre, String saldo);
     public void eliminarCuenta(String cuenta);
     public void mostrarCuentas();
     public float obtenerSaldode(String cuentabuscada, String tipobuscado);
+    public boolean verificarEstado();
     public ArrayList<String> obtenerCuentasde(String cuentabuscada, String tipobuscado);
     public Map<String,ArrayList<String>> importarCuentas();
     

@@ -9,11 +9,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *
@@ -166,7 +164,7 @@ public class Resultados implements EstadoFinanciero {
     }
 
     @Override
-    public void agregarCuentas(String nombre, String saldo) {
+    public void agregarCuenta(String nombre, String saldo) {
         ArrayList<String> datos = new ArrayList<>();
         
         /*
@@ -239,7 +237,7 @@ public class Resultados implements EstadoFinanciero {
         } catch (FileNotFoundException ex) {
             System.out.println(ex.getMessage());
         } catch (IOException ex) {
-            Logger.getLogger(Resultados.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
     }
 
@@ -294,7 +292,7 @@ public class Resultados implements EstadoFinanciero {
     }
 
     @Override
-    public void agregarCuentas(String cuenta, String tipo, String nombre, String saldo) {
+    public void agregarCuenta(String cuenta, String tipo, String nombre, String saldo) {
         //Este metodo esta vacio con la intencion de implementar mas detalles al HashMapal agregar cuentas 
     }
     
@@ -326,7 +324,7 @@ public class Resultados implements EstadoFinanciero {
         aux.clear();
         aux.add(saldo);
             
-        CUENTAS.put(cuenta, aux);
+            CUENTAS.put(cuenta, aux);
             //System.out.println("Esta es el nombre de la cuenta :"+cuenta);
             //System.out.println("Este es el saldo de la cuenta "+saldo);
                 
@@ -337,6 +335,17 @@ public class Resultados implements EstadoFinanciero {
     public Map<String,ArrayList<String>> importarCuentas()
     {
         return CUENTAS;
+    }
+
+    @Override
+    public boolean verificarEstado() {
+        /*
+        No hay una implementacion para este metodo debido a que este estado financiero no necesita ser cuadrado 
+        al final de algun ejercicio, solo sirve para obtener los valores de algunas cuentas que se utilizan en 
+        otros estados financieros
+        */
+                
+        return true;
     }
     
     

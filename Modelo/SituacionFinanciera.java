@@ -1,22 +1,24 @@
 package Modelo;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Scanner;
+
 
 
 /**
  *
  * @author Diego EG
  */
-public class SituacionFinanciera {
+public class SituacionFinanciera implements EstadoFinanciero {
     
     /* Declarando un map para guardar todas las cuentas del estado de resultados de manera que la llave de cada
        elemento se el nombre de la cuenta, su contenido es de tipo ArrayLista para alacenar varios indicadores
@@ -29,18 +31,20 @@ public class SituacionFinanciera {
              y saldo representa la cantidad en pesos con la cual cuenta la empresa en esa cuenta
     */
     
-    private  Map<String,ArrayList<String>> cuentas;
-    
+    //private  Map<String,ArrayList<String>> cuentas;
+    private String nomEdoFin;
+    private static String cuentaaux;
+    private static String tipoaux;
     
     public SituacionFinanciera(String nombrearchivo){
         //Inicializando el objeto cuentas como HashMap
-        cuentas = new HashMap<String, ArrayList<String>>();
-        
+        //cuentas = new HashMap<String, ArrayList<String>>();
+        nomEdoFin = nombrearchivo;
         
     }
     
-    public void crearEstadoDeSituacionFinanciera(String nombrearchivo)
-    {
+    @Override
+    public void crearEstadoFinanciero() {
         //System.out.println("Estoy creando el estado ");
         File f;
         FileWriter w;
@@ -51,19 +55,19 @@ public class SituacionFinanciera {
         float suma=0;
         int t,i;
         
-        f = new File(nombrearchivo);
+        f = new File(nomEdoFin);
         try {
         
         w = new FileWriter(f);
         bw=new BufferedWriter(w);
         wr=new PrintWriter(bw);
         
-        wr.println("\t\t\t\t\tEstado de situación financira de "+nombrearchivo+ "\t\t\t\t\t");
+        wr.println("\t\t\t\t\tEstado de situación financira de "+nomEdoFin+ "\t\t\t\t\t");
         wr.println("Activo");
         //Se comienzan a escribir las cuentas de activo cieculante, sus saldo y su suma 
         wr.println("\tCirculante");
-        cuenta = obtenercuentasde(cuentas, "Activo", "Circulante");
-        suma = obtenersaldode(cuentas, "Activo", "Circulante");
+        cuenta = obtenerCuentasde( "Activo", "Circulante");
+        suma = obtenerSaldode("Activo", "Circulante");
         t = cuenta.size();
             //System.out.println("Tamño "+t);
         for(i = 0; i<t; i++)
@@ -80,8 +84,8 @@ public class SituacionFinanciera {
         //Se comineza a escribir las cuentas de activo fijo, sus saldos y su suma
         
         wr.println("\tFijo");
-        cuenta = obtenercuentasde(cuentas, "Activo", "Fijo");
-        suma = obtenersaldode(cuentas, "Activo", "Fijo");
+        cuenta = obtenerCuentasde("Activo", "Fijo");
+        suma = obtenerSaldode("Activo", "Fijo");
         t = cuenta.size();
             //System.out.println("Tamño "+t);
         for(i = 0; i<t; i++)
@@ -99,8 +103,8 @@ public class SituacionFinanciera {
         //Se comienza aescribir las cuentas de activo diferido, sus saldos y su suma 
         
         wr.println("\tDiferido");
-        cuenta = obtenercuentasde(cuentas, "Activo", "Diferido");
-        suma = obtenersaldode(cuentas, "Activo", "Diferido");
+        cuenta = obtenerCuentasde("Activo", "Diferido");
+        suma = obtenerSaldode("Activo", "Diferido");
         t = cuenta.size();
             //System.out.println("Tamño "+t);
         for(i = 0; i<t; i++)
@@ -114,7 +118,7 @@ public class SituacionFinanciera {
         
         wr.println("\tSuma diferio  "+suma+""); //se llama a la suma de activo fijo 
         
-        suma = obtenersaldode(cuentas, "Activo", "Activo");
+        suma = obtenerSaldode("Activo", "Activo");
         
         wr.println("Suma de activo   "+suma+""); //se llama a la suma de activo total 
         
@@ -122,8 +126,8 @@ public class SituacionFinanciera {
         wr.println("Pasivo");
         
         wr.println("\tCirculante");
-        cuenta = obtenercuentasde(cuentas, "Pasivo", "Circulante");
-        suma = obtenersaldode(cuentas, "Pasivo", "Circulante");
+        cuenta = obtenerCuentasde("Pasivo", "Circulante");
+        suma = obtenerSaldode("Pasivo", "Circulante");
         t = cuenta.size();
             //System.out.println("Tamño "+t);
         for(i = 0; i<t; i++)
@@ -141,8 +145,8 @@ public class SituacionFinanciera {
         //Se comienza a escribir las cuentas de pasivo fijo, sus saldos y su suma
         
         wr.println("\tFijo");
-        cuenta = obtenercuentasde(cuentas, "Pasivo", "Fijo");
-        suma = obtenersaldode(cuentas, "Pasivo", "Fijo");
+        cuenta = obtenerCuentasde("Pasivo", "Fijo");
+        suma = obtenerSaldode("Pasivo", "Fijo");
         t = cuenta.size();
             //System.out.println("Tamño "+t);
         for(i = 0; i<t; i++)
@@ -165,8 +169,8 @@ public class SituacionFinanciera {
         float auxsuma=0;
         
         
-        cuenta = obtenercuentasde(cuentas, "Capital", "Capital social");
-        suma = obtenersaldode(cuentas, "Capital", "Capital social");
+        cuenta = obtenerCuentasde("Capital", "Capital social");
+        suma = obtenerSaldode("Capital", "Capital social");
        
           aux = cuenta.get(0);
           datos = aux.split(",");
@@ -175,8 +179,8 @@ public class SituacionFinanciera {
           auxsuma += suma;
         
           
-        cuenta = obtenercuentasde(cuentas, "Capital", "Utilidad neta");
-        suma = obtenersaldode(cuentas, "Capital", "Utilidad neta");
+        cuenta = obtenerCuentasde("Capital", "Utilidad neta");
+        suma = obtenerSaldode("Capital", "Utilidad neta");
        
           aux = cuenta.get(0);
           datos = aux.split(",");
@@ -187,7 +191,7 @@ public class SituacionFinanciera {
         
         wr.println("\tSuma capital  "+auxsuma+""); //se llama a la suma de capital 
         
-        suma = obtenersaldode(cuentas, "Pasivo", "Pasivo");
+        suma = obtenerSaldode("Pasivo", "Pasivo");
         
         wr.println("Suma pasivo y capital  "+(suma+auxsuma)+""); //se llama a la suma de activo fijo 
         
@@ -198,33 +202,72 @@ public class SituacionFinanciera {
             System.out.println(ex.getMessage());
         }
         
-        System.out.println("Estado de resultados "+ nombrearchivo+ " creado con exito");
+        System.out.println("Estado de resultados "+nomEdoFin+ " creado con exito");
         
     }
-    
-    public void agregarcuenta(String cuenta, String tipo, String nombre, String saldo)
-    {
+
+    @Override
+    public void leerEstadoFinanciero() {
+        File f;
+        FileReader r;
+        BufferedReader br;
+        String linea;
+            //PrintWriter wr;
+        
+        f = new File(nomEdoFin);
+        
+        try {
+            
+            r = new FileReader(f);
+            br=new BufferedReader(r);
+            
+            while((linea=br.readLine())!=null)
+            {
+                asignarCuentas(linea);
+            }
+            
+            
+            r.close();
+            br.close();
+            
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    @Override
+    public void agregarCuenta(String cuenta, String tipo, String nombre, String saldo) {
         ArrayList<String> datos = new ArrayList();
         datos.add(cuenta);      datos.add(tipo);    datos.add(saldo);
-        cuentas.put(nombre,datos);
+        CUENTAS.put(nombre,datos);
     }
-    
-    public void eliminarcuenta(String cuenta)
-    {
-        cuentas.remove(cuenta);
+
+    @Override
+    public void agregarCuenta(String nombre, String saldo) {
+       /*
+        Este metdo no se implementa para esta clase debido a que un estado de situacionfinanciera requiere de mas 
+        parametros de los que provee este metodo
+        */
     }
-    
-    public void mostrarcuentas()
-    {
+
+    @Override
+    public void eliminarCuenta(String cuenta) {
+         CUENTAS.remove(cuenta);
+    }
+
+    @Override
+    public void mostrarCuentas() {
         //Declarando un iterador para recorrer todas las cuentas ingresadas e imprimirlas en consola
-        Iterator it = cuentas.keySet().iterator();
+        Iterator it = CUENTAS.keySet().iterator();
         ArrayList <String> cuenta;
         int i,tam;
         String nombre;
         
         while(it.hasNext()){
             nombre = it.next().toString();
-            cuenta = (ArrayList<String>) cuentas.get(nombre);
+            cuenta = (ArrayList<String>) CUENTAS.get(nombre);
             
             tam = cuenta.size();
             System.out.print("Cuenta :"+nombre);
@@ -235,20 +278,73 @@ public class SituacionFinanciera {
             }
             System.out.println("");
         }
-        
     }
-    
-    public  boolean verificardatosestado()
-    {
+
+    @Override
+    public float obtenerSaldode(String cuentabuscada, String tipobuscado) {
+        
+        float suma=0;
+        String nombre;
+        Iterator it = CUENTAS.keySet().iterator();
+        ArrayList <String> cuenta;
+        
+        while(it.hasNext()){
+            nombre = it.next().toString();
+            cuenta = (ArrayList<String>) CUENTAS.get(nombre);
+            if (cuenta.contains(cuentabuscada) && cuenta.contains(tipobuscado))
+            {  
+         
+                suma += Float.valueOf(cuenta.get(2));
+            }
+            
+        }
+        
+        return suma;
+    }
+
+    @Override
+    public ArrayList<String> obtenerCuentasde(String cuentabuscada, String tipobuscado) {
+        ArrayList<String> coincidencias = new ArrayList<>();
+        
+        Iterator it = CUENTAS.keySet().iterator();
+        ArrayList <String> cuenta;
+        String nombre, datos;
+        
+        while(it.hasNext()){
+            nombre = it.next().toString();
+            cuenta = (ArrayList<String>) CUENTAS.get(nombre);
+            if (cuenta.contains(cuentabuscada) && cuenta.contains(tipobuscado))
+            {
+                //System.out.println(nombre +" = "+ cuenta.get(2));
+               
+                
+                //coincidenciaencontrada[0] = nombre;     coincidenciaencontrada[1]=cuenta.get(2);
+                datos = nombre +","+ cuenta.get(2);
+               coincidencias.add(datos);
+                //System.out.println(datos);
+            }
+            
+        }
+         
+        return coincidencias;
+    }
+
+    @Override
+    public Map<String, ArrayList<String>> importarCuentas() {
+        return CUENTAS;
+    }
+
+    @Override
+    public boolean verificarEstado() {
         boolean edo= false; //ATENCION CAMBIAR A FALSE (CHECKED)
-        Iterator it = cuentas.keySet().iterator();
+        Iterator it = CUENTAS.keySet().iterator();
         ArrayList <String> cuenta;
         int i,tam,sumaactivo=0,sumapasivo=0,sumacapital=0;
         String nombre;
         
         while(it.hasNext()){
             nombre = it.next().toString();
-            cuenta = (ArrayList<String>) cuentas.get(nombre);
+            cuenta = (ArrayList<String>) CUENTAS.get(nombre);
             
             /*Debido al orden de entrada de los datos en el metodo agregarcuenta() sabemos que los datos
               del objeto de tipo ArrayList se encuentean acomodados de la forma [0]cuenta [1]tipo [2]saldo
@@ -278,56 +374,116 @@ public class SituacionFinanciera {
         
         return edo;
     }
-
     
-    public static ArrayList obtenercuentasde(Map cuentas, String cuentabuscada, String tipobuscado)
+    
+     public static void asignarCuentas(String linea)
     {
-        ArrayList<String> coincidencias = new ArrayList<>();
+        /*
+        Para este metodo de clase se debe considerar que si se quiere leer un estado de resultados hecho por el usuario
+        en lugar de crearlo con el sistema se corre el riesgo de la perdida de fidelidad en la lectura de informacion
+        debido a que la condicion para asignar los saldo admite todo lo que no sea en letras de a-z, A-Z o espacios
+        */
+        int t = linea.length();
+        ArrayList<String> aux = new ArrayList();
+        String nombre = "";
+        String  saldo = "";
+        String cuenta="";
+        String tipo = "";
         
-        Iterator it = cuentas.keySet().iterator();
-        ArrayList <String> cuenta;
-        String nombre, datos;
+        /*
+        Este ArrayList contiene las palabras que al momento de ser leidas por el archivo no forman parte de alguna cuenta
+        del estado de situacion financiera, cada que se encuetre una de estas palabras se debe de saltar a la siguiente liena
+        del estado financiero
+        */
+       
         
-        while(it.hasNext()){
-            nombre = it.next().toString();
-            cuenta = (ArrayList<String>) cuentas.get(nombre);
-            if (cuenta.contains(cuentabuscada) && cuenta.contains(tipobuscado))
+        
+        
+        if(linea.equals("Activo"))
+            cuentaaux = "Activo";
+        else{
+            if (linea.equals("Pasivo")) 
+                cuentaaux = "Pasivo";
+            else
             {
-                //System.out.println(nombre +" = "+ cuenta.get(2));
-               
-                
-                //coincidenciaencontrada[0] = nombre;     coincidenciaencontrada[1]=cuenta.get(2);
-                datos = nombre +","+ cuenta.get(2);
-               coincidencias.add(datos);
-                //System.out.println(datos);
+                if (linea.equals("Capital")) 
+                    cuentaaux = "Capital";
+                else 
+                {
+                    if (linea.contains("Estado")) 
+                        cuentaaux = "Activo";
+                    else
+                        cuentaaux = cuentaaux;
+                }
+                    
             }
-            
         }
-         
-        return coincidencias;
-    }
-    
-    public static float obtenersaldode(Map cuentas, String cuentabuscada, String tipobuscado)
+        
+        
+        if(cuentaaux.equals("Activo") || cuentaaux.equals("Pasivo"))
+        {
+            if(linea.contains("Circulante"))
+                                    tipoaux = "Circulante";
+                                else
+                                {
+                                    if(linea.contains("Fijo"))
+                                        tipoaux = "Fijo";
+                                    else
+                                    {
+                                        if(linea.contains("Diferido"))
+                                        tipoaux = "Diferido";
+                                        else
+                                            tipoaux = tipoaux;
+                                    }
+                                }
+        }
+        else
+        {
+            if(cuentaaux.equals("Capital"))
+            {
+                if(linea.contains("Capital social"))
+                                        tipoaux = "Capital social";
+                                    else
+                                    {
+                                        if(linea.contains("Utilidad neta"))
+                                        tipoaux = "Utilidad neta";
+                                        else
+                                          tipoaux = "Utilidad Neta"; 
+                                    }
+            }
+            else
+                System.out.println("Error en la elaboraion del Estado Financiero");
+        }
+        
+        
+        
+        
+if (!linea.equals("Capital") && !linea.contains("Activo") && !linea.contains("Pasivo") && !linea.contains("Circulante")  
+     && !linea.contains("Fijo") && !linea.contains("Diferido") && !linea.contains("Suma") && !linea.contains("Estado")
+    ) 
     {
-        float suma=0;
-        String nombre;
-        Iterator it = cuentas.keySet().iterator();
-        ArrayList <String> cuenta;
-        
-        while(it.hasNext()){
-            nombre = it.next().toString();
-            cuenta = (ArrayList<String>) cuentas.get(nombre);
-            if (cuenta.contains(cuentabuscada) && cuenta.contains(tipobuscado))
-            {  
-         
-                suma += Float.valueOf(cuenta.get(2));
-            }
-            
+        for (int i = 0; i < t; i++) {            
+            if(((linea.charAt(i)==32) ||(linea.charAt(i)>=65 && linea.charAt(i)<=90) || ((linea.charAt(i)>=97 && linea.charAt(i)<=122)))) //Mentras este leyendo un caracter en lugar de un numero en codigo ascii
+                {
+                    cuenta += linea.charAt(i);
+                }
+                else
+                {
+                    saldo += linea.charAt(i);
+                }  
+           
         }
-        
-        return suma;
-    }
-    
-   
+     
+     
+      aux.clear();
+            //System.out.println(cuenta);
+            //System.out.println(saldo);
+            aux.add(cuentaaux);
+            aux.add(tipoaux);
+            aux.add(saldo);
+            
+            CUENTAS.put(cuenta, aux);
+    } 
+}
     
 }
