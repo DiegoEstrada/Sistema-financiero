@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -35,6 +36,7 @@ public class SituacionFinanciera implements EstadoFinanciero {
     private String nomEdoFin;
     private static String cuentaaux;
     private static String tipoaux;
+    private Map<String,ArrayList<String>> cuentas = new HashMap();
     
     public SituacionFinanciera(String nombrearchivo){
         //Inicializando el objeto cuentas como HashMap
@@ -241,7 +243,7 @@ public class SituacionFinanciera implements EstadoFinanciero {
     public void agregarCuenta(String cuenta, String tipo, String nombre, String saldo) {
         ArrayList<String> datos = new ArrayList();
         datos.add(cuenta);      datos.add(tipo);    datos.add(saldo);
-        CUENTAS.put(nombre,datos);
+        cuentas.put(nombre,datos);
     }
 
     @Override
@@ -254,20 +256,20 @@ public class SituacionFinanciera implements EstadoFinanciero {
 
     @Override
     public void eliminarCuenta(String cuenta) {
-         CUENTAS.remove(cuenta);
+         cuentas.remove(cuenta);
     }
 
     @Override
     public void mostrarCuentas() {
         //Declarando un iterador para recorrer todas las cuentas ingresadas e imprimirlas en consola
-        Iterator it = CUENTAS.keySet().iterator();
+        Iterator it = cuentas.keySet().iterator();
         ArrayList <String> cuenta;
         int i,tam;
         String nombre;
         
         while(it.hasNext()){
             nombre = it.next().toString();
-            cuenta = (ArrayList<String>) CUENTAS.get(nombre);
+            cuenta = (ArrayList<String>) cuentas.get(nombre);
             
             tam = cuenta.size();
             System.out.print("Cuenta :"+nombre);
@@ -285,12 +287,12 @@ public class SituacionFinanciera implements EstadoFinanciero {
         
         float suma=0;
         String nombre;
-        Iterator it = CUENTAS.keySet().iterator();
+        Iterator it = cuentas.keySet().iterator();
         ArrayList <String> cuenta;
         
         while(it.hasNext()){
             nombre = it.next().toString();
-            cuenta = (ArrayList<String>) CUENTAS.get(nombre);
+            cuenta = (ArrayList<String>) cuentas.get(nombre);
             if (cuenta.contains(cuentabuscada) && cuenta.contains(tipobuscado))
             {  
          
@@ -306,13 +308,13 @@ public class SituacionFinanciera implements EstadoFinanciero {
     public ArrayList<String> obtenerCuentasde(String cuentabuscada, String tipobuscado) {
         ArrayList<String> coincidencias = new ArrayList<>();
         
-        Iterator it = CUENTAS.keySet().iterator();
+        Iterator it = cuentas.keySet().iterator();
         ArrayList <String> cuenta;
         String nombre, datos;
         
         while(it.hasNext()){
             nombre = it.next().toString();
-            cuenta = (ArrayList<String>) CUENTAS.get(nombre);
+            cuenta = (ArrayList<String>) cuentas.get(nombre);
             if (cuenta.contains(cuentabuscada) && cuenta.contains(tipobuscado))
             {
                 //System.out.println(nombre +" = "+ cuenta.get(2));
@@ -331,20 +333,20 @@ public class SituacionFinanciera implements EstadoFinanciero {
 
     @Override
     public Map<String, ArrayList<String>> importarCuentas() {
-        return CUENTAS;
+        return cuentas;
     }
 
     @Override
     public boolean verificarEstado() {
         boolean edo= false; //ATENCION CAMBIAR A FALSE (CHECKED)
-        Iterator it = CUENTAS.keySet().iterator();
+        Iterator it = cuentas.keySet().iterator();
         ArrayList <String> cuenta;
         int i,tam,sumaactivo=0,sumapasivo=0,sumacapital=0;
         String nombre;
         
         while(it.hasNext()){
             nombre = it.next().toString();
-            cuenta = (ArrayList<String>) CUENTAS.get(nombre);
+            cuenta = (ArrayList<String>) cuentas.get(nombre);
             
             /*Debido al orden de entrada de los datos en el metodo agregarcuenta() sabemos que los datos
               del objeto de tipo ArrayList se encuentean acomodados de la forma [0]cuenta [1]tipo [2]saldo
@@ -376,7 +378,7 @@ public class SituacionFinanciera implements EstadoFinanciero {
     }
     
     
-     public static void asignarCuentas(String linea)
+     public void asignarCuentas(String linea)
     {
         /*
         Para este metodo de clase se debe considerar que si se quiere leer un estado de resultados hecho por el usuario
@@ -482,7 +484,7 @@ if (!linea.equals("Capital") && !linea.contains("Activo") && !linea.contains("Pa
             aux.add(tipoaux);
             aux.add(saldo);
             
-            CUENTAS.put(cuenta, aux);
+            cuentas.put(cuenta, aux);
     } 
 }
     

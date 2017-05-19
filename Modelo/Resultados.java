@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -20,6 +21,7 @@ import java.util.Map;
 public class Resultados implements EstadoFinanciero {
     
     private String nomEdoFin;
+    private Map<String,ArrayList<String>> cuentas = new HashMap();
     
     public Resultados(String nombreEdoFin)
     {
@@ -66,7 +68,8 @@ public class Resultados implements EstadoFinanciero {
             wr.println("Utilidad bruta \t "+String.valueOf(suma));
             aux = String.valueOf(suma);
             utilidades.add(aux);
-            CUENTAS.put("Utilidad bruta", utilidades);
+            
+            cuentas.put("Utilidad bruta", utilidades);
             
             wr.println("Menos");
             
@@ -89,7 +92,8 @@ public class Resultados implements EstadoFinanciero {
             aux = String.valueOf(a-b-suma);
             utilidades.clear();
             utilidades.add(aux);
-            CUENTAS.put("Utilidad de operacion", utilidades);
+            
+            cuentas.put("Utilidad de operacion", utilidades);
             
             a=0; b =0;
             
@@ -141,13 +145,15 @@ public class Resultados implements EstadoFinanciero {
         utilidad = suma - (a+b);
         utilidades.clear();
         utilidades.add(String.valueOf(a+b));
-        CUENTAS.put("Impuestos por pagar",utilidades);
+       
+        cuentas.put("Impuestos por pagar",utilidades);
         
         wr.println("Impuestos por pagar \t"+ (a+b));
         
         utilidades.clear();
         utilidades.add(String.valueOf(utilidad));
-        CUENTAS.put("Utilidad neta",utilidades);
+        
+        cuentas.put("Utilidad neta",utilidades);
         
        wr.println("Utilidad neta \t"+ utilidad);
        
@@ -175,18 +181,20 @@ public class Resultados implements EstadoFinanciero {
                                 <nombre, saldo>
         */
         datos.add(saldo);
-        CUENTAS.put(nombre, datos);
+        
+        cuentas.put(nombre, datos);
        
     }
 
     @Override
     public void eliminarCuenta(String cuenta) {
-      CUENTAS.remove(cuenta);
+      
+      cuentas.remove(cuenta);
     }
 
     @Override
     public void mostrarCuentas() {
-        Iterator it = CUENTAS.keySet().iterator();
+        Iterator it = cuentas.keySet().iterator();
         
         ArrayList <String> cuenta;
         int i,tam;
@@ -194,7 +202,7 @@ public class Resultados implements EstadoFinanciero {
         
         while(it.hasNext()){
             nombre = it.next().toString(); //Esta variable contiene el nombre de la llave de cada elemento del hashmap en las diferentes itraciones
-            cuenta = (ArrayList<String>) CUENTAS.get(nombre); //Este objeto almacena los detalles de cada cuenta
+            cuenta = (ArrayList<String>) cuentas.get(nombre); //Este objeto almacena los detalles de cada cuenta
             
             tam = cuenta.size();
             
@@ -245,14 +253,14 @@ public class Resultados implements EstadoFinanciero {
     public float obtenerSaldode(String cuentabuscada, String tipobuscado) {
         float suma=0;
         
-        Iterator it = CUENTAS.keySet().iterator();
+        Iterator it = cuentas.keySet().iterator();
         ArrayList <String> cuenta;
         String nombre;
         
        
          while(it.hasNext()){
             nombre = it.next().toString();
-            cuenta = (ArrayList<String>) CUENTAS.get(nombre);
+            cuenta = (ArrayList<String>) cuentas.get(nombre);
             if (nombre.contains(tipobuscado))
              suma += Float.valueOf(cuenta.get(0));
         }
@@ -271,14 +279,14 @@ public class Resultados implements EstadoFinanciero {
         
         ArrayList<String> coincidencias = new ArrayList();
         
-        Iterator it = CUENTAS.keySet().iterator();
+        Iterator it = cuentas.keySet().iterator();
         ArrayList <String> cuenta;
         String nombre, datos;
         
        
          while(it.hasNext()){
             nombre = it.next().toString();
-            cuenta = (ArrayList<String>) CUENTAS.get(nombre);
+            cuenta = (ArrayList<String>) cuentas.get(nombre);
             if (nombre.contains(cuentabuscada))
             {
                datos = nombre +","+ cuenta.get(0);
@@ -296,7 +304,7 @@ public class Resultados implements EstadoFinanciero {
         //Este metodo esta vacio con la intencion de implementar mas detalles al HashMapal agregar cuentas 
     }
     
-    public static void asignarCuentas(String linea)
+    public  void asignarCuentas(String linea)
     {
         /*
         Para este metodo de clase se debe considerar que si se quiere leer un estado de resultados hecho por el usuario
@@ -324,7 +332,7 @@ public class Resultados implements EstadoFinanciero {
         aux.clear();
         aux.add(saldo);
             
-            CUENTAS.put(cuenta, aux);
+            cuentas.put(cuenta, aux);
             //System.out.println("Esta es el nombre de la cuenta :"+cuenta);
             //System.out.println("Este es el saldo de la cuenta "+saldo);
                 
@@ -334,7 +342,7 @@ public class Resultados implements EstadoFinanciero {
     @Override
     public Map<String,ArrayList<String>> importarCuentas()
     {
-        return CUENTAS;
+        return cuentas;
     }
 
     @Override

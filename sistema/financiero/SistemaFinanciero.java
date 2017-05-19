@@ -51,9 +51,9 @@ public class SistemaFinanciero {
         */
         
         edo1.leerEstadoFinanciero();
-        v = edo1.importarCuentas();
-        System.out.println(v.size());
-       // edo1.mostrarCuentas();
+        //v = edo1.importarCuentas();
+        //System.out.println(v.size());
+        edo1.mostrarCuentas();
         
         Resultados  edores1 = new Resultados("Estado de Resultados Wamlart de 2015.txt");
         /*
@@ -67,9 +67,9 @@ public class SistemaFinanciero {
         */
         System.out.println("-------------------------------------------------------------------------------------------");
         edores1.leerEstadoFinanciero();
-        //edores1.mostrarCuentas();
-        cuentas = edores1.importarCuentas();
-        System.out.println(cuentas.size());
+        edores1.mostrarCuentas();
+        //cuentas = edores1.importarCuentas();
+        //System.out.println(cuentas.size());
     }
     
 }
