@@ -45,6 +45,32 @@ public class SituacionFinanciera implements EstadoFinanciero {
         
     }
     
+    public Map<String,ArrayList<String>> importarNombreySaldo()
+    {
+        Map<String,ArrayList<String>> nombreySaldo = new HashMap();
+        //ArrayList <String> saldos = new ArrayList();
+        ArrayList <String> cuenta;
+        int i,tam;
+        String nombre;
+        
+        Iterator it = cuentas.keySet().iterator();
+        
+        while(it.hasNext()){
+            ArrayList <String> saldos = new ArrayList();
+            nombre = it.next().toString(); //Esta variable contiene el nombre de la llave de cada elemento del hashmap en las diferentes itraciones
+            cuenta = (ArrayList<String>) cuentas.get(nombre); //Este objeto almacena los detalles de cada cuenta
+            
+                saldos.add(cuenta.get(2));
+     
+                nombreySaldo.put(nombre, saldos);
+             
+               //saldos.clear();
+        }
+        
+        
+        return nombreySaldo;
+    }
+    
     @Override
     public void crearEstadoFinanciero() {
         //System.out.println("Estoy creando el estado ");
@@ -204,7 +230,7 @@ public class SituacionFinanciera implements EstadoFinanciero {
             System.out.println(ex.getMessage());
         }
         
-        System.out.println("Estado de resultados "+nomEdoFin+ " creado con exito");
+        System.out.println(nomEdoFin+ " creado con exito");
         
     }
 

@@ -161,6 +161,8 @@ public class Resultados implements EstadoFinanciero {
             
         wr.close();
         bw.close();
+        
+           System.out.println(nomEdoFin+ " creado con exito");
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }

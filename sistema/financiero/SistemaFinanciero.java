@@ -5,6 +5,7 @@
  */
 package sistema.financiero;
 
+import Modelo.Analisis.Horizontal.Diferencias;
 import Modelo.Resultados;
 import Modelo.SituacionFinanciera;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class SistemaFinanciero {
     /**
      * @param args the command line arguments
      */
-    private static Map<String,ArrayList<String>> cuentas,v;
+    private static Map<String,ArrayList<String>> cuentasSFX,cuentasSFY,cuentasERX,cuentasERY;
     
     public static void main(String[] args) {
         
@@ -27,7 +28,7 @@ public class SistemaFinanciero {
         //Comentada toda la parte pare crear un estado de situación finaciera balanceado "
         
         SituacionFinanciera edo1 = new SituacionFinanciera("Estado de  Situacion Financiera  Walmart de 2015.txt");
-        /*
+        
         edo1.agregarCuenta("Activo", "Circulante", "Caja", "200000");
         edo1.agregarCuenta("Activo", "Circulante", "Bancos", "250000");
        
@@ -46,30 +47,88 @@ public class SistemaFinanciero {
         else
             System.out.println("Los saldos de las cuentas no estan balanceados por favor revisa las cantidades rehistradas en las cuentas");
         
-        //edo1.mostrarcuentas();
-
-        */
+       //edo1.mostrarCuentas();
+       
+       cuentasSFX = edo1.importarNombreySaldo();
+       
+        //System.out.println(cuentasSFX.get("Bancos").get(0));
+       
+        System.out.println("----------------------------------------------------------------------------------------------");
+       
+       // Esta parte genera otro estado de situacion financiera para realizar el analsis horizontal
+       
+        SituacionFinanciera edo2 = new SituacionFinanciera("Estado de  Situacion Financiera  Walmart de 2016.txt");
         
-        edo1.leerEstadoFinanciero();
-        //v = edo1.importarCuentas();
-        //System.out.println(v.size());
-        edo1.mostrarCuentas();
+        edo2.agregarCuenta("Activo", "Circulante", "Caja", "250000");
+        edo2.agregarCuenta("Activo", "Circulante", "Bancos", "310000");
+       
+        edo2.agregarCuenta("Activo", "Circulante", "Clientes", "250000");
+        edo2.agregarCuenta("Activo", "Fijo", "Equipo de computo", "1000000");
+        edo2.agregarCuenta("Activo", "Diferido", "Gastos de instalacion", "250000");
         
+        edo2.agregarCuenta("Pasivo", "Circulante", "Proveedores", "120000");
+        edo2.agregarCuenta("Pasivo", "Fijo", "Hipotecas por pagar", "400000");
+        edo2.agregarCuenta("Capital", "Utilidad neta", "Utilidad neta", "540000");
+        edo2.agregarCuenta("Capital", "Capital social", "Capital social", "1000000");
+        
+        
+        if(edo2.verificarEstado())
+            edo2.crearEstadoFinanciero();
+        else
+            System.out.println("Los saldos de las cuentas no estan balanceados por favor revisa las cantidades rehistradas en las cuentas");
+        
+       //edo2.mostrarCuentas();
+       
+       cuentasSFY = edo2.importarNombreySaldo();
+       
+        
+        System.out.println("***************************************************************************************");
+        
+        //Esta parte genera un estado de resultados 
         Resultados  edores1 = new Resultados("Estado de Resultados Wamlart de 2015.txt");
-        /*
-        edores1.agregarCuentas("Ventas", "150000");
-        edores1.agregarCuentas("Costo de ventas", "25000");
-        edores1.agregarCuentas("Gastos de venta", "10000");
-        edores1.agregarCuentas("Gastos de administracion", "5000");
-        edores1.agregarCuentas("Otros productos financieros", "5000");
-        edores1.agregarCuentas("ISR", "12560");
-        edores1.agregarCuentas("PTU", "8900");
-        */
+        
+        edores1.agregarCuenta("Ventas", "150000");
+        edores1.agregarCuenta("Costo de ventas", "25000");
+        edores1.agregarCuenta("Gastos de venta", "10000");
+        edores1.agregarCuenta("Gastos de administracion", "5000");
+        edores1.agregarCuenta("Otros productos financieros", "5000");
+        edores1.agregarCuenta("ISR", "12560");
+        edores1.agregarCuenta("PTU", "8900");
+        
+        
+        edores1.crearEstadoFinanciero();
+        //edores1.mostrarCuentas();
+        
+        cuentasERX = edores1.importarCuentas();
+        
         System.out.println("-------------------------------------------------------------------------------------------");
-        edores1.leerEstadoFinanciero();
-        edores1.mostrarCuentas();
-        //cuentas = edores1.importarCuentas();
-        //System.out.println(cuentas.size());
+ 
+        //Esta parte genera otro estado de resultados 
+        
+        Resultados  edores2 = new Resultados("Estado de Resultados Wamlart de 2016.txt");
+        
+        edores2.agregarCuenta("Ventas", "602070");
+        edores2.agregarCuenta("Costo de ventas", "32000");
+        edores2.agregarCuenta("Gastos de venta", "9000");
+        edores2.agregarCuenta("Gastos de administracion", "5000");
+        edores2.agregarCuenta("Otros productos financieros", "15000");
+        edores2.agregarCuenta("ISR", "18600");
+        edores2.agregarCuenta("PTU", "12470");
+        
+        edores2.crearEstadoFinanciero();
+        //edores2.mostrarCuentas();
+        
+        cuentasERY = edores2.importarCuentas();
+        
+        
+        
+        Diferencias diferenciasSF = new Diferencias(cuentasSFX, cuentasSFY);
+        Diferencias diferenciasER = new Diferencias(cuentasERX, cuentasERY);
+        
+diferenciasSF.imprimirAnalisisDierencias(diferenciasSF.analisisDiferencias(diferenciasSF.obtenerNombresCuentas()));
+        
+      
     }
+    
     
 }
