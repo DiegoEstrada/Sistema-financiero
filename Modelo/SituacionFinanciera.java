@@ -487,7 +487,7 @@ public class SituacionFinanciera implements EstadoFinanciero {
         
         
 if (!linea.equals("Capital") && !linea.contains("Activo") && !linea.contains("Pasivo") && !linea.contains("Circulante")  
-     && !linea.contains("Fijo") && !linea.contains("Diferido") && !linea.contains("Suma") && !linea.contains("Estado")
+     && !linea.contains("Fijo") && !linea.contains("Diferido")  && !linea.contains("Estado")
     ) 
     {
         for (int i = 0; i < t; i++) {            

@@ -115,7 +115,7 @@ public class Diferencias {
             //System.out.println("Saldo I "+saldoX);
             saldoY = Float.parseFloat(cY);
             //System.out.println("Saldo F "+saldoY);
-             saldoDif = saldoX - saldoY;
+             saldoDif = saldoY - saldoX;
              //System.out.println("SALDO "+saldoDif);
             diferencias.put(nombres.get(i),String.valueOf(saldoDif));
             

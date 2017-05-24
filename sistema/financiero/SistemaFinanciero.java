@@ -6,9 +6,11 @@
 package sistema.financiero;
 
 import Modelo.Analisis.Horizontal.Diferencias;
+import Modelo.Analisis.Horizontal.PuntoEquilibrio;
 import Modelo.Resultados;
 import Modelo.SituacionFinanciera;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -106,7 +108,7 @@ public class SistemaFinanciero {
         //Esta parte genera otro estado de resultados 
         
         Resultados  edores2 = new Resultados("Estado de Resultados Wamlart de 2016.txt");
-        
+        /*
         edores2.agregarCuenta("Ventas", "602070");
         edores2.agregarCuenta("Costo de ventas", "32000");
         edores2.agregarCuenta("Gastos de venta", "9000");
@@ -116,18 +118,38 @@ public class SistemaFinanciero {
         edores2.agregarCuenta("PTU", "12470");
         
         edores2.crearEstadoFinanciero();
-        //edores2.mostrarCuentas();
+        */
+        
+        
+        edores2.leerEstadoFinanciero();
+        
         
         cuentasERY = edores2.importarCuentas();
+        
+        Iterator it = cuentasERY.keySet().iterator();
+        
+       String nombre = it.next().toString();
+        
+        //System.out.println(cuentasERY.containsKey("Utilidad de operacion  "));
+        //edores2.mostrarCuentas();
         
         
         
         Diferencias diferenciasSF = new Diferencias(cuentasSFX, cuentasSFY);
         Diferencias diferenciasER = new Diferencias(cuentasERX, cuentasERY);
         
-diferenciasSF.imprimirAnalisisDierencias(diferenciasSF.analisisDiferencias(diferenciasSF.obtenerNombresCuentas()));
+//diferenciasSF.imprimirAnalisisDierencias(diferenciasSF.analisisDiferencias(diferenciasSF.obtenerNombresCuentas()));
         
       
+    //Porcientos porcientosSF = new Porcientos (CuentasSFX);
+    
+
+    
+        PuntoEquilibrio peedo1 = new PuntoEquilibrio(15000, 300, cuentasERY);
+        
+        System.out.println(peedo1.calcularPE());
+        System.out.println(peedo1.calcularPEU());
+
     }
     
     

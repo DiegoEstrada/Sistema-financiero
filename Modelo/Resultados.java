@@ -71,6 +71,7 @@ public class Resultados implements EstadoFinanciero {
             
             cuentas.put("Utilidad bruta", utilidades);
             
+            
             wr.println("Menos");
             
             cuenta = obtenerCuentasde("Gastos", "Gastos");
@@ -331,6 +332,7 @@ public class Resultados implements EstadoFinanciero {
                     saldo += linea.charAt(i);
                 }
             }
+            
         aux.clear();
         aux.add(saldo);
             
