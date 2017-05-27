@@ -11,8 +11,8 @@ import java.util.Map;
  */
 public class Diferencias {
     
-    Map<String,ArrayList<String>>cuentasEdoX;
-    Map<String,ArrayList<String>>cuentasEdoY;
+   private Map<String,ArrayList<String>>cuentasEdoX;
+   private Map<String,ArrayList<String>>cuentasEdoY;
     
     /*  
     Los objetos de tpo Map que llevan por nombre cuentasEdoX y cuentasEdoY se refieren a X para el periodo
