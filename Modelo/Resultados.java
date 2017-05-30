@@ -119,11 +119,11 @@ public class Resultados implements EstadoFinanciero {
                 wr.println(datos[0] +"\t"+ datos[1] );
                 }
                 suma = (gastos - a ) +b; 
-                wr.println("Utilidad de operacion \t "+suma);
+                wr.println("Gastos de operacion \t "+suma);
             }
             else
             {
-                wr.println("Utilidad de operacion \t" +suma);
+                wr.println("Gastos de operacion \t" +suma);
             }
             
             

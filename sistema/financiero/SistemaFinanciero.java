@@ -8,6 +8,7 @@ package sistema.financiero;
 import Modelo.Analisis.Horizontal.Diferencias;
 import Modelo.Analisis.Horizontal.PuntoEquilibrio;
 import Modelo.Analisis.Vertical.PorcientosIntegrados;
+import Modelo.Analisis.Vertical.RazonesFinancieras;
 import Modelo.Resultados;
 import Modelo.SituacionFinanciera;
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class SistemaFinanciero {
         
         SituacionFinanciera edo1 = new SituacionFinanciera("Estado de  Situacion Financiera  Walmart de 2015.txt");
         
-        /*
+        
         edo1.agregarCuenta("Activo", "Circulante", "Caja", "200000");
         edo1.agregarCuenta("Activo", "Circulante", "Bancos", "250000");
        
@@ -52,7 +53,7 @@ public class SistemaFinanciero {
             System.out.println("Los saldos de las cuentas no estan balanceados por favor revisa las cantidades rehistradas en las cuentas");
         
        //edo1.mostrarCuentas();
-        */
+        
         edo1.leerEstadoFinanciero();
         
         //edo1.mostrarCuentas();
@@ -67,7 +68,7 @@ public class SistemaFinanciero {
        
         SituacionFinanciera edo2 = new SituacionFinanciera("Estado de  Situacion Financiera  Walmart de 2016.txt");
         
-        /*
+        
         
         
         edo2.agregarCuenta("Activo", "Circulante", "Caja", "250000");
@@ -90,7 +91,7 @@ public class SistemaFinanciero {
         
        //edo2.mostrarCuentas();
        
-        */
+        
        edo2.leerEstadoFinanciero();
        cuentasSFY = edo2.importarNombreySaldo();
        
@@ -99,7 +100,7 @@ public class SistemaFinanciero {
         
         //Esta parte genera un estado de resultados 
         Resultados  edores1 = new Resultados("Estado de Resultados Wamlart de 2015.txt");
-        /*
+        
         edores1.agregarCuenta("Ventas", "150000");
         edores1.agregarCuenta("Costo de ventas", "25000");
         edores1.agregarCuenta("Gastos de venta", "10000");
@@ -107,9 +108,9 @@ public class SistemaFinanciero {
         edores1.agregarCuenta("Otros productos financieros", "5000");
         edores1.agregarCuenta("ISR", "12560");
         edores1.agregarCuenta("PTU", "8900");
-        */
         
-        //edores1.crearEstadoFinanciero();
+        
+        edores1.crearEstadoFinanciero();
         //edores1.mostrarCuentas();
         edores1.leerEstadoFinanciero();
         cuentasERX = edores1.importarCuentas();
@@ -119,7 +120,7 @@ public class SistemaFinanciero {
         //Esta parte genera otro estado de resultados 
         
         Resultados  edores2 = new Resultados("Estado de Resultados Wamlart de 2016.txt");
-        /*
+        
         edores2.agregarCuenta("Ventas", "602070");
         edores2.agregarCuenta("Costo de ventas", "32000");
         edores2.agregarCuenta("Gastos de venta", "9000");
@@ -129,7 +130,7 @@ public class SistemaFinanciero {
         edores2.agregarCuenta("PTU", "12470");
         
         edores2.crearEstadoFinanciero();
-        */
+        
         
         
         edores2.leerEstadoFinanciero();
@@ -156,22 +157,30 @@ public class SistemaFinanciero {
     
 
     
-        PuntoEquilibrio peedo1 = new PuntoEquilibrio(15000, 300, cuentasERX);
+        PuntoEquilibrio peedo1 = new PuntoEquilibrio(1, 300, cuentasERY,cuentasSFY);
         
         //Diferencias psdf = new Diferencias();
         
         
-        PorcientosIntegrados pSF = new PorcientosIntegrados(cuentasERX);
+        PorcientosIntegrados pSF = new PorcientosIntegrados(cuentasSFX);
         
-       Map <String,String> analisisp = pSF.AnalisisPorcientosIntegrados();
+       //Map <String,String> analisisp = pSF.AnalisisPorcientosIntegrados();
        
-       pSF.imprimirAnalisisPorcientos(analisisp);
+       //pSF.imprimirAnalisisPorcientos(analisisp);
         //System.out.println( pSF.ObtenerCien());
         //ArrayList<String> n = pSF.obtenerNombresCuentas();
         //System.out.println(n.get(5));
         
         //System.out.println(peedo1.calcularPE());
         //System.out.println(peedo1.calcularPEU());
+        //System.out.println(peedo1.obtenerCostosFijosTotales());
+        //System.out.println(peedo1.obtenerCostosVariablesUnitarios());
+        System.out.println(peedo1.calcularUtlidad());
+        
+        RazonesFinancieras rfX = new RazonesFinancieras(cuentasERY,cuentasSFY);
+        System.out.println(rfX.ObtenerSaldo("Bancos"));
+        
+        rfX.imprimirRazonesFinancieras(rfX.analisisRazonesFinancieras());
 
     }
     

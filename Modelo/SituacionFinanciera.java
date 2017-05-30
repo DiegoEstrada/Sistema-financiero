@@ -107,7 +107,7 @@ public class SituacionFinanciera implements EstadoFinanciero {
             
         }
         
-        wr.println("\tSuma citculante  "+suma+""); //se llama a la suma de activo circulante
+        wr.println("\tSuma activo circulante  "+suma+""); //se llama a la suma de activo circulante
         
         //Se comineza a escribir las cuentas de activo fijo, sus saldos y su suma
         
@@ -125,7 +125,7 @@ public class SituacionFinanciera implements EstadoFinanciero {
             
         }
         
-        wr.println("\tSuma fijo  "+suma+""); //se llama a la suma de activo fijo 
+        wr.println("\tSuma activo fijo  "+suma+""); //se llama a la suma de activo fijo 
         
         
         //Se comienza aescribir las cuentas de activo diferido, sus saldos y su suma 
@@ -144,7 +144,7 @@ public class SituacionFinanciera implements EstadoFinanciero {
             
         }
         
-        wr.println("\tSuma diferio  "+suma+""); //se llama a la suma de activo fijo 
+        wr.println("\tSuma activo diferio  "+suma+""); //se llama a la suma de activo fijo 
         
         suma = obtenerSaldode("Activo", "Activo");
         
@@ -167,7 +167,7 @@ public class SituacionFinanciera implements EstadoFinanciero {
             
         }
         
-        wr.println("\tSuma circulante  "+suma+""); //se llama a la suma de activo fijo 
+        wr.println("\tSuma pasivo circulante  "+suma+""); //se llama a la suma de activo fijo 
         
         
         //Se comienza a escribir las cuentas de pasivo fijo, sus saldos y su suma
@@ -186,7 +186,7 @@ public class SituacionFinanciera implements EstadoFinanciero {
             
         }
         
-        wr.println("\tSuma fijo  "+suma+""); //se llama a la suma de pasivo fijo 
+        wr.println("\tSuma pasivo fijo  "+suma+""); //se llama a la suma de pasivo fijo 
         
         
         

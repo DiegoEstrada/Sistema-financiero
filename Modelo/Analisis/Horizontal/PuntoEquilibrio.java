@@ -14,9 +14,10 @@ public class PuntoEquilibrio {
     private float utilidad;
     private float precioVentaU;
     private float costoVentasS;
-    private Map<String,ArrayList<String>> cuentas;
+    private Map<String,ArrayList<String>> cuentasER;
+    private Map<String,ArrayList<String>> cuentasSF;
     
-    public PuntoEquilibrio(float utilidad, float precioVentaU, Map<String,ArrayList<String>> cuentas)
+    public PuntoEquilibrio(float utilidad, float precioVentaU, Map<String,ArrayList<String>> cuentaser, Map<String,ArrayList<String>> cuentassf)
     {
         /*
         Este clase debe recibir cuentas del estado de resultados para que los calulos se realicen 
@@ -24,7 +25,8 @@ public class PuntoEquilibrio {
         */
         this.utilidad = utilidad;
         this.precioVentaU = precioVentaU;
-        this.cuentas = cuentas;
+        this.cuentasER = cuentaser;
+        this.cuentasSF = cuentassf;
         
     }
     
@@ -37,7 +39,7 @@ public class PuntoEquilibrio {
         
         
         
-        pe = (cft)/(1-(cvu*costoVentasS/precioVentaU));
+        pe = (cft)/(1-((cvu*precioVentaU)/precioVentaU));
         
         return String.valueOf(pe);
     }
@@ -50,13 +52,13 @@ public class PuntoEquilibrio {
         float cvu = obtenerCostosVariablesUnitarios();
         
         
-        //System.out.println("porcriento \t \t"+cvu);
-        //System.out.println("costos fijos (gastos op) \t \t"+cft);
-        //System.out.println("costos variables (costo ventas) \t \t"+costoVentasS);
-        //System.out.println("Utilidad "+utilidad);
+        System.out.println("porcriento \t \t"+cvu);
+        System.out.println("costos fijos (gastos op) \t \t"+cft);
+        System.out.println("costos variables (costo ventas) \t \t"+costoVentasS);
+        System.out.println("Utilidad "+utilidad);
         
         
-        peu = (cft+utilidad)/(1-(cvu*costoVentasS/precioVentaU));
+        peu = (cft+calcularUtlidad())/(1-(cvu*precioVentaU/precioVentaU));
         
         return String.valueOf(peu);
     }
@@ -66,7 +68,7 @@ public class PuntoEquilibrio {
         float cft=0;
         String c="";
         ArrayList<String> aux = new ArrayList();
-        Set s = cuentas.keySet();
+        Set s = cuentasER.keySet();
         
         
         Iterator it = s.iterator();
@@ -76,9 +78,9 @@ public class PuntoEquilibrio {
         {
            String nombre = it.next().toString();
            
-            if(nombre.contains("Utilidad de operacion"))
+            if(nombre.contains("Gastos de operacion"))
             {
-                 aux =(ArrayList<String>) cuentas.get(nombre);
+                 aux =(ArrayList<String>) cuentasER.get(nombre);
                  //break;
             }
         }
@@ -101,12 +103,12 @@ public class PuntoEquilibrio {
     {
         float cft=0, cien=0;
         ArrayList<String> aux;
-        if (cuentas.containsKey("Costo de ventas") && cuentas.containsKey("Ventas")) 
+        if (cuentasER.containsKey("Costo de ventas") && cuentasER.containsKey("Ventas")) 
         {
-            aux = cuentas.get("Costo de ventas");
+            aux = cuentasER.get("Costo de ventas");
             costoVentasS = Float.parseFloat(aux.get(0));
             
-            aux = cuentas.get("Ventas");
+            aux = cuentasER.get("Ventas");
             cien = Float.parseFloat(aux.get(0));
             
             cft = (costoVentasS)/(cien);
@@ -114,6 +116,63 @@ public class PuntoEquilibrio {
         else
             System.out.println("Las cuentas recibidas para calcular PEU y PE no son las correctas");
         return cft;
+    }
+    
+    public float calcularUtlidad()
+    {
+        float capsocial=0;
+        float ut;
+        String saldo="";
+        
+        ArrayList<String> aux = new ArrayList();
+        Set s = cuentasSF.keySet();
+        
+        
+        Iterator it = s.iterator();
+        
+        
+        while(it.hasNext())
+        {
+           String nombre = it.next().toString();
+           
+            if(nombre.contains("Capital social"))
+            {
+                 aux =(ArrayList<String>) cuentasSF.get(nombre);
+                 saldo = aux.get(0);
+                 break;
+            }
+        }
+        
+        capsocial = Float.parseFloat(saldo);
+        
+        ut = (utilidad*capsocial)/100;
+        return ut;
+    }
+    
+    public float numVentasPE()
+    {
+        String PEU = calcularPEU();
+        return Float.valueOf(PEU)/precioVentaU;
+    }
+    
+    public float numVentasPEU()
+    {
+        String PE = calcularPE();
+        return Float.valueOf(PE)/precioVentaU;
+    }
+    
+    public float cvtPE()
+    {
+        float cvu = obtenerCostosVariablesUnitarios();
+        float nv = numVentasPE();
+        return nv*cvu*precioVentaU;
+    }
+    
+    public float cvtPEU()
+    {
+        float cvu = obtenerCostosVariablesUnitarios();
+        float nv = numVentasPEU();
+        return nv*cvu*precioVentaU;
     }
     
 }
