@@ -12,7 +12,7 @@ import java.util.Set;
  */
 public class RazonesFinancieras {
     
-    private Map <String, ArrayList<String>> cuentasSF;
+   private Map <String, ArrayList<String>> cuentasSF;
     private Map <String, ArrayList<String>> cuentasER;
  
     public RazonesFinancieras(Map <String, ArrayList<String>> cuentasEdoRes,Map <String, ArrayList<String>> cuentasSitFin)
@@ -80,7 +80,7 @@ public class RazonesFinancieras {
     public Map<String,String>analisisRazonesFinancieras()
     {
         String nombre = "";
-        float a,b,numerador,denominador,indicador=0;
+        float a,b,c,numerador,denominador,indicador=0;
         Map<String,String> rf = new HashMap();
         
         nombre = "Liquidez";
@@ -103,8 +103,40 @@ public class RazonesFinancieras {
         
         rf.put(nombre, String.valueOf(indicador));
         
+        nombre= "Estabilidad economica";
+        a=ObtenerSaldo("Suma pasivo fijo");
+        b=ObtenerSaldo("Suma pasivo circulante");
+        c=ObtenerSaldo("Suma de activo");
         
+        numerador=a+b;
+        denominador=c;
         
+        indicador=numerador/denominador;
+        
+        rf.put(nombre, String.valueOf(indicador));
+        
+        nombre="Inmovilizacion de capital";
+        a=ObtenerSaldo("Suma activo fijo");
+        b=ObtenerSaldo("Suma capital");
+        
+        indicador=a/b;
+        
+        rf.put(nombre, String.valueOf(indicador));
+        
+        nombre="Rentabilidad en ventas";
+        a=ObtenerSaldo("Utilidad neta");
+        b=ObtenerSaldo("Ventas");
+        
+        indicador=a/b;
+        
+        rf.put(nombre, String.valueOf(indicador));
+        
+        nombre="Rentabilidad en inversion";
+        b=ObtenerSaldo("Capital social");
+        
+        indicador=a/b;
+        
+        rf.put(nombre, String.valueOf(indicador));
         return rf;
     }
     

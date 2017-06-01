@@ -7,6 +7,7 @@ package sistema.financiero;
 
 import Modelo.Analisis.Horizontal.Diferencias;
 import Modelo.Analisis.Horizontal.PuntoEquilibrio;
+import Modelo.Analisis.Vertical.BenchMarking;
 import Modelo.Analisis.Vertical.PorcientosIntegrados;
 import Modelo.Analisis.Vertical.RazonesFinancieras;
 import Modelo.Resultados;
@@ -180,7 +181,12 @@ public class SistemaFinanciero {
         RazonesFinancieras rfX = new RazonesFinancieras(cuentasERY,cuentasSFY);
         System.out.println(rfX.ObtenerSaldo("Bancos"));
         
-        rfX.imprimirRazonesFinancieras(rfX.analisisRazonesFinancieras());
+        //rfX.imprimirRazonesFinancieras(rfX.analisisRazonesFinancieras());
+        
+        BenchMarking bm = new BenchMarking(rfX, 1);
+        
+        
+        bm.imprimirDiferenciasBenchMarking(bm.AnalisisBenchMarking());
 
     }
     
