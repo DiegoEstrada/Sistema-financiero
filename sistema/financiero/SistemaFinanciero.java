@@ -1,4 +1,4 @@
-﻿/*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -181,11 +181,10 @@ public class SistemaFinanciero {
         RazonesFinancieras rfX = new RazonesFinancieras(cuentasERY,cuentasSFY);
         System.out.println(rfX.ObtenerSaldo("Bancos"));
         
-        rfX.imprimirRazonesFinancieras(rfX.analisisRazonesFinancieras());
+        //rfX.imprimirRazonesFinancieras(rfX.analisisRazonesFinancieras());
         
         BenchMarking bm = new BenchMarking(rfX, 1);
         
-	System.out.println("------------BenchMarking--------------------------");
         
         bm.imprimirDiferenciasBenchMarking(bm.AnalisisBenchMarking());
 

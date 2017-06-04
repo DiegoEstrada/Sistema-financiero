@@ -1,9 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vistas;
+
+import java.io.File;
+import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -14,7 +14,12 @@ public class Inicio extends javax.swing.JFrame {
     /**
      * Creates new form Inicio
      */
+    
+    private File estados[];
+    
+    
     public Inicio() {
+        estados = new File[2];
         initComponents();
     }
 
@@ -27,21 +32,392 @@ public class Inicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Rdbs_Estados_Financieros = new javax.swing.ButtonGroup();
+        Encabezado_1 = new javax.swing.JLabel();
+        Encabezado_2 = new javax.swing.JLabel();
+        lb_Sis_Financiero = new javax.swing.JLabel();
+        lb_integrantes = new javax.swing.JLabel();
+        lb_Integrante_1 = new javax.swing.JLabel();
+        lb_Integrante_2 = new javax.swing.JLabel();
+        lb_Opcion = new javax.swing.JLabel();
+        btnCrearEstado = new javax.swing.JButton();
+        btnCargarEstado = new javax.swing.JButton();
+        btnCrear_Estado_Financiero = new javax.swing.JButton();
+        lbLogoIPN = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jpEdosfinancieros = new javax.swing.JPanel();
+        Rdb_Situacion_Financiera = new javax.swing.JRadioButton();
+        Rdb_Estado_Resultados = new javax.swing.JRadioButton();
+        RdbFlujoEfectivo = new javax.swing.JRadioButton();
+        jpRealizarAnalisis = new javax.swing.JPanel();
+        jlEdosCargados = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jListArhivosAbiertos = new javax.swing.JList<>();
+        jbAnalisisFinanciero = new javax.swing.JButton();
+        jbCerrarEstado = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Sistema Financiero");
+        setName("FormInicio"); // NOI18N
+        setSize(new java.awt.Dimension(500, 500));
+
+        Encabezado_1.setFont(new java.awt.Font("Rockwell", 0, 16)); // NOI18N
+        Encabezado_1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Encabezado_1.setText("INSTITUTO POLITÉCNICO NACIONAL");
+        Encabezado_1.setToolTipText("");
+
+        Encabezado_2.setFont(new java.awt.Font("Rockwell", 0, 16)); // NOI18N
+        Encabezado_2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Encabezado_2.setText("ESCUELA SUPERIOR DE CÓMPUTO");
+        Encabezado_2.setToolTipText("");
+
+        lb_Sis_Financiero.setFont(new java.awt.Font("Rockwell", 1, 18)); // NOI18N
+        lb_Sis_Financiero.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_Sis_Financiero.setText("Sistema Financiero");
+
+        lb_integrantes.setFont(new java.awt.Font("Rockwell", 0, 16)); // NOI18N
+        lb_integrantes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_integrantes.setText("Integrantes:");
+
+        lb_Integrante_1.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        lb_Integrante_1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_Integrante_1.setText("Castillo Jiménez Jorge");
+
+        lb_Integrante_2.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        lb_Integrante_2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_Integrante_2.setText("Estrada Granados Diego");
+
+        lb_Opcion.setFont(new java.awt.Font("Rockwell", 0, 18)); // NOI18N
+        lb_Opcion.setText("Seleccione una opción:");
+
+        btnCrearEstado.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
+        btnCrearEstado.setText("Crear Estado Financiero");
+        btnCrearEstado.setName("bt Crear Estado Financiero"); // NOI18N
+        btnCrearEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearEstadoActionPerformed(evt);
+            }
+        });
+
+        btnCargarEstado.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
+        btnCargarEstado.setText("Cargar Estado Financiero");
+        btnCargarEstado.setName("bt Cargar Estado"); // NOI18N
+        btnCargarEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCargarEstadoActionPerformed(evt);
+            }
+        });
+
+        btnCrear_Estado_Financiero.setText("Crear");
+        btnCrear_Estado_Financiero.setName("bt Crear"); // NOI18N
+        btnCrear_Estado_Financiero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrear_Estado_FinancieroActionPerformed(evt);
+            }
+        });
+
+        Rdbs_Estados_Financieros.add(Rdb_Situacion_Financiera);
+        Rdb_Situacion_Financiera.setText("Situación Financiera");
+        Rdb_Situacion_Financiera.setToolTipText("");
+        Rdb_Situacion_Financiera.setName("rdb SF"); // NOI18N
+
+        Rdbs_Estados_Financieros.add(Rdb_Estado_Resultados);
+        Rdb_Estado_Resultados.setText("Estado de Resultados");
+        Rdb_Estado_Resultados.setName("rdb ER"); // NOI18N
+
+        Rdbs_Estados_Financieros.add(RdbFlujoEfectivo);
+        RdbFlujoEfectivo.setText("Flujo de Efectivo");
+        RdbFlujoEfectivo.setName("rdb EF"); // NOI18N
+        RdbFlujoEfectivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RdbFlujoEfectivoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jpEdosfinancierosLayout = new javax.swing.GroupLayout(jpEdosfinancieros);
+        jpEdosfinancieros.setLayout(jpEdosfinancierosLayout);
+        jpEdosfinancierosLayout.setHorizontalGroup(
+            jpEdosfinancierosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpEdosfinancierosLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(jpEdosfinancierosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(RdbFlujoEfectivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Rdb_Estado_Resultados, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                    .addComponent(Rdb_Situacion_Financiera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jpEdosfinancierosLayout.setVerticalGroup(
+            jpEdosfinancierosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpEdosfinancierosLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(Rdb_Situacion_Financiera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Rdb_Estado_Resultados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(RdbFlujoEfectivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(10, 10, 10))
+        );
+
+        jlEdosCargados.setText("Estados Financieros cargados");
+
+        jListArhivosAbiertos.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jListArhivosAbiertos);
+
+        jbAnalisisFinanciero.setText("Análisis financero");
+        jbAnalisisFinanciero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAnalisisFinancieroActionPerformed(evt);
+            }
+        });
+
+        jbCerrarEstado.setText("Cerrar estado");
+        jbCerrarEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCerrarEstadoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jpRealizarAnalisisLayout = new javax.swing.GroupLayout(jpRealizarAnalisis);
+        jpRealizarAnalisis.setLayout(jpRealizarAnalisisLayout);
+        jpRealizarAnalisisLayout.setHorizontalGroup(
+            jpRealizarAnalisisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpRealizarAnalisisLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpRealizarAnalisisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpRealizarAnalisisLayout.createSequentialGroup()
+                        .addGroup(jpRealizarAnalisisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlEdosCargados)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(22, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpRealizarAnalisisLayout.createSequentialGroup()
+                        .addComponent(jbCerrarEstado)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbAnalisisFinanciero))))
+        );
+        jpRealizarAnalisisLayout.setVerticalGroup(
+            jpRealizarAnalisisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpRealizarAnalisisLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jlEdosCargados)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addGroup(jpRealizarAnalisisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbAnalisisFinanciero)
+                    .addComponent(jbCerrarEstado))
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(205, 205, 205)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lb_Integrante_2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(lb_Integrante_1))
+                            .addComponent(lb_Sis_Financiero)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(237, 237, 237)
+                        .addComponent(lb_integrantes)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(lbLogoIPN)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(Encabezado_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2)
+                        .addGap(13, 13, 13))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(166, 166, 166)
+                                .addComponent(Encabezado_2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(47, 47, 47)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(btnCrearEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(lb_Opcion, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE))
+                                        .addGap(58, 58, 58)
+                                        .addComponent(btnCargarEstado))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jpEdosfinancieros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(56, 56, 56)
+                                                .addComponent(btnCrear_Estado_Financiero)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jpRealizarAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbLogoIPN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(Encabezado_1))
+                        .addGap(18, 18, 18)
+                        .addComponent(Encabezado_2)
+                        .addGap(40, 40, 40)
+                        .addComponent(lb_Sis_Financiero, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)))
+                .addGap(31, 31, 31)
+                .addComponent(lb_integrantes, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lb_Integrante_1, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lb_Integrante_2, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(lb_Opcion, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCrearEstado)
+                    .addComponent(btnCargarEstado))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jpEdosfinancieros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCrear_Estado_Financiero, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jpRealizarAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCrearEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearEstadoActionPerformed
+        this.jpEdosfinancieros.setVisible(true);
+        this.btnCrear_Estado_Financiero.setVisible(true);
+        this.jpRealizarAnalisis.setVisible(false);
+    }//GEN-LAST:event_btnCrearEstadoActionPerformed
+
+    private void btnCargarEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarEstadoActionPerformed
+        this.jpRealizarAnalisis.setVisible(true);
+        this.jpEdosfinancieros.setVisible(false);
+        this.jpRealizarAnalisis.setVisible(true);
+        this.btnCrear_Estado_Financiero.setVisible(false);
+        JFileChooser abrredo = new JFileChooser();
+        FileNameExtensionFilter extension = new FileNameExtensionFilter("Estados finacieros(*.txt)", "txt");
+        abrredo.setDialogTitle("Selecciona un estado financiero");
+        abrredo.setFileFilter(extension);
+        abrredo.showDialog(this, "Seleccionar");
+        
+        try {
+            File archivo = abrredo.getSelectedFile();
+            String nombre = archivo.getName();
+            agregarEdoFinancieroLista((DefaultListModel)this.jListArhivosAbiertos.getModel(), archivo);
+            System.out.println(nombre);
+        }catch(Exception e){
+            System.out.println("Excepcion ->"+e.getMessage());
+        }
+        
+       
+       
+        
+        
+    }//GEN-LAST:event_btnCargarEstadoActionPerformed
+
+    private void RdbFlujoEfectivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RdbFlujoEfectivoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RdbFlujoEfectivoActionPerformed
+
+    private void jbCerrarEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCerrarEstadoActionPerformed
+        int i = this.jListArhivosAbiertos.getSelectedIndex();
+        cerrarEstadoFinanciero((DefaultListModel)this.jListArhivosAbiertos.getModel(), i);
+    }//GEN-LAST:event_jbCerrarEstadoActionPerformed
+
+    private void jbAnalisisFinancieroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAnalisisFinancieroActionPerformed
+       
+        String nombre1,nombre2;
+        String sf,er;
+        
+        if(estados[0]==null || estados[1]==null)
+            //JOPTION
+            System.out.println("Algun archivo no esta abierto");
+        else{
+            nombre1 = estados[0].getName();
+            nombre2 = estados[1].getName();
+        //System.out.println("->>>>>"+estados[0].getName());
+        //System.out.println("->>>>"+estados[1].getName());
+        
+            if  ((nombre1.contains("Resultados") ||  nombre1.contains("Situacion")) 
+                    && 
+                (nombre1.contains("Resultados") ||  nombre1.contains("Situacion"))
+                 
+                    &&
+                !( (nombre1.contains("Resultados") && nombre2.contains("Resultados")) || (nombre1.contains("Situacion")&&nombre2.contains("Situacion"))  )
+                )
+                
+            {
+                System.out.println("***********Estados correctos");
+                if(nombre1.contains("Resultados"))
+                {
+                    er = nombre1;
+                    sf = nombre2;
+                }
+                else
+                {
+                    er = nombre2;
+                    sf = nombre1;
+                }
+                
+                
+            }
+            else   
+                System.out.println("Alguno de los archivos que selecconaste no tiene el formato para ser leido");  //JOPTION
+        
+        
+        //Aqui se llamara al nuevo formulario para visualizar el analisis con los nombres pasados para 
+        }
+        
+    }//GEN-LAST:event_jbAnalisisFinancieroActionPerformed
+
+    private void btnCrear_Estado_FinancieroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrear_Estado_FinancieroActionPerformed
+        
+        
+        
+        if(this.RdbFlujoEfectivo.isSelected())
+            System.out.println("NO hacer nada aun");
+        
+        else
+        {
+            if(this.Rdb_Estado_Resultados.isSelected())
+            {
+               Crear_Estado_Resultados formularioEstadoResultados = new Crear_Estado_Resultados();
+               this.setVisible(false);
+               
+            }
+            else
+            {
+                if(this.Rdb_Situacion_Financiera.isSelected())
+                {
+                    Crear_Estado_Situacion_Financiera formularioSF = new Crear_Estado_Situacion_Financiera();
+                    this.setVisible(false);
+                }
+                else
+                    System.out.println("Selecciona una opcion "); //JOPTION
+            }
+        }
+        
+            
+    }//GEN-LAST:event_btnCrear_Estado_FinancieroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -69,15 +445,110 @@ public class Inicio extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Inicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Inicio().setVisible(true);
+               
+               Inicio formularioInicio = new Inicio();
+               formularioInicio.setVisible(true);
+               DefaultListModel lista = new DefaultListModel();
+               lista.addElement("Ningun elemento seleccionado");
+               lista.addElement("Ningun elemento seleccionado");
+               
+               formularioInicio.jListArhivosAbiertos.setModel(lista);
+               
+               formularioInicio.jpEdosfinancieros.setVisible(false);
+               formularioInicio.btnCrear_Estado_Financiero.setVisible(false);
+               formularioInicio.jpRealizarAnalisis.setVisible(false);
+               
+         
+    }
+    
+    public  void agregarEdoFinancieroLista(DefaultListModel lista, File estado)
+    {
+        String defecto = "Ningun elemento seleccionado";
+        String nombre  = estado.getName();
+        if (lista.firstElement().equals(defecto)) {
+            lista.set(0,nombre);
+            estados[0] = estado;
+        }
+        else 
+        {
+            if(lista.lastElement().equals(defecto)){
+             lista.set(1,nombre);
+             estados[1] = estado;
             }
-        });
+            else
+            {
+                //Aqui debe ir in JOPtion para que diga que ya no se pueden agregar mas estados
+                System.out.println("Solo es posible realizar el analisis de 2 estados financieros");
+            }
+        }
+    }
+    
+    public void cerrarEstadoFinanciero(DefaultListModel lista, int elementoseleccionado )
+    {
+       
+        if(elementoseleccionado<0)
+        {
+            System.out.println("Selecciona un archivo a ser cerrado");
+            
+        }
+        else
+        {
+            /*
+                ------ATENCION------
+                Una manera de evitar que cuando se cierren los archivos se tengan los dos abuertos
+                Puede NO ser la opcion usar el metodo .delete() porque borra el archivo creado, tampoco podria ser
+                una opcion mandarlo a null para evitar los apuntadores a nulos al hacer la transicion a otro form
+            
+                Podemos usar los textos de la lista, verificando que los dos sean diferentes que el estadocerrado
+                (Ningun elemento seleccionado), ademas podriamos verificar que tenga algun nombre en especial el archivo
+                que abrio el usuario
+            
+                --------RESUELTO-----------
+                Es necesrio verificar si los archivos son == a null para que entre en el if declarado en el metodo
+                
+            */
+            
+                    
+            //lista.removeElementAt(elementoselecionado);
+            estados[elementoseleccionado]=null;
+            mandaraEstadoCerrado(lista, elementoseleccionado);
+        }
+    }
+    
+    public  void mandaraEstadoCerrado(DefaultListModel lista, int i)
+    {
+        String nombre = "Ningun elemento seleccionado";
+        lista.set(i,nombre);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Encabezado_1;
+    private javax.swing.JLabel Encabezado_2;
+    private javax.swing.JRadioButton RdbFlujoEfectivo;
+    private javax.swing.JRadioButton Rdb_Estado_Resultados;
+    private javax.swing.JRadioButton Rdb_Situacion_Financiera;
+    private javax.swing.ButtonGroup Rdbs_Estados_Financieros;
+    private javax.swing.JButton btnCargarEstado;
+    private javax.swing.JButton btnCrearEstado;
+    private javax.swing.JButton btnCrear_Estado_Financiero;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JList<String> jListArhivosAbiertos;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbAnalisisFinanciero;
+    private javax.swing.JButton jbCerrarEstado;
+    private javax.swing.JLabel jlEdosCargados;
+    private javax.swing.JPanel jpEdosfinancieros;
+    private javax.swing.JPanel jpRealizarAnalisis;
+    private javax.swing.JLabel lbLogoIPN;
+    private javax.swing.JLabel lb_Integrante_1;
+    private javax.swing.JLabel lb_Integrante_2;
+    private javax.swing.JLabel lb_Opcion;
+    private javax.swing.JLabel lb_Sis_Financiero;
+    private javax.swing.JLabel lb_integrantes;
     // End of variables declaration//GEN-END:variables
 }
