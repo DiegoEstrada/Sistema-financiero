@@ -512,8 +512,7 @@ public class Inicio extends javax.swing.JFrame {
                 Es necesrio verificar si los archivos son == a null para que entre en el if declarado en el metodo
                 
             */
-            
-                    
+
             //lista.removeElementAt(elementoselecionado);
             estados[elementoseleccionado]=null;
             mandaraEstadoCerrado(lista, elementoseleccionado);
