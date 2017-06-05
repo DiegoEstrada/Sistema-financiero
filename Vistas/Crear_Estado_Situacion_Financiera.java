@@ -72,7 +72,7 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
         setTitle("Crear Estado de Situación Financiera");
 
         lbTitulo.setFont(new java.awt.Font("Rockwell", 0, 18)); // NOI18N
-        lbTitulo.setText("Crear nuevo Estado de Situacion Financiera");
+        lbTitulo.setText("Crear nuevo Estado de Situación Financiera");
 
         lbExtension.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
         lbExtension.setText("Nombre del archivo ");
@@ -225,8 +225,7 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(txtNombreSF, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(81, 81, 81)
-                                        .addComponent(jbCrearEstado)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                        .addComponent(jbCrearEstado)))
                                 .addGap(166, 166, 166))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(34, 34, 34)

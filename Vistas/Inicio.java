@@ -500,7 +500,7 @@ public class Inicio extends javax.swing.JFrame {
         {
             /*
                 ------ATENCION------
-                Una manera de evitar que cuando se cierren los archivos se tengan los dos abuertos
+                Una manera de evitar que cuando se cierren los archivos se tengan los dos abiertos
                 Puede NO ser la opcion usar el metodo .delete() porque borra el archivo creado, tampoco podria ser
                 una opcion mandarlo a null para evitar los apuntadores a nulos al hacer la transicion a otro form
             

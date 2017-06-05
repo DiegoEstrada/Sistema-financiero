@@ -61,7 +61,6 @@
                                       <Component id="txtNombreSF" min="-2" pref="200" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
                                       <Component id="jbCrearEstado" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="-2" pref="166" max="-2" attributes="0"/>
@@ -224,7 +223,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Rockwell" size="18" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Crear nuevo Estado de Situacion Financiera"/>
+        <Property name="text" type="java.lang.String" value="Crear nuevo Estado de Situaci&#xf3;n Financiera"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lbExtension">
