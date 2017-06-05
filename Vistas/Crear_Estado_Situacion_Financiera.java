@@ -2,18 +2,33 @@ package Vistas;
 
 import Modelo.EstadoFinanciero;
 import Modelo.SituacionFinanciera;
+import java.io.File;
+import java.io.FileWriter;
 import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author super
  */
+
+    /*
+        -----ATENCION-----
+        Un unico detalle que no es un error sino que puede confundir al usuaro es el jtextfield del nombre de archivo
+        porque cuando da clic en crear se abre un JFChooser para seleccionar la ruta a guardar su archivo y aparte le
+        vuelve a pedir un nombre, que si es distraido o no pone atenóm, puede poner tro diferente
+        Lo que trae esto como consecuenica es que el archivo tenga un nombre diferente al que el piensa 
+        El nombre con el que se guarda es con el que lo escribe en el JFChooser, el otro nobre sirve para crear el objeto
+        de tipo Situacion Financiera
+    */
 public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
 
     /**
      * Creates new form Crear_Estado_Situacion_Financiera
      */
         private SituacionFinanciera sf;
+        private File guardar;
         private DefaultListModel lista = new DefaultListModel();
         
     
@@ -21,6 +36,7 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
         initComponents();
         DefaultListModel l = new DefaultListModel();
         l.addElement("");
+        this.jcbTipoCuenta.removeAllItems();
         this.ComboBoxNombreCuenta.removeAllItems();
         this.jlCuentasAgregadas.setModel(l);
         this.setVisible(true);
@@ -48,14 +64,6 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
         RdbActivo = new javax.swing.JRadioButton();
         RdbPasivo = new javax.swing.JRadioButton();
         RdbCapital = new javax.swing.JRadioButton();
-        Rdb_A_circulante = new javax.swing.JRadioButton();
-        Rdb_A_fijo = new javax.swing.JRadioButton();
-        Rdb_A_diferido = new javax.swing.JRadioButton();
-        Rdb_P_circulante = new javax.swing.JRadioButton();
-        Rdb_P_fijo = new javax.swing.JRadioButton();
-        Rdb_P_diferido = new javax.swing.JRadioButton();
-        Rdb_C_capSocial = new javax.swing.JRadioButton();
-        Rdb_C_UtilidadNeta = new javax.swing.JRadioButton();
         lbNombreCuenta = new javax.swing.JLabel();
         lbSaldoCuenta = new javax.swing.JLabel();
         txtSaldoCuenta = new javax.swing.JTextField();
@@ -67,12 +75,14 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
         jlCuentasAgregadas = new javax.swing.JList<>();
         jlbCuentasAgregadas = new javax.swing.JLabel();
         jbCrearEstado = new javax.swing.JButton();
+        jcbTipoCuenta = new javax.swing.JComboBox<>();
+        jbEliminarCuenta = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Crear Estado de Situación Financiera");
 
         lbTitulo.setFont(new java.awt.Font("Rockwell", 0, 18)); // NOI18N
-        lbTitulo.setText("Crear nuevo Estado de Situación Financiera");
+        lbTitulo.setText("Crear nuevo Estado de Situacion Financiera");
 
         lbExtension.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
         lbExtension.setText("Nombre del archivo ");
@@ -93,71 +103,17 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
 
         bts_TipoCuenta.add(RdbPasivo);
         RdbPasivo.setText("Pasivo");
+        RdbPasivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RdbPasivoActionPerformed(evt);
+            }
+        });
 
         bts_TipoCuenta.add(RdbCapital);
         RdbCapital.setText("Capital");
-
-        bts_Activo.add(Rdb_A_circulante);
-        Rdb_A_circulante.setText("Circulante");
-        Rdb_A_circulante.addActionListener(new java.awt.event.ActionListener() {
+        RdbCapital.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Rdb_A_circulanteActionPerformed(evt);
-            }
-        });
-
-        bts_Activo.add(Rdb_A_fijo);
-        Rdb_A_fijo.setText("Fijo");
-        Rdb_A_fijo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Rdb_A_fijoActionPerformed(evt);
-            }
-        });
-
-        bts_Activo.add(Rdb_A_diferido);
-        Rdb_A_diferido.setText("Diferido");
-        Rdb_A_diferido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Rdb_A_diferidoActionPerformed(evt);
-            }
-        });
-
-        bts_Pasivo.add(Rdb_P_circulante);
-        Rdb_P_circulante.setText("Circulante");
-        Rdb_P_circulante.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Rdb_P_circulanteActionPerformed(evt);
-            }
-        });
-
-        bts_Pasivo.add(Rdb_P_fijo);
-        Rdb_P_fijo.setText("Fijo");
-        Rdb_P_fijo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Rdb_P_fijoActionPerformed(evt);
-            }
-        });
-
-        bts_Pasivo.add(Rdb_P_diferido);
-        Rdb_P_diferido.setText("Diferido");
-        Rdb_P_diferido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Rdb_P_diferidoActionPerformed(evt);
-            }
-        });
-
-        bts_Capital.add(Rdb_C_capSocial);
-        Rdb_C_capSocial.setText("Capital Social");
-        Rdb_C_capSocial.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Rdb_C_capSocialActionPerformed(evt);
-            }
-        });
-
-        bts_Capital.add(Rdb_C_UtilidadNeta);
-        Rdb_C_UtilidadNeta.setText("Utilidad Neta");
-        Rdb_C_UtilidadNeta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Rdb_C_UtilidadNetaActionPerformed(evt);
+                RdbCapitalActionPerformed(evt);
             }
         });
 
@@ -177,9 +133,19 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
 
         btFinalizarSF.setFont(new java.awt.Font("Constantia", 0, 12)); // NOI18N
         btFinalizarSF.setText("Guardar Estado");
+        btFinalizarSF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btFinalizarSFActionPerformed(evt);
+            }
+        });
 
         btRegresar.setFont(new java.awt.Font("Constantia", 0, 12)); // NOI18N
         btRegresar.setText("Regresar");
+        btRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRegresarActionPerformed(evt);
+            }
+        });
 
         ComboBoxNombreCuenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -199,12 +165,26 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
             }
         });
 
+        jcbTipoCuenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbTipoCuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbTipoCuentaActionPerformed(evt);
+            }
+        });
+
+        jbEliminarCuenta.setText("Eliminar cuenta");
+        jbEliminarCuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarCuentaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
+                .addGap(79, 79, 79)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lbExtension, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -215,76 +195,60 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
                             .addComponent(lbNombreSF))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(Rdb_C_UtilidadNeta)
-                                            .addComponent(Rdb_C_capSocial)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtNombreSF, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(81, 81, 81)
-                                        .addComponent(jbCrearEstado)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtNombreSF, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(81, 81, 81)
+                                .addComponent(jbCrearEstado)
                                 .addGap(166, 166, 166))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(34, 34, 34)
                                 .addComponent(ComboBoxNombreCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(33, 33, 33)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(33, 33, 33)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(lbCuentas)
-                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(RdbPasivo)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(RdbCapital)
-                                                .addGap(224, 224, 224))))
+                                        .addComponent(RdbPasivo)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(RdbCapital)
+                                        .addGap(224, 224, 224))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(68, 68, 68)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jlbCuentasAgregadas)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(btFinalizarSF)))
-                                        .addContainerGap())))))
+                                        .addComponent(lbCuentas)
+                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(161, 161, 161)
+                                .addComponent(jbEliminarCuenta)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jlbCuentasAgregadas)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btFinalizarSF)))
+                                .addContainerGap())))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Rdb_A_fijo)
-                            .addComponent(Rdb_A_circulante)
-                            .addComponent(Rdb_A_diferido))
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(104, 104, 104)
+                        .addComponent(btAgregarCuenta)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lbSaldoCuenta)
                             .addComponent(lbNombreCuenta))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtSaldoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(68, 68, 68)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Rdb_P_fijo)
-                            .addComponent(Rdb_P_diferido)
-                            .addComponent(Rdb_P_circulante))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(104, 104, 104)
-                        .addComponent(btAgregarCuenta)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(295, 295, 295)
-                .addComponent(lbTitulo)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btRegresar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btRegresar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(295, 295, 295)
+                        .addComponent(lbTitulo)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jcbTipoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(364, 364, 364))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,46 +264,41 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
                     .addComponent(jbCrearEstado))
                 .addGap(18, 18, 18)
                 .addComponent(lbCuentas)
-                .addGap(27, 27, 27)
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(RdbPasivo)
                     .addComponent(RdbActivo)
                     .addComponent(RdbCapital))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Rdb_C_capSocial)
-                    .addComponent(Rdb_P_circulante)
-                    .addComponent(Rdb_A_circulante))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Rdb_C_UtilidadNeta)
-                    .addComponent(Rdb_P_fijo)
-                    .addComponent(Rdb_A_fijo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Rdb_P_diferido)
-                    .addComponent(Rdb_A_diferido))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
+                        .addGap(111, 111, 111)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbNombreCuenta)
                             .addComponent(ComboBoxNombreCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbSaldoCuenta)
-                            .addComponent(txtSaldoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtSaldoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jcbTipoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(47, 47, 47)
                         .addComponent(btAgregarCuenta)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btFinalizarSF)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btRegresar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 28, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jlbCuentasAgregadas)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jbEliminarCuenta)
+                                .addGap(29, 29, 29)))))
                 .addContainerGap())
         );
 
@@ -347,51 +306,16 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void RdbActivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RdbActivoActionPerformed
-      
-      
-            
-        
+      asignarValoresCBTipo();
     }//GEN-LAST:event_RdbActivoActionPerformed
 
-    private void Rdb_A_circulanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Rdb_A_circulanteActionPerformed
-           AsignarValoresCB();
-    }//GEN-LAST:event_Rdb_A_circulanteActionPerformed
-
-    private void Rdb_A_fijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Rdb_A_fijoActionPerformed
-            AsignarValoresCB();
-    }//GEN-LAST:event_Rdb_A_fijoActionPerformed
-
-    private void Rdb_P_circulanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Rdb_P_circulanteActionPerformed
-        AsignarValoresCB();
-    }//GEN-LAST:event_Rdb_P_circulanteActionPerformed
-
-    private void Rdb_P_fijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Rdb_P_fijoActionPerformed
-        AsignarValoresCB();
-    }//GEN-LAST:event_Rdb_P_fijoActionPerformed
-
-    private void Rdb_P_diferidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Rdb_P_diferidoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Rdb_P_diferidoActionPerformed
-
-    private void Rdb_C_capSocialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Rdb_C_capSocialActionPerformed
-        AsignarValoresCB();
-    }//GEN-LAST:event_Rdb_C_capSocialActionPerformed
-
-    private void Rdb_C_UtilidadNetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Rdb_C_UtilidadNetaActionPerformed
-       AsignarValoresCB();
-    }//GEN-LAST:event_Rdb_C_UtilidadNetaActionPerformed
-
-    private void Rdb_A_diferidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Rdb_A_diferidoActionPerformed
-        AsignarValoresCB();
-    }//GEN-LAST:event_Rdb_A_diferidoActionPerformed
-
     private void btAgregarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgregarCuentaActionPerformed
-        String nombrecuenta,saldo;
+        String nombrecuenta,tipocuenta,saldo;
         int i;
         
         i = this.ComboBoxNombreCuenta.getSelectedIndex();
         saldo = this.txtSaldoCuenta.getText();
-        nombrecuenta = this.ComboBoxNombreCuenta.getItemAt(0);
+        nombrecuenta = this.ComboBoxNombreCuenta.getItemAt(i);
         
         //sf.agregarCuenta(saldo, saldo, saldo, saldo);
         /*
@@ -401,11 +325,51 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
         */
         
         
-        System.out.println(nombrecuenta + " = "+ saldo);
+        if (this.RdbActivo.isSelected())
+        {
+            i = this.jcbTipoCuenta.getSelectedIndex();
+            tipocuenta = this.jcbTipoCuenta.getItemAt(i);
+            //System.out.println("Voy a ingresar Activo, "+ tipocuenta +" , " +nombrecuenta+ ", "+saldo);
+            sf.agregarCuenta("Activo", tipocuenta, nombrecuenta, saldo);
+            lista.addElement(nombrecuenta+"="+ saldo);
+            jlCuentasAgregadas.setModel(lista);
+            
+        }
+        else
+         {
+             if (this.RdbPasivo.isSelected())
+             {
+                  i = this.jcbTipoCuenta.getSelectedIndex();
+                  tipocuenta = this.jcbTipoCuenta.getItemAt(i);
+                  //System.out.println("Voy a ingresar Pasivo, "+ tipocuenta +" , " +nombrecuenta+ ", "+saldo);
+                  sf.agregarCuenta("Pasivo", tipocuenta, nombrecuenta, saldo);
+                  lista.addElement(nombrecuenta+"="+ saldo);
+                  jlCuentasAgregadas.setModel(lista);
+             }
+             else
+             {
+                 if(this.RdbCapital.isSelected())
+                 {
+                       i = this.jcbTipoCuenta.getSelectedIndex();
+                       tipocuenta = this.jcbTipoCuenta.getItemAt(i);
+                       System.out.println("Voy a ingresar Capital, "+ tipocuenta +" , " +nombrecuenta+ ", "+saldo);
+                       sf.agregarCuenta("Capital", tipocuenta, nombrecuenta, saldo);
+                       lista.addElement(nombrecuenta+"="+ saldo);
+                       jlCuentasAgregadas.setModel(lista);
+                 }
+                 else
+                     System.out.println("Selecciona una opcion"); //JOPTION
+             }
+         }
+        
+        
+
         
     }//GEN-LAST:event_btAgregarCuentaActionPerformed
 
     private void jbCrearEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCrearEstadoActionPerformed
+        
+        
         
         if(this.txtNombreSF.getText().isEmpty())
         {   
@@ -415,107 +379,216 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
         {
             SituacionFinanciera situacionfinanciera = new SituacionFinanciera(this.getName()+".txt");
             this.sf =  situacionfinanciera;
+            JFileChooser guardarestado = new JFileChooser();
+            
+            
+            try{
+                guardarestado.showSaveDialog(this);
+                this.guardar = guardarestado.getSelectedFile();
+                if (guardar != null)
+                {
+                    System.out.println(guardar);
+                    //FileWriter  save=new FileWriter(guardar+".txt");
+                    //save.write(areaDeTexto.getText());
+                    //save.close();
+                        //JOptionPane.showMessageDialog(null,
+                          //      "El archivo se ha guardado Exitosamente",
+                            //                            "Información",JOptionPane.INFORMATION_MESSAGE);
+                }
+                
+                
+            }catch(Exception e){
+            
+            }
         }
         
     }//GEN-LAST:event_jbCrearEstadoActionPerformed
 
-   public void AsignarValoresCB()
-   {
-         if (this.RdbActivo.isSelected())
+    private void RdbPasivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RdbPasivoActionPerformed
+        asignarValoresCBTipo();
+    }//GEN-LAST:event_RdbPasivoActionPerformed
+
+    private void RdbCapitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RdbCapitalActionPerformed
+        asignarValoresCBTipo();
+    }//GEN-LAST:event_RdbCapitalActionPerformed
+
+    private void jcbTipoCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbTipoCuentaActionPerformed
+        asignarCuentasCB();
+    }//GEN-LAST:event_jcbTipoCuentaActionPerformed
+
+    private void jbEliminarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarCuentaActionPerformed
+        int j,i = jlCuentasAgregadas.getSelectedIndex();
+        String fila;
+        String nombre = "";
+        if(i<0)
         {
-            if(this.Rdb_A_circulante.isSelected())
-            {
-                this.ComboBoxNombreCuenta.removeAllItems();
-                this.ComboBoxNombreCuenta.addItem("Caja");
-            }
-            else
-            {
-                if(this.Rdb_A_fijo.isSelected())
-                {
-                    this.ComboBoxNombreCuenta.removeAllItems();
-                    this.ComboBoxNombreCuenta.addItem("Terrenos");
-                }
-                else
-                {
-                    if (this.Rdb_A_diferido.isSelected())
-                    {
-                        this.ComboBoxNombreCuenta.removeAllItems();
-                        this.ComboBoxNombreCuenta.addItem("Gastos de operacion");
-                    }
-                    else
-                        System.out.println("Selecciona un tipo de cuenta" ); //JOPTION
-                }
-            }
+            System.out.println("Selecciona la cuenta que deseas agregar"); //JOPTION
         }
         else
         {
-            if(this.RdbPasivo.isSelected())
-            {
-                if(this.Rdb_P_circulante.isSelected())
-            {
-                this.ComboBoxNombreCuenta.removeAllItems();
-                this.ComboBoxNombreCuenta.addItem("Clientes");
-            }
-            else
-            {
-                if(this.Rdb_P_fijo.isSelected())
+            fila = jlCuentasAgregadas.getSelectedValue();
+            
+            for ( j = 0; j <fila.length(); j++) {
+                if (!(fila.charAt(j)>=48 && fila.charAt(j)<=57) || fila.charAt(j)==32 )
                 {
-                    this.ComboBoxNombreCuenta.removeAllItems();
-                    this.ComboBoxNombreCuenta.addItem("Hipotecas por pagar");
-                }
-                else
-                {
-                    if (this.Rdb_P_diferido.isSelected())
-                    {
-                        
-                    }
-                    else
-                        System.out.println("Selecciona un tipo de cuenta" ); //JOPTION
+                    nombre = nombre + fila.charAt(j);
                 }
             }
-            }
-            else
-            {
-                if(this.RdbCapital.isSelected())
-                {
-                    if(this.Rdb_C_capSocial.isSelected())
-                    {
-                        this.ComboBoxNombreCuenta.removeAllItems();
-                    this.ComboBoxNombreCuenta.addItem("Capital social");
-                    }
-                    else
-                    {
-                        if(this.Rdb_C_UtilidadNeta.isSelected())
-                        {
-                            this.ComboBoxNombreCuenta.removeAllItems();
-                            this.ComboBoxNombreCuenta.addItem("UtilidadNeta");
-                        }
-                        else
-                            System.out.println("Selecciona una cuenta"); //JOPTION
-                    }
-                }
-                else
-                {
-                    System.out.println("Selecciona una cuenta"); //JOPTION
-                }
-            }
+            //System.out.println("SELECCONE "+ nombre);
+            sf.eliminarCuenta(nombre);
+            lista.removeElementAt(i);
+            jlCuentasAgregadas.setModel(lista);
         }
+    }//GEN-LAST:event_jbEliminarCuentaActionPerformed
+
+    private void btFinalizarSFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFinalizarSFActionPerformed
+        this.sf.mostrarCuentas();
+        if (this.sf.verificarEstado())
+        this.sf.crearEstadoFinanciero(guardar);
+        else
+            System.out.println("Las cuentas ingresadas no estan balanceadas "); //JOPION
+        
+        Inicio forminicio = new Inicio();
+        forminicio.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btFinalizarSFActionPerformed
+
+    private void btRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegresarActionPerformed
+        Inicio forminicio = new Inicio();
+        forminicio.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btRegresarActionPerformed
+
+   public void asignarValoresCBTipo()
+   {
+         if (this.RdbActivo.isSelected())
+        {
+             this.jcbTipoCuenta.removeAllItems();
+             this.jcbTipoCuenta.addItem("Circulante");
+             this.jcbTipoCuenta.addItem("Fijo");
+             this.jcbTipoCuenta.addItem("Diferido");
+            
+        }
+        else
+         {
+             if (this.RdbPasivo.isSelected())
+             {
+                 this.jcbTipoCuenta.removeAllItems();
+                 this.jcbTipoCuenta.addItem("Circulante");
+                 this.jcbTipoCuenta.addItem("Fijo");
+             }
+             else
+             {
+                 if(this.RdbCapital.isSelected())
+                 {
+                      this.jcbTipoCuenta.removeAllItems();
+                      this.jcbTipoCuenta.addItem("Capital social");
+                      this.jcbTipoCuenta.addItem("Utilidad neta");
+                 }
+                 else
+                     System.out.println("Selecciona una opcion"); //JOPTION
+             }
+         }
+             
+        
+           
    }
    
 
+   public void asignarCuentasCB()
+   {
+       int i = this.jcbTipoCuenta.getSelectedIndex();
+       
+       if (this.RdbActivo.isSelected())
+        {
+             switch(i)
+             {
+                 case 0: //Caso Circulante
+                      this.ComboBoxNombreCuenta.removeAllItems();
+                      this.ComboBoxNombreCuenta.addItem("Caja");
+                      this.ComboBoxNombreCuenta.addItem("Bancos");
+                      this.ComboBoxNombreCuenta.addItem("Alamacen");
+                      this.ComboBoxNombreCuenta.addItem("Clientes");
+                      this.ComboBoxNombreCuenta.addItem("Deudores");
+                      this.ComboBoxNombreCuenta.addItem("Documentos por cobrar");
+                 break;
+                 case 1: //Caso Fijo
+                     this.ComboBoxNombreCuenta.removeAllItems();
+                     this.ComboBoxNombreCuenta.addItem("Terrenos");
+                     this.ComboBoxNombreCuenta.addItem("Edificios");
+                     this.ComboBoxNombreCuenta.addItem("Mobiliario y equipo");
+                     this.ComboBoxNombreCuenta.addItem("Equipo de reparto");
+                     this.ComboBoxNombreCuenta.addItem("Equipo de transporte");
+                     this.ComboBoxNombreCuenta.addItem("Equipo de computo");
+                     break;
+                 case 2: //Caso Diferido
+                      this.ComboBoxNombreCuenta.removeAllItems();
+                      this.ComboBoxNombreCuenta.addItem("Gastos de instalacion ");
+                      this.ComboBoxNombreCuenta.addItem("Gastos de organizacion");
+                      this.ComboBoxNombreCuenta.addItem("Papeleria y utiles ");
+                      this.ComboBoxNombreCuenta.addItem("Propaganda y publicidad");
+                     break;
+                 default:
+                     System.out.println("Selecciona un tipo de cuenta"); //JOPTION
+                     break;
+             }
+            
+        }
+        else
+         {
+             if (this.RdbPasivo.isSelected())
+             {
+                 switch(i)
+                {
+                 case 0: //Caso Circulante
+                        this.ComboBoxNombreCuenta.removeAllItems();
+                        this.ComboBoxNombreCuenta.addItem("Proveedores");
+                        this.ComboBoxNombreCuenta.addItem("Deudores");
+                        this.ComboBoxNombreCuenta.addItem("Acreedores");
+                        this.ComboBoxNombreCuenta.addItem("Documentos por pagar");
+                     break;
+                 case 1:  //Caso Fijo
+                        this.ComboBoxNombreCuenta.removeAllItems();
+                        this.ComboBoxNombreCuenta.addItem("Documentos por pagar a largo plazo");
+                        this.ComboBoxNombreCuenta.addItem("Acreedores hipotecarios");
+                     break;
+                 default:
+                      System.out.println("Selecciona un tipo de cuenta"); //JOPTION
+                     break;
+                }
+                         
+             }
+             else
+             {
+                 if(this.RdbCapital.isSelected())
+                 {
+                       switch(i)
+                        {
+                        case 0: //Caso Capital social
+                            this.ComboBoxNombreCuenta.removeAllItems();
+                            this.ComboBoxNombreCuenta.addItem("Capital social");
+                        
+                            break;
+                        case 1: // Caso Utilidad neta
+                            this.ComboBoxNombreCuenta.removeAllItems();
+                            this.ComboBoxNombreCuenta.addItem("Utilidad neta");
+                            break;
+                        default:
+                             System.out.println("Selecciona un tipo de cuenta"); //JOPTION
+                            break;
+                        }
+                 }
+                 else
+                     System.out.println("Selecciona una opcion"); //JOPTION
+             }
+         }
+   }
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboBoxNombreCuenta;
     private javax.swing.JRadioButton RdbActivo;
     private javax.swing.JRadioButton RdbCapital;
     private javax.swing.JRadioButton RdbPasivo;
-    private javax.swing.JRadioButton Rdb_A_circulante;
-    private javax.swing.JRadioButton Rdb_A_diferido;
-    private javax.swing.JRadioButton Rdb_A_fijo;
-    private javax.swing.JRadioButton Rdb_C_UtilidadNeta;
-    private javax.swing.JRadioButton Rdb_C_capSocial;
-    private javax.swing.JRadioButton Rdb_P_circulante;
-    private javax.swing.JRadioButton Rdb_P_diferido;
-    private javax.swing.JRadioButton Rdb_P_fijo;
     private javax.swing.JButton btAgregarCuenta;
     private javax.swing.JButton btFinalizarSF;
     private javax.swing.JButton btRegresar;
@@ -525,6 +598,8 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
     private javax.swing.ButtonGroup bts_TipoCuenta;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbCrearEstado;
+    private javax.swing.JButton jbEliminarCuenta;
+    private javax.swing.JComboBox<String> jcbTipoCuenta;
     private javax.swing.JList<String> jlCuentasAgregadas;
     private javax.swing.JLabel jlbCuentasAgregadas;
     private javax.swing.JLabel lbCuentas;

@@ -21,6 +21,15 @@ public class Inicio extends javax.swing.JFrame {
     public Inicio() {
         estados = new File[2];
         initComponents();
+        DefaultListModel lista = new DefaultListModel();
+        lista.addElement("Ningun elemento seleccionado");
+        lista.addElement("Ningun elemento seleccionado");
+               
+        this.jListArhivosAbiertos.setModel(lista);
+               
+        this.jpEdosfinancieros.setVisible(false);
+        this.btnCrear_Estado_Financiero.setVisible(false);
+        this.jpRealizarAnalisis.setVisible(false);
     }
 
     /**
@@ -453,15 +462,7 @@ public class Inicio extends javax.swing.JFrame {
                
                Inicio formularioInicio = new Inicio();
                formularioInicio.setVisible(true);
-               DefaultListModel lista = new DefaultListModel();
-               lista.addElement("Ningun elemento seleccionado");
-               lista.addElement("Ningun elemento seleccionado");
                
-               formularioInicio.jListArhivosAbiertos.setModel(lista);
-               
-               formularioInicio.jpEdosfinancieros.setVisible(false);
-               formularioInicio.btnCrear_Estado_Financiero.setVisible(false);
-               formularioInicio.jpRealizarAnalisis.setVisible(false);
                
          
     }
@@ -500,7 +501,7 @@ public class Inicio extends javax.swing.JFrame {
         {
             /*
                 ------ATENCION------
-                Una manera de evitar que cuando se cierren los archivos se tengan los dos abiertos
+                Una manera de evitar que cuando se cierren los archivos se tengan los dos abuertos
                 Puede NO ser la opcion usar el metodo .delete() porque borra el archivo creado, tampoco podria ser
                 una opcion mandarlo a null para evitar los apuntadores a nulos al hacer la transicion a otro form
             
@@ -512,7 +513,8 @@ public class Inicio extends javax.swing.JFrame {
                 Es necesrio verificar si los archivos son == a null para que entre en el if declarado en el metodo
                 
             */
-
+            
+                    
             //lista.removeElementAt(elementoselecionado);
             estados[elementoseleccionado]=null;
             mandaraEstadoCerrado(lista, elementoseleccionado);

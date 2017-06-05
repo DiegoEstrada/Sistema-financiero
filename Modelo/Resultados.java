@@ -29,9 +29,9 @@ public class Resultados implements EstadoFinanciero {
     }
    
     @Override
-    public void crearEstadoFinanciero() {
+    public void crearEstadoFinanciero(File f) {
         try {
-            File f;
+            //File f;
             FileWriter w;
             BufferedWriter bw;
             PrintWriter wr;
@@ -42,7 +42,7 @@ public class Resultados implements EstadoFinanciero {
             int i,t;
             
            
-            f = new File(nomEdoFin);
+            //f = new File(nomEdoFin);
             w = new FileWriter(f);
             bw=new BufferedWriter(w);
             wr=new PrintWriter(bw);

@@ -72,28 +72,29 @@ public class SituacionFinanciera implements EstadoFinanciero {
     }
     
     @Override
-    public void crearEstadoFinanciero() {
+    public void crearEstadoFinanciero(File f) {
         //System.out.println("Estoy creando el estado ");
-        File f;
+        //File f;
         FileWriter w;
         BufferedWriter bw;
         PrintWriter wr;
         ArrayList<String> cuenta = new ArrayList<>(); 
         String datos[], aux; 
+        String nombrear = f.getName();
         float suma=0;
         int t,i;
         
-        f = new File(nomEdoFin);
+        //f = new File(nomEdoFin);
         try {
         
         w = new FileWriter(f);
         bw=new BufferedWriter(w);
         wr=new PrintWriter(bw);
         
-        wr.println("\t\t\t\t\tEstado de situación financira de "+nomEdoFin+ "\t\t\t\t\t");
+        wr.println("\t\t\t\t\tEstado de situación financira de "+nombrear+ "\t\t\t\t\t");
         wr.println("Activo");
         //Se comienzan a escribir las cuentas de activo cieculante, sus saldo y su suma 
-        wr.println("\tCirculante");
+        wr.println("Circulante");
         cuenta = obtenerCuentasde( "Activo", "Circulante");
         suma = obtenerSaldode("Activo", "Circulante");
         t = cuenta.size();
@@ -103,15 +104,15 @@ public class SituacionFinanciera implements EstadoFinanciero {
           aux = cuenta.get(i);
           datos = aux.split(",");
             //System.out.println(datos[0] +"\t "+ datos[1]);
-            wr.println("\t\t" +datos[0]+ "\t\t\t"+datos[1]);
+            wr.println(datos[0]+ " "+datos[1]);
             
         }
         
-        wr.println("\tSuma activo circulante  "+suma+""); //se llama a la suma de activo circulante
+        wr.println("\tSuma activo circulante  "+suma); //se llama a la suma de activo circulante
         
         //Se comineza a escribir las cuentas de activo fijo, sus saldos y su suma
         
-        wr.println("\tFijo");
+        wr.println("Fijo");
         cuenta = obtenerCuentasde("Activo", "Fijo");
         suma = obtenerSaldode("Activo", "Fijo");
         t = cuenta.size();
@@ -121,16 +122,16 @@ public class SituacionFinanciera implements EstadoFinanciero {
           aux = cuenta.get(i);
           datos = aux.split(",");
             //System.out.println(datos[0] +"\t "+ datos[1]);
-            wr.println("\t\t" +datos[0]+ "\t\t\t"+datos[1]);
+            wr.println(datos[0]+" "+datos[1]);
             
         }
         
-        wr.println("\tSuma activo fijo  "+suma+""); //se llama a la suma de activo fijo 
+        wr.println("\tSuma activo fijo  "+suma); //se llama a la suma de activo fijo 
         
         
         //Se comienza aescribir las cuentas de activo diferido, sus saldos y su suma 
         
-        wr.println("\tDiferido");
+        wr.println("Diferido");
         cuenta = obtenerCuentasde("Activo", "Diferido");
         suma = obtenerSaldode("Activo", "Diferido");
         t = cuenta.size();
@@ -140,20 +141,20 @@ public class SituacionFinanciera implements EstadoFinanciero {
           aux = cuenta.get(i);
           datos = aux.split(",");
             //System.out.println(datos[0] +"\t "+ datos[1]);
-            wr.println("\t\t" +datos[0]+ "\t\t\t"+datos[1]);
+            wr.println(datos[0]+ " "+datos[1]);
             
         }
         
-        wr.println("\tSuma activo diferio  "+suma+""); //se llama a la suma de activo fijo 
+        wr.println("\tSuma activo diferio  "+suma); //se llama a la suma de activo fijo 
         
         suma = obtenerSaldode("Activo", "Activo");
         
-        wr.println("Suma de activo   "+suma+""); //se llama a la suma de activo total 
+        wr.println("\t\tSuma de activo   "+suma); //se llama a la suma de activo total 
         
         //Se comeinzan a escribir las cuentas de pasivo circulante, sus saldos y su suma
         wr.println("Pasivo");
         
-        wr.println("\tCirculante");
+        wr.println("Circulante");
         cuenta = obtenerCuentasde("Pasivo", "Circulante");
         suma = obtenerSaldode("Pasivo", "Circulante");
         t = cuenta.size();
@@ -163,16 +164,16 @@ public class SituacionFinanciera implements EstadoFinanciero {
           aux = cuenta.get(i);
           datos = aux.split(",");
             //System.out.println(datos[0] +"\t "+ datos[1]);
-            wr.println("\t\t" +datos[0]+ "\t\t\t"+datos[1]);
+            wr.println(datos[0]+ " "+datos[1]);
             
         }
         
-        wr.println("\tSuma pasivo circulante  "+suma+""); //se llama a la suma de activo fijo 
+        wr.println("\tSuma pasivo circulante  "+suma); //se llama a la suma de activo fijo 
         
         
         //Se comienza a escribir las cuentas de pasivo fijo, sus saldos y su suma
         
-        wr.println("\tFijo");
+        wr.println("Fijo");
         cuenta = obtenerCuentasde("Pasivo", "Fijo");
         suma = obtenerSaldode("Pasivo", "Fijo");
         t = cuenta.size();
@@ -182,7 +183,7 @@ public class SituacionFinanciera implements EstadoFinanciero {
           aux = cuenta.get(i);
           datos = aux.split(",");
             //System.out.println(datos[0] +"\t "+ datos[1]);
-            wr.println("\t\t" +datos[0]+ "\t\t\t"+datos[1]);
+            wr.println(datos[0]+ " "+datos[1]);
             
         }
         
@@ -202,7 +203,7 @@ public class SituacionFinanciera implements EstadoFinanciero {
        
           aux = cuenta.get(0);
           datos = aux.split(",");
-          wr.println("\t\t" +datos[0]+ "\t\t\t"+datos[1]);
+          wr.println(datos[0]+ " "+datos[1]);
            
           auxsuma += suma;
         
@@ -212,7 +213,7 @@ public class SituacionFinanciera implements EstadoFinanciero {
        
           aux = cuenta.get(0);
           datos = aux.split(",");
-          wr.println("\t\t" +datos[0]+ "\t\t\t"+datos[1]);
+          wr.println(datos[0]+ " "+datos[1]);
         
           
         auxsuma += suma;
@@ -221,7 +222,7 @@ public class SituacionFinanciera implements EstadoFinanciero {
         
         suma = obtenerSaldode("Pasivo", "Pasivo");
         
-        wr.println("Suma pasivo y capital  "+(suma+auxsuma)+""); //se llama a la suma de activo fijo 
+        wr.println("\t\tSuma pasivo y capital  "+(suma+auxsuma)+""); //se llama a la suma de activo fijo 
         
         wr.close();
         bw.close();
@@ -230,7 +231,7 @@ public class SituacionFinanciera implements EstadoFinanciero {
             System.out.println(ex.getMessage());
         }
         
-        System.out.println(nomEdoFin+ " creado con exito");
+        System.out.println(nombrear+ " creado con exito");
         
     }
 

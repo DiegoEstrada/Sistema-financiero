@@ -49,7 +49,7 @@ public class SistemaFinanciero {
         
         
         if(edo1.verificarEstado())
-            edo1.crearEstadoFinanciero();
+            edo1 = edo1;//edo1.crearEstadoFinanciero();
         else
             System.out.println("Los saldos de las cuentas no estan balanceados por favor revisa las cantidades rehistradas en las cuentas");
         
@@ -86,7 +86,7 @@ public class SistemaFinanciero {
         
         
         if(edo2.verificarEstado())
-            edo2.crearEstadoFinanciero();
+            edo2 = edo2;//edo2.crearEstadoFinanciero();
         else
             System.out.println("Los saldos de las cuentas no estan balanceados por favor revisa las cantidades rehistradas en las cuentas");
         
@@ -111,7 +111,7 @@ public class SistemaFinanciero {
         edores1.agregarCuenta("PTU", "8900");
         
         
-        edores1.crearEstadoFinanciero();
+        //edores1.crearEstadoFinanciero();
         //edores1.mostrarCuentas();
         edores1.leerEstadoFinanciero();
         cuentasERX = edores1.importarCuentas();
@@ -130,7 +130,7 @@ public class SistemaFinanciero {
         edores2.agregarCuenta("ISR", "18600");
         edores2.agregarCuenta("PTU", "12470");
         
-        edores2.crearEstadoFinanciero();
+        //edores2.crearEstadoFinanciero();
         
         
         
