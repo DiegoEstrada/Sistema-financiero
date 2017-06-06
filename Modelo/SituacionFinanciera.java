@@ -38,10 +38,10 @@ public class SituacionFinanciera implements EstadoFinanciero {
     private static String tipoaux;
     private Map<String,ArrayList<String>> cuentas = new HashMap();
     
-    public SituacionFinanciera(String nombrearchivo){
+    public SituacionFinanciera(File archivo){
         //Inicializando el objeto cuentas como HashMap
         //cuentas = new HashMap<String, ArrayList<String>>();
-        nomEdoFin = nombrearchivo;
+        nomEdoFin = archivo.getName();
         
     }
     
@@ -514,5 +514,71 @@ if (!linea.equals("Capital") && !linea.contains("Activo") && !linea.contains("Pa
             cuentas.put(cuenta, aux);
     } 
 }
+
+    @Override
+    public ArrayList<String> obtenerNombresdeCuentasOrdenadas(File f) {
+        ArrayList<String> nombresordenados = new ArrayList();
+        
+        String nombre;
+        FileReader r;
+        BufferedReader br;
+        String linea;
+            //PrintWriter wr;
+        
+        f = new File(nomEdoFin);
+        
+        try {
+            
+            r = new FileReader(f);
+            br=new BufferedReader(r);
+            
+            while((linea=br.readLine())!=null)
+            {
+                if (!linea.equals("Capital") && !linea.contains("Activo") && !linea.contains("Pasivo") && !linea.contains("Circulante")  
+                && !linea.contains("Fijo") && !linea.contains("Diferido")  && !linea.contains("Estado")
+                ) 
+                { 
+                    nombre = nombreOrdenado(linea);
+                    nombresordenados.add(nombre);
+                    //System.out.println(nombre);
+                }
+                
+            }
+            
+            
+            r.close();
+            br.close();
+            
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        
+        
+        return nombresordenados;
+    }
+    
+    public String nombreOrdenado(String linea)
+    {
+        int t = linea.length();
+        String nombre = "";
+        
+        
+            for (int i = 0; i < t; i++) {
+            
+                    if((linea.charAt(i)==32) ||(linea.charAt(i)>=65 && linea.charAt(i)<=90) || ((linea.charAt(i)>=97 && linea.charAt(i)<=122))) //Mentras este leyendo un caracter en lugar de un numero en codigo ascii
+                     {
+                        nombre += linea.charAt(i);
+                     }
+                    else
+                        break;
+                
+            }
+                
+        
+        return nombre;
+    }
     
 }

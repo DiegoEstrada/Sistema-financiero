@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -370,37 +371,43 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
     private void jbCrearEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCrearEstadoActionPerformed
         
         
-        
+        /*
         if(this.txtNombreSF.getText().isEmpty())
         {   
-            Ventana.ShowInformationMessage("Ingresa un nombre a tu Estado de Situación Financiera"); //JOPTION
+            System.out.println("Ingresa un nombre a tu sf"); //JOPTION
         }
         else
         {
-            SituacionFinanciera situacionfinanciera = new SituacionFinanciera(this.getName()+".txt");
-            this.sf =  situacionfinanciera;
-            JFileChooser guardarestado = new JFileChooser();
+        */
+            String nombre="";
+        
             
+            JFileChooser guardarestado = new JFileChooser();
+            FileNameExtensionFilter extension = new FileNameExtensionFilter("Estados finacieros(*.txt)", "txt");
+            guardarestado.setFileFilter(extension);
             
             try{
                 guardarestado.showSaveDialog(this);
                 this.guardar = guardarestado.getSelectedFile();
-                if (guardar != null)
+                //nombre = this.guardar.getName();
+                SituacionFinanciera situacionfinanciera = new SituacionFinanciera(guardar);
+                this.sf =  situacionfinanciera;
+                if (this.guardar != null)
                 {
-                    System.out.println(guardar);
+                    
                     //FileWriter  save=new FileWriter(guardar+".txt");
                     //save.write(areaDeTexto.getText());
                     //save.close();
-                        //JOptionPane.showMessageDialog(null,
-                          //      "El archivo se ha guardado Exitosamente",
-                            //                            "Información",JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null,
+                                "El archivo se ha generado correctamente",
+                                                        "Información",JOptionPane.INFORMATION_MESSAGE);
                 }
                 
                 
             }catch(Exception e){
             
             }
-        }
+        //}
         
     }//GEN-LAST:event_jbCrearEstadoActionPerformed
 
@@ -422,7 +429,7 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
         String nombre = "";
         if(i<0)
         {
-            Ventana.ShowInformationMessage("Selecciona la cuenta que deseas agregar"); //JOPTION
+            Ventana.ShowInformationMessage("Selecciona la cuenta que deseas agregar");  //JOPTION
         }
         else
         {
@@ -443,14 +450,16 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
 
     private void btFinalizarSFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFinalizarSFActionPerformed
         this.sf.mostrarCuentas();
-        if (this.sf.verificarEstado())
-        this.sf.crearEstadoFinanciero(guardar);
-        else
-            Ventana.ShowErrorMessage("Las cuentas ingresadas no estan balanceadas "); //JOPION
-        
+        if (this.sf.verificarEstado()){
         Inicio forminicio = new Inicio();
         forminicio.setVisible(true);
         this.setVisible(false);
+        this.sf.crearEstadoFinanciero(guardar);
+        }
+        else
+            Ventana.ShowErrorMessage("Las cuentas ingresadas no estan balanceadas ");  //JOPION
+        
+        
     }//GEN-LAST:event_btFinalizarSFActionPerformed
 
     private void btRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegresarActionPerformed
@@ -553,7 +562,7 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
                         this.ComboBoxNombreCuenta.addItem("Acreedores hipotecarios");
                      break;
                  default:
-                      Ventana.ShowInformationMessage("Selecciona un tipo de cuenta"); //JOPTION
+                      Ventana.ShowInformationMessage("Selecciona una cuenta"); //JOPTION
                      break;
                 }
                          
@@ -574,12 +583,12 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
                             this.ComboBoxNombreCuenta.addItem("Utilidad neta");
                             break;
                         default:
-                             Ventana.ShowInformationMessage("Selecciona un tipo de cuenta"); //JOPTION
+                             Ventana.ShowInformationMessage("Selecciona una cuenta"); //JOPTION
                             break;
                         }
                  }
                  else
-                     Ventana.ShowInformationMessage("Selecciona una opcion"); //JOPTION
+                     Ventana.ShowInformationMessage("Selecciona un tipo de cuenta"); //JOPTION
              }
          }
    }

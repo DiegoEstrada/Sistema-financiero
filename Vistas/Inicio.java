@@ -1,5 +1,7 @@
 package Vistas;
 
+import Modelo.Resultados;
+import Modelo.SituacionFinanciera;
 import java.io.File;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
@@ -25,7 +27,7 @@ public class Inicio extends javax.swing.JFrame {
         lista.addElement("Ningun elemento seleccionado");
         lista.addElement("Ningun elemento seleccionado");
                
-        this.jListArhivosAbiertos.setModel(lista);
+        this.jListArchivosAbiertos.setModel(lista);
                
         this.jpEdosfinancieros.setVisible(false);
         this.btnCrear_Estado_Financiero.setVisible(false);
@@ -61,7 +63,7 @@ public class Inicio extends javax.swing.JFrame {
         jpRealizarAnalisis = new javax.swing.JPanel();
         jlEdosCargados = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jListArhivosAbiertos = new javax.swing.JList<>();
+        jListArchivosAbiertos = new javax.swing.JList<>();
         jbAnalisisFinanciero = new javax.swing.JButton();
         jbCerrarEstado = new javax.swing.JButton();
 
@@ -169,12 +171,12 @@ public class Inicio extends javax.swing.JFrame {
 
         jlEdosCargados.setText("Estados Financieros cargados");
 
-        jListArhivosAbiertos.setModel(new javax.swing.AbstractListModel<String>() {
+        jListArchivosAbiertos.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jListArhivosAbiertos);
+        jScrollPane1.setViewportView(jListArchivosAbiertos);
 
         jbAnalisisFinanciero.setText("Análisis financero");
         jbAnalisisFinanciero.addActionListener(new java.awt.event.ActionListener() {
@@ -328,16 +330,19 @@ public class Inicio extends javax.swing.JFrame {
         abrredo.setFileFilter(extension);
         abrredo.showDialog(this, "Seleccionar");
         
+        //La posicion 0 del array es situacion financiera y la 1 resultados
+        
         try {
             File archivo = abrredo.getSelectedFile();
             String nombre = archivo.getName();
-            agregarEdoFinancieroLista((DefaultListModel)this.jListArhivosAbiertos.getModel(), archivo);
-            System.out.println(nombre);
+            agregarEdoFinancieroLista((DefaultListModel)this.jListArchivosAbiertos.getModel(), archivo);
+            
         }catch(Exception e){
-            Ventana.ShowErrorMessage("Excepcion ->"+e.getMessage());
+            System.out.println("Excepcion ->"+e.getMessage());
         }
         
-       
+        //System.out.println("SF"+estados[0]);
+        //System.out.println("ER"+estados[1]);
        
         
         
@@ -348,18 +353,25 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_RdbFlujoEfectivoActionPerformed
 
     private void jbCerrarEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCerrarEstadoActionPerformed
-        int i = this.jListArhivosAbiertos.getSelectedIndex();
-        cerrarEstadoFinanciero((DefaultListModel)this.jListArhivosAbiertos.getModel(), i);
+        int i = this.jListArchivosAbiertos.getSelectedIndex();
+        String nombre = this.jListArchivosAbiertos.getSelectedValue();
+        //System.out.println("->>>>  "+nombre);
+        if(nombre.contains("Situacion")){
+             estados[0] = null;}
+        else{
+             estados[1] = null;}
+        
+        cerrarEstadoFinanciero((DefaultListModel)this.jListArchivosAbiertos.getModel(), i);
     }//GEN-LAST:event_jbCerrarEstadoActionPerformed
 
     private void jbAnalisisFinancieroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAnalisisFinancieroActionPerformed
        
         String nombre1,nombre2;
-        String sf,er;
+        //String sf,er;
         
         if(estados[0]==null || estados[1]==null)
             //JOPTION
-            Ventana.ShowWarningMessage("Algun archivo no esta abierto");
+             Ventana.ShowWarningMessage("Algun archivo no esta abierto");
         else{
             nombre1 = estados[0].getName();
             nombre2 = estados[1].getName();
@@ -376,23 +388,32 @@ public class Inicio extends javax.swing.JFrame {
                 
             {
                 Ventana.ShowInformationMessage("¡Estados correctos!");
-                if(nombre1.contains("Resultados"))
-                {
-                    er = nombre1;
-                    sf = nombre2;
-                }
-                else
-                {
-                    er = nombre2;
-                    sf = nombre1;
-                }
+                //System.out.println("***********Estados correctos");
                 
+                //SituacionFinanciera sf = new SituacionFinanciera(estados[0]);
+                //Resultados er = new Resultados(estados[1]);
+                
+                AnalisisEF formularioAnalisis = new AnalisisEF(estados[0], estados[1]);
+                formularioAnalisis.setVisible(true);
+                this.setVisible(false);
+                /*
+                System.out.println("------------------------------------------");
+                System.out.println("ER");
+                er.leerEstadoFinanciero();
+                er.mostrarCuentas();
+                
+                */
                 
             }
             else   
-                Ventana.ShowErrorMessage("Alguno de los archivos que selecconaste no tiene el formato para ser leido");  //JOPTION
+               Ventana.ShowErrorMessage("Alguno de los archivos que selecconaste no tiene el formato para ser leido");  //JOPTION
         
-        
+            System.out.println(estados[0]);
+            System.out.println(estados[1]);
+            
+             
+            
+          
         //Aqui se llamara al nuevo formulario para visualizar el analisis con los nombres pasados para 
         }
         
@@ -473,12 +494,18 @@ public class Inicio extends javax.swing.JFrame {
         String nombre  = estado.getName();
         if (lista.firstElement().equals(defecto)) {
             lista.set(0,nombre);
-            estados[0] = estado;
+             if(nombre.contains("Situacion"))
+             estados[0] = estado;
+             else
+             estados[1] = estado;
         }
         else 
         {
             if(lista.lastElement().equals(defecto)){
              lista.set(1,nombre);
+             if(nombre.contains("Situacion"))
+             estados[0] = estado;
+             else
              estados[1] = estado;
             }
             else
@@ -538,7 +565,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton btnCrearEstado;
     private javax.swing.JButton btnCrear_Estado_Financiero;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JList<String> jListArhivosAbiertos;
+    private javax.swing.JList<String> jListArchivosAbiertos;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbAnalisisFinanciero;
     private javax.swing.JButton jbCerrarEstado;

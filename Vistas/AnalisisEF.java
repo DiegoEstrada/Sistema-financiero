@@ -5,10 +5,18 @@
  */
 package Vistas;
 
+import Modelo.Analisis.Vertical.BenchMarking;
+import Modelo.Analisis.Vertical.RazonesFinancieras;
 import Modelo.Resultados;
 import Modelo.SituacionFinanciera;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Map;
+import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,26 +24,38 @@ import java.util.Map;
  */
 public class AnalisisEF extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AnalisisEF
+    /*
+     los estados X representan al periodo actual
+     Los estaods Y represnentan al periodo anterior
      */
+        private File estados[];
+        private SituacionFinanciera sfX;
+        private SituacionFinanciera sfY;
+        private Resultados erX;
+        private Resultados erY;
         
-        private Map<String, String> analisiscuentasSF;
-        private Map<String, String> analisiscuentasER;
     
         
-    public AnalisisEF(String nsf, String ner) {
-        SituacionFinanciera sf = new SituacionFinanciera(nsf);
-        Resultados er = new Resultados(ner);
+    public AnalisisEF(File nsf, File ner) {
+        estados = new File[2];
+        sfX = new SituacionFinanciera(nsf);
+        erX = new Resultados(ner);
         
-        sf.leerEstadoFinanciero();
-        er.leerEstadoFinanciero();
+        sfX.leerEstadoFinanciero();
+        erX.leerEstadoFinanciero();
         
-        Map<String, ArrayList<String>> cuentasSF = sf.importarNombreySaldo();
-        Map<String, ArrayList<String>> cuentasER = er.importarCuentas();
-        
+        ArrayList<String> nombresOrdenados = erX.obtenerNombresdeCuentasOrdenadas(nsf);
+        System.out.println(nombresOrdenados.size());
+       
+        ArrayList<String> nombresOrdenados1 = sfX.obtenerNombresdeCuentasOrdenadas(nsf);
+        System.out.println(nombresOrdenados1.size());
         
         initComponents();
+        DefaultListModel lista = new DefaultListModel();
+        lista.addElement("Ningun elemento seleccionado");
+        lista.addElement("Ningun elemento seleccionado");
+               
+        this.jListArchivosAbiertos.setModel(lista);
     }
 
     /**
@@ -59,7 +79,15 @@ public class AnalisisEF extends javax.swing.JFrame {
         btRegresar = new javax.swing.JButton();
         btConfirmar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TableBenchMarking = new javax.swing.JTable();
+        JTableBenchMarking = new javax.swing.JTable();
+        jbVerAnalisis = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jListArchivosAbiertos = new javax.swing.JList<>();
+        jbCerrarEstado = new javax.swing.JButton();
+        jbAceptar = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jtCuentas = new javax.swing.JTable();
+        jbAgregarEstado = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Análisis Financiero");
@@ -88,7 +116,7 @@ public class AnalisisEF extends javax.swing.JFrame {
         btConfirmar.setFont(new java.awt.Font("Constantia", 0, 12)); // NOI18N
         btConfirmar.setText("Confirmar");
 
-        TableBenchMarking.setModel(new javax.swing.table.DefaultTableModel(
+        JTableBenchMarking.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -100,8 +128,72 @@ public class AnalisisEF extends javax.swing.JFrame {
             new String [] {
                 "Indicador", "Razones Financieras", "Razones Estandar", "Diferencia"
             }
-        ));
-        jScrollPane1.setViewportView(TableBenchMarking);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(JTableBenchMarking);
+
+        jbVerAnalisis.setText("Ver Analisis");
+        jbVerAnalisis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbVerAnalisisActionPerformed(evt);
+            }
+        });
+
+        jListArchivosAbiertos.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(jListArchivosAbiertos);
+
+        jbCerrarEstado.setText("Cerrar Estado");
+        jbCerrarEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCerrarEstadoActionPerformed(evt);
+            }
+        });
+
+        jbAceptar.setText("Aceptar");
+        jbAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAceptarActionPerformed(evt);
+            }
+        });
+
+        jtCuentas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Cuenta", "Perido Actual", "Periodo Anterior", "Porcentaje", "Diferencia"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(jtCuentas);
+
+        jbAgregarEstado.setText("Agregar Estado");
+        jbAgregarEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAgregarEstadoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -115,96 +207,340 @@ public class AnalisisEF extends javax.swing.JFrame {
                         .addComponent(btRegresar))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lb_OpcionAnalisis)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(RdbAnalisisVertical)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lbPorcentaje))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(RdbAnalisisHorizontal)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(ComboBoxAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(48, 48, 48)
-                                        .addComponent(lbIncrementoVentas)))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtIncVentas)
-                                    .addComponent(txtPorcentaje, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lbIncrementoVentas)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtIncVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lbPorcentaje)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtPorcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(ComboBoxAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(73, 73, 73)
+                                        .addComponent(btConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lb_OpcionAnalisis)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(RdbAnalisisVertical)
+                                            .addComponent(RdbAnalisisHorizontal))
+                                        .addGap(41, 41, 41)
+                                        .addComponent(jbVerAnalisis)))
+                                .addGap(170, 170, 170)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(btConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 354, Short.MAX_VALUE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jbCerrarEstado)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jbAceptar))
+                                    .addComponent(jbAgregarEstado))))
+                        .addGap(0, 288, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(lb_OpcionAnalisis)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
+                        .addGap(20, 20, 20)
+                        .addComponent(lb_OpcionAnalisis)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(RdbAnalisisHorizontal)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(RdbAnalisisVertical))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jbVerAnalisis))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jbAgregarEstado)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jbCerrarEstado)
+                                    .addComponent(jbAceptar))))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(RdbAnalisisVertical)
+                            .addComponent(lbIncrementoVentas)
+                            .addComponent(txtIncVentas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lbPorcentaje)
-                            .addComponent(txtPorcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(ComboBoxAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lbIncrementoVentas)
-                        .addComponent(txtIncVentas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btConfirmar)
-                        .addComponent(RdbAnalisisHorizontal)))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 357, Short.MAX_VALUE)
+                            .addComponent(txtPorcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ComboBoxAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btConfirmar))))
+                .addGap(59, 59, 59)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 262, Short.MAX_VALUE)
                 .addComponent(btRegresar))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbVerAnalisisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVerAnalisisActionPerformed
+        if (this.RdbAnalisisVertical.isSelected())
+        {
+           //Aqui se deben de poner en modo visibles los elemntos de razones financieras
+            cargarDatosTablaRazones();
+        }
+        else
+        {
+            if (this.RdbAnalisisHorizontal.isSelected())
+            {
+               //Aqui se debe hacer visible la tabla de las cuentas, los botornes para eliminar, crear, y todo lo relacionado
+            }
+            else
+                    System.out.println("Selecciona un tipo de analisis");  //joption
+        }
+    }//GEN-LAST:event_jbVerAnalisisActionPerformed
+
+    
+    public void cerrarEstadoFinanciero(DefaultListModel lista, int elementoseleccionado )
+    {
+       
+        if(elementoseleccionado<0)
+        {
+            System.out.println("Selecciona un archivo a ser cerrado");
+            
+        }
+        else
+        {
+            /*
+                ------ATENCION------
+                Una manera de evitar que cuando se cierren los archivos se tengan los dos abuertos
+                Puede NO ser la opcion usar el metodo .delete() porque borra el archivo creado, tampoco podria ser
+                una opcion mandarlo a null para evitar los apuntadores a nulos al hacer la transicion a otro form
+            
+                Podemos usar los textos de la lista, verificando que los dos sean diferentes que el estadocerrado
+                (Ningun elemento seleccionado), ademas podriamos verificar que tenga algun nombre en especial el archivo
+                que abrio el usuario
+            
+                --------RESUELTO-----------
+                Es necesrio verificar si los archivos son == a null para que entre en el if declarado en el metodo
+                
+            */
+            
+                    
+            //lista.removeElementAt(elementoselecionado);
+            estados[elementoseleccionado]=null;
+            mandaraEstadoCerrado(lista, elementoseleccionado);
+        }
+    }
+    
+    
+    
+     public  void mandaraEstadoCerrado(DefaultListModel lista, int i)
+    {
+        String nombre = "Ningun elemento seleccionado";
+        lista.set(i,nombre);
+    }
+    private void jbCerrarEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCerrarEstadoActionPerformed
+         int i = this.jListArchivosAbiertos.getSelectedIndex();
+         String nombre = this.jListArchivosAbiertos.getSelectedValue();
+            //System.out.println("->>>>  "+nombre);
+        if(nombre.contains("Situacion")){
+             estados[0] = null;}
+        else{
+             estados[1] = null;}
+        
+        cerrarEstadoFinanciero((DefaultListModel)this.jListArchivosAbiertos.getModel(), i);
+    }//GEN-LAST:event_jbCerrarEstadoActionPerformed
+
+    private void jbAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAceptarActionPerformed
+        String nombre1,nombre2;
+        //String sf,er;
+        
+        if(estados[0]==null || estados[1]==null)
+            //JOPTION
+            System.out.println("Algun archivo no esta abierto");
+        else{
+            nombre1 = estados[0].getName();
+            nombre2 = estados[1].getName();
+        //System.out.println("->>>>>"+estados[0].getName());
+        //System.out.println("->>>>"+estados[1].getName());
+        
+            if  ((nombre1.contains("Resultados") ||  nombre1.contains("Situacion")) 
+                    && 
+                (nombre1.contains("Resultados") ||  nombre1.contains("Situacion"))
+                 
+                    &&
+                !( (nombre1.contains("Resultados") && nombre2.contains("Resultados")) || (nombre1.contains("Situacion")&&nombre2.contains("Situacion"))  )
+                )
+                
+            {
+                System.out.println("***********Estados correctos");
+                
+                 sfY = new SituacionFinanciera(estados[0]);
+                 erY = new Resultados(estados[1]);
+                
+               cargarDatosTablaCuentas();
+               
+                /*
+                System.out.println("------------------------------------------");
+                System.out.println("ER");
+                er.leerEstadoFinanciero();
+                er.mostrarCuentas();
+                
+                */
+                
+            }
+            else   
+                System.out.println("Alguno de los archivos que selecconaste no tiene el formato para ser leido");  //JOPTION
+        
+            System.out.println(estados[0]);
+            System.out.println(estados[1]);
+            
+             
+            
+          
+        //Aqui se llamara al nuevo formulario para visualizar el analisis con los nombres pasados para 
+        }
+    }//GEN-LAST:event_jbAceptarActionPerformed
+
+    private void jbAgregarEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarEstadoActionPerformed
+         JFileChooser abrredo = new JFileChooser();
+                FileNameExtensionFilter extension = new FileNameExtensionFilter("Estados finacieros(*.txt)", "txt");
+                abrredo.setDialogTitle("Selecciona un estado financiero");
+                abrredo.setFileFilter(extension);
+                abrredo.showDialog(this, "Seleccionar");
+        
+        //La posicion 0 del array es situacion financiera y la 1 resultados
+        
+        try {
+            File archivo = abrredo.getSelectedFile();
+            
+            agregarEdoFinancieroLista((DefaultListModel)this.jListArchivosAbiertos.getModel(), archivo);
+            
+        }catch(Exception e){
+            System.out.println("Excepcion ->"+e.getMessage());
+        }
+    }//GEN-LAST:event_jbAgregarEstadoActionPerformed
+
+    
+    public  void agregarEdoFinancieroLista(DefaultListModel lista, File estado)
+    {
+        String defecto = "Ningun elemento seleccionado";
+        String nombre  = estado.getName();
+        if (lista.firstElement().equals(defecto)) {
+            lista.set(0,nombre);
+             if(nombre.contains("Situacion"))
+             estados[0] = estado;
+             else
+             estados[1] = estado;
+        }
+        else 
+        {
+            if(lista.lastElement().equals(defecto)){
+             lista.set(1,nombre);
+             if(nombre.contains("Situacion"))
+             estados[0] = estado;
+             else
+             estados[1] = estado;
+            }
+            else
+            {
+                //Aqui debe ir in JOPtion para que diga que ya no se pueden agregar mas estados
+                System.out.println("Solo es posible realizar el analisis de 2 estados financieros");
+            }
+        }
+    }
+    
+    public void cargarDatosTablaRazones()
+    {
+        int t;
+        DefaultTableModel modelo = (DefaultTableModel) this.JTableBenchMarking.getModel();
+        ArrayList<String> indicadores = new ArrayList();
+        indicadores.add("Liquidez"); indicadores.add("Solvencia");  indicadores.add("Estabilidad economica");
+        indicadores.add("Inmovilizacion de capital"); indicadores.add("Rentabilidad en ventas");  indicadores.add("Rentabilidad en inversion");
+        
+        System.out.println("Vamos a comenzar el analisis");
+        Map<String,ArrayList<String>> cuentassfX = sfX.importarNombreySaldo();
+        Map<String,ArrayList<String>> cuentaserX = erX.importarCuentas();
+        
+        RazonesFinancieras rfX = new RazonesFinancieras(cuentaserX,cuentassfX);
+        
+        Map<String,String> analisisRF = rfX.analisisRazonesFinancieras();
+        //rfX.imprimirRazonesFinancieras(analisisRF);
+        
+        /*-----------ATENCION-----------
+            Falata crear un elemento grafioco para senalar el ramo de la empresa
+        */
+        BenchMarking bm = new BenchMarking(rfX, 1);
+        Map<String,String> analisisBM = bm.AnalisisBenchMarking();
+        
+        ArrayList<String> indicadoresEsrandar = bm.obtenerIndicadoresdeRamo("Industria");
+        
+        String fila[] = new String[4];
+        try {
+        int filas=this.JTableBenchMarking.getRowCount();
+            for (int i = 0;filas>i; i++) {
+                modelo.removeRow(0);
+            }
+           
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al limpiar la tabla.");
+        }
+        
+        for (int i = 0; i < indicadores.size(); i++) {
+            
+            fila[0] = indicadores.get(i);
+            fila[1] = analisisRF.get(indicadores.get(i));
+            fila[2] = indicadoresEsrandar.get(i);
+            fila[3] = analisisBM.get(indicadores.get(i));
+            
+            
+            modelo.addRow(fila);
+            this.JTableBenchMarking.setModel(modelo);
+        }
+        
+    }
+    
+    public void cargarDatosTablaCuentas()
+    {
+        //Cuando se llama este metodo los 4 objetos de analisi deben estar creados
+        System.out.println("Vamos a llenar la tabla  de cuentas ");
+    }
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AnalisisEF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AnalisisEF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AnalisisEF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AnalisisEF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboBoxAnalisis;
+    private javax.swing.JTable JTableBenchMarking;
     private javax.swing.JRadioButton RdbAnalisisHorizontal;
     private javax.swing.JRadioButton RdbAnalisisVertical;
-    private javax.swing.JTable TableBenchMarking;
     private javax.swing.ButtonGroup TipoAnálisis;
     private javax.swing.JButton btConfirmar;
     private javax.swing.JButton btRegresar;
+    private javax.swing.JList<String> jListArchivosAbiertos;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JButton jbAceptar;
+    private javax.swing.JButton jbAgregarEstado;
+    private javax.swing.JButton jbCerrarEstado;
+    private javax.swing.JButton jbVerAnalisis;
+    private javax.swing.JTable jtCuentas;
     private javax.swing.JLabel lbIncrementoVentas;
     private javax.swing.JLabel lbPorcentaje;
     private javax.swing.JLabel lb_OpcionAnalisis;

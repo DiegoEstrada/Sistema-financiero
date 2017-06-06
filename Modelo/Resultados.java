@@ -23,9 +23,9 @@ public class Resultados implements EstadoFinanciero {
     private String nomEdoFin;
     private Map<String,ArrayList<String>> cuentas = new HashMap();
     
-    public Resultados(String nombreEdoFin)
+    public Resultados(File archivo)
     {
-        nomEdoFin = nombreEdoFin;
+        nomEdoFin = archivo.getName();
     }
    
     @Override
@@ -358,6 +358,70 @@ public class Resultados implements EstadoFinanciero {
         */
                 
         return true;
+    }
+
+    @Override
+    public ArrayList<String> obtenerNombresdeCuentasOrdenadas(File f) {
+        ArrayList<String> nombresordenados = new ArrayList();
+        
+        String nombre;
+        FileReader r;
+        BufferedReader br;
+        String linea;
+            //PrintWriter wr;
+        
+        f = new File(nomEdoFin);
+        
+        try {
+            
+            r = new FileReader(f);
+            br=new BufferedReader(r);
+            
+            while((linea=br.readLine())!=null)
+            {
+                if (!linea.contains("Menos") && !linea.contains("Mas") && !linea.contains("Estado"))
+                { 
+                    nombre = nombreOrdenado(linea);
+                    nombresordenados.add(nombre);
+                    //System.out.println(nombre);
+                }
+                
+            }
+            
+            
+            r.close();
+            br.close();
+            
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        
+        
+        return nombresordenados;
+    }
+    
+    public String nombreOrdenado(String linea)
+    {
+        int t = linea.length();
+        String nombre = "";
+        
+        
+            for (int i = 0; i < t; i++) {
+            
+                    if((linea.charAt(i)==32) ||(linea.charAt(i)>=65 && linea.charAt(i)<=90) || ((linea.charAt(i)>=97 && linea.charAt(i)<=122))) //Mentras este leyendo un caracter en lugar de un numero en codigo ascii
+                     {
+                        nombre += linea.charAt(i);
+                     }
+                    else
+                        break;
+                
+            }
+                
+        
+        return nombre;
     }
     
     

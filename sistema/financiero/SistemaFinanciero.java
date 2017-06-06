@@ -29,7 +29,7 @@ public class SistemaFinanciero {
     
     public static void main(String[] args) {
         
-        
+        /*
         //Comentada toda la parte pare crear un estado de situación finaciera balanceado "
         
         SituacionFinanciera edo1 = new SituacionFinanciera("Estado de  Situacion Financiera  Walmart de 2015.txt");
@@ -187,7 +187,7 @@ public class SistemaFinanciero {
         
         
         bm.imprimirDiferenciasBenchMarking(bm.AnalisisBenchMarking());
-
+        */
     }
     
     
