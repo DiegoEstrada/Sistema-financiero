@@ -373,7 +373,7 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
         
         if(this.txtNombreSF.getText().isEmpty())
         {   
-            System.out.println("Ingresa un nombre a tu sf"); //JOPTION
+            Ventana.ShowInformationMessage("Ingresa un nombre a tu Estado de Situación Financiera"); //JOPTION
         }
         else
         {
@@ -422,7 +422,7 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
         String nombre = "";
         if(i<0)
         {
-            System.out.println("Selecciona la cuenta que deseas agregar"); //JOPTION
+            Ventana.ShowInformationMessage("Selecciona la cuenta que deseas agregar"); //JOPTION
         }
         else
         {
@@ -446,7 +446,7 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
         if (this.sf.verificarEstado())
         this.sf.crearEstadoFinanciero(guardar);
         else
-            System.out.println("Las cuentas ingresadas no estan balanceadas "); //JOPION
+            Ventana.ShowErrorMessage("Las cuentas ingresadas no estan balanceadas "); //JOPION
         
         Inicio forminicio = new Inicio();
         forminicio.setVisible(true);
@@ -486,7 +486,7 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
                       this.jcbTipoCuenta.addItem("Utilidad neta");
                  }
                  else
-                     System.out.println("Selecciona una opcion"); //JOPTION
+                     Ventana.ShowInformationMessage("Selecciona una opcion"); //JOPTION
              }
          }
              
@@ -529,7 +529,7 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
                       this.ComboBoxNombreCuenta.addItem("Propaganda y publicidad");
                      break;
                  default:
-                     System.out.println("Selecciona un tipo de cuenta"); //JOPTION
+                     Ventana.ShowInformationMessage("Selecciona un tipo de cuenta"); //JOPTION
                      break;
              }
             
@@ -553,7 +553,7 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
                         this.ComboBoxNombreCuenta.addItem("Acreedores hipotecarios");
                      break;
                  default:
-                      System.out.println("Selecciona un tipo de cuenta"); //JOPTION
+                      Ventana.ShowInformationMessage("Selecciona un tipo de cuenta"); //JOPTION
                      break;
                 }
                          
@@ -574,12 +574,12 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
                             this.ComboBoxNombreCuenta.addItem("Utilidad neta");
                             break;
                         default:
-                             System.out.println("Selecciona un tipo de cuenta"); //JOPTION
+                             Ventana.ShowInformationMessage("Selecciona un tipo de cuenta"); //JOPTION
                             break;
                         }
                  }
                  else
-                     System.out.println("Selecciona una opcion"); //JOPTION
+                     Ventana.ShowInformationMessage("Selecciona una opcion"); //JOPTION
              }
          }
    }
