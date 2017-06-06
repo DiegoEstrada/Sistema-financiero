@@ -334,7 +334,7 @@ public class Inicio extends javax.swing.JFrame {
             agregarEdoFinancieroLista((DefaultListModel)this.jListArhivosAbiertos.getModel(), archivo);
             System.out.println(nombre);
         }catch(Exception e){
-            System.out.println("Excepcion ->"+e.getMessage());
+            Ventana.ShowErrorMessage("Excepcion ->"+e.getMessage());
         }
         
        
@@ -359,7 +359,7 @@ public class Inicio extends javax.swing.JFrame {
         
         if(estados[0]==null || estados[1]==null)
             //JOPTION
-            System.out.println("Algun archivo no esta abierto");
+            Ventana.ShowWarningMessage("Algun archivo no esta abierto");
         else{
             nombre1 = estados[0].getName();
             nombre2 = estados[1].getName();
@@ -375,7 +375,7 @@ public class Inicio extends javax.swing.JFrame {
                 )
                 
             {
-                System.out.println("***********Estados correctos");
+                Ventana.ShowInformationMessage("¡Estados correctos!");
                 if(nombre1.contains("Resultados"))
                 {
                     er = nombre1;
@@ -390,7 +390,7 @@ public class Inicio extends javax.swing.JFrame {
                 
             }
             else   
-                System.out.println("Alguno de los archivos que selecconaste no tiene el formato para ser leido");  //JOPTION
+                Ventana.ShowErrorMessage("Alguno de los archivos que selecconaste no tiene el formato para ser leido");  //JOPTION
         
         
         //Aqui se llamara al nuevo formulario para visualizar el analisis con los nombres pasados para 
@@ -403,7 +403,7 @@ public class Inicio extends javax.swing.JFrame {
         
         
         if(this.RdbFlujoEfectivo.isSelected())
-            System.out.println("NO hacer nada aun");
+            Ventana.ShowWarningMessage("NO hacer nada aun");
         
         else
         {
@@ -421,7 +421,7 @@ public class Inicio extends javax.swing.JFrame {
                     this.setVisible(false);
                 }
                 else
-                    System.out.println("Selecciona una opcion "); //JOPTION
+                    Ventana.ShowInformationMessage("Selecciona una opción"); //JOPTION
             }
         }
         
@@ -484,7 +484,7 @@ public class Inicio extends javax.swing.JFrame {
             else
             {
                 //Aqui debe ir in JOPtion para que diga que ya no se pueden agregar mas estados
-                System.out.println("Solo es posible realizar el analisis de 2 estados financieros");
+                Ventana.ShowErrorMessage("Solo es posible realizar el analisis de 2 estados financieros");
             }
         }
     }
@@ -494,7 +494,7 @@ public class Inicio extends javax.swing.JFrame {
        
         if(elementoseleccionado<0)
         {
-            System.out.println("Selecciona un archivo a ser cerrado");
+            Ventana.ShowInformationMessage("Selecciona un archivo a ser cerrado");
             
         }
         else
