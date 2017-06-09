@@ -29,7 +29,7 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
      * Creates new form Crear_Estado_Situacion_Financiera
      */
         private SituacionFinanciera sf;
-        private File guardar;
+        private File f;
         private DefaultListModel lista = new DefaultListModel();
         
     
@@ -60,7 +60,6 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
         lbTitulo = new javax.swing.JLabel();
         lbExtension = new javax.swing.JLabel();
         lbNombreSF = new javax.swing.JLabel();
-        txtNombreSF = new javax.swing.JTextField();
         lbCuentas = new javax.swing.JLabel();
         RdbActivo = new javax.swing.JRadioButton();
         RdbPasivo = new javax.swing.JRadioButton();
@@ -191,16 +190,21 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
                         .addComponent(lbExtension, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(651, 651, 651))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(104, 104, 104)
+                        .addComponent(btAgregarCuenta)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbSaldoCuenta)
+                            .addComponent(lbNombreCuenta))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtSaldoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(RdbActivo)
                             .addComponent(lbNombreSF))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtNombreSF, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(81, 81, 81)
-                                .addComponent(jbCrearEstado)
-                                .addGap(166, 166, 166))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(34, 34, 34)
                                 .addComponent(ComboBoxNombreCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -224,18 +228,11 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
                                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(btFinalizarSF)))
-                                .addContainerGap())))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(104, 104, 104)
-                        .addComponent(btAgregarCuenta)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbSaldoCuenta)
-                            .addComponent(lbNombreCuenta))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtSaldoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                .addContainerGap())
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jbCrearEstado)
+                                .addGap(277, 277, 277))))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -261,7 +258,6 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbNombreSF)
-                    .addComponent(txtNombreSF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbCrearEstado))
                 .addGap(18, 18, 18)
                 .addComponent(lbCuentas)
@@ -388,16 +384,15 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
             
             try{
                 guardarestado.showSaveDialog(this);
-                this.guardar = guardarestado.getSelectedFile();
+                this.f = guardarestado.getSelectedFile();
                 //nombre = this.guardar.getName();
-                SituacionFinanciera situacionfinanciera = new SituacionFinanciera(guardar);
+                //System.out.println(this.guardar);
+                SituacionFinanciera situacionfinanciera = new SituacionFinanciera(this.f);
                 this.sf =  situacionfinanciera;
-                if (this.guardar != null)
+                if (this.f != null)
                 {
                     
-                    //FileWriter  save=new FileWriter(guardar+".txt");
-                    //save.write(areaDeTexto.getText());
-                    //save.close();
+                    
                         JOptionPane.showMessageDialog(null,
                                 "El archivo se ha generado correctamente",
                                                         "Información",JOptionPane.INFORMATION_MESSAGE);
@@ -454,7 +449,7 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
         Inicio forminicio = new Inicio();
         forminicio.setVisible(true);
         this.setVisible(false);
-        this.sf.crearEstadoFinanciero(guardar);
+        this.sf.crearEstadoFinanciero();
         }
         else
             Ventana.ShowErrorMessage("Las cuentas ingresadas no estan balanceadas ");  //JOPION
@@ -617,7 +612,6 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
     private javax.swing.JLabel lbNombreSF;
     private javax.swing.JLabel lbSaldoCuenta;
     private javax.swing.JLabel lbTitulo;
-    private javax.swing.JTextField txtNombreSF;
     private javax.swing.JTextField txtSaldoCuenta;
     // End of variables declaration//GEN-END:variables
 }

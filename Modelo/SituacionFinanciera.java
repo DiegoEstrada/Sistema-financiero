@@ -14,7 +14,6 @@ import java.util.Iterator;
 import java.util.Map;
 
 
-
 /**
  *
  * @author Diego EG
@@ -36,11 +35,13 @@ public class SituacionFinanciera implements EstadoFinanciero {
     private String nomEdoFin;
     private static String cuentaaux;
     private static String tipoaux;
+    private File f;
     private Map<String,ArrayList<String>> cuentas = new HashMap();
     
     public SituacionFinanciera(File archivo){
         //Inicializando el objeto cuentas como HashMap
         //cuentas = new HashMap<String, ArrayList<String>>();
+        this.f = archivo;
         nomEdoFin = archivo.getName();
         
     }
@@ -72,7 +73,7 @@ public class SituacionFinanciera implements EstadoFinanciero {
     }
     
     @Override
-    public void crearEstadoFinanciero(File f) {
+    public void crearEstadoFinanciero() {
         //System.out.println("Estoy creando el estado ");
         //File f;
         FileWriter w;
@@ -108,13 +109,29 @@ public class SituacionFinanciera implements EstadoFinanciero {
             
         }
         
-        wr.println("\tSuma activo circulante  "+suma); //se llama a la suma de activo circulante
+        wr.println("Suma activo circulante  "+suma); //se llama a la suma de activo circulante
         
         //Se comineza a escribir las cuentas de activo fijo, sus saldos y su suma
         
         wr.println("Fijo");
+        float edificios = obtenerSaldodeLlave("Edificios");
+        float mobiliario = obtenerSaldodeLlave("Mobiliario");
+        float equiporeparto = obtenerSaldodeLlave("Equipo de reparto");
+        float equipotransporte = obtenerSaldodeLlave("Equipo de transporte");
+        float equipocomputo = obtenerSaldodeLlave("Equipo de computo");
+        
+        double depresiacionedificios = (edificios*0.05);
+        double depresiacionmobiliario =  (mobiliario*0.1);
+        double depresiacionequiporep =  (equiporeparto*0.25);
+        double depresiacionequipotransp = (equipotransporte*0.25);
+        double depresiacionequcomputo = (equipocomputo*0.33);
+        
+        double depresacionacumulada = depresiacionedificios + depresiacionmobiliario + depresiacionequiporep + depresiacionequipotransp + depresiacionequcomputo;
+        
+        
         cuenta = obtenerCuentasde("Activo", "Fijo");
         suma = obtenerSaldode("Activo", "Fijo");
+        suma = suma - (float)depresacionacumulada;
         t = cuenta.size();
             //System.out.println("Tamño "+t);
         for(i = 0; i<t; i++)
@@ -125,15 +142,23 @@ public class SituacionFinanciera implements EstadoFinanciero {
             wr.println(datos[0]+" "+datos[1]);
             
         }
-        
-        wr.println("\tSuma activo fijo  "+suma); //se llama a la suma de activo fijo 
+        wr.println("Depreciacion acumulada "+(float) depresacionacumulada);
+        wr.println("Suma activo fijo  "+suma); //se llama a la suma de activo fijo 
         
         
         //Se comienza aescribir las cuentas de activo diferido, sus saldos y su suma 
         
         wr.println("Diferido");
+        float gastosdeinstalacion = obtenerSaldodeLlave("Gastos de instalacion");
+        float gastosdeorganizacion = obtenerSaldodeLlave("Gastos de organizacion");
+        
+        double amortizaciongastosinst = (gastosdeinstalacion*0.05);
+        double amortizaciongastosorg =  (gastosdeorganizacion*0.05);
+        double amoriizacionacumulada = amortizaciongastosinst + amortizaciongastosorg;
+        
         cuenta = obtenerCuentasde("Activo", "Diferido");
         suma = obtenerSaldode("Activo", "Diferido");
+        suma  = suma - (float)amoriizacionacumulada;
         t = cuenta.size();
             //System.out.println("Tamño "+t);
         for(i = 0; i<t; i++)
@@ -145,11 +170,13 @@ public class SituacionFinanciera implements EstadoFinanciero {
             
         }
         
-        wr.println("\tSuma activo diferio  "+suma); //se llama a la suma de activo fijo 
+        wr.println("Amortizacion acumulada "+(float)amoriizacionacumulada);
+        wr.println("Suma activo diferio  "+suma); //se llama a la suma de activo fijo 
         
         suma = obtenerSaldode("Activo", "Activo");
+        suma = suma - (float)depresacionacumulada - (float)amoriizacionacumulada;
         
-        wr.println("\t\tSuma de activo   "+suma); //se llama a la suma de activo total 
+        wr.println("Suma de activo   "+suma); //se llama a la suma de activo total 
         
         //Se comeinzan a escribir las cuentas de pasivo circulante, sus saldos y su suma
         wr.println("Pasivo");
@@ -168,7 +195,7 @@ public class SituacionFinanciera implements EstadoFinanciero {
             
         }
         
-        wr.println("\tSuma pasivo circulante  "+suma); //se llama a la suma de activo fijo 
+        wr.println("Suma pasivo circulante  "+suma); //se llama a la suma de activo fijo 
         
         
         //Se comienza a escribir las cuentas de pasivo fijo, sus saldos y su suma
@@ -187,7 +214,7 @@ public class SituacionFinanciera implements EstadoFinanciero {
             
         }
         
-        wr.println("\tSuma pasivo fijo  "+suma+""); //se llama a la suma de pasivo fijo 
+        wr.println("Suma pasivo fijo  "+suma+""); //se llama a la suma de pasivo fijo 
         
         
         
@@ -210,25 +237,29 @@ public class SituacionFinanciera implements EstadoFinanciero {
           
         cuenta = obtenerCuentasde("Capital", "Utilidad neta");
         suma = obtenerSaldode("Capital", "Utilidad neta");
+        suma = suma - (float)amoriizacionacumulada - (float)depresacionacumulada;
        
           aux = cuenta.get(0);
           datos = aux.split(",");
-          wr.println(datos[0]+ " "+datos[1]);
+          float s = Float.parseFloat(datos[1]);
+            //System.out.println("--------------------------"+s);
+          s = s - (float)amoriizacionacumulada - (float)depresacionacumulada;
+          wr.println(datos[0]+ " "+s);
         
           
         auxsuma += suma;
         
-        wr.println("\tSuma capital  "+auxsuma+""); //se llama a la suma de capital 
+        wr.println("Suma capital  "+auxsuma+""); //se llama a la suma de capital 
         
         suma = obtenerSaldode("Pasivo", "Pasivo");
         
-        wr.println("\t\tSuma pasivo y capital  "+(suma+auxsuma)+""); //se llama a la suma de activo fijo 
+        wr.println("Suma pasivo y capital  "+(suma+auxsuma)+""); //se llama a la suma de activo fijo 
         
         wr.close();
         bw.close();
         
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("Excepcion --->"+ex.getMessage());
         }
         
         System.out.println(nombrear+ " creado con exito");
@@ -237,17 +268,18 @@ public class SituacionFinanciera implements EstadoFinanciero {
 
     @Override
     public void leerEstadoFinanciero() {
-        File f;
+      
         FileReader r;
+        System.out.println("Voy a leer "+this.f);
         BufferedReader br;
         String linea;
             //PrintWriter wr;
         
-        f = new File(nomEdoFin);
+      
         
         try {
             
-            r = new FileReader(f);
+            r = new FileReader(this.f);
             br=new BufferedReader(r);
             
             while((linea=br.readLine())!=null)
@@ -260,9 +292,9 @@ public class SituacionFinanciera implements EstadoFinanciero {
             br.close();
             
         } catch (FileNotFoundException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("Exepcion leer archivo Situcacion Financiera "+ex.getMessage());
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("Excepcon IO leer archivo Situacion Financiera "+ex.getMessage());
         }
     }
 
@@ -516,7 +548,7 @@ if (!linea.equals("Capital") && !linea.contains("Activo") && !linea.contains("Pa
 }
 
     @Override
-    public ArrayList<String> obtenerNombresdeCuentasOrdenadas(File f) {
+    public ArrayList<String> obtenerNombresdeCuentasOrdenadas() {
         ArrayList<String> nombresordenados = new ArrayList();
         
         String nombre;
@@ -525,11 +557,11 @@ if (!linea.equals("Capital") && !linea.contains("Activo") && !linea.contains("Pa
         String linea;
             //PrintWriter wr;
         
-        f = new File(nomEdoFin);
+        
         
         try {
             
-            r = new FileReader(f);
+            r = new FileReader(this.f);
             br=new BufferedReader(r);
             
             while((linea=br.readLine())!=null)
@@ -550,9 +582,9 @@ if (!linea.equals("Capital") && !linea.contains("Activo") && !linea.contains("Pa
             br.close();
             
         } catch (FileNotFoundException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("Excepcion Situacion financiera en obtenerNombresOrdenados "+ex.getMessage());
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("Excepcion IO en situacion financiera obtenerNombresOrdenados "+ex.getMessage());
         }
         
         
@@ -581,4 +613,24 @@ if (!linea.equals("Capital") && !linea.contains("Activo") && !linea.contains("Pa
         return nombre;
     }
     
+    
+    public float obtenerSaldodeLlave(String nombrecuenta)
+    {
+        float saldo = 0;
+        String nombre;
+        Iterator it = cuentas.keySet().iterator();
+        ArrayList <String> cuenta;
+        
+        while(it.hasNext()){
+            nombre = it.next().toString();
+            cuenta = (ArrayList<String>) cuentas.get(nombre);
+            if(nombre.contains(nombrecuenta))
+            {
+                saldo += Float.valueOf(cuenta.get(2));
+            }
+            
+        }
+        
+        return saldo;
+    }
 }

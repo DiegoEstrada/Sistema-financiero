@@ -13,7 +13,7 @@ import java.util.Map;
 public interface EstadoFinanciero {
     public Map<String,ArrayList<String>> CUENTAS = new HashMap<>();
     
-    public void crearEstadoFinanciero(File f);
+    public void crearEstadoFinanciero();
     public void leerEstadoFinanciero();
     public void agregarCuenta(String cuenta, String tipo, String nombre, String saldo);
     public void agregarCuenta(String nombre, String saldo);
@@ -21,7 +21,7 @@ public interface EstadoFinanciero {
     public void mostrarCuentas();
     public float obtenerSaldode(String cuentabuscada, String tipobuscado);
     public boolean verificarEstado();
-    public ArrayList<String> obtenerNombresdeCuentasOrdenadas(File f);
+    public ArrayList<String> obtenerNombresdeCuentasOrdenadas();
     public ArrayList<String> obtenerCuentasde(String cuentabuscada, String tipobuscado);
     public Map<String,ArrayList<String>> importarCuentas();
     

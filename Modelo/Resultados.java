@@ -21,15 +21,17 @@ import java.util.Map;
 public class Resultados implements EstadoFinanciero {
     
     private String nomEdoFin;
+    private File f;
     private Map<String,ArrayList<String>> cuentas = new HashMap();
     
     public Resultados(File archivo)
     {
-        nomEdoFin = archivo.getName();
+        this.f = archivo;
+        nomEdoFin = this.f.getName();
     }
    
     @Override
-    public void crearEstadoFinanciero(File f) {
+    public void crearEstadoFinanciero() {
         try {
             //File f;
             FileWriter w;
@@ -43,7 +45,7 @@ public class Resultados implements EstadoFinanciero {
             
            
             //f = new File(nomEdoFin);
-            w = new FileWriter(f);
+            w = new FileWriter(this.f);
             bw=new BufferedWriter(w);
             wr=new PrintWriter(bw);
             
@@ -53,7 +55,7 @@ public class Resultados implements EstadoFinanciero {
             aux = cuenta.get(0); //Obteniendo los valores de la cuenta de ventas
             datos = aux.split(",");
             a = Float.valueOf(datos[1]);
-            wr.println(datos[0] +"\t"+ datos[1] );
+            wr.println(datos[0] +" "+ datos[1] );
             
             wr.println("Menos");
             
@@ -61,11 +63,11 @@ public class Resultados implements EstadoFinanciero {
             aux = cuenta.get(0); //Obteniendo los valores de la cuenta de Costo de ventas
             datos = aux.split(",");
             b = Float.valueOf(datos[1]);
-            wr.println(datos[0] +"\t"+ datos[1] );
+            wr.println(datos[0] +" "+ datos[1] );
             
             suma = a-b;
             
-            wr.println("Utilidad bruta \t "+String.valueOf(suma));
+            wr.println("Utilidad bruta  "+String.valueOf(suma));
             aux = String.valueOf(suma);
             utilidades.add(aux);
             
@@ -75,28 +77,29 @@ public class Resultados implements EstadoFinanciero {
             wr.println("Menos");
             
             cuenta = obtenerCuentasde("Gastos", "Gastos");
-            suma = obtenerSaldode("Gastos", "Gastos");
+            gastos = obtenerSaldode("Gastos", "Gastos");
             t = cuenta.size();
             //System.out.println("Tamño "+t);
+            
             for(i = 0; i<t; i++)
             {
                 aux = cuenta.get(i);
                 datos = aux.split(",");
                 //System.out.println(datos[0] +"\t "+ datos[1]);
-                wr.println(datos[0]+ "\t"+datos[1]);
-            
+                wr.println(datos[0]+ " "+datos[1]);
+                //gastosop = gastosop + Float.valueOf(datos[1]);
             }
             
-            gastos = a-b-suma;
+            suma = a-b-gastos;
             
-            wr.println("Utilidad de operacion \t "+String.valueOf(a-b-suma));
-            aux = String.valueOf(a-b-suma);
+            wr.println("Gastos de operacion "+String.valueOf(suma));
+            aux = String.valueOf(suma);
             utilidades.clear();
             utilidades.add(aux);
             
-            cuentas.put("Utilidad de operacion", utilidades);
+            cuentas.put("Gastos de operacion ", utilidades);
             
-            a=0; b =0;
+            a=0; b =0; 
             
             if ((cuenta = obtenerCuentasde("Otros", "Otros")).size()>0)
             {
@@ -107,7 +110,7 @@ public class Resultados implements EstadoFinanciero {
                 datos = aux.split(",");
                 a = Float.valueOf(datos[1]);
                 wr.println("Menos");
-                wr.println(datos[0] +"\t"+ datos[1] );
+                wr.println(datos[0] +" "+ datos[1] );
                 }
                 if ((cuenta = obtenerCuentasde("productos", "productos")).size()>0)
                 {
@@ -116,17 +119,17 @@ public class Resultados implements EstadoFinanciero {
                 datos = aux.split(",");
                 b = Float.valueOf(datos[1]);
                 wr.println("Mas");
-                wr.println(datos[0] +"\t"+ datos[1] );
+                wr.println(datos[0] +" "+ datos[1] );
                 }
-                suma = (gastos - a ) +b; 
-                wr.println("Gastos de operacion \t "+suma);
+                suma =  suma + b - a; 
+                wr.println("Utilidad neta \t "+suma);
             }
             else
             {
-                wr.println("Gastos de operacion \t" +suma);
+                wr.println("Utilidad neta \t" +suma);
             }
             
-            
+            /*
          wr.println("Menos");
          
         cuenta = obtenerCuentasde("ISR", "ISR");
@@ -140,7 +143,7 @@ public class Resultados implements EstadoFinanciero {
         datos = aux.split(",");
         b = Float.valueOf(datos[1]);;
         wr.println(datos[0] +"\t"+ datos[1] );
-        
+         
         float utilidad;
         
         utilidad = suma - (a+b);
@@ -150,7 +153,7 @@ public class Resultados implements EstadoFinanciero {
         cuentas.put("Impuestos por pagar",utilidades);
         
         wr.println("Impuestos por pagar \t"+ (a+b));
-        
+       
         utilidades.clear();
         utilidades.add(String.valueOf(utilidad));
         
@@ -158,14 +161,14 @@ public class Resultados implements EstadoFinanciero {
         
        wr.println("Utilidad neta \t"+ utilidad);
        
-            
+            */
             
         wr.close();
         bw.close();
         
            System.out.println(nomEdoFin+ " creado con exito");
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("Excepcion al crear estado "+ex.getMessage());
         }
         
         
@@ -223,17 +226,17 @@ public class Resultados implements EstadoFinanciero {
     @Override
     public void leerEstadoFinanciero() {
         
-        File f;
+        
         FileReader r;
         BufferedReader br;
         String linea;
             //PrintWriter wr;
         
-        f = new File(nomEdoFin);
+       
         
         try {
             
-            r = new FileReader(f);
+            r = new FileReader(this.f);
             br=new BufferedReader(r);
             
             while((linea=br.readLine())!=null)
@@ -246,9 +249,9 @@ public class Resultados implements EstadoFinanciero {
             br.close();
             
         } catch (FileNotFoundException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("Excepcion leer estado Resultados "+ex.getMessage());
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("Excepcion leer estado Resultados "+ex.getMessage());
         }
     }
 
@@ -361,7 +364,7 @@ public class Resultados implements EstadoFinanciero {
     }
 
     @Override
-    public ArrayList<String> obtenerNombresdeCuentasOrdenadas(File f) {
+    public ArrayList<String> obtenerNombresdeCuentasOrdenadas() {
         ArrayList<String> nombresordenados = new ArrayList();
         
         String nombre;
@@ -370,11 +373,11 @@ public class Resultados implements EstadoFinanciero {
         String linea;
             //PrintWriter wr;
         
-        f = new File(nomEdoFin);
+        
         
         try {
             
-            r = new FileReader(f);
+            r = new FileReader(this.f);
             br=new BufferedReader(r);
             
             while((linea=br.readLine())!=null)
@@ -393,9 +396,9 @@ public class Resultados implements EstadoFinanciero {
             br.close();
             
         } catch (FileNotFoundException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("Excepcion en Resultados obtenerNombresdeCuentas "+ex.getMessage());
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("Excepcion en Resultados IO "+ex.getMessage());
         }
         
         

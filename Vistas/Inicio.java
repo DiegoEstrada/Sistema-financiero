@@ -334,7 +334,7 @@ public class Inicio extends javax.swing.JFrame {
         
         try {
             File archivo = abrredo.getSelectedFile();
-            String nombre = archivo.getName();
+            //System.out.println("rchivo leido "+archivo);
             agregarEdoFinancieroLista((DefaultListModel)this.jListArchivosAbiertos.getModel(), archivo);
             
         }catch(Exception e){
@@ -408,7 +408,8 @@ public class Inicio extends javax.swing.JFrame {
             else   
                Ventana.ShowErrorMessage("Alguno de los archivos que selecconaste no tiene el formato para ser leido");  //JOPTION
         
-            System.out.println(estados[0]);
+            
+            System.out.println("Aqui "+estados[0]);
             System.out.println(estados[1]);
             
              
@@ -514,6 +515,8 @@ public class Inicio extends javax.swing.JFrame {
                 Ventana.ShowErrorMessage("Solo es posible realizar el analisis de 2 estados financieros");
             }
         }
+        //System.out.println(estados[0].isFile());
+         //System.out.println(estados[1].isFile());
     }
     
     public void cerrarEstadoFinanciero(DefaultListModel lista, int elementoseleccionado )

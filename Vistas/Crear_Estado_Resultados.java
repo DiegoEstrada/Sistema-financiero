@@ -5,17 +5,33 @@
  */
 package Vistas;
 
+import Modelo.Resultados;
+import Modelo.SituacionFinanciera;
+import java.io.File;
+import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 /**
  *
  * @author super
  */
 public class Crear_Estado_Resultados extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Crear_Estado_Resultados
-     */
+        private Resultados er;
+        private File guardar;
+        private DefaultListModel lista = new DefaultListModel();
+        
     public Crear_Estado_Resultados() {
         initComponents();
+        DefaultListModel l = new DefaultListModel();
+        l.addElement("");
+        //this.jComboBox1.removeAllItems();
+        this.ComboBoxNombreCuenta.removeAllItems();
+        this.ComboBoxNombreCuenta.removeAllItems();
+        this.jlCuentasAgregadas.setModel(l);
+        this.setVisible(true);
     }
 
     /**
@@ -29,19 +45,19 @@ public class Crear_Estado_Resultados extends javax.swing.JFrame {
 
         lbCuentas = new javax.swing.JLabel();
         lbNombreSF = new javax.swing.JLabel();
-        txtNombreSF = new javax.swing.JTextField();
         lbTitulo = new javax.swing.JLabel();
         lbExtension = new javax.swing.JLabel();
-        lbRuta = new javax.swing.JLabel();
-        txtRuta = new javax.swing.JTextField();
         lbNombreCuenta = new javax.swing.JLabel();
         lbSaldoCuenta = new javax.swing.JLabel();
         txtSaldoCuenta = new javax.swing.JTextField();
         btAgregarCuenta = new javax.swing.JButton();
-        btFinalizarSF = new javax.swing.JButton();
         btRegresar = new javax.swing.JButton();
         ComboBoxNombreCuenta = new javax.swing.JComboBox<>();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jbCrearArchivo = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jlCuentasAgregadas = new javax.swing.JList<>();
+        jbEliminarCuenta = new javax.swing.JButton();
+        jbCrearEstado = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Crear Estado de Resultados");
@@ -56,10 +72,7 @@ public class Crear_Estado_Resultados extends javax.swing.JFrame {
         lbTitulo.setText("Crear nuevo Estado de Resultados");
 
         lbExtension.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
-        lbExtension.setText("Nombre del archivo con extension    *.txt");
-
-        lbRuta.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
-        lbRuta.setText("Ruta a guardar:");
+        lbExtension.setText("Presiona el boton para generar un archivo ");
 
         lbNombreCuenta.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
         lbNombreCuenta.setText("Nombre de la Cuenta:");
@@ -69,16 +82,49 @@ public class Crear_Estado_Resultados extends javax.swing.JFrame {
 
         btAgregarCuenta.setFont(new java.awt.Font("Constantia", 0, 12)); // NOI18N
         btAgregarCuenta.setText("Agregar");
-
-        btFinalizarSF.setFont(new java.awt.Font("Constantia", 0, 12)); // NOI18N
-        btFinalizarSF.setText("Finalizar");
+        btAgregarCuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAgregarCuentaActionPerformed(evt);
+            }
+        });
 
         btRegresar.setFont(new java.awt.Font("Constantia", 0, 12)); // NOI18N
         btRegresar.setText("Regresar");
+        btRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRegresarActionPerformed(evt);
+            }
+        });
 
         ComboBoxNombreCuenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jbCrearArchivo.setText("Crear Archivo");
+        jbCrearArchivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCrearArchivoActionPerformed(evt);
+            }
+        });
+
+        jlCuentasAgregadas.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jlCuentasAgregadas);
+
+        jbEliminarCuenta.setText("Eliminar cuenta");
+        jbEliminarCuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarCuentaActionPerformed(evt);
+            }
+        });
+
+        jbCrearEstado.setText("Guardar estado");
+        jbCrearEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCrearEstadoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -88,132 +134,207 @@ public class Crear_Estado_Resultados extends javax.swing.JFrame {
                 .addGap(151, 151, 151)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbSaldoCuenta)
-                            .addComponent(lbNombreCuenta))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtSaldoCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(ComboBoxNombreCuenta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(33, 33, 33)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btFinalizarSF)
-                            .addComponent(btAgregarCuenta))
+                        .addComponent(lbExtension, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(110, 110, 110)
+                        .addComponent(jbCrearArchivo)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(lbCuentas)
-                        .addGap(479, 479, 479))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbExtension, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbNombreSF)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNombreSF, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
-                        .addComponent(lbRuta)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(180, 180, 180))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbNombreSF)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(lbSaldoCuenta)
+                                            .addComponent(lbNombreCuenta))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txtSaldoCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                            .addComponent(ComboBoxNombreCuenta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGap(33, 33, 33)
+                                        .addComponent(btAgregarCuenta))
+                                    .addComponent(jbEliminarCuenta)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(163, 163, 163)
+                                        .addComponent(lbCuentas)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(193, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btRegresar)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(lbTitulo)
                         .addGap(353, 353, 353))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(423, 423, 423))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jbCrearEstado)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btRegresar)
+                                .addGap(12, 12, 12)))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(56, 56, 56)
                 .addComponent(lbTitulo)
-                .addGap(35, 35, 35)
-                .addComponent(lbExtension)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbNombreSF)
-                    .addComponent(txtNombreSF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbRuta)
-                    .addComponent(txtRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
-                .addComponent(lbCuentas)
-                .addGap(32, 32, 32)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbNombreCuenta)
-                    .addComponent(btAgregarCuenta)
-                    .addComponent(ComboBoxNombreCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btFinalizarSF)
-                    .addComponent(lbSaldoCuenta)
-                    .addComponent(txtSaldoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49)
-                .addComponent(btRegresar)
-                .addContainerGap())
+                    .addComponent(lbExtension)
+                    .addComponent(jbCrearArchivo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbNombreSF)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lbCuentas)
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbNombreCuenta)
+                            .addComponent(btAgregarCuenta)
+                            .addComponent(ComboBoxNombreCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbSaldoCuenta)
+                            .addComponent(txtSaldoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(89, 89, 89))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jbEliminarCuenta)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(53, 53, 53))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jbCrearEstado)
+                        .addGap(29, 29, 29)
+                        .addComponent(btRegresar)
+                        .addContainerGap())))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+    private void btAgregarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgregarCuentaActionPerformed
+        String nombrecuenta,tipocuenta,saldo;
+        int i;
+        
+        i = this.ComboBoxNombreCuenta.getSelectedIndex();
+        saldo = this.txtSaldoCuenta.getText();
+        nombrecuenta = this.ComboBoxNombreCuenta.getItemAt(i);
+        
+        //sf.agregarCuenta(saldo, saldo, saldo, saldo);
+        /*
+            Para obtener los nombres es mejor usar un combo bo para la clasificacion y usar ifs para el nombre de los 
+            radiobuttns
+        
+        */
+     
+            //System.out.println("Voy a ingresar Activo, "+ tipocuenta +" , " +nombrecuenta+ ", "+saldo);
+            er.agregarCuenta(nombrecuenta, saldo);
+            lista.addElement(nombrecuenta+" = "+ saldo);
+            jlCuentasAgregadas.setModel(lista);
+            
+        
+        
+    }//GEN-LAST:event_btAgregarCuentaActionPerformed
+
+    private void btRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegresarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btRegresarActionPerformed
+
+    private void jbCrearArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCrearArchivoActionPerformed
+        JFileChooser guardarestado = new JFileChooser();
+            FileNameExtensionFilter extension = new FileNameExtensionFilter("Estados finacieros(*.txt)", "txt");
+            guardarestado.setFileFilter(extension);
+            
+            try{
+                guardarestado.showSaveDialog(this);
+                this.guardar = guardarestado.getSelectedFile();
+                //nombre = this.guardar.getName();
+                //System.out.println(this.guardar);
+                Resultados estadodeResultados = new Resultados(guardar);
+                this.er =  estadodeResultados;
+                if (this.guardar != null)
+                {
+                    
+                    //FileWriter  save=new FileWriter(guardar+".txt");
+                    //save.write(areaDeTexto.getText());
+                    //save.close();
+                        JOptionPane.showMessageDialog(null,
+                                "El archivo se ha generado correctamente",
+                                                        "Información",JOptionPane.INFORMATION_MESSAGE);
+                        
+                        asignarCuentasCB();
+                }
+                
+                
+            }catch(Exception e){
+                System.out.println("Excepcion atrapada -> "+e.getMessage());
+            }
+            
+            
+    }//GEN-LAST:event_jbCrearArchivoActionPerformed
+
+    private void jbEliminarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarCuentaActionPerformed
+          int j,i = jlCuentasAgregadas.getSelectedIndex();
+        String fila;
+        String nombre = "";
+        if(i<0)
+        {
+            Ventana.ShowInformationMessage("Selecciona la cuenta que deseas agregar");  //JOPTION
+        }
+        else
+        {
+            fila = jlCuentasAgregadas.getSelectedValue();
+            
+            for ( j = 0; j <fila.length(); j++) {
+                if (!(fila.charAt(j)>=48 && fila.charAt(j)<=57) || fila.charAt(j)==32 )
+                {
+                    nombre = nombre + fila.charAt(j);
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Crear_Estado_Resultados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Crear_Estado_Resultados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Crear_Estado_Resultados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Crear_Estado_Resultados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            //System.out.println("SELECCONE "+ nombre);
+            er.eliminarCuenta(nombre);
+            lista.removeElementAt(i);
+            jlCuentasAgregadas.setModel(lista);
         }
-        //</editor-fold>
+    }//GEN-LAST:event_jbEliminarCuentaActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Crear_Estado_Resultados().setVisible(true);
-            }
-        });
+    private void jbCrearEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCrearEstadoActionPerformed
+        Inicio forminicio = new Inicio();
+        forminicio.setVisible(true);
+        this.setVisible(false);
+        this.er.crearEstadoFinanciero();
+    }//GEN-LAST:event_jbCrearEstadoActionPerformed
+
+    public void asignarCuentasCB()
+    {
+        this.ComboBoxNombreCuenta.removeAllItems();
+        this.ComboBoxNombreCuenta.addItem("Ventas");
+        this.ComboBoxNombreCuenta.addItem("Costo de ventas");
+        this.ComboBoxNombreCuenta.addItem("Gastos de venta");
+        this.ComboBoxNombreCuenta.addItem("Gastos de administracion");
+        this.ComboBoxNombreCuenta.addItem("Otros gastos financieros");
+        this.ComboBoxNombreCuenta.addItem("Otros productos financieros");
     }
+   
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboBoxNombreCuenta;
     private javax.swing.JButton btAgregarCuenta;
-    private javax.swing.JButton btFinalizarSF;
     private javax.swing.JButton btRegresar;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbCrearArchivo;
+    private javax.swing.JButton jbCrearEstado;
+    private javax.swing.JButton jbEliminarCuenta;
+    private javax.swing.JList<String> jlCuentasAgregadas;
     private javax.swing.JLabel lbCuentas;
     private javax.swing.JLabel lbExtension;
     private javax.swing.JLabel lbNombreCuenta;
     private javax.swing.JLabel lbNombreSF;
-    private javax.swing.JLabel lbRuta;
     private javax.swing.JLabel lbSaldoCuenta;
     private javax.swing.JLabel lbTitulo;
-    private javax.swing.JTextField txtNombreSF;
-    private javax.swing.JTextField txtRuta;
     private javax.swing.JTextField txtSaldoCuenta;
     // End of variables declaration//GEN-END:variables
 }

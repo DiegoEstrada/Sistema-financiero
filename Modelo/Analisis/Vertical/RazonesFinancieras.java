@@ -70,7 +70,7 @@ public class RazonesFinancieras {
             saldo = Float.parseFloat(s);
             }
             else
-                System.out.println("La cuenta buscada no existe en ningun estado financiero");
+                System.out.println("La cuenta "+cuenta+ " buscada no existe en ningun estado financiero ");
         
         
      
@@ -101,6 +101,8 @@ public class RazonesFinancieras {
         
         indicador = numerador/denominador;
         
+        //System.out.println(""+numerador+" / "+denominador);
+        
         rf.put(nombre, String.valueOf(indicador));
         
         nombre= "Estabilidad economica";
@@ -108,8 +110,10 @@ public class RazonesFinancieras {
         b=ObtenerSaldo("Suma pasivo circulante");
         c=ObtenerSaldo("Suma de activo");
         
-        numerador=a+b;
+        numerador=a + b;
         denominador=c;
+        //System.out.println("Estabilidad");
+        //System.out.println(""+a+" + "+b+ " / "+ denominador);
         
         indicador=numerador/denominador;
         

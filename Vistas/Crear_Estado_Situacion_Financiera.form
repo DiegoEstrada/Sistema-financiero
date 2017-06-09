@@ -42,18 +42,25 @@
                       <EmptySpace min="-2" pref="651" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
+                      <Component id="btAgregarCuenta" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="229" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="lbSaldoCuenta" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbNombreCuenta" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtSaldoCuenta" min="-2" pref="150" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="RdbActivo" min="-2" max="-2" attributes="0"/>
                           <Component id="lbNombreSF" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="txtNombreSF" min="-2" pref="200" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
-                              <Component id="jbCrearEstado" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="166" max="-2" attributes="0"/>
-                          </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                               <Component id="ComboBoxNombreCuenta" min="-2" pref="150" max="-2" attributes="0"/>
@@ -85,21 +92,12 @@
                               </Group>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="jbCrearEstado" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="277" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
-                      <Component id="btAgregarCuenta" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="229" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="lbSaldoCuenta" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbNombreCuenta" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txtSaldoCuenta" min="-2" pref="150" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -134,7 +132,6 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lbNombreSF" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtNombreSF" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbCrearEstado" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -214,8 +211,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Ingresa el nombre:"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtNombreSF">
     </Component>
     <Component class="javax.swing.JLabel" name="lbCuentas">
       <Properties>

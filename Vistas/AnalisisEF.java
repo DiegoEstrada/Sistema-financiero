@@ -5,7 +5,9 @@
  */
 package Vistas;
 
+import Modelo.Analisis.Horizontal.Diferencias;
 import Modelo.Analisis.Vertical.BenchMarking;
+import Modelo.Analisis.Vertical.PorcientosIntegrados;
 import Modelo.Analisis.Vertical.RazonesFinancieras;
 import Modelo.Resultados;
 import Modelo.SituacionFinanciera;
@@ -38,22 +40,28 @@ public class AnalisisEF extends javax.swing.JFrame {
         
     public AnalisisEF(File nsf, File ner) {
         estados = new File[2];
+        //System.out.println("--------"+nsf);
+        //System.out.println("--------yyyy"+ner);
         sfX = new SituacionFinanciera(nsf);
         erX = new Resultados(ner);
-        
+       
         sfX.leerEstadoFinanciero();
         erX.leerEstadoFinanciero();
         
-        ArrayList<String> nombresOrdenados = erX.obtenerNombresdeCuentasOrdenadas(nsf);
+        ArrayList<String> nombresOrdenados = erX.obtenerNombresdeCuentasOrdenadas();
         System.out.println(nombresOrdenados.size());
        
-        ArrayList<String> nombresOrdenados1 = sfX.obtenerNombresdeCuentasOrdenadas(nsf);
+        ArrayList<String> nombresOrdenados1 = sfX.obtenerNombresdeCuentasOrdenadas();
         System.out.println(nombresOrdenados1.size());
         
         initComponents();
         DefaultListModel lista = new DefaultListModel();
         lista.addElement("Ningun elemento seleccionado");
         lista.addElement("Ningun elemento seleccionado");
+        
+        //sfX.mostrarCuentas();
+        //System.out.println("----------------------------");
+        //erX.mostrarCuentas();
                
         this.jListArchivosAbiertos.setModel(lista);
     }
@@ -97,6 +105,11 @@ public class AnalisisEF extends javax.swing.JFrame {
 
         TipoAnálisis.add(RdbAnalisisHorizontal);
         RdbAnalisisHorizontal.setText("Análisis Horizontal");
+        RdbAnalisisHorizontal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RdbAnalisisHorizontalActionPerformed(evt);
+            }
+        });
 
         TipoAnálisis.add(RdbAnalisisVertical);
         RdbAnalisisVertical.setText("Análisis Vertical");
@@ -112,6 +125,11 @@ public class AnalisisEF extends javax.swing.JFrame {
 
         btRegresar.setFont(new java.awt.Font("Constantia", 0, 12)); // NOI18N
         btRegresar.setText("Regresar");
+        btRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRegresarActionPerformed(evt);
+            }
+        });
 
         btConfirmar.setFont(new java.awt.Font("Constantia", 0, 12)); // NOI18N
         btConfirmar.setText("Confirmar");
@@ -207,7 +225,6 @@ public class AnalisisEF extends javax.swing.JFrame {
                         .addComponent(btRegresar))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -241,8 +258,9 @@ public class AnalisisEF extends javax.swing.JFrame {
                                         .addComponent(jbCerrarEstado)
                                         .addGap(18, 18, 18)
                                         .addComponent(jbAceptar))
-                                    .addComponent(jbAgregarEstado))))
-                        .addGap(0, 288, Short.MAX_VALUE)))
+                                    .addComponent(jbAgregarEstado)))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 902, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 230, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -286,9 +304,9 @@ public class AnalisisEF extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(ComboBoxAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btConfirmar))))
-                .addGap(59, 59, 59)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 262, Short.MAX_VALUE)
+                .addGap(70, 70, 70)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                 .addComponent(btRegresar))
         );
 
@@ -305,7 +323,7 @@ public class AnalisisEF extends javax.swing.JFrame {
         {
             if (this.RdbAnalisisHorizontal.isSelected())
             {
-               //Aqui se debe hacer visible la tabla de las cuentas, los botornes para eliminar, crear, y todo lo relacionado
+               cargarDatosTablaCuentas();
             }
             else
                     System.out.println("Selecciona un tipo de analisis");  //joption
@@ -391,7 +409,7 @@ public class AnalisisEF extends javax.swing.JFrame {
                  sfY = new SituacionFinanciera(estados[0]);
                  erY = new Resultados(estados[1]);
                 
-               cargarDatosTablaCuentas();
+              
                
                 /*
                 System.out.println("------------------------------------------");
@@ -405,7 +423,7 @@ public class AnalisisEF extends javax.swing.JFrame {
             else   
                 System.out.println("Alguno de los archivos que selecconaste no tiene el formato para ser leido");  //JOPTION
         
-            System.out.println(estados[0]);
+            System.out.println("EF "+ estados[0]);
             System.out.println(estados[1]);
             
              
@@ -433,6 +451,17 @@ public class AnalisisEF extends javax.swing.JFrame {
             System.out.println("Excepcion ->"+e.getMessage());
         }
     }//GEN-LAST:event_jbAgregarEstadoActionPerformed
+
+    private void btRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegresarActionPerformed
+        
+        Inicio formularioInicio = new Inicio();
+        formularioInicio.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btRegresarActionPerformed
+
+    private void RdbAnalisisHorizontalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RdbAnalisisHorizontalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RdbAnalisisHorizontalActionPerformed
 
     
     public  void agregarEdoFinancieroLista(DefaultListModel lista, File estado)
@@ -518,6 +547,55 @@ public class AnalisisEF extends javax.swing.JFrame {
     {
         //Cuando se llama este metodo los 4 objetos de analisi deben estar creados
         System.out.println("Vamos a llenar la tabla  de cuentas ");
+        DefaultTableModel modelo = (DefaultTableModel) this.jtCuentas.getModel();
+        String fila[] = new String[5];
+        
+        try {
+        int filas=this.jtCuentas.getRowCount();
+            for (int i = 0;filas>i; i++) {
+                modelo.removeRow(0);
+            }
+           
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al limpiar la tabla.");
+        }
+        
+        ArrayList<String> cuentasordenadasSF = sfX.obtenerNombresdeCuentasOrdenadas();
+        ArrayList<String> cuentasordenadasER = erX.obtenerNombresdeCuentasOrdenadas();
+        
+        Map<String,ArrayList<String>> cuentassfX = sfX.importarNombreySaldo();
+        Map<String,ArrayList<String>> cuentaserX = erX.importarCuentas();
+        Map<String,ArrayList<String>> cuentassfY = sfY.importarNombreySaldo();
+        Map<String,ArrayList<String>> cuentaserY = erY.importarCuentas();
+        
+        PorcientosIntegrados porcientosIntegradosSFX = new PorcientosIntegrados(cuentassfX);
+        PorcientosIntegrados porcientosIntegradosERX = new PorcientosIntegrados(cuentaserX);
+         
+        //iferencias diferenciasER = new Diferencias(cuentaserX, cuentaserY);
+        //Diferencias diferenciasSF = new Diferencias(cuentassfX, cuentassfY);
+        
+        Map<String,String> analisisporcientosSFX = porcientosIntegradosSFX.AnalisisPorcientosIntegrados();
+        Map<String,String> analisisporcientosERX = porcientosIntegradosERX.AnalisisPorcientosIntegrados();
+        
+        //Map<String, String> analisisdiferenciasSF = diferenciasSF.analisisDiferencias(cuentasordenadasSF);
+        //Map<String, String> analisisdiferenciasER = diferenciasER.analisisDiferencias(cuentasordenadasER); 
+        
+        
+        
+        for (int i = 0; i < cuentasordenadasSF.size(); i++) {
+            fila[0] = cuentasordenadasSF.get(i);
+            System.out.println(""+cuentasordenadasSF.get(i));
+            //fila[1] = cuentassfX.get(cuentasordenadasSF.get(i)).get(1);
+            //fila[2] = cuentassfY.get(cuentasordenadasSF.get(i)).get(1);
+            //fila[3] = analisisporcientosSFX.get(cuentasordenadasSF.get(i));
+            //fila[4] = analisisdiferenciasSF.get(cuentasordenadasSF.get(i));
+            fila[4] = "vacio";
+            
+            modelo.addRow(fila);
+            this.jtCuentas.setModel(modelo);
+        }
+        
     }
     /**
      * @param args the command line arguments
