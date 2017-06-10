@@ -20,6 +20,7 @@ import java.util.Map;
  */
 public class Resultados implements EstadoFinanciero {
     
+    private float valorAmortizacionDepresiacion;
     private String nomEdoFin;
     private File f;
     private Map<String,ArrayList<String>> cuentas = new HashMap();
@@ -27,11 +28,12 @@ public class Resultados implements EstadoFinanciero {
     public Resultados(File archivo)
     {
         this.f = archivo;
+        this.valorAmortizacionDepresiacion = 0;
         nomEdoFin = this.f.getName();
     }
    
     @Override
-    public void crearEstadoFinanciero() {
+    public void crearEstadoFinanciero(boolean calcularamortizaconydepresiacion) {
         try {
             //File f;
             FileWriter w;
@@ -91,6 +93,10 @@ public class Resultados implements EstadoFinanciero {
             }
             
             suma = a-b-gastos;
+            
+            if (calcularamortizaconydepresiacion){
+                suma = a-b-gastos-this.getAmortizacionDepresiacion();
+            }
             
             wr.println("Gastos de operacion "+String.valueOf(suma));
             aux = String.valueOf(suma);
@@ -427,5 +433,20 @@ public class Resultados implements EstadoFinanciero {
         return nombre;
     }
     
+    /*
+    Para el afectar el ER en el calculo de las depresiaciones y amortizaciones utlizaremos metodos set y get
+    par de esta manera no pedir la variable en el constructor ni emplear un obteto de tipo SF para obtener ese valor
+    Este valor sera cambiado cuando se entre al formulario de opciones de mejora
+   */
+    
+    public float getAmortizacionDepresiacion()
+    {
+        return this.valorAmortizacionDepresiacion;
+    }
+    
+    public void setAmprtizacionDepresiacion(float valor)
+    {
+        this.valorAmortizacionDepresiacion = valor;
+    }
     
 }

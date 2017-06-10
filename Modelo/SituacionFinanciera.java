@@ -73,7 +73,7 @@ public class SituacionFinanciera implements EstadoFinanciero {
     }
     
     @Override
-    public void crearEstadoFinanciero() {
+    public void crearEstadoFinanciero(boolean calcularamortizaconydepresiacion) {
         //System.out.println("Estoy creando el estado ");
         //File f;
         FileWriter w;
@@ -114,6 +114,7 @@ public class SituacionFinanciera implements EstadoFinanciero {
         //Se comineza a escribir las cuentas de activo fijo, sus saldos y su suma
         
         wr.println("Fijo");
+        
         float edificios = obtenerSaldodeLlave("Edificios");
         float mobiliario = obtenerSaldodeLlave("Mobiliario");
         float equiporeparto = obtenerSaldodeLlave("Equipo de reparto");
@@ -131,7 +132,9 @@ public class SituacionFinanciera implements EstadoFinanciero {
         
         cuenta = obtenerCuentasde("Activo", "Fijo");
         suma = obtenerSaldode("Activo", "Fijo");
+        if(calcularamortizaconydepresiacion){
         suma = suma - (float)depresacionacumulada;
+        }
         t = cuenta.size();
             //System.out.println("Tamño "+t);
         for(i = 0; i<t; i++)
@@ -142,7 +145,9 @@ public class SituacionFinanciera implements EstadoFinanciero {
             wr.println(datos[0]+" "+datos[1]);
             
         }
+        if (calcularamortizaconydepresiacion){
         wr.println("Depreciacion acumulada "+(float) depresacionacumulada);
+        }
         wr.println("Suma activo fijo  "+suma); //se llama a la suma de activo fijo 
         
         
@@ -158,7 +163,9 @@ public class SituacionFinanciera implements EstadoFinanciero {
         
         cuenta = obtenerCuentasde("Activo", "Diferido");
         suma = obtenerSaldode("Activo", "Diferido");
+        if(calcularamortizaconydepresiacion){
         suma  = suma - (float)amoriizacionacumulada;
+        }
         t = cuenta.size();
             //System.out.println("Tamño "+t);
         for(i = 0; i<t; i++)
@@ -170,11 +177,15 @@ public class SituacionFinanciera implements EstadoFinanciero {
             
         }
         
+        if(calcularamortizaconydepresiacion){
         wr.println("Amortizacion acumulada "+(float)amoriizacionacumulada);
+        }
         wr.println("Suma activo diferio  "+suma); //se llama a la suma de activo fijo 
         
         suma = obtenerSaldode("Activo", "Activo");
+        if(calcularamortizaconydepresiacion){
         suma = suma - (float)depresacionacumulada - (float)amoriizacionacumulada;
+        }
         
         wr.println("Suma de activo   "+suma); //se llama a la suma de activo total 
         
@@ -237,13 +248,16 @@ public class SituacionFinanciera implements EstadoFinanciero {
           
         cuenta = obtenerCuentasde("Capital", "Utilidad neta");
         suma = obtenerSaldode("Capital", "Utilidad neta");
+        if(calcularamortizaconydepresiacion){
         suma = suma - (float)amoriizacionacumulada - (float)depresacionacumulada;
-       
+        }
           aux = cuenta.get(0);
           datos = aux.split(",");
           float s = Float.parseFloat(datos[1]);
             //System.out.println("--------------------------"+s);
-          s = s - (float)amoriizacionacumulada - (float)depresacionacumulada;
+            if(calcularamortizaconydepresiacion){
+            s = s - (float)amoriizacionacumulada - (float)depresacionacumulada;
+            }
           wr.println(datos[0]+ " "+s);
         
           

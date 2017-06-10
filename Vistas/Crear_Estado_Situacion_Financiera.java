@@ -449,7 +449,7 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
         Inicio forminicio = new Inicio();
         forminicio.setVisible(true);
         this.setVisible(false);
-        this.sf.crearEstadoFinanciero();
+        this.sf.crearEstadoFinanciero(false); //Envio false porque no quiero calcular depresiaciones ni amortizaciones
         }
         else
             Ventana.ShowErrorMessage("Las cuentas ingresadas no estan balanceadas ");  //JOPION

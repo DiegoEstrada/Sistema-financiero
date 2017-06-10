@@ -13,7 +13,7 @@ import java.util.Map;
 public interface EstadoFinanciero {
     public Map<String,ArrayList<String>> CUENTAS = new HashMap<>();
     
-    public void crearEstadoFinanciero();
+    public void crearEstadoFinanciero(boolean calcularamortizacionydepresiacion);
     public void leerEstadoFinanciero();
     public void agregarCuenta(String cuenta, String tipo, String nombre, String saldo);
     public void agregarCuenta(String nombre, String saldo);

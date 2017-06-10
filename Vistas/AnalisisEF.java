@@ -5,7 +5,6 @@
  */
 package Vistas;
 
-import Modelo.Analisis.Horizontal.Diferencias;
 import Modelo.Analisis.Vertical.BenchMarking;
 import Modelo.Analisis.Vertical.PorcientosIntegrados;
 import Modelo.Analisis.Vertical.RazonesFinancieras;
@@ -39,7 +38,7 @@ public class AnalisisEF extends javax.swing.JFrame {
     
         
     public AnalisisEF(File nsf, File ner) {
-        estados = new File[2];
+        this.estados = new File[2];
         //System.out.println("--------"+nsf);
         //System.out.println("--------yyyy"+ner);
         sfX = new SituacionFinanciera(nsf);
@@ -77,8 +76,8 @@ public class AnalisisEF extends javax.swing.JFrame {
 
         TipoAnálisis = new javax.swing.ButtonGroup();
         lb_OpcionAnalisis = new javax.swing.JLabel();
-        RdbAnalisisHorizontal = new javax.swing.JRadioButton();
-        RdbAnalisisVertical = new javax.swing.JRadioButton();
+        jrbPorcientosDiferencias = new javax.swing.JRadioButton();
+        jrbRazonesyBM = new javax.swing.JRadioButton();
         ComboBoxAnalisis = new javax.swing.JComboBox<>();
         lbIncrementoVentas = new javax.swing.JLabel();
         lbPorcentaje = new javax.swing.JLabel();
@@ -92,10 +91,10 @@ public class AnalisisEF extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jListArchivosAbiertos = new javax.swing.JList<>();
         jbCerrarEstado = new javax.swing.JButton();
-        jbAceptar = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jtCuentas = new javax.swing.JTable();
         jbAgregarEstado = new javax.swing.JButton();
+        jbSFPorcientosDiferencias = new javax.swing.JButton();
+        jbERPorcientosDiefernecias = new javax.swing.JButton();
+        jbRealizarPropuestas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Análisis Financiero");
@@ -103,16 +102,16 @@ public class AnalisisEF extends javax.swing.JFrame {
         lb_OpcionAnalisis.setFont(new java.awt.Font("Rockwell", 0, 18)); // NOI18N
         lb_OpcionAnalisis.setText("Seleccione una opción:");
 
-        TipoAnálisis.add(RdbAnalisisHorizontal);
-        RdbAnalisisHorizontal.setText("Análisis Horizontal");
-        RdbAnalisisHorizontal.addActionListener(new java.awt.event.ActionListener() {
+        TipoAnálisis.add(jrbPorcientosDiferencias);
+        jrbPorcientosDiferencias.setText("Analisis Porcientos y Diferencias");
+        jrbPorcientosDiferencias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RdbAnalisisHorizontalActionPerformed(evt);
+                jrbPorcientosDiferenciasActionPerformed(evt);
             }
         });
 
-        TipoAnálisis.add(RdbAnalisisVertical);
-        RdbAnalisisVertical.setText("Análisis Vertical");
+        TipoAnálisis.add(jrbRazonesyBM);
+        jrbRazonesyBM.setText("Razones financieras y Benchmarking");
 
         ComboBoxAnalisis.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Porcientos integrados", "Razones Financieras", "BenchMarking", "Diferencias", "Punto de equilibrio", "Punto de equilibrio con Utilidad" }));
         ComboBoxAnalisis.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -132,7 +131,12 @@ public class AnalisisEF extends javax.swing.JFrame {
         });
 
         btConfirmar.setFont(new java.awt.Font("Constantia", 0, 12)); // NOI18N
-        btConfirmar.setText("Confirmar");
+        btConfirmar.setText("Continuar");
+        btConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btConfirmarActionPerformed(evt);
+            }
+        });
 
         JTableBenchMarking.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -178,38 +182,31 @@ public class AnalisisEF extends javax.swing.JFrame {
             }
         });
 
-        jbAceptar.setText("Aceptar");
-        jbAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbAceptarActionPerformed(evt);
-            }
-        });
-
-        jtCuentas.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Cuenta", "Perido Actual", "Periodo Anterior", "Porcentaje", "Diferencia"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane3.setViewportView(jtCuentas);
-
         jbAgregarEstado.setText("Agregar Estado");
         jbAgregarEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbAgregarEstadoActionPerformed(evt);
+            }
+        });
+
+        jbSFPorcientosDiferencias.setText("Ver Diferencias y Porcientos de Situacioón financiera");
+        jbSFPorcientosDiferencias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSFPorcientosDiferenciasActionPerformed(evt);
+            }
+        });
+
+        jbERPorcientosDiefernecias.setText("Ver Difernecias y Porcientos Estado de Resultados");
+        jbERPorcientosDiefernecias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbERPorcientosDieferneciasActionPerformed(evt);
+            }
+        });
+
+        jbRealizarPropuestas.setText("Realzar propuestas");
+        jbRealizarPropuestas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbRealizarPropuestasActionPerformed(evt);
             }
         });
 
@@ -221,47 +218,52 @@ public class AnalisisEF extends javax.swing.JFrame {
                 .addGap(58, 58, 58)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btRegresar))
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lbIncrementoVentas)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lbIncrementoVentas)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtIncVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lbPorcentaje)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(txtPorcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(ComboBoxAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(73, 73, 73)
-                                        .addComponent(btConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtIncVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lb_OpcionAnalisis)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(RdbAnalisisVertical)
-                                            .addComponent(RdbAnalisisHorizontal))
-                                        .addGap(41, 41, 41)
-                                        .addComponent(jbVerAnalisis)))
-                                .addGap(170, 170, 170)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lbPorcentaje)
                                 .addGap(18, 18, 18)
+                                .addComponent(txtPorcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(ComboBoxAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lb_OpcionAnalisis)
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jbCerrarEstado)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jbAceptar))
-                                    .addComponent(jbAgregarEstado)))
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 902, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 230, Short.MAX_VALUE)))
+                                    .addComponent(jrbRazonesyBM)
+                                    .addComponent(jrbPorcientosDiferencias))
+                                .addGap(41, 41, 41)
+                                .addComponent(jbVerAnalisis)))
+                        .addGap(170, 170, 170)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jbAgregarEstado)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jbCerrarEstado)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btRegresar)
+                        .addGap(31, 31, 31)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(98, 98, 98)
+                .addComponent(jbSFPorcientosDiferencias)
+                .addGap(53, 53, 53)
+                .addComponent(jbERPorcientosDiefernecias)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbRealizarPropuestas)
+                .addGap(23, 23, 23))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -273,9 +275,9 @@ public class AnalisisEF extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(1, 1, 1)
-                                .addComponent(RdbAnalisisHorizontal)
+                                .addComponent(jrbPorcientosDiferencias)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(RdbAnalisisVertical))
+                                .addComponent(jrbRazonesyBM))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addComponent(jbVerAnalisis))))
@@ -288,7 +290,7 @@ public class AnalisisEF extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jbCerrarEstado)
-                                    .addComponent(jbAceptar))))))
+                                    .addComponent(btConfirmar))))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -301,27 +303,29 @@ public class AnalisisEF extends javax.swing.JFrame {
                             .addComponent(lbPorcentaje)
                             .addComponent(txtPorcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(ComboBoxAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btConfirmar))))
-                .addGap(70, 70, 70)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
-                .addComponent(btRegresar))
+                        .addComponent(ComboBoxAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbSFPorcientosDiferencias)
+                    .addComponent(jbERPorcientosDiefernecias)
+                    .addComponent(jbRealizarPropuestas))
+                .addGap(18, 18, 18)
+                .addComponent(btRegresar)
+                .addGap(16, 16, 16))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbVerAnalisisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVerAnalisisActionPerformed
-        if (this.RdbAnalisisVertical.isSelected())
+        if (this.jrbRazonesyBM.isSelected())
         {
            //Aqui se deben de poner en modo visibles los elemntos de razones financieras
             cargarDatosTablaRazones();
         }
         else
         {
-            if (this.RdbAnalisisHorizontal.isSelected())
+            if (this.jrbPorcientosDiferencias.isSelected())
             {
                cargarDatosTablaCuentas();
             }
@@ -382,57 +386,6 @@ public class AnalisisEF extends javax.swing.JFrame {
         cerrarEstadoFinanciero((DefaultListModel)this.jListArchivosAbiertos.getModel(), i);
     }//GEN-LAST:event_jbCerrarEstadoActionPerformed
 
-    private void jbAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAceptarActionPerformed
-        String nombre1,nombre2;
-        //String sf,er;
-        
-        if(estados[0]==null || estados[1]==null)
-            //JOPTION
-            System.out.println("Algun archivo no esta abierto");
-        else{
-            nombre1 = estados[0].getName();
-            nombre2 = estados[1].getName();
-        //System.out.println("->>>>>"+estados[0].getName());
-        //System.out.println("->>>>"+estados[1].getName());
-        
-            if  ((nombre1.contains("Resultados") ||  nombre1.contains("Situacion")) 
-                    && 
-                (nombre1.contains("Resultados") ||  nombre1.contains("Situacion"))
-                 
-                    &&
-                !( (nombre1.contains("Resultados") && nombre2.contains("Resultados")) || (nombre1.contains("Situacion")&&nombre2.contains("Situacion"))  )
-                )
-                
-            {
-                System.out.println("***********Estados correctos");
-                
-                 sfY = new SituacionFinanciera(estados[0]);
-                 erY = new Resultados(estados[1]);
-                
-              
-               
-                /*
-                System.out.println("------------------------------------------");
-                System.out.println("ER");
-                er.leerEstadoFinanciero();
-                er.mostrarCuentas();
-                
-                */
-                
-            }
-            else   
-                System.out.println("Alguno de los archivos que selecconaste no tiene el formato para ser leido");  //JOPTION
-        
-            System.out.println("EF "+ estados[0]);
-            System.out.println(estados[1]);
-            
-             
-            
-          
-        //Aqui se llamara al nuevo formulario para visualizar el analisis con los nombres pasados para 
-        }
-    }//GEN-LAST:event_jbAceptarActionPerformed
-
     private void jbAgregarEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarEstadoActionPerformed
          JFileChooser abrredo = new JFileChooser();
                 FileNameExtensionFilter extension = new FileNameExtensionFilter("Estados finacieros(*.txt)", "txt");
@@ -459,9 +412,73 @@ public class AnalisisEF extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btRegresarActionPerformed
 
-    private void RdbAnalisisHorizontalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RdbAnalisisHorizontalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RdbAnalisisHorizontalActionPerformed
+    private void jrbPorcientosDiferenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbPorcientosDiferenciasActionPerformed
+        
+    }//GEN-LAST:event_jrbPorcientosDiferenciasActionPerformed
+
+    private void jbSFPorcientosDiferenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSFPorcientosDiferenciasActionPerformed
+        AnalisisSF formularoTablaAnalisisSF = new AnalisisSF(sfX, sfY);
+        formularoTablaAnalisisSF.setVisible(true);
+    }//GEN-LAST:event_jbSFPorcientosDiferenciasActionPerformed
+
+    private void jbRealizarPropuestasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRealizarPropuestasActionPerformed
+        Propuestas formularioPropuestas = new Propuestas();
+        formularioPropuestas.setVisible(true);
+    }//GEN-LAST:event_jbRealizarPropuestasActionPerformed
+
+    private void jbERPorcientosDieferneciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbERPorcientosDieferneciasActionPerformed
+        AnalisisER formularioTablaAnalisisER = new AnalisisER(erX, erY);
+        formularioTablaAnalisisER.setVisible(true);
+    }//GEN-LAST:event_jbERPorcientosDieferneciasActionPerformed
+
+    private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
+         String nombre1,nombre2;
+        //String sf,er;
+        
+        if(estados[0]==null || estados[1]==null)
+            //JOPTION
+             Ventana.ShowWarningMessage("Algun archivo no esta abierto");
+        else{
+            nombre1 = estados[0].getName();
+            nombre2 = estados[1].getName();
+        //System.out.println("->>>>>"+estados[0].getName());
+        //System.out.println("->>>>"+estados[1].getName());
+        
+            if  ((nombre1.contains("Resultados") ||  nombre1.contains("Situacion")) 
+                    && 
+                (nombre1.contains("Resultados") ||  nombre1.contains("Situacion"))
+                 
+                    &&
+                !( (nombre1.contains("Resultados") && nombre2.contains("Resultados")) || (nombre1.contains("Situacion")&&nombre2.contains("Situacion"))  )
+                )
+                
+            {
+                Ventana.ShowInformationMessage("¡Estados correctos!");
+                //System.out.println("***********Estados correctos");
+                
+                this.sfY = new SituacionFinanciera(estados[0]);
+                this.erY = new Resultados(estados[1]);
+                
+                //sfY.leerEstadoFinanciero();
+                //rY.leerEstadoFinanciero();
+                
+                /*
+                System.out.println("------------------------------------------");
+                System.out.println("ER");
+                er.leerEstadoFinanciero();
+                er.mostrarCuentas();
+                
+                */
+                
+            }
+            else   
+               Ventana.ShowErrorMessage("Alguno de los archivos que selecconaste no tiene el formato para ser leido");  //JOPTION
+        
+            
+            System.out.println("Aqui "+estados[0]);
+            System.out.println(estados[1]);
+        }
+    }//GEN-LAST:event_btConfirmarActionPerformed
 
     
     public  void agregarEdoFinancieroLista(DefaultListModel lista, File estado)
@@ -547,19 +564,12 @@ public class AnalisisEF extends javax.swing.JFrame {
     {
         //Cuando se llama este metodo los 4 objetos de analisi deben estar creados
         System.out.println("Vamos a llenar la tabla  de cuentas ");
-        DefaultTableModel modelo = (DefaultTableModel) this.jtCuentas.getModel();
+        
         String fila[] = new String[5];
         
-        try {
-        int filas=this.jtCuentas.getRowCount();
-            for (int i = 0;filas>i; i++) {
-                modelo.removeRow(0);
-            }
+        
            
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al limpiar la tabla.");
-        }
+        
         
         ArrayList<String> cuentasordenadasSF = sfX.obtenerNombresdeCuentasOrdenadas();
         ArrayList<String> cuentasordenadasER = erX.obtenerNombresdeCuentasOrdenadas();
@@ -592,8 +602,7 @@ public class AnalisisEF extends javax.swing.JFrame {
             //fila[4] = analisisdiferenciasSF.get(cuentasordenadasSF.get(i));
             fila[4] = "vacio";
             
-            modelo.addRow(fila);
-            this.jtCuentas.setModel(modelo);
+            
         }
         
     }
@@ -605,20 +614,20 @@ public class AnalisisEF extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboBoxAnalisis;
     private javax.swing.JTable JTableBenchMarking;
-    private javax.swing.JRadioButton RdbAnalisisHorizontal;
-    private javax.swing.JRadioButton RdbAnalisisVertical;
     private javax.swing.ButtonGroup TipoAnálisis;
     private javax.swing.JButton btConfirmar;
     private javax.swing.JButton btRegresar;
     private javax.swing.JList<String> jListArchivosAbiertos;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JButton jbAceptar;
     private javax.swing.JButton jbAgregarEstado;
     private javax.swing.JButton jbCerrarEstado;
+    private javax.swing.JButton jbERPorcientosDiefernecias;
+    private javax.swing.JButton jbRealizarPropuestas;
+    private javax.swing.JButton jbSFPorcientosDiferencias;
     private javax.swing.JButton jbVerAnalisis;
-    private javax.swing.JTable jtCuentas;
+    private javax.swing.JRadioButton jrbPorcientosDiferencias;
+    private javax.swing.JRadioButton jrbRazonesyBM;
     private javax.swing.JLabel lbIncrementoVentas;
     private javax.swing.JLabel lbPorcentaje;
     private javax.swing.JLabel lb_OpcionAnalisis;

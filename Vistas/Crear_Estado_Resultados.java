@@ -304,7 +304,7 @@ public class Crear_Estado_Resultados extends javax.swing.JFrame {
         Inicio forminicio = new Inicio();
         forminicio.setVisible(true);
         this.setVisible(false);
-        this.er.crearEstadoFinanciero();
+        this.er.crearEstadoFinanciero(false); //Envio falso porque no quiero caluclar depresiaciones ni amoritizaciones
     }//GEN-LAST:event_jbCrearEstadoActionPerformed
 
     public void asignarCuentasCB()

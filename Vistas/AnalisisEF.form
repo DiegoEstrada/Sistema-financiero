@@ -31,63 +31,67 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="btRegresar" min="-2" max="-2" attributes="0"/>
-                  </Group>
                   <Group type="102" attributes="0">
+                      <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lbIncrementoVentas" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="lbIncrementoVentas" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtIncVentas" min="-2" pref="160" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="lbPorcentaje" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="txtPorcentaje" min="-2" pref="160" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="ComboBoxAnalisis" min="-2" pref="160" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
-                                      <Component id="btConfirmar" min="-2" pref="130" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
+                              <Component id="txtIncVentas" min="-2" pref="160" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="lb_OpcionAnalisis" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="RdbAnalisisVertical" min="-2" max="-2" attributes="0"/>
-                                          <Component id="RdbAnalisisHorizontal" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                                      <Component id="jbVerAnalisis" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace min="-2" pref="170" max="-2" attributes="0"/>
-                              <Component id="jScrollPane2" min="-2" pref="229" max="-2" attributes="0"/>
+                              <Component id="lbPorcentaje" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="jbCerrarEstado" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jbAceptar" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="jbAgregarEstado" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="txtPorcentaje" min="-2" pref="160" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jScrollPane3" alignment="0" min="-2" pref="902" max="-2" attributes="0"/>
+                          <Component id="ComboBoxAnalisis" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="230" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="lb_OpcionAnalisis" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jrbRazonesyBM" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jrbPorcientosDiferencias" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                              <Component id="jbVerAnalisis" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="170" max="-2" attributes="0"/>
+                      <Component id="jScrollPane2" min="-2" pref="229" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="jbAgregarEstado" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jbCerrarEstado" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="btConfirmar" min="-2" pref="130" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="btRegresar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
+              <Component id="jbSFPorcientosDiferencias" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+              <Component id="jbERPorcientosDiefernecias" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jbRealizarPropuestas" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -101,9 +105,9 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                              <Component id="RdbAnalisisHorizontal" min="-2" max="-2" attributes="0"/>
+                              <Component id="jrbPorcientosDiferencias" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="RdbAnalisisVertical" min="-2" max="-2" attributes="0"/>
+                              <Component id="jrbRazonesyBM" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -120,7 +124,7 @@
                               <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jbCerrarEstado" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jbAceptar" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btConfirmar" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -140,16 +144,18 @@
                           <Component id="txtPorcentaje" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="ComboBoxAnalisis" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btConfirmar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="ComboBoxAnalisis" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
-              <Component id="jScrollPane3" min="-2" pref="270" max="-2" attributes="0"/>
-              <EmptySpace pref="68" max="32767" attributes="0"/>
+              <EmptySpace pref="69" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jbSFPorcientosDiferencias" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jbERPorcientosDiefernecias" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jbRealizarPropuestas" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btRegresar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -163,23 +169,23 @@
         <Property name="text" type="java.lang.String" value="Seleccione una opci&#xf3;n:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="RdbAnalisisHorizontal">
+    <Component class="javax.swing.JRadioButton" name="jrbPorcientosDiferencias">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="TipoAn&#xe1;lisis"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="An&#xe1;lisis Horizontal"/>
+        <Property name="text" type="java.lang.String" value="Analisis Porcientos y Diferencias"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RdbAnalisisHorizontalActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jrbPorcientosDiferenciasActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="RdbAnalisisVertical">
+    <Component class="javax.swing.JRadioButton" name="jrbRazonesyBM">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="TipoAn&#xe1;lisis"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="An&#xe1;lisis Vertical"/>
+        <Property name="text" type="java.lang.String" value="Razones financieras y Benchmarking"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="ComboBoxAnalisis">
@@ -238,8 +244,11 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Constantia" size="12" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Confirmar"/>
+        <Property name="text" type="java.lang.String" value="Continuar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btConfirmarActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -330,74 +339,36 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbCerrarEstadoActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jbAceptar">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Aceptar"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbAceptarActionPerformed"/>
-      </Events>
-    </Component>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane3">
-      <AuxValues>
-        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-      </AuxValues>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-      <SubComponents>
-        <Component class="javax.swing.JTable" name="jtCuentas">
-          <Properties>
-            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="5" rowCount="4">
-                <Column editable="true" title="Cuenta" type="java.lang.String"/>
-                <Column editable="true" title="Perido Actual" type="java.lang.String"/>
-                <Column editable="true" title="Periodo Anterior" type="java.lang.String"/>
-                <Column editable="true" title="Porcentaje" type="java.lang.String"/>
-                <Column editable="true" title="Diferencia" type="java.lang.String"/>
-              </Table>
-            </Property>
-            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
-              <TableColumnModel selectionModel="0">
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-              </TableColumnModel>
-            </Property>
-            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
-            </Property>
-          </Properties>
-        </Component>
-      </SubComponents>
-    </Container>
     <Component class="javax.swing.JButton" name="jbAgregarEstado">
       <Properties>
         <Property name="text" type="java.lang.String" value="Agregar Estado"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbAgregarEstadoActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jbSFPorcientosDiferencias">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ver Diferencias y Porcientos de Situacio&#xf3;n financiera"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbSFPorcientosDiferenciasActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jbERPorcientosDiefernecias">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ver Difernecias y Porcientos Estado de Resultados"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbERPorcientosDieferneciasActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jbRealizarPropuestas">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Realzar propuestas"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbRealizarPropuestasActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

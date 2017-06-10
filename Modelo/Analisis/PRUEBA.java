@@ -65,7 +65,7 @@ public class PRUEBA {
         
         
         if(edo1.verificarEstado())
-            edo1.crearEstadoFinanciero();
+            edo1.crearEstadoFinanciero(false); // se envia falso porque no quiero calclar dpreciacion ni amortizacion
         else
             System.out.println("Los saldos de las cuentas no estan balanceados por favor revisa las cantidades rehistradas en las cuentas");
         
