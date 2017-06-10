@@ -1,0 +1,32 @@
+					Estado de situación financira de Estado de Situacion Financiera Modelo SAB de 2016.txt					
+Activo
+Circulante
+Alamacen 99823
+Caja 1291
+Bancos 13014
+Documentos por cobrar 5225
+Suma activo circulante  119353.0
+Fijo
+Equipo de reparto 22535
+Edificios 55155
+Equipo de computo 2106
+Mobiliario y equipo 10705
+Suma activo fijo  90501.0
+Diferido
+Gastos de instalacion  4729
+Suma activo diferio  4729.0
+Suma de activo   214583.0
+Pasivo
+Circulante
+Acreedores 12845
+Documentos por pagar 31046
+Proveedores 43146
+Suma pasivo circulante  87037.0
+Fijo
+Documentos por pagar a largo plazo 8974
+Suma pasivo fijo  8974.0
+Capital
+Capital social 69884
+Utilidad neta 48688.0
+Suma capital  118572.0
+Suma pasivo y capital  214583.0

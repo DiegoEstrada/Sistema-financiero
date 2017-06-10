@@ -1,0 +1,9 @@
+					Estado de Resultados Modelo SAB de 2016.txt					
+Ventas 77219
+Menos
+Costo de ventas 11383
+Utilidad bruta  65836.0
+Menos
+Gastos de administracion 17148
+Gastos de operacion 48688.0
+Utilidad neta 	48688.0
