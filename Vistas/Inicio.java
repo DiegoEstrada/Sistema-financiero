@@ -2,9 +2,12 @@ package Vistas;
 
 import Modelo.Resultados;
 import Modelo.SituacionFinanciera;
+import java.awt.Image;
 import java.io.File;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -66,6 +69,10 @@ public class Inicio extends javax.swing.JFrame {
         jListArchivosAbiertos = new javax.swing.JList<>();
         jbAnalisisFinanciero = new javax.swing.JButton();
         jbCerrarEstado = new javax.swing.JButton();
+        jpESCOM = new javax.swing.JPanel();
+        LogoESCOM = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema Financiero");
@@ -223,57 +230,75 @@ public class Inicio extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jpESCOM.setLayout(null);
+
+        LogoESCOM.setIcon(new javax.swing.ImageIcon("C:\\Users\\super\\Documents\\logoescom-iloveimg-resized.png")); // NOI18N
+        jpESCOM.add(LogoESCOM);
+        LogoESCOM.setBounds(0, 0, 120, 90);
+
+        jPanel2.setLayout(null);
+
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\super\\Documents\\LOGOTIPO_IPN-iloveimg-resized.png")); // NOI18N
+        jPanel2.add(jLabel3);
+        jLabel3.setBounds(0, 0, 100, 100);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(205, 205, 205)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lb_Integrante_2)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(lb_Integrante_1))
-                            .addComponent(lb_Sis_Financiero)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(237, 237, 237)
-                        .addComponent(lb_integrantes)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(lbLogoIPN)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(Encabezado_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, Short.MAX_VALUE)
                         .addComponent(jLabel2)
-                        .addGap(13, 13, 13))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(166, 166, 166)
-                                .addComponent(Encabezado_2))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jpEdosfinancieros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(56, 56, 56)
+                                        .addComponent(btnCrear_Estado_Financiero)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jpRealizarAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(47, 47, 47)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
+                                        .addGap(30, 30, 30)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addComponent(btnCrearEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(lb_Opcion, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE))
+                                            .addComponent(lb_Opcion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(58, 58, 58)
                                         .addComponent(btnCargarEstado))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jpEdosfinancieros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(56, 56, 56)
-                                                .addComponent(btnCrear_Estado_Financiero)))
+                                        .addGap(129, 129, 129)
+                                        .addComponent(Encabezado_2)))
+                                .addGap(0, 77, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(Encabezado_1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jpRealizarAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addContainerGap())))
+                                        .addComponent(jpESCOM, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(30, 30, 30))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(68, 68, 68)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addGap(27, 27, 27)
+                                                        .addComponent(lb_integrantes))
+                                                    .addComponent(lb_Integrante_1, javax.swing.GroupLayout.Alignment.TRAILING))
+                                                .addComponent(lb_Integrante_2))
+                                            .addComponent(lb_Sis_Financiero))
+                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -282,21 +307,28 @@ public class Inicio extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbLogoIPN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(7, 7, 7)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(Encabezado_1))
-                        .addGap(18, 18, 18)
-                        .addComponent(Encabezado_2)
-                        .addGap(40, 40, 40)
-                        .addComponent(lb_Sis_Financiero, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)))
-                .addGap(31, 31, 31)
-                .addComponent(lb_integrantes, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Encabezado_1)
+                                .addGap(18, 18, 18)
+                                .addComponent(Encabezado_2)
+                                .addGap(38, 38, 38)
+                                .addComponent(lb_Sis_Financiero, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jpESCOM, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addGap(29, 29, 29)
+                .addComponent(lb_integrantes, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lb_Integrante_1, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+                .addComponent(lb_Integrante_1, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lb_Integrante_2, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(lb_Opcion, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addComponent(lb_Integrante_2, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
+                .addComponent(lb_Opcion, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCrearEstado)
@@ -307,7 +339,8 @@ public class Inicio extends javax.swing.JFrame {
                         .addComponent(jpEdosfinancieros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnCrear_Estado_Financiero, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jpRealizarAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jpRealizarAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         pack();
@@ -560,6 +593,7 @@ public class Inicio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Encabezado_1;
     private javax.swing.JLabel Encabezado_2;
+    private javax.swing.JLabel LogoESCOM;
     private javax.swing.JRadioButton RdbFlujoEfectivo;
     private javax.swing.JRadioButton Rdb_Estado_Resultados;
     private javax.swing.JRadioButton Rdb_Situacion_Financiera;
@@ -568,11 +602,14 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton btnCrearEstado;
     private javax.swing.JButton btnCrear_Estado_Financiero;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JList<String> jListArchivosAbiertos;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbAnalisisFinanciero;
     private javax.swing.JButton jbCerrarEstado;
     private javax.swing.JLabel jlEdosCargados;
+    private javax.swing.JPanel jpESCOM;
     private javax.swing.JPanel jpEdosfinancieros;
     private javax.swing.JPanel jpRealizarAnalisis;
     private javax.swing.JLabel lbLogoIPN;

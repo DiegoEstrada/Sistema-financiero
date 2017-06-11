@@ -108,13 +108,13 @@ public class BenchMarking {
         nom="Estabilidad economica";
         a=Float.parseFloat(razonesEmpresa.get("Estabilidad economica"));
         b=Float.parseFloat(indicadores.get(2));
-        dif=a-b;
+        dif=a<b? b-a:a-b;
         bm.put(nom, String.valueOf(dif));
         
         nom="Inmovilizacion de capital";
         a=Float.parseFloat(razonesEmpresa.get("Inmovilizacion de capital"));
         b=Float.parseFloat(indicadores.get(3));
-        dif=a-b;
+        dif=a<b? b-a:a-b;
         bm.put(nom, String.valueOf(dif));
         
         nom="Rentabilidad en ventas";

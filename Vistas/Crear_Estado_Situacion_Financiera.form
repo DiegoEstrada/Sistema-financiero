@@ -34,91 +34,69 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="lbExtension" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="651" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
-                      <Component id="btAgregarCuenta" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="229" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="lbSaldoCuenta" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbNombreCuenta" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txtSaldoCuenta" min="-2" pref="150" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="RdbActivo" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbNombreSF" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                              <Component id="ComboBoxNombreCuenta" min="-2" pref="150" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="RdbPasivo" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="RdbCapital" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="224" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="lbCuentas" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="161" max="-2" attributes="0"/>
-                              <Component id="jbEliminarCuenta" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jlbCuentasAgregadas" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" attributes="0">
-                                      <Component id="jScrollPane1" min="-2" pref="294" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="btFinalizarSF" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jbCrearEstado" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="277" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                  </Group>
-              </Group>
-          </Group>
-          <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btRegresar" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="295" max="-2" attributes="0"/>
-                      <Component id="lbTitulo" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="213" max="-2" attributes="0"/>
+              <Component id="RdbActivo" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="RdbPasivo" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="128" max="-2" attributes="0"/>
+              <Component id="RdbCapital" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="232" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               <Component id="jcbTipoCuenta" min="-2" pref="115" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="364" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="215" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="btFinalizarSF" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="lbSaldoCuenta" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbNombreCuenta" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="ComboBoxNombreCuenta" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                                  <Component id="txtSaldoCuenta" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                                  <Component id="btAgregarCuenta" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="jlbCuentasAgregadas" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="jbEliminarCuenta" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jScrollPane1" min="-2" pref="294" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="btRegresar" alignment="1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="229" max="-2" attributes="0"/>
+                      <Component id="lbTitulo" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="lbCuentas" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="416" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="jbCrearEstado" min="-2" pref="163" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="281" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
@@ -127,62 +105,42 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
               <Component id="lbTitulo" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-              <Component id="lbExtension" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lbNombreSF" min="-2" max="-2" attributes="0"/>
-                  <Component id="jbCrearEstado" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jbCrearEstado" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="lbCuentas" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="RdbPasivo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="RdbActivo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="RdbPasivo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="RdbCapital" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jcbTipoCuenta" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lbNombreCuenta" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="ComboBoxNombreCuenta" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jlbCuentasAgregadas" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jbEliminarCuenta" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lbNombreCuenta" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="ComboBoxNombreCuenta" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lbSaldoCuenta" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtSaldoCuenta" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                      <Component id="jcbTipoCuenta" min="-2" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btAgregarCuenta" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btFinalizarSF" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btRegresar" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="jlbCuentasAgregadas" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane1" min="-2" pref="262" max="-2" attributes="0"/>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="jbEliminarCuenta" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                  </Group>
+                  <Component id="jScrollPane1" min="-2" pref="262" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="btFinalizarSF" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="btRegresar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -194,22 +152,6 @@
           <Font name="Rockwell" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Crear nuevo Estado de Situacion Financiera"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lbExtension">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Rockwell" size="14" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Nombre del archivo "/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lbNombreSF">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Rockwell" size="14" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Ingresa el nombre:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lbCuentas">

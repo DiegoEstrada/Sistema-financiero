@@ -76,42 +76,34 @@ public class AnalisisEF extends javax.swing.JFrame {
 
         TipoAnálisis = new javax.swing.ButtonGroup();
         lb_OpcionAnalisis = new javax.swing.JLabel();
-        jrbPorcientosDiferencias = new javax.swing.JRadioButton();
-        jrbRazonesyBM = new javax.swing.JRadioButton();
         ComboBoxAnalisis = new javax.swing.JComboBox<>();
         lbIncrementoVentas = new javax.swing.JLabel();
         lbPorcentaje = new javax.swing.JLabel();
         txtIncVentas = new javax.swing.JTextField();
         txtPorcentaje = new javax.swing.JTextField();
         btRegresar = new javax.swing.JButton();
-        btConfirmar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        JTableBenchMarking = new javax.swing.JTable();
+        jbRealizarPropuestas = new javax.swing.JButton();
+        Panel_Opciones = new javax.swing.JPanel();
+        jrbPorcientosDiferencias = new javax.swing.JRadioButton();
         jbVerAnalisis = new javax.swing.JButton();
+        jrbRazonesyBM = new javax.swing.JRadioButton();
+        PanelEstadosFinancieros = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jListArchivosAbiertos = new javax.swing.JList<>();
-        jbCerrarEstado = new javax.swing.JButton();
         jbAgregarEstado = new javax.swing.JButton();
+        jbCerrarEstado = new javax.swing.JButton();
+        btConfirmar = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        JTableBenchMarking = new javax.swing.JTable();
         jbSFPorcientosDiferencias = new javax.swing.JButton();
         jbERPorcientosDiefernecias = new javax.swing.JButton();
-        jbRealizarPropuestas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Análisis Financiero");
 
         lb_OpcionAnalisis.setFont(new java.awt.Font("Rockwell", 0, 18)); // NOI18N
         lb_OpcionAnalisis.setText("Seleccione una opción:");
-
-        TipoAnálisis.add(jrbPorcientosDiferencias);
-        jrbPorcientosDiferencias.setText("Analisis Porcientos y Diferencias");
-        jrbPorcientosDiferencias.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jrbPorcientosDiferenciasActionPerformed(evt);
-            }
-        });
-
-        TipoAnálisis.add(jrbRazonesyBM);
-        jrbRazonesyBM.setText("Razones financieras y Benchmarking");
 
         ComboBoxAnalisis.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Porcientos integrados", "Razones Financieras", "BenchMarking", "Diferencias", "Punto de equilibrio", "Punto de equilibrio con Utilidad" }));
         ComboBoxAnalisis.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -130,6 +122,79 @@ public class AnalisisEF extends javax.swing.JFrame {
             }
         });
 
+        jbRealizarPropuestas.setText("Realizar propuestas");
+        jbRealizarPropuestas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbRealizarPropuestasActionPerformed(evt);
+            }
+        });
+
+        TipoAnálisis.add(jrbPorcientosDiferencias);
+        jrbPorcientosDiferencias.setText("Analisis Porcientos y Diferencias");
+        jrbPorcientosDiferencias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbPorcientosDiferenciasActionPerformed(evt);
+            }
+        });
+
+        jbVerAnalisis.setText("Ver Analisis");
+        jbVerAnalisis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbVerAnalisisActionPerformed(evt);
+            }
+        });
+
+        TipoAnálisis.add(jrbRazonesyBM);
+        jrbRazonesyBM.setText("Razones financieras y Benchmarking");
+
+        javax.swing.GroupLayout Panel_OpcionesLayout = new javax.swing.GroupLayout(Panel_Opciones);
+        Panel_Opciones.setLayout(Panel_OpcionesLayout);
+        Panel_OpcionesLayout.setHorizontalGroup(
+            Panel_OpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_OpcionesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(Panel_OpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jrbRazonesyBM)
+                    .addComponent(jrbPorcientosDiferencias))
+                .addGap(41, 41, 41)
+                .addComponent(jbVerAnalisis)
+                .addContainerGap(105, Short.MAX_VALUE))
+        );
+        Panel_OpcionesLayout.setVerticalGroup(
+            Panel_OpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_OpcionesLayout.createSequentialGroup()
+                .addGroup(Panel_OpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Panel_OpcionesLayout.createSequentialGroup()
+                        .addContainerGap(17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbVerAnalisis))
+                    .addGroup(Panel_OpcionesLayout.createSequentialGroup()
+                        .addComponent(jrbPorcientosDiferencias)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jrbRazonesyBM)))
+                .addGap(0, 57, Short.MAX_VALUE))
+        );
+
+        jListArchivosAbiertos.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(jListArchivosAbiertos);
+
+        jbAgregarEstado.setText("Agregar Estado");
+        jbAgregarEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAgregarEstadoActionPerformed(evt);
+            }
+        });
+
+        jbCerrarEstado.setText("Cerrar Estado");
+        jbCerrarEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCerrarEstadoActionPerformed(evt);
+            }
+        });
+
         btConfirmar.setFont(new java.awt.Font("Constantia", 0, 12)); // NOI18N
         btConfirmar.setText("Continuar");
         btConfirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -137,6 +202,38 @@ public class AnalisisEF extends javax.swing.JFrame {
                 btConfirmarActionPerformed(evt);
             }
         });
+
+        javax.swing.GroupLayout PanelEstadosFinancierosLayout = new javax.swing.GroupLayout(PanelEstadosFinancieros);
+        PanelEstadosFinancieros.setLayout(PanelEstadosFinancierosLayout);
+        PanelEstadosFinancierosLayout.setHorizontalGroup(
+            PanelEstadosFinancierosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelEstadosFinancierosLayout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(PanelEstadosFinancierosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelEstadosFinancierosLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(PanelEstadosFinancierosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jbAgregarEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbCerrarEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelEstadosFinancierosLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
+                        .addComponent(btConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
+        );
+        PanelEstadosFinancierosLayout.setVerticalGroup(
+            PanelEstadosFinancierosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelEstadosFinancierosLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(PanelEstadosFinancierosLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbAgregarEstado)
+                .addGap(7, 7, 7)
+                .addComponent(btConfirmar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbCerrarEstado))
+        );
 
         JTableBenchMarking.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -161,34 +258,6 @@ public class AnalisisEF extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(JTableBenchMarking);
 
-        jbVerAnalisis.setText("Ver Analisis");
-        jbVerAnalisis.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbVerAnalisisActionPerformed(evt);
-            }
-        });
-
-        jListArchivosAbiertos.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane2.setViewportView(jListArchivosAbiertos);
-
-        jbCerrarEstado.setText("Cerrar Estado");
-        jbCerrarEstado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbCerrarEstadoActionPerformed(evt);
-            }
-        });
-
-        jbAgregarEstado.setText("Agregar Estado");
-        jbAgregarEstado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbAgregarEstadoActionPerformed(evt);
-            }
-        });
-
         jbSFPorcientosDiferencias.setText("Ver Diferencias y Porcientos de Situacioón financiera");
         jbSFPorcientosDiferencias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -203,115 +272,92 @@ public class AnalisisEF extends javax.swing.JFrame {
             }
         });
 
-        jbRealizarPropuestas.setText("Realzar propuestas");
-        jbRealizarPropuestas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbRealizarPropuestasActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jbSFPorcientosDiferencias)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbERPorcientosDiefernecias)))
+                .addGap(0, 10, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbSFPorcientosDiferencias)
+                    .addComponent(jbERPorcientosDiefernecias))
+                .addGap(0, 24, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(58, 58, 58)
+                .addContainerGap(55, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbIncrementoVentas)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtIncVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbPorcentaje)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtPorcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(ComboBoxAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lb_OpcionAnalisis)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jrbRazonesyBM)
-                                    .addComponent(jrbPorcientosDiferencias))
-                                .addGap(41, 41, 41)
-                                .addComponent(jbVerAnalisis)))
-                        .addGap(170, 170, 170)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Panel_Opciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jbAgregarEstado)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jbCerrarEstado)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(PanelEstadosFinancieros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(btRegresar)
-                        .addGap(31, 31, 31)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(98, 98, 98)
-                .addComponent(jbSFPorcientosDiferencias)
-                .addGap(53, 53, 53)
-                .addComponent(jbERPorcientosDiefernecias)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbRealizarPropuestas)
-                .addGap(23, 23, 23))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(lbPorcentaje)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(txtPorcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(lbIncrementoVentas)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(txtIncVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(ComboBoxAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(259, 259, 259)
+                                    .addComponent(jbRealizarPropuestas)))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(lb_OpcionAnalisis)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(jrbPorcientosDiferencias)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jrbRazonesyBM))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jbVerAnalisis))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jbAgregarEstado)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jbCerrarEstado)
-                                    .addComponent(btConfirmar))))))
+                .addGap(15, 15, 15)
+                .addComponent(lb_OpcionAnalisis)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(PanelEstadosFinancieros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Panel_Opciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbIncrementoVentas)
-                            .addComponent(txtIncVentas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtIncVentas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbIncrementoVentas))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbPorcentaje)
-                            .addComponent(txtPorcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtPorcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbPorcentaje))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ComboBoxAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(jbRealizarPropuestas)
                         .addGap(18, 18, 18)
-                        .addComponent(ComboBoxAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbSFPorcientosDiferencias)
-                    .addComponent(jbERPorcientosDiefernecias)
-                    .addComponent(jbRealizarPropuestas))
-                .addGap(18, 18, 18)
-                .addComponent(btRegresar)
-                .addGap(16, 16, 16))
+                        .addComponent(btRegresar))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -614,10 +660,13 @@ public class AnalisisEF extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboBoxAnalisis;
     private javax.swing.JTable JTableBenchMarking;
+    private javax.swing.JPanel PanelEstadosFinancieros;
+    private javax.swing.JPanel Panel_Opciones;
     private javax.swing.ButtonGroup TipoAnálisis;
     private javax.swing.JButton btConfirmar;
     private javax.swing.JButton btRegresar;
     private javax.swing.JList<String> jListArchivosAbiertos;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton jbAgregarEstado;
