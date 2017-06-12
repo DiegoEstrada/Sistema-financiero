@@ -325,6 +325,27 @@ public class SituacionFinanciera implements EstadoFinanciero {
             System.out.println("Excepcon IO leer archivo Situacion Financiera "+ex.getMessage());
         }
     }
+    
+    public void modificarValorCuenta(String cuentaModificar, String nuevoSaldo)
+    {
+        Iterator it = cuentas.keySet().iterator();
+        String cuentaActual;
+        ArrayList<String> datos = new ArrayList();
+    
+        while(it.hasNext())
+        {
+            cuentaActual = it.next().toString();
+            if(cuentaActual.contains(cuentaModificar))
+            {
+                datos = cuentas.get(cuentaActual);
+                datos.set(2, nuevoSaldo);
+                cuentas.replace(cuentaActual, datos);
+                break;
+            }
+            
+        }
+    }
+    
 
     @Override
     public void agregarCuenta(String cuenta, String tipo, String nombre, String saldo) {

@@ -196,6 +196,25 @@ public class Resultados implements EstadoFinanciero {
         
         
     }
+    public void modificarValorCuenta(String cuentaModificar, String nuevoSaldo)
+    {
+         Iterator it = cuentas.keySet().iterator();
+        String cuentaActual;
+        ArrayList<String> datos = new ArrayList();
+    
+        while(it.hasNext())
+        {
+            cuentaActual = it.next().toString();
+            if(cuentaActual.contains(cuentaModificar))
+            {
+                datos = cuentas.get(cuentaActual);
+                datos.set(0, nuevoSaldo);
+                cuentas.replace(cuentaActual, datos);
+                break;
+            }
+            
+        }
+    }
 
     @Override
     public void agregarCuenta(String nombre, String saldo) {

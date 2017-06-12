@@ -9,6 +9,7 @@ import Modelo.Resultados;
 import Modelo.SituacionFinanciera;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import javax.swing.DefaultListModel;
@@ -23,8 +24,10 @@ public class Propuestas extends javax.swing.JFrame {
 
     private SituacionFinanciera sf;
     private Resultados er;
-    private Map<String,ArrayList<String>> cuentasModificadasSF;
-    private Map<String,ArrayList<String>> cuentasModificadasER;
+    private SituacionFinanciera sfProforma;
+    private Resultados erProforma;
+    //private Map<String,ArrayList<String>> cuentasModificadasSF;
+    //private Map<String,ArrayList<String>> cuentasModificadasER;
     private DefaultListModel lista;
     private float ad;
     
@@ -36,12 +39,36 @@ public class Propuestas extends javax.swing.JFrame {
         this.sf.leerEstadoFinanciero();
         this.er.leerEstadoFinanciero();
         
-        cuentasModificadasER = er.getCuentas();
-        cuentasModificadasSF = sf.getCuentas();
+        //cuentasModificadasER = er.getCuentas();
+        //cuentasModificadasSF = sf.getCuentas();
         
         
         
-        System.out.println(cuentasModificadasSF.containsKey("Depresiacion "));
+        String rutaoriginal = this.sf.getF().getParent();
+        String nombres [] = nombresNuevosArchivos();
+        String nombreProformaSF = nombres[0];
+        String nombresProformaER = nombres[1];
+        File proformaSF = new File(rutaoriginal+"\\"+nombreProformaSF);
+        File proformaER = new File(rutaoriginal+"\\"+nombresProformaER);
+        
+        //System.out.println(proformaSF);
+        //System.out.println(proformaER);
+        
+        this.sfProforma = new SituacionFinanciera(proformaSF);
+        this.erProforma = new Resultados(proformaER);
+        
+        Map<String,ArrayList<String>> cuentasFiltradasSF  = filtrarCuentasSuma();
+        Map<String,ArrayList<String>> cuentasOriginalesER  = filtrarCuentasUtilidad();
+        
+        sfProforma.setCuentas(cuentasFiltradasSF);
+        erProforma.setCuentas(cuentasOriginalesER);
+        
+        
+        
+        sfProforma.mostrarCuentas();
+        
+                
+        //System.out.println(cuentasModificadasSF.containsKey("Depresiacion "));
         float d = sf.obtenerSaldodeLlave("Depreciacion acumulada");
         float a = sf.obtenerSaldodeLlave("Amortizacion acumulada");
         ad = a+d;
@@ -62,16 +89,20 @@ public class Propuestas extends javax.swing.JFrame {
         ArrayList<String> cuentasOrdenadasSF = sf.obtenerNombresdeCuentasOrdenadas();
         ArrayList<String> cuentasOrdenadasER = er.obtenerNombresdeCuentasOrdenadas();
         
+        ArrayList<String> cuentasOrdenadasSFFiltradas = filtrarCuentasCBSF(cuentasOrdenadasSF);
+        ArrayList<String> cuentasOrdenadasERFiltradas = filtrarCuentasCBER(cuentasOrdenadasER);
+        
         //Agregando las cuentas de SF
-        for (int i = 0; i < cuentasOrdenadasSF.size(); i++) {
-            this.ComboBoxCuentasMod.addItem(cuentasOrdenadasSF.get(i));   
+        for (int i = 0; i < cuentasOrdenadasSFFiltradas.size(); i++) {
+            this.ComboBoxCuentasMod.addItem(cuentasOrdenadasSFFiltradas.get(i));   
         }
         
         //Agregando las cuentas de ER
         
             this.ComboBoxCuentasMod.addItem("---------");
-        for (int j = 0; j < cuentasOrdenadasER.size(); j++) {
-            this.ComboBoxCuentasMod.addItem(cuentasOrdenadasER.get(j));
+            
+        for (int j = 0; j < cuentasOrdenadasERFiltradas.size(); j++) {
+            this.ComboBoxCuentasMod.addItem(cuentasOrdenadasERFiltradas.get(j));
         }
     }
     
@@ -83,6 +114,32 @@ public class Propuestas extends javax.swing.JFrame {
         return cuenta;
     }
     
+    public ArrayList<String> filtrarCuentasCBSF(ArrayList<String> cuentas)
+    {
+        String palabraAFiltrar = "Suma";
+        ArrayList<String> cuentasordendas = new ArrayList();
+        
+        for (int i = 0; i < cuentas.size(); i++) {
+            if (!cuentas.get(i).contains(palabraAFiltrar)){
+                cuentasordendas.add(cuentas.get(i));
+            }
+        }
+        
+        return cuentasordendas;
+    }
+    public ArrayList<String> filtrarCuentasCBER(ArrayList<String> cuentas)
+    {
+        String palabraAFiltrar = "Utilidad";
+        ArrayList<String> cuentasordendas = new ArrayList();
+        
+        for (int i = 0; i < cuentas.size(); i++) {
+            if (!cuentas.get(i).contains(palabraAFiltrar)){
+                cuentasordendas.add(cuentas.get(i));
+            }
+        }
+        
+        return cuentasordendas;
+    }
     public String[] nombresNuevosArchivos()
     {
         String nombreOriginalArchivoSFExtension = sf.getF().getName();
@@ -107,7 +164,56 @@ public class Propuestas extends javax.swing.JFrame {
         lista.addElement(cambio);
         jlCambios.setModel(lista);
     }
-
+    
+    public Map<String,ArrayList<String>> filtrarCuentasSuma()
+    {
+        String palabraAquitarSF = "Suma";
+        
+        String nombreactual;
+        ArrayList<String> datos = new ArrayList();
+        Map<String,ArrayList<String>> cuentasOriginalesSF = sf.getCuentas();
+        Map<String,ArrayList<String>> cuentasFiltradas = new HashMap();
+        
+        Iterator itSF = cuentasOriginalesSF.keySet().iterator();
+        
+        while(itSF.hasNext())
+        {
+            nombreactual = itSF.next().toString();
+            if(!nombreactual.contains(palabraAquitarSF))
+            {
+                datos = cuentasOriginalesSF.get(nombreactual);
+                cuentasFiltradas.put(nombreactual, datos);
+            }
+        }
+        
+        
+       
+        
+        return cuentasFiltradas;
+    }
+    
+    public Map<String, ArrayList<String>> filtrarCuentasUtilidad()
+    {
+        String nombreactual;
+        String palabraAquitarER = "Utilidad";
+        Map<String,ArrayList<String>> cuentasOriginalesER = er.getCuentas();
+        Map<String,ArrayList<String>> cuentasFiltradas = new HashMap();
+        ArrayList<String> datos = new ArrayList();
+        
+        Iterator itER = cuentasOriginalesER.keySet().iterator();
+        
+        while(itER.hasNext())
+        {
+            nombreactual = itER.next().toString();
+            if(!nombreactual.contains(palabraAquitarER))
+            {
+                datos = cuentasOriginalesER.get(nombreactual);
+                cuentasFiltradas.put(nombreactual, datos);
+            }
+        }
+        
+        return cuentasFiltradas;
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -234,6 +340,11 @@ public class Propuestas extends javax.swing.JFrame {
         String cuentaACambiar = obtenerNombreSeleccionadaCB();
         String cuentaActual;
         ArrayList<String> datos;
+      
+        Map<String, ArrayList<String>> cuentasModificadasER = erProforma.getCuentas();
+        Map<String, ArrayList<String>> cuentasModificadasSF = sfProforma.getCuentas();
+        
+        System.out.println(cuentasModificadasSF.size());
         
         Iterator itER = cuentasModificadasER.keySet().iterator();
         
@@ -243,17 +354,23 @@ public class Propuestas extends javax.swing.JFrame {
             
             if(cuentaActual.contains(cuentaACambiar))
             {
-                datos = cuentasModificadasER.get(cuentaACambiar);
+               datos = cuentasModificadasER.get(cuentaActual);
             
                 if(!this.txtNuevoSaldo.getText().isEmpty())
                 {
-                    datos.set(0, txtNuevoSaldo.getText());
-                    cuentasModificadasER.remove(cuentaActual);
-                    cuentasModificadasER.put(cuentaActual, datos);
-                     agregarElemntoAJLista("Cuenta "+ cuentaActual+ " de Estado de Resultados modifcada con "+datos.get(0));
-                     System.out.println("Cuenta en ER "+ cuentaActual+ " modificada con "+ datos.get(0));
+                    //nuevosDatos.add(this.txtNuevoSaldo.getText());
+                    //datos.set(0, txtNuevoSaldo.getText());
+                    //erProforma.eliminarCuenta(cuentaActual);
+                    erProforma.agregarCuenta(cuentaActual, this.txtNuevoSaldo.getText());
+                    agregarElemntoAJLista("Cuenta "+ cuentaActual+ " de Estado de Resultados modifcada con "+this.txtNuevoSaldo.getText());
+                    System.out.println("Cuenta en ER "+ cuentaActual+ " modificada con "+ this.txtNuevoSaldo.getText());
+                    break;
                 }
-                break;
+                //else
+                //{
+                  //  erProforma.eliminarCuenta(cuentaActual);
+                   // erProforma.agregarCuenta(cuentaActual, datos.get(0));
+                //}
             }
             
         }
@@ -272,13 +389,20 @@ public class Propuestas extends javax.swing.JFrame {
             
                 if(!this.txtNuevoSaldo.getText().isEmpty())
                 {
-                    datos.set(2, txtNuevoSaldo.getText());
-                    cuentasModificadasSF.remove(cuentaActual);
-                    cuentasModificadasSF.put(cuentaActual, datos);
-                    agregarElemntoAJLista("Cuenta "+ cuentaActual+ " de Estado de Situación  modifcada con "+datos.get(2));
-                    System.out.println("Cuenta en SF "+ cuentaActual+ " modificada con "+ datos.get(2));
+                    sf.modificarValorCuenta(cuentaACambiar, this.txtNuevoSaldo.getText());
+                    //sfProforma.eliminarCuenta(cuentaActual);
+                    //sfProforma.agregarCuenta(cuentaActual, datos.get(0), datos.get(1), this.txtNuevoSaldo.getText());
+                    agregarElemntoAJLista("Cuenta "+ cuentaActual+ " de Estado de Situación  modifcada con "+this.txtNuevoSaldo.getText());
+                    System.out.println("Cuenta en SF "+ cuentaActual+ " modificada con "+ this.txtNuevoSaldo.getText());
+                    break;
                 }
-                break;
+                
+                //else
+                //{
+                  ///  sfProforma.eliminarCuenta(cuentaActual);
+                    //sfProforma.agregarCuenta(cuentaActual, datos.get(0), datos.get(1), datos.get(2));
+               // }
+               
             }
             
         }
@@ -288,46 +412,14 @@ public class Propuestas extends javax.swing.JFrame {
 
     private void jbRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRegistrarActionPerformed
         
-        
-        String nombres[] = nombresNuevosArchivos();
-        
-        String nombreSF = nombres[0]; 
-        String nombreER = nombres[1];
-        
-        
-        JFileChooser abrredo = new JFileChooser();
-        FileNameExtensionFilter extension = new FileNameExtensionFilter("Estados finacieros(*.txt)", "txt");
-        abrredo.setDialogTitle("Selecciona un estado financiero");
-        abrredo.setFileFilter(extension);
-        abrredo.showDialog(this, "Seleccionar");
-        
-        //La posicion 0 del array es situacion financiera y la 1 resultados
-        
-        try {
-            File archivo = abrredo.getCurrentDirectory();
-            System.out.println("Resultado "+archivo);
-            
-            File archivoSF = new File(archivo.toString()+"\\"+nombreSF);
-            File archivoER = new File(archivo.toString()+"\\"+nombreER);
-            
-            SituacionFinanciera sfProforma = new SituacionFinanciera(archivoSF);
-            Resultados erProforma = new Resultados(archivoER);
-            
-            sfProforma.setCuentas(cuentasModificadasSF);
-            erProforma.setCuentas(cuentasModificadasER);
-            if (sfProforma.verificarEstado()){
-            sfProforma.crearEstadoFinanciero(false); //Si quiero que calcule amortizaciones y depresiaciones
-            }
-            else
-                System.out.println("Las modificaciones no estan balanceadas "); //JOPTION
-            
-            erProforma.crearEstadoFinanciero(false); //Si quiero que calcule amortizaciones y depresiaciones
-            
-            
-            
-        }catch(Exception e){
-            System.out.println("Excepcion ->"+e.getMessage());
+        if(this.sfProforma.verificarEstado())
+        {
+           System.out.println("Cuentas bien");
+            this.sfProforma.crearEstadoFinanciero(true);
         }
+        
+        this.erProforma.crearEstadoFinanciero(true);
+        
     }//GEN-LAST:event_jbRegistrarActionPerformed
 
     
