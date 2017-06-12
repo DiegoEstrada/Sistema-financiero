@@ -24,6 +24,20 @@ public class Resultados implements EstadoFinanciero {
     private String nomEdoFin;
     private File f;
     private Map<String,ArrayList<String>> cuentas = new HashMap();
+
+    public Map<String, ArrayList<String>> getCuentas() {
+        return cuentas;
+    }
+
+    public void setCuentas(Map<String, ArrayList<String>> cuentas) {
+        this.cuentas = cuentas;
+    }
+
+    public File getF() {
+        return f;
+    }
+    
+    
     
     public Resultados(File archivo)
     {
@@ -42,7 +56,7 @@ public class Resultados implements EstadoFinanciero {
             ArrayList<String> cuenta = new ArrayList<>();
             ArrayList<String> utilidades = new ArrayList<>();
             String datos[], aux;
-            float a,b,gastos,suma=0;
+            float a,b,gastos=0,suma=0;
             int i,t;
             
            
@@ -79,7 +93,7 @@ public class Resultados implements EstadoFinanciero {
             wr.println("Menos");
             
             cuenta = obtenerCuentasde("Gastos", "Gastos");
-            gastos = obtenerSaldode("Gastos", "Gastos");
+            
             t = cuenta.size();
             //System.out.println("Tamño "+t);
             
@@ -89,20 +103,22 @@ public class Resultados implements EstadoFinanciero {
                 datos = aux.split(",");
                 //System.out.println(datos[0] +"\t "+ datos[1]);
                 wr.println(datos[0]+ " "+datos[1]);
-                //gastosop = gastosop + Float.valueOf(datos[1]);
+                gastos = gastos + Float.valueOf(datos[1]);
             }
             
             suma = a-b-gastos;
             
             if (calcularamortizaconydepresiacion){
                 suma = a-b-gastos-this.getAmortizacionDepresiacion();
+                System.out.println("La amoritzacoin y dpresiacion es ****" +this.getAmortizacionDepresiacion());
             }
             
-            wr.println("Gastos de operacion "+String.valueOf(suma));
+            /*
+            wr.println("Gastos de operacion "+String.valueOf(gastosacumulados));
             aux = String.valueOf(suma);
             utilidades.clear();
             utilidades.add(aux);
-            
+            */
             cuentas.put("Gastos de operacion ", utilidades);
             
             a=0; b =0; 

@@ -312,8 +312,8 @@ public class Crear_Estado_Resultados extends javax.swing.JFrame {
         this.ComboBoxNombreCuenta.removeAllItems();
         this.ComboBoxNombreCuenta.addItem("Ventas");
         this.ComboBoxNombreCuenta.addItem("Costo de ventas");
-        this.ComboBoxNombreCuenta.addItem("Gastos de venta");
-        this.ComboBoxNombreCuenta.addItem("Gastos de administracion");
+        this.ComboBoxNombreCuenta.addItem("Gastos de operacion");
+        //this.ComboBoxNombreCuenta.addItem("Gastos de administracion");
         this.ComboBoxNombreCuenta.addItem("Otros gastos financieros");
         this.ComboBoxNombreCuenta.addItem("Otros productos financieros");
     }

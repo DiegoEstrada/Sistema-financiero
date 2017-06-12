@@ -78,11 +78,16 @@ public class PRUEBA {
         
         Map<String,ArrayList<String>> cuentas = edo1.importarNombreySaldo();
          
+        System.out.println("Vamos a modificar una cuenta");
         
+        
+        
+        /*
         Diferencias df = new Diferencias(cuentas, cuentas);
         ArrayList<String> aux = df.obtenerNombresCuentas();
         Map<String,String> analisidiferencias = df.analisisDiferencias(aux);
         df.imprimirAnalisisDierencias(analisidiferencias);
+        */
     }
     public static void main(String[] args) {
         PRUEBA P = new PRUEBA();

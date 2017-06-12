@@ -37,6 +37,20 @@ public class SituacionFinanciera implements EstadoFinanciero {
     private static String tipoaux;
     private File f;
     private Map<String,ArrayList<String>> cuentas = new HashMap();
+
+    
+    public Map<String, ArrayList<String>> getCuentas() {
+        return cuentas;
+    }
+
+    public void setCuentas(Map<String, ArrayList<String>> cuentas) {
+        this.cuentas = cuentas;
+    }
+
+    public File getF() {
+        return f;
+    }
+   
     
     public SituacionFinanciera(File archivo){
         //Inicializando el objeto cuentas como HashMap
@@ -637,9 +651,10 @@ if (!linea.equals("Capital") && !linea.contains("Activo") && !linea.contains("Pa
         
         while(it.hasNext()){
             nombre = it.next().toString();
-            cuenta = (ArrayList<String>) cuentas.get(nombre);
+           
             if(nombre.contains(nombrecuenta))
             {
+                cuenta = (ArrayList<String>) cuentas.get(nombre);
                 saldo += Float.valueOf(cuenta.get(2));
             }
             

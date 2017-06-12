@@ -34,7 +34,7 @@ public class AnalisisEF extends javax.swing.JFrame {
         private SituacionFinanciera sfY;
         private Resultados erX;
         private Resultados erY;
-        
+       
     
         
     public AnalisisEF(File nsf, File ner) {
@@ -46,6 +46,9 @@ public class AnalisisEF extends javax.swing.JFrame {
        
         sfX.leerEstadoFinanciero();
         erX.leerEstadoFinanciero();
+        //System.out.println("Llegana analisis Situacion ->"+sfX.getF());
+        //System.out.println("Llegana analisis Resultados ->"+erX.getF());
+        
         
         ArrayList<String> nombresOrdenados = erX.obtenerNombresdeCuentasOrdenadas();
         System.out.println(nombresOrdenados.size());
@@ -347,9 +350,9 @@ public class AnalisisEF extends javax.swing.JFrame {
                             .addComponent(txtIncVentas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbIncrementoVentas))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtPorcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbPorcentaje))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbPorcentaje)
+                            .addComponent(txtPorcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(ComboBoxAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(26, 26, 26)
@@ -468,7 +471,7 @@ public class AnalisisEF extends javax.swing.JFrame {
     }//GEN-LAST:event_jbSFPorcientosDiferenciasActionPerformed
 
     private void jbRealizarPropuestasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRealizarPropuestasActionPerformed
-        Propuestas formularioPropuestas = new Propuestas();
+        Propuestas formularioPropuestas = new Propuestas(sfX,erX);
         formularioPropuestas.setVisible(true);
     }//GEN-LAST:event_jbRealizarPropuestasActionPerformed
 

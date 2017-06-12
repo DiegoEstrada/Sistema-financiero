@@ -373,12 +373,10 @@ public class Inicio extends javax.swing.JFrame {
         }catch(Exception e){
             System.out.println("Excepcion ->"+e.getMessage());
         }
+              
         
-        //System.out.println("SF"+estados[0]);
-        //System.out.println("ER"+estados[1]);
-       
-        
-        
+        //System.out.println("Archivos generados Resultados->>>>"+ estados[1] );
+        //System.out.println("Archivos generados Situacion->>>>"+ estados[0] );
     }//GEN-LAST:event_btnCargarEstadoActionPerformed
 
     private void RdbFlujoEfectivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RdbFlujoEfectivoActionPerformed

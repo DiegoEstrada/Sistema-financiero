@@ -47,8 +47,6 @@ public class AnalisisSF extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtCuentas = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         jtCuentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
