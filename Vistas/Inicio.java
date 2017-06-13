@@ -47,6 +47,7 @@ public class Inicio extends javax.swing.JFrame {
     private void initComponents() {
 
         Rdbs_Estados_Financieros = new javax.swing.ButtonGroup();
+        Fondo = new javax.swing.JPanel();
         Encabezado_1 = new javax.swing.JLabel();
         Encabezado_2 = new javax.swing.JLabel();
         lb_Sis_Financiero = new javax.swing.JLabel();
@@ -58,7 +59,6 @@ public class Inicio extends javax.swing.JFrame {
         btnCargarEstado = new javax.swing.JButton();
         btnCrear_Estado_Financiero = new javax.swing.JButton();
         lbLogoIPN = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jpEdosfinancieros = new javax.swing.JPanel();
         Rdb_Situacion_Financiera = new javax.swing.JRadioButton();
         Rdb_Estado_Resultados = new javax.swing.JRadioButton();
@@ -71,20 +71,34 @@ public class Inicio extends javax.swing.JFrame {
         jbCerrarEstado = new javax.swing.JButton();
         jpESCOM = new javax.swing.JPanel();
         LogoESCOM = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        jpIPN = new javax.swing.JPanel();
+        LogoIPN = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema Financiero");
+        setBackground(new java.awt.Color(153, 204, 255));
         setName("FormInicio"); // NOI18N
         setSize(new java.awt.Dimension(500, 500));
 
-        Encabezado_1.setFont(new java.awt.Font("Rockwell", 0, 16)); // NOI18N
+        Fondo.setBackground(new java.awt.Color(153, 204, 255));
+
+        javax.swing.GroupLayout FondoLayout = new javax.swing.GroupLayout(Fondo);
+        Fondo.setLayout(FondoLayout);
+        FondoLayout.setHorizontalGroup(
+            FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 640, Short.MAX_VALUE)
+        );
+        FondoLayout.setVerticalGroup(
+            FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 620, Short.MAX_VALUE)
+        );
+
+        Encabezado_1.setFont(new java.awt.Font("Rockwell", 1, 16)); // NOI18N
         Encabezado_1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Encabezado_1.setText("INSTITUTO POLITÉCNICO NACIONAL");
         Encabezado_1.setToolTipText("");
 
-        Encabezado_2.setFont(new java.awt.Font("Rockwell", 0, 16)); // NOI18N
+        Encabezado_2.setFont(new java.awt.Font("Rockwell", 1, 16)); // NOI18N
         Encabezado_2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Encabezado_2.setText("ESCUELA SUPERIOR DE CÓMPUTO");
         Encabezado_2.setToolTipText("");
@@ -93,22 +107,23 @@ public class Inicio extends javax.swing.JFrame {
         lb_Sis_Financiero.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lb_Sis_Financiero.setText("Sistema Financiero");
 
-        lb_integrantes.setFont(new java.awt.Font("Rockwell", 0, 16)); // NOI18N
+        lb_integrantes.setFont(new java.awt.Font("Rockwell", 1, 16)); // NOI18N
         lb_integrantes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lb_integrantes.setText("Integrantes:");
 
-        lb_Integrante_1.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        lb_Integrante_1.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
         lb_Integrante_1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lb_Integrante_1.setText("Castillo Jiménez Jorge");
 
-        lb_Integrante_2.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        lb_Integrante_2.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
         lb_Integrante_2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lb_Integrante_2.setText("Estrada Granados Diego");
 
         lb_Opcion.setFont(new java.awt.Font("Rockwell", 0, 18)); // NOI18N
         lb_Opcion.setText("Seleccione una opción:");
 
-        btnCrearEstado.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
+        btnCrearEstado.setBackground(new java.awt.Color(255, 255, 255));
+        btnCrearEstado.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 14)); // NOI18N
         btnCrearEstado.setText("Crear Estado Financiero");
         btnCrearEstado.setName("bt Crear Estado Financiero"); // NOI18N
         btnCrearEstado.addActionListener(new java.awt.event.ActionListener() {
@@ -117,7 +132,8 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
-        btnCargarEstado.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
+        btnCargarEstado.setBackground(new java.awt.Color(255, 255, 255));
+        btnCargarEstado.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 14)); // NOI18N
         btnCargarEstado.setText("Cargar Estado Financiero");
         btnCargarEstado.setName("bt Cargar Estado"); // NOI18N
         btnCargarEstado.addActionListener(new java.awt.event.ActionListener() {
@@ -126,6 +142,8 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
+        btnCrear_Estado_Financiero.setBackground(new java.awt.Color(255, 255, 255));
+        btnCrear_Estado_Financiero.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         btnCrear_Estado_Financiero.setText("Crear");
         btnCrear_Estado_Financiero.setName("bt Crear"); // NOI18N
         btnCrear_Estado_Financiero.addActionListener(new java.awt.event.ActionListener() {
@@ -134,16 +152,24 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
+        jpEdosfinancieros.setBackground(new java.awt.Color(153, 204, 255));
+
+        Rdb_Situacion_Financiera.setBackground(new java.awt.Color(153, 204, 255));
         Rdbs_Estados_Financieros.add(Rdb_Situacion_Financiera);
+        Rdb_Situacion_Financiera.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
         Rdb_Situacion_Financiera.setText("Situación Financiera");
         Rdb_Situacion_Financiera.setToolTipText("");
         Rdb_Situacion_Financiera.setName("rdb SF"); // NOI18N
 
+        Rdb_Estado_Resultados.setBackground(new java.awt.Color(153, 204, 255));
         Rdbs_Estados_Financieros.add(Rdb_Estado_Resultados);
+        Rdb_Estado_Resultados.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
         Rdb_Estado_Resultados.setText("Estado de Resultados");
         Rdb_Estado_Resultados.setName("rdb ER"); // NOI18N
 
+        RdbFlujoEfectivo.setBackground(new java.awt.Color(153, 204, 255));
         Rdbs_Estados_Financieros.add(RdbFlujoEfectivo);
+        RdbFlujoEfectivo.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
         RdbFlujoEfectivo.setText("Flujo de Efectivo");
         RdbFlujoEfectivo.setName("rdb EF"); // NOI18N
         RdbFlujoEfectivo.addActionListener(new java.awt.event.ActionListener() {
@@ -176,7 +202,11 @@ public class Inicio extends javax.swing.JFrame {
                 .addGap(10, 10, 10))
         );
 
-        jlEdosCargados.setText("Estados Financieros cargados");
+        jpRealizarAnalisis.setBackground(new java.awt.Color(153, 204, 255));
+
+        jlEdosCargados.setBackground(new java.awt.Color(0, 153, 255));
+        jlEdosCargados.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        jlEdosCargados.setText("Estados Financieros cargados:");
 
         jListArchivosAbiertos.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -185,6 +215,8 @@ public class Inicio extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jListArchivosAbiertos);
 
+        jbAnalisisFinanciero.setBackground(new java.awt.Color(255, 255, 255));
+        jbAnalisisFinanciero.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jbAnalisisFinanciero.setText("Análisis financero");
         jbAnalisisFinanciero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -192,6 +224,8 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
+        jbCerrarEstado.setBackground(new java.awt.Color(255, 255, 255));
+        jbCerrarEstado.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jbCerrarEstado.setText("Cerrar estado");
         jbCerrarEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -205,23 +239,22 @@ public class Inicio extends javax.swing.JFrame {
             jpRealizarAnalisisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpRealizarAnalisisLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jpRealizarAnalisisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jpRealizarAnalisisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jpRealizarAnalisisLayout.createSequentialGroup()
-                        .addGroup(jpRealizarAnalisisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlEdosCargados)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(22, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpRealizarAnalisisLayout.createSequentialGroup()
                         .addComponent(jbCerrarEstado)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbAnalisisFinanciero))))
+                        .addGap(80, 80, 80)
+                        .addComponent(jbAnalisisFinanciero))
+                    .addGroup(jpRealizarAnalisisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jlEdosCargados)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpRealizarAnalisisLayout.setVerticalGroup(
             jpRealizarAnalisisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpRealizarAnalisisLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jlEdosCargados)
                 .addGap(18, 18, 18)
+                .addComponent(jlEdosCargados)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(jpRealizarAnalisisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -230,17 +263,20 @@ public class Inicio extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jpESCOM.setBackground(new java.awt.Color(153, 204, 255));
         jpESCOM.setLayout(null);
 
         LogoESCOM.setIcon(new javax.swing.ImageIcon("C:\\Users\\super\\Documents\\logoescom-iloveimg-resized.png")); // NOI18N
         jpESCOM.add(LogoESCOM);
         LogoESCOM.setBounds(0, 0, 120, 90);
 
-        jPanel2.setLayout(null);
+        jpIPN.setBackground(new java.awt.Color(153, 204, 255));
+        jpIPN.setLayout(null);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\super\\Documents\\LOGOTIPO_IPN-iloveimg-resized.png")); // NOI18N
-        jPanel2.add(jLabel3);
-        jLabel3.setBounds(0, 0, 100, 100);
+        LogoIPN.setBackground(new java.awt.Color(153, 255, 153));
+        LogoIPN.setIcon(new javax.swing.ImageIcon("C:\\Users\\super\\Documents\\LOGOTIPO_IPN-iloveimg-resized.png")); // NOI18N
+        jpIPN.add(LogoIPN);
+        LogoIPN.setBounds(0, 0, 100, 100);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -249,56 +285,54 @@ public class Inicio extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(lbLogoIPN)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addGap(3, 3, 3))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jpEdosfinancieros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(56, 56, 56)
+                                .addComponent(btnCrear_Estado_Financiero)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jpRealizarAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnCrearEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lb_Opcion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(58, 58, 58)
+                        .addComponent(btnCargarEstado)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jpIPN, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jpEdosfinancieros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Encabezado_1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(56, 56, 56)
-                                        .addComponent(btnCrear_Estado_Financiero)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jpRealizarAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(30, 30, 30)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(btnCrearEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(lb_Opcion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(58, 58, 58)
-                                        .addComponent(btnCargarEstado))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(129, 129, 129)
+                                        .addGap(23, 23, 23)
                                         .addComponent(Encabezado_2)))
-                                .addGap(0, 77, Short.MAX_VALUE))
+                                .addGap(18, 18, Short.MAX_VALUE)
+                                .addComponent(jpESCOM, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(Encabezado_1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jpESCOM, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(30, 30, 30))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(68, 68, 68)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addGap(27, 27, 27)
-                                                        .addComponent(lb_integrantes))
-                                                    .addComponent(lb_Integrante_1, javax.swing.GroupLayout.Alignment.TRAILING))
-                                                .addComponent(lb_Integrante_2))
-                                            .addComponent(lb_Sis_Financiero))
-                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))))
+                                .addGap(68, 68, 68)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(27, 27, 27)
+                                                .addComponent(lb_integrantes))
+                                            .addComponent(lb_Integrante_1, javax.swing.GroupLayout.Alignment.TRAILING))
+                                        .addComponent(lb_Integrante_2))
+                                    .addComponent(lb_Sis_Financiero))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(Fondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -307,28 +341,27 @@ public class Inicio extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbLogoIPN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
                         .addGap(7, 7, 7)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(Encabezado_1)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(Encabezado_2)
-                                .addGap(38, 38, 38)
-                                .addComponent(lb_Sis_Financiero, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
+                                .addGap(50, 50, 50)
+                                .addComponent(lb_Sis_Financiero, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jpESCOM, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jpIPN, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
-                .addGap(29, 29, 29)
-                .addComponent(lb_integrantes, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lb_Integrante_1, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+                .addComponent(lb_integrantes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lb_Integrante_2, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                .addComponent(lb_Integrante_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lb_Integrante_2, javax.swing.GroupLayout.DEFAULT_SIZE, 19, Short.MAX_VALUE)
                 .addGap(28, 28, 28)
-                .addComponent(lb_Opcion, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                .addComponent(lb_Opcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCrearEstado)
@@ -341,6 +374,11 @@ public class Inicio extends javax.swing.JFrame {
                         .addComponent(btnCrear_Estado_Financiero, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jpRealizarAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(Fondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
@@ -591,7 +629,9 @@ public class Inicio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Encabezado_1;
     private javax.swing.JLabel Encabezado_2;
+    private javax.swing.JPanel Fondo;
     private javax.swing.JLabel LogoESCOM;
+    private javax.swing.JLabel LogoIPN;
     private javax.swing.JRadioButton RdbFlujoEfectivo;
     private javax.swing.JRadioButton Rdb_Estado_Resultados;
     private javax.swing.JRadioButton Rdb_Situacion_Financiera;
@@ -599,16 +639,14 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton btnCargarEstado;
     private javax.swing.JButton btnCrearEstado;
     private javax.swing.JButton btnCrear_Estado_Financiero;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JList<String> jListArchivosAbiertos;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbAnalisisFinanciero;
     private javax.swing.JButton jbCerrarEstado;
     private javax.swing.JLabel jlEdosCargados;
     private javax.swing.JPanel jpESCOM;
     private javax.swing.JPanel jpEdosfinancieros;
+    private javax.swing.JPanel jpIPN;
     private javax.swing.JPanel jpRealizarAnalisis;
     private javax.swing.JLabel lbLogoIPN;
     private javax.swing.JLabel lb_Integrante_1;

@@ -230,6 +230,7 @@ public class Propuestas extends javax.swing.JFrame {
         jbRegistrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Realizar Propuestas");
 
         lbCuentaAMod.setText("Seleccione las cuentas que desea modificar:");
 
@@ -260,7 +261,7 @@ public class Propuestas extends javax.swing.JFrame {
             }
         });
 
-        jbRegistrar.setText("Regsitrar cambios");
+        jbRegistrar.setText("Registrar cambios");
         jbRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbRegistrarActionPerformed(evt);

@@ -78,6 +78,7 @@ public class AnalisisEF extends javax.swing.JFrame {
     private void initComponents() {
 
         TipoAnálisis = new javax.swing.ButtonGroup();
+        Rdbs_Ramo = new javax.swing.ButtonGroup();
         lb_OpcionAnalisis = new javax.swing.JLabel();
         ComboBoxAnalisis = new javax.swing.JComboBox<>();
         lbIncrementoVentas = new javax.swing.JLabel();
@@ -90,6 +91,11 @@ public class AnalisisEF extends javax.swing.JFrame {
         jrbPorcientosDiferencias = new javax.swing.JRadioButton();
         jbVerAnalisis = new javax.swing.JButton();
         jrbRazonesyBM = new javax.swing.JRadioButton();
+        lbRamo = new javax.swing.JLabel();
+        RdbIndustria = new javax.swing.JRadioButton();
+        RdbComercio = new javax.swing.JRadioButton();
+        RdbServicios = new javax.swing.JRadioButton();
+        RdbTecno = new javax.swing.JRadioButton();
         PanelEstadosFinancieros = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jListArchivosAbiertos = new javax.swing.JList<>();
@@ -150,6 +156,25 @@ public class AnalisisEF extends javax.swing.JFrame {
         TipoAnálisis.add(jrbRazonesyBM);
         jrbRazonesyBM.setText("Razones financieras y Benchmarking");
 
+        lbRamo.setText("Ramo:");
+
+        Rdbs_Ramo.add(RdbIndustria);
+        RdbIndustria.setText("Industria");
+        RdbIndustria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RdbIndustriaActionPerformed(evt);
+            }
+        });
+
+        Rdbs_Ramo.add(RdbComercio);
+        RdbComercio.setText("Comercio");
+
+        Rdbs_Ramo.add(RdbServicios);
+        RdbServicios.setText("Servicios");
+
+        Rdbs_Ramo.add(RdbTecno);
+        RdbTecno.setText("Tecnologia");
+
         javax.swing.GroupLayout Panel_OpcionesLayout = new javax.swing.GroupLayout(Panel_Opciones);
         Panel_Opciones.setLayout(Panel_OpcionesLayout);
         Panel_OpcionesLayout.setHorizontalGroup(
@@ -157,11 +182,23 @@ public class AnalisisEF extends javax.swing.JFrame {
             .addGroup(Panel_OpcionesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(Panel_OpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jrbRazonesyBM)
-                    .addComponent(jrbPorcientosDiferencias))
-                .addGap(41, 41, 41)
-                .addComponent(jbVerAnalisis)
-                .addContainerGap(105, Short.MAX_VALUE))
+                    .addGroup(Panel_OpcionesLayout.createSequentialGroup()
+                        .addGroup(Panel_OpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jrbRazonesyBM)
+                            .addComponent(jrbPorcientosDiferencias))
+                        .addGap(41, 41, 41)
+                        .addComponent(jbVerAnalisis))
+                    .addGroup(Panel_OpcionesLayout.createSequentialGroup()
+                        .addComponent(lbRamo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(RdbIndustria)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(RdbComercio)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(RdbServicios)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(RdbTecno)))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         Panel_OpcionesLayout.setVerticalGroup(
             Panel_OpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,7 +211,14 @@ public class AnalisisEF extends javax.swing.JFrame {
                         .addComponent(jrbPorcientosDiferencias)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jrbRazonesyBM)))
-                .addGap(0, 57, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(Panel_OpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbRamo)
+                    .addComponent(RdbIndustria)
+                    .addComponent(RdbComercio)
+                    .addComponent(RdbServicios)
+                    .addComponent(RdbTecno))
+                .addContainerGap())
         );
 
         jListArchivosAbiertos.setModel(new javax.swing.AbstractListModel<String>() {
@@ -304,7 +348,7 @@ public class AnalisisEF extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(55, Short.MAX_VALUE)
+                .addContainerGap(73, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -379,7 +423,7 @@ public class AnalisisEF extends javax.swing.JFrame {
                cargarDatosTablaCuentas();
             }
             else
-                    System.out.println("Selecciona un tipo de analisis");  //joption
+                    Ventana.ShowInformationMessage("Selecciona un tipo de analisis");  //joption
         }
     }//GEN-LAST:event_jbVerAnalisisActionPerformed
 
@@ -389,7 +433,7 @@ public class AnalisisEF extends javax.swing.JFrame {
        
         if(elementoseleccionado<0)
         {
-            System.out.println("Selecciona un archivo a ser cerrado");
+            Ventana.ShowInformationMessage("Selecciona un archivo a ser cerrado");
             
         }
         else
@@ -529,6 +573,10 @@ public class AnalisisEF extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btConfirmarActionPerformed
 
+    private void RdbIndustriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RdbIndustriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RdbIndustriaActionPerformed
+
     
     public  void agregarEdoFinancieroLista(DefaultListModel lista, File estado)
     {
@@ -553,7 +601,7 @@ public class AnalisisEF extends javax.swing.JFrame {
             else
             {
                 //Aqui debe ir in JOPtion para que diga que ya no se pueden agregar mas estados
-                System.out.println("Solo es posible realizar el analisis de 2 estados financieros");
+                Ventana.ShowInformationMessage("Solo es posible realizar el analisis de 2 estados financieros");
             }
         }
     }
@@ -576,12 +624,43 @@ public class AnalisisEF extends javax.swing.JFrame {
         //rfX.imprimirRazonesFinancieras(analisisRF);
         
         /*-----------ATENCION-----------
-            Falata crear un elemento grafioco para senalar el ramo de la empresa
+            Falta crear un elemento grafico para senalar el ramo de la empresa
         */
-        BenchMarking bm = new BenchMarking(rfX, 1);
-        Map<String,String> analisisBM = bm.AnalisisBenchMarking();
         
-        ArrayList<String> indicadoresEsrandar = bm.obtenerIndicadoresdeRamo("Industria");
+        //Objetos del frame para el ramo
+        int rama=0;
+        String ramo="";
+        if(this.RdbIndustria.isSelected())
+        {
+            rama=1;
+            ramo="Industria";
+        }
+        else if(this.RdbComercio.isSelected())
+        {
+            rama=2;
+            ramo="Comercio";
+        }
+        else if(this.RdbServicios.isSelected())
+        {
+            rama=3;
+            ramo="Servicios";
+        }
+        else if(this.RdbTecno.isSelected())
+        {
+            rama=4;
+            ramo="Tecnologia";
+        }
+        else
+        {
+            Ventana.ShowErrorMessage("No se ha seleccionado la rama de la empresa.");
+            rama=0;
+            ramo=null;
+        }
+        //System.out.println("Bench: "+rama);
+        //System.out.println("Rama:"+ramo);
+        BenchMarking bm = new BenchMarking(rfX, rama);
+        Map<String,String> analisisBM = bm.AnalisisBenchMarking();
+        ArrayList<String> indicadoresEstandar = bm.obtenerIndicadoresdeRamo(ramo);
         
         String fila[] = new String[4];
         try {
@@ -592,14 +671,14 @@ public class AnalisisEF extends javax.swing.JFrame {
            
             
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al limpiar la tabla.");
+            Ventana.ShowErrorMessage("Error al limpiar la tabla.");
         }
         
         for (int i = 0; i < indicadores.size(); i++) {
             
             fila[0] = indicadores.get(i);
             fila[1] = analisisRF.get(indicadores.get(i));
-            fila[2] = indicadoresEsrandar.get(i);
+            fila[2] = indicadoresEstandar.get(i);
             fila[3] = analisisBM.get(indicadores.get(i));
             
             
@@ -665,6 +744,11 @@ public class AnalisisEF extends javax.swing.JFrame {
     private javax.swing.JTable JTableBenchMarking;
     private javax.swing.JPanel PanelEstadosFinancieros;
     private javax.swing.JPanel Panel_Opciones;
+    private javax.swing.JRadioButton RdbComercio;
+    private javax.swing.JRadioButton RdbIndustria;
+    private javax.swing.JRadioButton RdbServicios;
+    private javax.swing.JRadioButton RdbTecno;
+    private javax.swing.ButtonGroup Rdbs_Ramo;
     private javax.swing.ButtonGroup TipoAnálisis;
     private javax.swing.JButton btConfirmar;
     private javax.swing.JButton btRegresar;
@@ -682,6 +766,7 @@ public class AnalisisEF extends javax.swing.JFrame {
     private javax.swing.JRadioButton jrbRazonesyBM;
     private javax.swing.JLabel lbIncrementoVentas;
     private javax.swing.JLabel lbPorcentaje;
+    private javax.swing.JLabel lbRamo;
     private javax.swing.JLabel lb_OpcionAnalisis;
     private javax.swing.JTextField txtIncVentas;
     private javax.swing.JTextField txtPorcentaje;

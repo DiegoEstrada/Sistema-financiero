@@ -4,6 +4,8 @@
   <NonVisualComponents>
     <Component class="javax.swing.ButtonGroup" name="TipoAn&#xe1;lisis">
     </Component>
+    <Component class="javax.swing.ButtonGroup" name="Rdbs_Ramo">
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
@@ -29,7 +31,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace pref="55" max="32767" attributes="0"/>
+              <EmptySpace pref="73" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -181,15 +183,30 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jrbRazonesyBM" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jrbPorcientosDiferencias" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jrbRazonesyBM" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jrbPorcientosDiferencias" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                          <Component id="jbVerAnalisis" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="lbRamo" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="RdbIndustria" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="RdbComercio" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="RdbServicios" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="RdbTecno" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                  <Component id="jbVerAnalisis" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="105" max="32767" attributes="0"/>
+                  <EmptySpace pref="17" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -207,7 +224,15 @@
                           <Component id="jrbRazonesyBM" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="0" pref="57" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lbRamo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="RdbIndustria" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="RdbComercio" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="RdbServicios" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="RdbTecno" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -238,6 +263,46 @@
               <ComponentRef name="TipoAn&#xe1;lisis"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Razones financieras y Benchmarking"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbRamo">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Ramo:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="RdbIndustria">
+          <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="Rdbs_Ramo"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Industria"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RdbIndustriaActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="RdbComercio">
+          <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="Rdbs_Ramo"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Comercio"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="RdbServicios">
+          <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="Rdbs_Ramo"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Servicios"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="RdbTecno">
+          <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="Rdbs_Ramo"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Tecnologia"/>
           </Properties>
         </Component>
       </SubComponents>
