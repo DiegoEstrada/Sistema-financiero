@@ -57,6 +57,17 @@ public class AnalisisEF extends javax.swing.JFrame {
         System.out.println(nombresOrdenados1.size());
         
         initComponents();
+        
+        //Modificando la visibilidad de los paneles
+        this.PanelRamo.setVisible(true);
+        this.Panel_Opciones.setVisible(false);
+        this.PanelEstadosFinancieros.setVisible(false);
+        this.PanelTablaBench.setVisible(false);
+        this.btPU.setVisible(false);
+        
+        
+        
+        
         DefaultListModel lista = new DefaultListModel();
         lista.addElement("Ningun elemento seleccionado");
         lista.addElement("Ningun elemento seleccionado");
@@ -85,11 +96,6 @@ public class AnalisisEF extends javax.swing.JFrame {
         jrbPorcientosDiferencias = new javax.swing.JRadioButton();
         jbVerAnalisis = new javax.swing.JButton();
         jrbRazonesyBM = new javax.swing.JRadioButton();
-        lbRamo = new javax.swing.JLabel();
-        RdbIndustria = new javax.swing.JRadioButton();
-        RdbComercio = new javax.swing.JRadioButton();
-        RdbServicios = new javax.swing.JRadioButton();
-        RdbTecno = new javax.swing.JRadioButton();
         PanelEstadosFinancieros = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jListArchivosAbiertos = new javax.swing.JList<>();
@@ -101,13 +107,16 @@ public class AnalisisEF extends javax.swing.JFrame {
         JTableBenchMarking = new javax.swing.JTable();
         jbSFPorcientosDiferencias = new javax.swing.JButton();
         jbERPorcientosDiefernecias = new javax.swing.JButton();
-        lbPorcentaje = new javax.swing.JLabel();
-        txtIncVentas = new javax.swing.JTextField();
-        txtPorcentaje = new javax.swing.JTextField();
         jbRealizarPropuestas = new javax.swing.JButton();
-        ComboBoxAnalisis = new javax.swing.JComboBox<>();
-        lbIncrementoVentas = new javax.swing.JLabel();
         btRegresar = new javax.swing.JButton();
+        btPU = new javax.swing.JButton();
+        PanelRamo = new javax.swing.JPanel();
+        lbRamo = new javax.swing.JLabel();
+        RdbIndustria = new javax.swing.JRadioButton();
+        RdbComercio = new javax.swing.JRadioButton();
+        RdbServicios = new javax.swing.JRadioButton();
+        RdbTecno = new javax.swing.JRadioButton();
+        btRamaSelect = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Análisis Financiero");
@@ -141,34 +150,6 @@ public class AnalisisEF extends javax.swing.JFrame {
         TipoAnálisis.add(jrbRazonesyBM);
         jrbRazonesyBM.setText("Razones financieras y Benchmarking");
 
-        lbRamo.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
-        lbRamo.setText("Ramo:");
-
-        RdbIndustria.setBackground(new java.awt.Color(153, 204, 255));
-        Rdbs_Ramo.add(RdbIndustria);
-        RdbIndustria.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
-        RdbIndustria.setText("Industria");
-        RdbIndustria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RdbIndustriaActionPerformed(evt);
-            }
-        });
-
-        RdbComercio.setBackground(new java.awt.Color(153, 204, 255));
-        Rdbs_Ramo.add(RdbComercio);
-        RdbComercio.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
-        RdbComercio.setText("Comercio");
-
-        RdbServicios.setBackground(new java.awt.Color(153, 204, 255));
-        Rdbs_Ramo.add(RdbServicios);
-        RdbServicios.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
-        RdbServicios.setText("Servicios");
-
-        RdbTecno.setBackground(new java.awt.Color(153, 204, 255));
-        Rdbs_Ramo.add(RdbTecno);
-        RdbTecno.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
-        RdbTecno.setText("Tecnologia");
-
         javax.swing.GroupLayout Panel_OpcionesLayout = new javax.swing.GroupLayout(Panel_Opciones);
         Panel_Opciones.setLayout(Panel_OpcionesLayout);
         Panel_OpcionesLayout.setHorizontalGroup(
@@ -176,23 +157,11 @@ public class AnalisisEF extends javax.swing.JFrame {
             .addGroup(Panel_OpcionesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(Panel_OpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Panel_OpcionesLayout.createSequentialGroup()
-                        .addGroup(Panel_OpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jrbRazonesyBM)
-                            .addComponent(jrbPorcientosDiferencias))
-                        .addGap(41, 41, 41)
-                        .addComponent(jbVerAnalisis))
-                    .addGroup(Panel_OpcionesLayout.createSequentialGroup()
-                        .addComponent(lbRamo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(RdbIndustria)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(RdbComercio)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(RdbServicios)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(RdbTecno)))
-                .addContainerGap(9, Short.MAX_VALUE))
+                    .addComponent(jrbRazonesyBM)
+                    .addComponent(jrbPorcientosDiferencias))
+                .addGap(41, 41, 41)
+                .addComponent(jbVerAnalisis)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         Panel_OpcionesLayout.setVerticalGroup(
             Panel_OpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,14 +174,7 @@ public class AnalisisEF extends javax.swing.JFrame {
                         .addComponent(jrbPorcientosDiferencias)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jrbRazonesyBM)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
-                .addGroup(Panel_OpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbRamo)
-                    .addComponent(RdbIndustria)
-                    .addComponent(RdbComercio)
-                    .addComponent(RdbServicios)
-                    .addComponent(RdbTecno))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         PanelEstadosFinancieros.setBackground(new java.awt.Color(153, 204, 255));
@@ -257,17 +219,16 @@ public class AnalisisEF extends javax.swing.JFrame {
             PanelEstadosFinancierosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelEstadosFinancierosLayout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(PanelEstadosFinancierosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelEstadosFinancierosLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(PanelEstadosFinancierosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jbAgregarEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jbCerrarEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelEstadosFinancierosLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
+                        .addComponent(jbAgregarEstado)
+                        .addContainerGap(162, Short.MAX_VALUE))
+                    .addGroup(PanelEstadosFinancierosLayout.createSequentialGroup()
+                        .addComponent(jbCerrarEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addGap(18, 18, 18))))
         );
         PanelEstadosFinancierosLayout.setVerticalGroup(
             PanelEstadosFinancierosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -277,10 +238,14 @@ public class AnalisisEF extends javax.swing.JFrame {
             .addGroup(PanelEstadosFinancierosLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jbAgregarEstado)
-                .addGap(7, 7, 7)
-                .addComponent(btConfirmar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbCerrarEstado))
+                .addGroup(PanelEstadosFinancierosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelEstadosFinancierosLayout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(btConfirmar))
+                    .addGroup(PanelEstadosFinancierosLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jbCerrarEstado)))
+                .addGap(18, 18, 18))
         );
 
         PanelTablaBench.setBackground(new java.awt.Color(153, 204, 255));
@@ -326,37 +291,6 @@ public class AnalisisEF extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout PanelTablaBenchLayout = new javax.swing.GroupLayout(PanelTablaBench);
-        PanelTablaBench.setLayout(PanelTablaBenchLayout);
-        PanelTablaBenchLayout.setHorizontalGroup(
-            PanelTablaBenchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelTablaBenchLayout.createSequentialGroup()
-                .addGroup(PanelTablaBenchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(PanelTablaBenchLayout.createSequentialGroup()
-                        .addComponent(jbSFPorcientosDiferencias)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbERPorcientosDiefernecias)))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        PanelTablaBenchLayout.setVerticalGroup(
-            PanelTablaBenchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelTablaBenchLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(PanelTablaBenchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbSFPorcientosDiferencias)
-                    .addComponent(jbERPorcientosDiefernecias))
-                .addGap(0, 24, Short.MAX_VALUE))
-        );
-
-        lbPorcentaje.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
-        lbPorcentaje.setText("Porcentaje esperado:");
-
-        txtIncVentas.setFont(new java.awt.Font("Consolas", 0, 11)); // NOI18N
-
-        txtPorcentaje.setFont(new java.awt.Font("Consolas", 0, 11)); // NOI18N
-
         jbRealizarPropuestas.setBackground(new java.awt.Color(255, 255, 255));
         jbRealizarPropuestas.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jbRealizarPropuestas.setText("Realizar propuestas");
@@ -365,13 +299,6 @@ public class AnalisisEF extends javax.swing.JFrame {
                 jbRealizarPropuestasActionPerformed(evt);
             }
         });
-
-        ComboBoxAnalisis.setFont(new java.awt.Font("Times New Roman", 2, 11)); // NOI18N
-        ComboBoxAnalisis.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Porcientos integrados", "Razones Financieras", "BenchMarking", "Diferencias", "Punto de equilibrio", "Punto de equilibrio con Utilidad" }));
-        ComboBoxAnalisis.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
-        lbIncrementoVentas.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
-        lbIncrementoVentas.setText("Incremento de Ventas:");
 
         btRegresar.setBackground(new java.awt.Color(255, 255, 255));
         btRegresar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
@@ -382,75 +309,158 @@ public class AnalisisEF extends javax.swing.JFrame {
             }
         });
 
+        btPU.setBackground(new java.awt.Color(255, 255, 255));
+        btPU.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btPU.setText("Punto de Equilibrio");
+        btPU.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPUActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout PanelTablaBenchLayout = new javax.swing.GroupLayout(PanelTablaBench);
+        PanelTablaBench.setLayout(PanelTablaBenchLayout);
+        PanelTablaBenchLayout.setHorizontalGroup(
+            PanelTablaBenchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelTablaBenchLayout.createSequentialGroup()
+                .addGroup(PanelTablaBenchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelTablaBenchLayout.createSequentialGroup()
+                        .addComponent(jbSFPorcientosDiferencias)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbERPorcientosDiefernecias)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
+                        .addComponent(btRegresar))
+                    .addGroup(PanelTablaBenchLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(PanelTablaBenchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jbRealizarPropuestas)
+                            .addComponent(btPU))))
+                .addContainerGap())
+        );
+        PanelTablaBenchLayout.setVerticalGroup(
+            PanelTablaBenchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelTablaBenchLayout.createSequentialGroup()
+                .addGroup(PanelTablaBenchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(PanelTablaBenchLayout.createSequentialGroup()
+                        .addComponent(jbRealizarPropuestas)
+                        .addGap(30, 30, 30)
+                        .addComponent(btPU)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(PanelTablaBenchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbSFPorcientosDiferencias)
+                    .addComponent(jbERPorcientosDiefernecias)
+                    .addComponent(btRegresar))
+                .addGap(0, 24, Short.MAX_VALUE))
+        );
+
+        PanelRamo.setBackground(new java.awt.Color(153, 204, 255));
+
+        lbRamo.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        lbRamo.setText("Ramo:");
+
+        RdbIndustria.setBackground(new java.awt.Color(153, 204, 255));
+        Rdbs_Ramo.add(RdbIndustria);
+        RdbIndustria.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
+        RdbIndustria.setText("Industria");
+        RdbIndustria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RdbIndustriaActionPerformed(evt);
+            }
+        });
+
+        RdbComercio.setBackground(new java.awt.Color(153, 204, 255));
+        Rdbs_Ramo.add(RdbComercio);
+        RdbComercio.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
+        RdbComercio.setText("Comercio");
+
+        RdbServicios.setBackground(new java.awt.Color(153, 204, 255));
+        Rdbs_Ramo.add(RdbServicios);
+        RdbServicios.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
+        RdbServicios.setText("Servicios");
+
+        RdbTecno.setBackground(new java.awt.Color(153, 204, 255));
+        Rdbs_Ramo.add(RdbTecno);
+        RdbTecno.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
+        RdbTecno.setText("Tecnologia");
+
+        btRamaSelect.setBackground(new java.awt.Color(255, 255, 255));
+        btRamaSelect.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btRamaSelect.setText("Continuar");
+        btRamaSelect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRamaSelectActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout PanelRamoLayout = new javax.swing.GroupLayout(PanelRamo);
+        PanelRamo.setLayout(PanelRamoLayout);
+        PanelRamoLayout.setHorizontalGroup(
+            PanelRamoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelRamoLayout.createSequentialGroup()
+                .addComponent(lbRamo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(RdbIndustria)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(RdbComercio)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(RdbServicios)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(RdbTecno)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addComponent(btRamaSelect)
+                .addContainerGap())
+        );
+        PanelRamoLayout.setVerticalGroup(
+            PanelRamoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelRamoLayout.createSequentialGroup()
+                .addGap(0, 8, Short.MAX_VALUE)
+                .addGroup(PanelRamoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbRamo)
+                    .addComponent(RdbIndustria)
+                    .addComponent(RdbComercio)
+                    .addComponent(RdbServicios)
+                    .addComponent(RdbTecno)
+                    .addComponent(btRamaSelect)))
+        );
+
         javax.swing.GroupLayout FondoLayout = new javax.swing.GroupLayout(Fondo);
         Fondo.setLayout(FondoLayout);
         FondoLayout.setHorizontalGroup(
             FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FondoLayout.createSequentialGroup()
-                .addGap(68, 68, 68)
-                .addComponent(PanelTablaBench, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(FondoLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(FondoLayout.createSequentialGroup()
-                                .addComponent(lbIncrementoVentas)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtIncVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(ComboBoxAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jbRealizarPropuestas)
-                                .addGroup(FondoLayout.createSequentialGroup()
-                                    .addComponent(lbPorcentaje)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtPorcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(76, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FondoLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btRegresar)
-                        .addContainerGap())))
-            .addGroup(FondoLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(FondoLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(PanelTablaBench, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(FondoLayout.createSequentialGroup()
+                        .addComponent(lb_OpcionAnalisis)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(PanelRamo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(FondoLayout.createSequentialGroup()
                         .addComponent(Panel_Opciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(PanelEstadosFinancieros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lb_OpcionAnalisis))
+                        .addComponent(PanelEstadosFinancieros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         FondoLayout.setVerticalGroup(
             FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FondoLayout.createSequentialGroup()
-                .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lb_OpcionAnalisis, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(PanelRamo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(FondoLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(PanelEstadosFinancieros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12)
+                        .addComponent(PanelEstadosFinancieros, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(FondoLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(lb_OpcionAnalisis)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Panel_Opciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(FondoLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(PanelTablaBench, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(FondoLayout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtIncVentas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbIncrementoVentas))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbPorcentaje)
-                            .addComponent(txtPorcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ComboBoxAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(jbRealizarPropuestas)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btRegresar)))
-                .addContainerGap())
+                        .addGap(26, 26, 26)
+                        .addComponent(Panel_Opciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(PanelTablaBench, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -461,23 +471,33 @@ public class AnalisisEF extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Fondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(Fondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbVerAnalisisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVerAnalisisActionPerformed
+        
+        
+        Ventana.ShowInformationMessage("Cargue los estados financieros restantes");
+        
         if (this.jrbRazonesyBM.isSelected())
         {
            //Aqui se deben de poner en modo visibles los elemntos de razones financieras
+            this.PanelTablaBench.setVisible(true);
+            this.PanelEstadosFinancieros.setVisible(true);
+            this.btPU.setVisible(true);
             cargarDatosTablaRazones();
         }
         else
         {
             if (this.jrbPorcientosDiferencias.isSelected())
             {
-               cargarDatosTablaCuentas();
+                this.PanelTablaBench.setVisible(true);
+                this.PanelEstadosFinancieros.setVisible(true);
+                Ventana.ShowInformationMessage("Cargue los estados financieros restantes");
+                cargarDatosTablaCuentas();
             }
             else
                     Ventana.ShowInformationMessage("Selecciona un tipo de analisis");  //joption
@@ -563,12 +583,14 @@ public class AnalisisEF extends javax.swing.JFrame {
     }//GEN-LAST:event_btRegresarActionPerformed
 
     private void jrbPorcientosDiferenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbPorcientosDiferenciasActionPerformed
-        
+        this.PanelEstadosFinancieros.setVisible(true);
+        this.PanelTablaBench.setVisible(false);
     }//GEN-LAST:event_jrbPorcientosDiferenciasActionPerformed
 
     private void jbSFPorcientosDiferenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSFPorcientosDiferenciasActionPerformed
         AnalisisSF formularoTablaAnalisisSF = new AnalisisSF(sfX, sfY);
         formularoTablaAnalisisSF.setVisible(true);
+        PanelTablaBench.setVisible(true);
     }//GEN-LAST:event_jbSFPorcientosDiferenciasActionPerformed
 
     private void jbRealizarPropuestasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRealizarPropuestasActionPerformed
@@ -633,6 +655,18 @@ public class AnalisisEF extends javax.swing.JFrame {
     private void RdbIndustriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RdbIndustriaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_RdbIndustriaActionPerformed
+
+    private void btRamaSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRamaSelectActionPerformed
+        // TODO add your handling code here:
+        this.Panel_Opciones.setVisible(true);
+        this.PanelEstadosFinancieros.setVisible(false);
+        this.PanelTablaBench.setVisible(false);
+    }//GEN-LAST:event_btRamaSelectActionPerformed
+
+    private void btPUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPUActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btPUActionPerformed
 
     
     public  void agregarEdoFinancieroLista(DefaultListModel lista, File estado)
@@ -797,10 +831,10 @@ public class AnalisisEF extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> ComboBoxAnalisis;
     private javax.swing.JPanel Fondo;
     private javax.swing.JTable JTableBenchMarking;
     private javax.swing.JPanel PanelEstadosFinancieros;
+    private javax.swing.JPanel PanelRamo;
     private javax.swing.JPanel PanelTablaBench;
     private javax.swing.JPanel Panel_Opciones;
     private javax.swing.JRadioButton RdbComercio;
@@ -810,6 +844,8 @@ public class AnalisisEF extends javax.swing.JFrame {
     private javax.swing.ButtonGroup Rdbs_Ramo;
     private javax.swing.ButtonGroup TipoAnálisis;
     private javax.swing.JButton btConfirmar;
+    private javax.swing.JButton btPU;
+    private javax.swing.JButton btRamaSelect;
     private javax.swing.JButton btRegresar;
     private javax.swing.JList<String> jListArchivosAbiertos;
     private javax.swing.JScrollPane jScrollPane1;
@@ -822,11 +858,7 @@ public class AnalisisEF extends javax.swing.JFrame {
     private javax.swing.JButton jbVerAnalisis;
     private javax.swing.JRadioButton jrbPorcientosDiferencias;
     private javax.swing.JRadioButton jrbRazonesyBM;
-    private javax.swing.JLabel lbIncrementoVentas;
-    private javax.swing.JLabel lbPorcentaje;
     private javax.swing.JLabel lbRamo;
     private javax.swing.JLabel lb_OpcionAnalisis;
-    private javax.swing.JTextField txtIncVentas;
-    private javax.swing.JTextField txtPorcentaje;
     // End of variables declaration//GEN-END:variables
 }

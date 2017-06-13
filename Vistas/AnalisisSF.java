@@ -47,7 +47,6 @@ public class AnalisisSF extends javax.swing.JFrame {
         Fondo = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtCuentas = new javax.swing.JTable();
-        btRegresar = new javax.swing.JButton();
 
         Fondo.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -72,26 +71,13 @@ public class AnalisisSF extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jtCuentas);
 
-        btRegresar.setBackground(new java.awt.Color(255, 255, 255));
-        btRegresar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        btRegresar.setText("Regresar");
-        btRegresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btRegresarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout FondoLayout = new javax.swing.GroupLayout(Fondo);
         Fondo.setLayout(FondoLayout);
         FondoLayout.setHorizontalGroup(
             FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FondoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FondoLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btRegresar))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
                 .addContainerGap())
         );
         FondoLayout.setVerticalGroup(
@@ -99,9 +85,7 @@ public class AnalisisSF extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FondoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btRegresar)
-                .addContainerGap())
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -117,11 +101,6 @@ public class AnalisisSF extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegresarActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_btRegresarActionPerformed
 
     
     public void cargarDatosTablaCuentas()
@@ -205,7 +184,6 @@ public class AnalisisSF extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Fondo;
-    private javax.swing.JButton btRegresar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtCuentas;
     // End of variables declaration//GEN-END:variables

@@ -250,14 +250,29 @@ public class Propuestas extends javax.swing.JFrame {
         btModificar.setBackground(new java.awt.Color(255, 255, 255));
         btModificar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         btModificar.setText("Modificar");
+        btModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btModificarActionPerformed(evt);
+            }
+        });
 
         btRegresar.setBackground(new java.awt.Color(255, 255, 255));
         btRegresar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         btRegresar.setText("Regresar");
+        btRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRegresarActionPerformed(evt);
+            }
+        });
 
         jbRegistrar.setBackground(new java.awt.Color(255, 255, 255));
         jbRegistrar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jbRegistrar.setText("Registrar cambios");
+        jbRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbRegistrarActionPerformed(evt);
+            }
+        });
 
         lbCuentaAMod.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         lbCuentaAMod.setText("Seleccione las cuentas que desea modificar:");
@@ -337,6 +352,121 @@ public class Propuestas extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModificarActionPerformed
+        
+        //Vamos a modifiar en los dos estados el valor que modifique
+        
+        String cuentaACambiar = obtenerNombreSeleccionadaCB();
+        String cuentaActual;
+        ArrayList<String> datos;
+      
+        Map<String, ArrayList<String>> cuentasModificadasER = erProforma.getCuentas();
+        Map<String, ArrayList<String>> cuentasModificadasSF = sfProforma.getCuentas();
+        
+        System.out.println(cuentasModificadasSF.size());
+        
+        Iterator itER = cuentasModificadasER.keySet().iterator();
+        
+        while(itER.hasNext())
+        {
+            cuentaActual = itER.next().toString(); // contiene la llave de la cuenta en iteracion 
+            
+            if(cuentaActual.contains(cuentaACambiar))
+            {
+               datos = cuentasModificadasER.get(cuentaActual);
+            
+                if(!this.txtNuevoSaldo.getText().isEmpty())
+                {
+                    //nuevosDatos.add(this.txtNuevoSaldo.getText());
+                    //datos.set(0, txtNuevoSaldo.getText());
+                    //erProforma.eliminarCuenta(cuentaActual);
+                    erProforma.agregarCuenta(cuentaActual, this.txtNuevoSaldo.getText());
+                    agregarElemntoAJLista("Cuenta "+ cuentaActual+ " de Estado de Resultados modifcada con "+this.txtNuevoSaldo.getText());
+                    System.out.println("Cuenta en ER "+ cuentaActual+ " modificada con "+ this.txtNuevoSaldo.getText());
+                    break;
+                }
+                //else
+                //{
+                  //  erProforma.eliminarCuenta(cuentaActual);
+                   // erProforma.agregarCuenta(cuentaActual, datos.get(0));
+                //}
+            }
+            
+        }
+        
+        
+        
+        Iterator itSF = cuentasModificadasSF.keySet().iterator();
+        
+        while(itSF.hasNext())
+        {
+            cuentaActual = itSF.next().toString(); // contiene la llave de la cuenta en iteracion 
+            
+            if(cuentaActual.contains(cuentaACambiar))
+            {
+                datos = cuentasModificadasSF.get(cuentaACambiar);
+            
+                if(!this.txtNuevoSaldo.getText().isEmpty())
+                {
+                    sf.modificarValorCuenta(cuentaACambiar, this.txtNuevoSaldo.getText());
+                    //sfProforma.eliminarCuenta(cuentaActual);
+                    //sfProforma.agregarCuenta(cuentaActual, datos.get(0), datos.get(1), this.txtNuevoSaldo.getText());
+                    agregarElemntoAJLista("Cuenta "+ cuentaActual+ " de Estado de Situación  modifcada con "+this.txtNuevoSaldo.getText());
+                    System.out.println("Cuenta en SF "+ cuentaActual+ " modificada con "+ this.txtNuevoSaldo.getText());
+                    break;
+                }
+                
+                //else
+                //{
+                  ///  sfProforma.eliminarCuenta(cuentaActual);
+                    //sfProforma.agregarCuenta(cuentaActual, datos.get(0), datos.get(1), datos.get(2));
+               // }
+               
+            }
+            
+        }
+    }//GEN-LAST:event_btModificarActionPerformed
+
+    private void jbRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRegistrarActionPerformed
+
+        if(this.sfProforma.verificarEstado())
+        {
+           System.out.println("Cuentas bien");
+            this.sfProforma.crearEstadoFinanciero(true);
+            
+            this.sfProforma.leerEstadoFinanciero();
+                    
+            float a = sfProforma.obtenerSaldodeLlave("Amortizacion");
+            float d = sfProforma.obtenerSaldodeLlave("Depreciacion");
+            System.out.println("AMORTIZACION->>>>>"+a);
+            System.out.println("DEPRESICACION->>>>"+d);
+        
+        
+            this.erProforma.setAmprtizacionDepresiacion(a+d);
+            this.erProforma.crearEstadoFinanciero(true);
+        
+            
+            
+            Ventana.ShowInformationMessage("¡Modificaciones realizadas con exito!");
+            File fSF= this.sf.getF();
+            File fER= this.er.getF();
+            
+            AnalisisEF EF = new AnalisisEF(fSF, fER);
+            EF.setVisible(true);
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_jbRegistrarActionPerformed
+
+    private void btRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegresarActionPerformed
+        // TODO add your handling code here:
+        File fSF= this.sf.getF();
+        File fER= this.er.getF();
+            
+        AnalisisEF EF = new AnalisisEF(fSF, fER);
+        EF.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btRegresarActionPerformed
 
     
 
