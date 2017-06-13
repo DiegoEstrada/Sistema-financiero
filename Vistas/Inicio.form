@@ -252,6 +252,8 @@
         <Property name="text" type="java.lang.String" value="Seleccione una opci&#xf3;n:"/>
       </Properties>
     </Component>
+    <Component class="javax.swing.JLabel" name="lbLogoIPN">
+    </Component>
     <Component class="javax.swing.JButton" name="btnCrearEstado">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -296,8 +298,6 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCrear_Estado_FinancieroActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lbLogoIPN">
     </Component>
     <Container class="javax.swing.JPanel" name="jpEdosfinancieros">
       <Properties>

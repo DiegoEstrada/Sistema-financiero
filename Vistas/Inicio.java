@@ -55,10 +55,10 @@ public class Inicio extends javax.swing.JFrame {
         lb_Integrante_1 = new javax.swing.JLabel();
         lb_Integrante_2 = new javax.swing.JLabel();
         lb_Opcion = new javax.swing.JLabel();
+        lbLogoIPN = new javax.swing.JLabel();
         btnCrearEstado = new javax.swing.JButton();
         btnCargarEstado = new javax.swing.JButton();
         btnCrear_Estado_Financiero = new javax.swing.JButton();
-        lbLogoIPN = new javax.swing.JLabel();
         jpEdosfinancieros = new javax.swing.JPanel();
         Rdb_Situacion_Financiera = new javax.swing.JRadioButton();
         Rdb_Estado_Resultados = new javax.swing.JRadioButton();

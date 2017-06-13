@@ -218,9 +218,7 @@ public class Propuestas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lbCuentaAMod = new javax.swing.JLabel();
-        ComboBoxCuentasMod = new javax.swing.JComboBox<>();
-        lbNuevoSaldo = new javax.swing.JLabel();
+        Fondo = new javax.swing.JPanel();
         txtNuevoSaldo = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jlCambios = new javax.swing.JList<>();
@@ -228,15 +226,16 @@ public class Propuestas extends javax.swing.JFrame {
         btModificar = new javax.swing.JButton();
         btRegresar = new javax.swing.JButton();
         jbRegistrar = new javax.swing.JButton();
+        lbCuentaAMod = new javax.swing.JLabel();
+        ComboBoxCuentasMod = new javax.swing.JComboBox<>();
+        lbNuevoSaldo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Realizar Propuestas");
 
-        lbCuentaAMod.setText("Seleccione las cuentas que desea modificar:");
+        Fondo.setBackground(new java.awt.Color(153, 204, 255));
 
-        ComboBoxCuentasMod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        lbNuevoSaldo.setText("Nuevo Saldo:");
+        txtNuevoSaldo.setFont(new java.awt.Font("Consolas", 0, 11)); // NOI18N
 
         jlCambios.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -245,188 +244,105 @@ public class Propuestas extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jlCambios);
 
+        lbCuentasMod.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         lbCuentasMod.setText("Cuentas modificadas:");
 
+        btModificar.setBackground(new java.awt.Color(255, 255, 255));
+        btModificar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         btModificar.setText("Modificar");
-        btModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btModificarActionPerformed(evt);
-            }
-        });
 
+        btRegresar.setBackground(new java.awt.Color(255, 255, 255));
+        btRegresar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         btRegresar.setText("Regresar");
-        btRegresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btRegresarActionPerformed(evt);
-            }
-        });
 
+        jbRegistrar.setBackground(new java.awt.Color(255, 255, 255));
+        jbRegistrar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jbRegistrar.setText("Registrar cambios");
-        jbRegistrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbRegistrarActionPerformed(evt);
-            }
-        });
+
+        lbCuentaAMod.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        lbCuentaAMod.setText("Seleccione las cuentas que desea modificar:");
+
+        ComboBoxCuentasMod.setFont(new java.awt.Font("Times New Roman", 2, 11)); // NOI18N
+        ComboBoxCuentasMod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        lbNuevoSaldo.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        lbNuevoSaldo.setText("Nuevo Saldo:");
+
+        javax.swing.GroupLayout FondoLayout = new javax.swing.GroupLayout(Fondo);
+        Fondo.setLayout(FondoLayout);
+        FondoLayout.setHorizontalGroup(
+            FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(FondoLayout.createSequentialGroup()
+                .addGap(16, 20, Short.MAX_VALUE)
+                .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FondoLayout.createSequentialGroup()
+                        .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(FondoLayout.createSequentialGroup()
+                                .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lbCuentaAMod)
+                                    .addComponent(lbNuevoSaldo))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(ComboBoxCuentasMod, 0, 96, Short.MAX_VALUE)
+                                    .addComponent(txtNuevoSaldo))
+                                .addGap(17, 17, 17))
+                            .addGroup(FondoLayout.createSequentialGroup()
+                                .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jbRegistrar)
+                                    .addComponent(btModificar))
+                                .addGap(18, 18, 18)))
+                        .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbCuentasMod)))
+                    .addComponent(btRegresar, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
+        );
+        FondoLayout.setVerticalGroup(
+            FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(FondoLayout.createSequentialGroup()
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbCuentaAMod)
+                    .addComponent(ComboBoxCuentasMod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbCuentasMod))
+                .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(FondoLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbNuevoSaldo)
+                            .addComponent(txtNuevoSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28)
+                        .addComponent(btModificar)
+                        .addGap(36, 36, 36)
+                        .addComponent(jbRegistrar)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FondoLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btRegresar)
+                        .addGap(6, 6, 6))))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lbCuentaAMod, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ComboBoxCuentasMod, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbNuevoSaldo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jbRegistrar)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtNuevoSaldo)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(btModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(0, 0, Short.MAX_VALUE))))))
-                        .addGap(36, 36, 36)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbCuentasMod)
-                                .addGap(0, 161, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btRegresar)))
-                .addContainerGap())
+            .addComponent(Fondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbCuentaAMod)
-                    .addComponent(lbCuentasMod))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(ComboBoxCuentasMod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbNuevoSaldo)
-                            .addComponent(txtNuevoSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(btModificar))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btRegresar)
-                    .addComponent(jbRegistrar))
-                .addContainerGap(19, Short.MAX_VALUE))
+            .addComponent(Fondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegresarActionPerformed
-        Inicio formularioprincipal = new Inicio();
-        formularioprincipal.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btRegresarActionPerformed
-
-    private void btModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModificarActionPerformed
-        
-        //Vamos a modifiar en los dos estados el valor que modifique
-        
-        String cuentaACambiar = obtenerNombreSeleccionadaCB();
-        String cuentaActual;
-        ArrayList<String> datos;
-      
-        Map<String, ArrayList<String>> cuentasModificadasER = erProforma.getCuentas();
-        Map<String, ArrayList<String>> cuentasModificadasSF = sfProforma.getCuentas();
-        
-        System.out.println(cuentasModificadasSF.size());
-        
-        Iterator itER = cuentasModificadasER.keySet().iterator();
-        
-        while(itER.hasNext())
-        {
-            cuentaActual = itER.next().toString(); // contiene la llave de la cuenta en iteracion 
-            
-            if(cuentaActual.contains(cuentaACambiar))
-            {
-               datos = cuentasModificadasER.get(cuentaActual);
-            
-                if(!this.txtNuevoSaldo.getText().isEmpty())
-                {
-                    //nuevosDatos.add(this.txtNuevoSaldo.getText());
-                    //datos.set(0, txtNuevoSaldo.getText());
-                    //erProforma.eliminarCuenta(cuentaActual);
-                    erProforma.agregarCuenta(cuentaActual, this.txtNuevoSaldo.getText());
-                    agregarElemntoAJLista("Cuenta "+ cuentaActual+ " de Estado de Resultados modifcada con "+this.txtNuevoSaldo.getText());
-                    System.out.println("Cuenta en ER "+ cuentaActual+ " modificada con "+ this.txtNuevoSaldo.getText());
-                    break;
-                }
-                //else
-                //{
-                  //  erProforma.eliminarCuenta(cuentaActual);
-                   // erProforma.agregarCuenta(cuentaActual, datos.get(0));
-                //}
-            }
-            
-        }
-        
-        
-        
-        Iterator itSF = cuentasModificadasSF.keySet().iterator();
-        
-        while(itSF.hasNext())
-        {
-            cuentaActual = itSF.next().toString(); // contiene la llave de la cuenta en iteracion 
-            
-            if(cuentaActual.contains(cuentaACambiar))
-            {
-                datos = cuentasModificadasSF.get(cuentaACambiar);
-            
-                if(!this.txtNuevoSaldo.getText().isEmpty())
-                {
-                    sf.modificarValorCuenta(cuentaACambiar, this.txtNuevoSaldo.getText());
-                    //sfProforma.eliminarCuenta(cuentaActual);
-                    //sfProforma.agregarCuenta(cuentaActual, datos.get(0), datos.get(1), this.txtNuevoSaldo.getText());
-                    agregarElemntoAJLista("Cuenta "+ cuentaActual+ " de Estado de Situación  modifcada con "+this.txtNuevoSaldo.getText());
-                    System.out.println("Cuenta en SF "+ cuentaActual+ " modificada con "+ this.txtNuevoSaldo.getText());
-                    break;
-                }
-                
-                //else
-                //{
-                  ///  sfProforma.eliminarCuenta(cuentaActual);
-                    //sfProforma.agregarCuenta(cuentaActual, datos.get(0), datos.get(1), datos.get(2));
-               // }
-               
-            }
-            
-        }
-                
-        
-    }//GEN-LAST:event_btModificarActionPerformed
-
-    private void jbRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRegistrarActionPerformed
-        
-        if(this.sfProforma.verificarEstado())
-        {
-           System.out.println("Cuentas bien");
-            this.sfProforma.crearEstadoFinanciero(true);
-        }
-        
-        this.erProforma.crearEstadoFinanciero(true);
-        
-    }//GEN-LAST:event_jbRegistrarActionPerformed
-
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboBoxCuentasMod;
+    private javax.swing.JPanel Fondo;
     private javax.swing.JButton btModificar;
     private javax.swing.JButton btRegresar;
     private javax.swing.JScrollPane jScrollPane1;

@@ -27,38 +27,18 @@ public class Cargar_Estado_Financiero extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lb_titulo = new javax.swing.JLabel();
-        lb_Instrucciones1 = new javax.swing.JLabel();
-        lb_Instrucciones2 = new javax.swing.JLabel();
-        lb_Instrucciones3 = new javax.swing.JLabel();
-        lb_Instrucciones4 = new javax.swing.JLabel();
-        lb_edos_cargados = new javax.swing.JLabel();
+        Fondo = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla_Estados_cargados = new javax.swing.JTable();
         btAbrirEstado = new javax.swing.JButton();
         btAnalizarEstado = new javax.swing.JButton();
         btRegresar = new javax.swing.JButton();
+        lb_edos_cargados = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cargar Estado Financiero");
 
-        lb_titulo.setFont(new java.awt.Font("Rockwell", 0, 18)); // NOI18N
-        lb_titulo.setText("INSTRUCCIONES");
-
-        lb_Instrucciones1.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
-        lb_Instrucciones1.setText("Presiona el boton de \"Abrir Estado Financiero\" para cargar la información de un Estado Financiero.");
-
-        lb_Instrucciones2.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
-        lb_Instrucciones2.setText("Este archivo debe de tener la extensión:       *.txt");
-
-        lb_Instrucciones3.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
-        lb_Instrucciones3.setText("Puedes cargar un Estado Financiero que hayas creado tu mismo pero se recomienda que");
-
-        lb_Instrucciones4.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
-        lb_Instrucciones4.setText("uses el sistema para crear tus Estados Financieros.");
-
-        lb_edos_cargados.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
-        lb_edos_cargados.setText("Estados cargados:");
+        Fondo.setBackground(new java.awt.Color(153, 204, 255));
 
         Tabla_Estados_cargados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -73,7 +53,8 @@ public class Cargar_Estado_Financiero extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(Tabla_Estados_cargados);
 
-        btAbrirEstado.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
+        btAbrirEstado.setBackground(new java.awt.Color(255, 255, 255));
+        btAbrirEstado.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btAbrirEstado.setText("Abrir Estado Financiero");
         btAbrirEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,7 +62,8 @@ public class Cargar_Estado_Financiero extends javax.swing.JFrame {
             }
         });
 
-        btAnalizarEstado.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
+        btAnalizarEstado.setBackground(new java.awt.Color(255, 255, 255));
+        btAnalizarEstado.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btAnalizarEstado.setText("Analizar Estado Financiero");
         btAnalizarEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,7 +71,8 @@ public class Cargar_Estado_Financiero extends javax.swing.JFrame {
             }
         });
 
-        btRegresar.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
+        btRegresar.setBackground(new java.awt.Color(255, 255, 255));
+        btRegresar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         btRegresar.setText("Regresar");
         btRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,65 +80,58 @@ public class Cargar_Estado_Financiero extends javax.swing.JFrame {
             }
         });
 
+        lb_edos_cargados.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        lb_edos_cargados.setText("Estados cargados:");
+
+        javax.swing.GroupLayout FondoLayout = new javax.swing.GroupLayout(Fondo);
+        Fondo.setLayout(FondoLayout);
+        FondoLayout.setHorizontalGroup(
+            FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(FondoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lb_edos_cargados)
+                    .addGroup(FondoLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(FondoLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btAbrirEstado)
+                                    .addComponent(btAnalizarEstado)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FondoLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
+                                .addComponent(btRegresar)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        FondoLayout.setVerticalGroup(
+            FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(FondoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lb_edos_cargados)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(FondoLayout.createSequentialGroup()
+                        .addComponent(btAbrirEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(btAnalizarEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btRegresar)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(141, 141, 141)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(lb_Instrucciones1)
-                            .addComponent(lb_titulo)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lb_edos_cargados)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(btAbrirEstado)
-                                        .addGap(56, 56, 56)
-                                        .addComponent(btAnalizarEstado))
-                                    .addComponent(btRegresar, javax.swing.GroupLayout.Alignment.TRAILING)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(140, 140, 140)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lb_Instrucciones3)
-                            .addComponent(lb_Instrucciones2, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lb_Instrucciones4, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(44, 44, 44))
+                .addComponent(Fondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(lb_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(lb_Instrucciones1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lb_Instrucciones2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lb_Instrucciones3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lb_Instrucciones4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(lb_edos_cargados)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(154, 154, 154)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btAbrirEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btAnalizarEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(154, 154, 154)
-                        .addComponent(btRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(Fondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -209,16 +185,12 @@ public class Cargar_Estado_Financiero extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Fondo;
     private javax.swing.JTable Tabla_Estados_cargados;
     private javax.swing.JButton btAbrirEstado;
     private javax.swing.JButton btAnalizarEstado;
     private javax.swing.JButton btRegresar;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lb_Instrucciones1;
-    private javax.swing.JLabel lb_Instrucciones2;
-    private javax.swing.JLabel lb_Instrucciones3;
-    private javax.swing.JLabel lb_Instrucciones4;
     private javax.swing.JLabel lb_edos_cargados;
-    private javax.swing.JLabel lb_titulo;
     // End of variables declaration//GEN-END:variables
 }

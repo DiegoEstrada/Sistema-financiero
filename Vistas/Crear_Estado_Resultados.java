@@ -43,44 +43,46 @@ public class Crear_Estado_Resultados extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lbCuentas = new javax.swing.JLabel();
-        lbNombreSF = new javax.swing.JLabel();
-        lbTitulo = new javax.swing.JLabel();
-        lbExtension = new javax.swing.JLabel();
+        Fondo = new javax.swing.JPanel();
+        PanelER = new javax.swing.JPanel();
         lbNombreCuenta = new javax.swing.JLabel();
+        lbCuentas = new javax.swing.JLabel();
+        ComboBoxNombreCuenta = new javax.swing.JComboBox<>();
         lbSaldoCuenta = new javax.swing.JLabel();
         txtSaldoCuenta = new javax.swing.JTextField();
         btAgregarCuenta = new javax.swing.JButton();
-        btRegresar = new javax.swing.JButton();
-        ComboBoxNombreCuenta = new javax.swing.JComboBox<>();
-        jbCrearArchivo = new javax.swing.JButton();
+        jbEliminarCuenta = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jlCuentasAgregadas = new javax.swing.JList<>();
-        jbEliminarCuenta = new javax.swing.JButton();
         jbCrearEstado = new javax.swing.JButton();
+        PanelCrearER = new javax.swing.JPanel();
+        lbExtension = new javax.swing.JLabel();
+        jbCrearArchivo = new javax.swing.JButton();
+        btRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Crear Estado de Resultados");
 
-        lbCuentas.setFont(new java.awt.Font("Rockwell", 0, 16)); // NOI18N
-        lbCuentas.setText("Cuentas");
+        Fondo.setBackground(new java.awt.Color(153, 204, 255));
 
-        lbNombreSF.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
-        lbNombreSF.setText("Ingresa el nombre:");
-
-        lbTitulo.setFont(new java.awt.Font("Rockwell", 0, 18)); // NOI18N
-        lbTitulo.setText("Crear nuevo Estado de Resultados");
-
-        lbExtension.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
-        lbExtension.setText("Presiona el boton para generar un archivo ");
+        PanelER.setBackground(new java.awt.Color(153, 204, 255));
 
         lbNombreCuenta.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
         lbNombreCuenta.setText("Nombre de la Cuenta:");
 
+        lbCuentas.setFont(new java.awt.Font("Rockwell", 0, 16)); // NOI18N
+        lbCuentas.setText("Cuentas");
+
+        ComboBoxNombreCuenta.setFont(new java.awt.Font("Times New Roman", 2, 11)); // NOI18N
+        ComboBoxNombreCuenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         lbSaldoCuenta.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
         lbSaldoCuenta.setText("Saldo:");
 
-        btAgregarCuenta.setFont(new java.awt.Font("Constantia", 0, 12)); // NOI18N
+        txtSaldoCuenta.setFont(new java.awt.Font("Consolas", 0, 11)); // NOI18N
+
+        btAgregarCuenta.setBackground(new java.awt.Color(255, 255, 255));
+        btAgregarCuenta.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         btAgregarCuenta.setText("Agregar");
         btAgregarCuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,20 +90,12 @@ public class Crear_Estado_Resultados extends javax.swing.JFrame {
             }
         });
 
-        btRegresar.setFont(new java.awt.Font("Constantia", 0, 12)); // NOI18N
-        btRegresar.setText("Regresar");
-        btRegresar.addActionListener(new java.awt.event.ActionListener() {
+        jbEliminarCuenta.setBackground(new java.awt.Color(255, 255, 255));
+        jbEliminarCuenta.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jbEliminarCuenta.setText("Eliminar cuenta");
+        jbEliminarCuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btRegresarActionPerformed(evt);
-            }
-        });
-
-        ComboBoxNombreCuenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jbCrearArchivo.setText("Crear Archivo");
-        jbCrearArchivo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbCrearArchivoActionPerformed(evt);
+                jbEliminarCuentaActionPerformed(evt);
             }
         });
 
@@ -112,13 +106,8 @@ public class Crear_Estado_Resultados extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jlCuentasAgregadas);
 
-        jbEliminarCuenta.setText("Eliminar cuenta");
-        jbEliminarCuenta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbEliminarCuentaActionPerformed(evt);
-            }
-        });
-
+        jbCrearEstado.setBackground(new java.awt.Color(255, 255, 255));
+        jbCrearEstado.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jbCrearEstado.setText("Guardar estado");
         jbCrearEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,89 +115,137 @@ public class Crear_Estado_Resultados extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout PanelERLayout = new javax.swing.GroupLayout(PanelER);
+        PanelER.setLayout(PanelERLayout);
+        PanelERLayout.setHorizontalGroup(
+            PanelERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelERLayout.createSequentialGroup()
+                .addGroup(PanelERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelERLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(PanelERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbSaldoCuenta)
+                            .addComponent(lbNombreCuenta))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(PanelERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jbCrearEstado)
+                            .addComponent(ComboBoxNombreCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbEliminarCuenta)
+                            .addGroup(PanelERLayout.createSequentialGroup()
+                                .addComponent(txtSaldoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btAgregarCuenta)))
+                        .addGap(10, 10, 10)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PanelERLayout.createSequentialGroup()
+                        .addGap(190, 190, 190)
+                        .addComponent(lbCuentas)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        PanelERLayout.setVerticalGroup(
+            PanelERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelERLayout.createSequentialGroup()
+                .addComponent(lbCuentas)
+                .addGap(16, 16, 16)
+                .addGroup(PanelERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(PanelERLayout.createSequentialGroup()
+                        .addGroup(PanelERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbNombreCuenta)
+                            .addComponent(ComboBoxNombreCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(PanelERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbSaldoCuenta)
+                            .addComponent(txtSaldoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btAgregarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbEliminarCuenta)
+                        .addGap(69, 69, 69)
+                        .addComponent(jbCrearEstado))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+
+        PanelCrearER.setBackground(new java.awt.Color(153, 204, 255));
+
+        lbExtension.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        lbExtension.setText("Presiona el boton para generar un archivo ");
+
+        jbCrearArchivo.setBackground(new java.awt.Color(255, 255, 255));
+        jbCrearArchivo.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jbCrearArchivo.setText("Crear Archivo");
+        jbCrearArchivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCrearArchivoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout PanelCrearERLayout = new javax.swing.GroupLayout(PanelCrearER);
+        PanelCrearER.setLayout(PanelCrearERLayout);
+        PanelCrearERLayout.setHorizontalGroup(
+            PanelCrearERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelCrearERLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(lbExtension)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jbCrearArchivo)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        PanelCrearERLayout.setVerticalGroup(
+            PanelCrearERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelCrearERLayout.createSequentialGroup()
+                .addGroup(PanelCrearERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbExtension)
+                    .addComponent(jbCrearArchivo))
+                .addGap(0, 14, Short.MAX_VALUE))
+        );
+
+        btRegresar.setBackground(new java.awt.Color(255, 255, 255));
+        btRegresar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btRegresar.setText("Regresar");
+        btRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRegresarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout FondoLayout = new javax.swing.GroupLayout(Fondo);
+        Fondo.setLayout(FondoLayout);
+        FondoLayout.setHorizontalGroup(
+            FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(FondoLayout.createSequentialGroup()
+                .addGap(157, 157, 157)
+                .addComponent(PanelCrearER, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FondoLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btRegresar)
+                .addGap(96, 96, 96))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FondoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(PanelER, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(86, 86, 86))
+        );
+        FondoLayout.setVerticalGroup(
+            FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FondoLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(PanelCrearER, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(PanelER, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btRegresar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(151, 151, 151)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbExtension, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(110, 110, 110)
-                        .addComponent(jbCrearArchivo)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbNombreSF)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(lbSaldoCuenta)
-                                            .addComponent(lbNombreCuenta))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtSaldoCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                                            .addComponent(ComboBoxNombreCuenta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGap(33, 33, 33)
-                                        .addComponent(btAgregarCuenta))
-                                    .addComponent(jbEliminarCuenta)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(163, 163, 163)
-                                        .addComponent(lbCuentas)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(193, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lbTitulo)
-                        .addGap(353, 353, 353))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jbCrearEstado)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btRegresar)
-                                .addGap(12, 12, 12)))
-                        .addContainerGap())))
+            .addComponent(Fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 688, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addComponent(lbTitulo)
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbExtension)
-                    .addComponent(jbCrearArchivo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbNombreSF)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lbCuentas)
-                        .addGap(31, 31, 31)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbNombreCuenta)
-                            .addComponent(btAgregarCuenta)
-                            .addComponent(ComboBoxNombreCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbSaldoCuenta)
-                            .addComponent(txtSaldoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(89, 89, 89))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jbEliminarCuenta)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(53, 53, 53))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jbCrearEstado)
-                        .addGap(29, 29, 29)
-                        .addComponent(btRegresar)
-                        .addContainerGap())))
+            .addComponent(Fondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -322,6 +359,9 @@ public class Crear_Estado_Resultados extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboBoxNombreCuenta;
+    private javax.swing.JPanel Fondo;
+    private javax.swing.JPanel PanelCrearER;
+    private javax.swing.JPanel PanelER;
     private javax.swing.JButton btAgregarCuenta;
     private javax.swing.JButton btRegresar;
     private javax.swing.JScrollPane jScrollPane1;
@@ -332,9 +372,7 @@ public class Crear_Estado_Resultados extends javax.swing.JFrame {
     private javax.swing.JLabel lbCuentas;
     private javax.swing.JLabel lbExtension;
     private javax.swing.JLabel lbNombreCuenta;
-    private javax.swing.JLabel lbNombreSF;
     private javax.swing.JLabel lbSaldoCuenta;
-    private javax.swing.JLabel lbTitulo;
     private javax.swing.JTextField txtSaldoCuenta;
     // End of variables declaration//GEN-END:variables
 }
