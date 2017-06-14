@@ -48,8 +48,11 @@ public class AnalisisSF extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtCuentas = new javax.swing.JTable();
 
+        setTitle("Analisis Porcientos Integrados y Diferencias: Estado de Situación Financiera");
+
         Fondo.setBackground(new java.awt.Color(153, 204, 255));
 
+        jtCuentas.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jtCuentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -77,14 +80,14 @@ public class AnalisisSF extends javax.swing.JFrame {
             FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FondoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 980, Short.MAX_VALUE)
                 .addContainerGap())
         );
         FondoLayout.setVerticalGroup(
             FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FondoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

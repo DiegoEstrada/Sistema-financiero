@@ -74,7 +74,7 @@ public class Diferencias {
                 }
         }
         else
-            System.out.println("En alguno de los estados financieross las cuentas son diferentes o no existen las mismas cuentas");
+            System.out.println("En alguno de los estados financieros las cuentas son diferentes o no existen las mismas cuentas");
         
         
        
@@ -96,7 +96,7 @@ public class Diferencias {
         ArrayList<String> cuentaX = new ArrayList();
         ArrayList<String> cuentaY = new ArrayList();
         String cX, cY;
-        float saldoX, saldoY,saldoDif;
+        double saldoX, saldoY,saldoDif;
         
         
         for (int i = 0; i < nombres.size(); i++) {
@@ -111,13 +111,21 @@ public class Diferencias {
             cX = cuentaX.get(0);
             cY = cuentaY.get(0);
             
-            saldoX = Float.parseFloat(cX);
+            saldoX = Double.parseDouble(cX);
             //System.out.println("Saldo I "+saldoX);
-            saldoY = Float.parseFloat(cY);
+            saldoY = Double.parseDouble(cY);
             //System.out.println("Saldo F "+saldoY);
              saldoDif = saldoY - saldoX;
              //System.out.println("SALDO "+saldoDif);
-            diferencias.put(nombres.get(i),String.valueOf(saldoDif));
+             if(saldoDif<0)
+             {
+                 saldoDif=(-1)*(saldoDif);
+                 diferencias.put(nombres.get(i),String.valueOf("("+Redondear(saldoDif, 2)+")"));
+             }
+             else
+             {
+                 diferencias.put(nombres.get(i),String.valueOf(Redondear(saldoDif, 2)));
+             }
             
         }
               
@@ -138,5 +146,9 @@ public class Diferencias {
                 }
     }
    
-    
+    public static double Redondear(double numero,int digitos)
+    {
+      int cifras=(int) Math.pow(10,digitos);
+      return Math.rint(numero*cifras)/cifras;
+    }
 }

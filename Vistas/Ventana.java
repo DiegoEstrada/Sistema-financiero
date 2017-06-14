@@ -21,7 +21,12 @@
      }
      
      public static void ShowWarningMessage(String msg)
-    {
+     {
          JOptionPane.showMessageDialog(null, msg, "Warning", JOptionPane.WARNING_MESSAGE);
+     }
+     
+     public static String setValue(String msg)
+     {
+         return JOptionPane.showInputDialog(null,msg);
      }
  }

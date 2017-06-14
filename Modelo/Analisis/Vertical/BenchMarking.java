@@ -96,40 +96,71 @@ public class BenchMarking {
         b=Float.parseFloat(indicadores.get(0));
         System.out.println("-----------------"+b);
         dif=a-b;
-        bm.put(nom, String.valueOf(dif));
+        if(dif<0)
+        {
+            dif=(-1)*dif;
+            bm.put(nom, String.valueOf("("+Redondear(dif, 2))+")");
+        }
+        else
+        {
+            bm.put(nom, String.valueOf(Redondear(dif, 2)));
+        }
+        
         
         
         nom="Solvencia";
         a=Float.parseFloat(razonesEmpresa.get("Solvencia"));
         b=Float.parseFloat(indicadores.get(1));
         dif=a-b;
-        bm.put(nom, String.valueOf(dif));
+        if(dif<0)
+        {
+            dif=(-1)*dif;
+            bm.put(nom, String.valueOf("("+Redondear(dif, 2))+")");
+        }
+        else
+        {
+            bm.put(nom, String.valueOf(Redondear(dif, 2)));
+        }
         
         nom="Estabilidad economica";
         a=Float.parseFloat(razonesEmpresa.get("Estabilidad economica"));
         b=Float.parseFloat(indicadores.get(2));
         dif= a<b ? b-a:a-b;
-        bm.put(nom, String.valueOf(dif));
+        bm.put(nom, String.valueOf(Redondear(dif, 2)));
         
         nom="Inmovilizacion de capital";
         a=Float.parseFloat(razonesEmpresa.get("Inmovilizacion de capital"));
         b=Float.parseFloat(indicadores.get(3));
         dif= a<b ? b-a:a-b;
-        bm.put(nom, String.valueOf(dif));
+        bm.put(nom, String.valueOf(Redondear(dif, 2)));
         
         nom="Rentabilidad en ventas";
         a=Float.parseFloat(razonesEmpresa.get("Rentabilidad en ventas"));
         b=Float.parseFloat(indicadores.get(4));
         dif=a-b;
-        bm.put(nom, String.valueOf(dif));
+        if(dif<0)
+        {
+            dif=(-1)*dif;
+            bm.put(nom, String.valueOf("("+Redondear(dif, 2))+")");
+        }
+        else
+        {
+            bm.put(nom, String.valueOf(Redondear(dif, 2)));
+        }
         
         nom="Rentabilidad en inversion";
         a=Float.parseFloat(razonesEmpresa.get("Rentabilidad en inversion"));
         b=Float.parseFloat(indicadores.get(5));
         dif=a-b;
-        bm.put(nom, String.valueOf(dif));
-        
-        
+        if(dif<0)
+        {
+            dif=(-1)*dif;
+            bm.put(nom, String.valueOf("("+Redondear(dif, 2))+")");
+        }
+        else
+        {
+            bm.put(nom, String.valueOf(Redondear(dif, 2)));
+        }
         
         return bm;
     }
@@ -168,7 +199,11 @@ public class BenchMarking {
         }
     }
     
-    
+    public static double Redondear(double numero,int digitos)
+    {
+      int cifras=(int) Math.pow(10,digitos);
+      return Math.rint(numero*cifras)/cifras;
+    }
     
     
 }

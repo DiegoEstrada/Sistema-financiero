@@ -63,7 +63,7 @@ public class AnalisisEF extends javax.swing.JFrame {
         this.Panel_Opciones.setVisible(false);
         this.PanelEstadosFinancieros.setVisible(false);
         this.PanelTablaBench.setVisible(false);
-        this.btPU.setVisible(false);
+        this.btPU.setVisible(true);
         
         
         
@@ -107,9 +107,6 @@ public class AnalisisEF extends javax.swing.JFrame {
         JTableBenchMarking = new javax.swing.JTable();
         jbSFPorcientosDiferencias = new javax.swing.JButton();
         jbERPorcientosDiefernecias = new javax.swing.JButton();
-        jbRealizarPropuestas = new javax.swing.JButton();
-        btRegresar = new javax.swing.JButton();
-        btPU = new javax.swing.JButton();
         PanelRamo = new javax.swing.JPanel();
         lbRamo = new javax.swing.JLabel();
         RdbIndustria = new javax.swing.JRadioButton();
@@ -117,9 +114,13 @@ public class AnalisisEF extends javax.swing.JFrame {
         RdbServicios = new javax.swing.JRadioButton();
         RdbTecno = new javax.swing.JRadioButton();
         btRamaSelect = new javax.swing.JButton();
+        jbRealizarPropuestas = new javax.swing.JButton();
+        btPU = new javax.swing.JButton();
+        btRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Análisis Financiero");
+        setResizable(false);
 
         Fondo.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -149,6 +150,11 @@ public class AnalisisEF extends javax.swing.JFrame {
         jrbRazonesyBM.setBackground(new java.awt.Color(153, 204, 255));
         TipoAnálisis.add(jrbRazonesyBM);
         jrbRazonesyBM.setText("Razones financieras y Benchmarking");
+        jrbRazonesyBM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbRazonesyBMActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout Panel_OpcionesLayout = new javax.swing.GroupLayout(Panel_Opciones);
         Panel_Opciones.setLayout(Panel_OpcionesLayout);
@@ -179,6 +185,7 @@ public class AnalisisEF extends javax.swing.JFrame {
 
         PanelEstadosFinancieros.setBackground(new java.awt.Color(153, 204, 255));
 
+        jListArchivosAbiertos.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jListArchivosAbiertos.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -218,8 +225,9 @@ public class AnalisisEF extends javax.swing.JFrame {
         PanelEstadosFinancierosLayout.setHorizontalGroup(
             PanelEstadosFinancierosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelEstadosFinancierosLayout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PanelEstadosFinancierosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelEstadosFinancierosLayout.createSequentialGroup()
                         .addComponent(jbAgregarEstado)
@@ -250,6 +258,7 @@ public class AnalisisEF extends javax.swing.JFrame {
 
         PanelTablaBench.setBackground(new java.awt.Color(153, 204, 255));
 
+        JTableBenchMarking.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         JTableBenchMarking.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -291,33 +300,6 @@ public class AnalisisEF extends javax.swing.JFrame {
             }
         });
 
-        jbRealizarPropuestas.setBackground(new java.awt.Color(255, 255, 255));
-        jbRealizarPropuestas.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jbRealizarPropuestas.setText("Realizar propuestas");
-        jbRealizarPropuestas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbRealizarPropuestasActionPerformed(evt);
-            }
-        });
-
-        btRegresar.setBackground(new java.awt.Color(255, 255, 255));
-        btRegresar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        btRegresar.setText("Regresar");
-        btRegresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btRegresarActionPerformed(evt);
-            }
-        });
-
-        btPU.setBackground(new java.awt.Color(255, 255, 255));
-        btPU.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        btPU.setText("Punto de Equilibrio");
-        btPU.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btPUActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout PanelTablaBenchLayout = new javax.swing.GroupLayout(PanelTablaBench);
         PanelTablaBench.setLayout(PanelTablaBenchLayout);
         PanelTablaBenchLayout.setHorizontalGroup(
@@ -328,30 +310,20 @@ public class AnalisisEF extends javax.swing.JFrame {
                         .addComponent(jbSFPorcientosDiferencias)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbERPorcientosDiefernecias)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
-                        .addComponent(btRegresar))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(PanelTablaBenchLayout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(PanelTablaBenchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jbRealizarPropuestas)
-                            .addComponent(btPU))))
+                        .addGap(2, 415, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         PanelTablaBenchLayout.setVerticalGroup(
             PanelTablaBenchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelTablaBenchLayout.createSequentialGroup()
-                .addGroup(PanelTablaBenchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(PanelTablaBenchLayout.createSequentialGroup()
-                        .addComponent(jbRealizarPropuestas)
-                        .addGap(30, 30, 30)
-                        .addComponent(btPU)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PanelTablaBenchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbSFPorcientosDiferencias)
-                    .addComponent(jbERPorcientosDiefernecias)
-                    .addComponent(btRegresar))
+                    .addComponent(jbERPorcientosDiefernecias))
                 .addGap(0, 24, Short.MAX_VALUE))
         );
 
@@ -425,6 +397,33 @@ public class AnalisisEF extends javax.swing.JFrame {
                     .addComponent(btRamaSelect)))
         );
 
+        jbRealizarPropuestas.setBackground(new java.awt.Color(255, 255, 255));
+        jbRealizarPropuestas.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jbRealizarPropuestas.setText("Realizar propuestas");
+        jbRealizarPropuestas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbRealizarPropuestasActionPerformed(evt);
+            }
+        });
+
+        btPU.setBackground(new java.awt.Color(255, 255, 255));
+        btPU.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btPU.setText("Punto de Equilibrio");
+        btPU.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPUActionPerformed(evt);
+            }
+        });
+
+        btRegresar.setBackground(new java.awt.Color(255, 255, 255));
+        btRegresar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btRegresar.setText("Regresar");
+        btRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRegresarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout FondoLayout = new javax.swing.GroupLayout(Fondo);
         Fondo.setLayout(FondoLayout);
         FondoLayout.setHorizontalGroup(
@@ -434,7 +433,17 @@ public class AnalisisEF extends javax.swing.JFrame {
                 .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(FondoLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(PanelTablaBench, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(PanelTablaBench, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(FondoLayout.createSequentialGroup()
+                                .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jbRealizarPropuestas)
+                                    .addComponent(btPU))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FondoLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btRegresar))))
                     .addGroup(FondoLayout.createSequentialGroup()
                         .addComponent(lb_OpcionAnalisis)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -459,8 +468,18 @@ public class AnalisisEF extends javax.swing.JFrame {
                     .addGroup(FondoLayout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addComponent(Panel_Opciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(PanelTablaBench, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(FondoLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(PanelTablaBench, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(FondoLayout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jbRealizarPropuestas)
+                        .addGap(35, 35, 35)
+                        .addComponent(btPU)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btRegresar)
+                        .addContainerGap())))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -480,7 +499,7 @@ public class AnalisisEF extends javax.swing.JFrame {
     private void jbVerAnalisisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVerAnalisisActionPerformed
         
         
-        Ventana.ShowInformationMessage("Cargue los estados financieros restantes");
+        
         
         if (this.jrbRazonesyBM.isSelected())
         {
@@ -496,7 +515,8 @@ public class AnalisisEF extends javax.swing.JFrame {
             {
                 this.PanelTablaBench.setVisible(true);
                 this.PanelEstadosFinancieros.setVisible(true);
-                Ventana.ShowInformationMessage("Cargue los estados financieros restantes");
+                this.btPU.setVisible(true);
+                
                 cargarDatosTablaCuentas();
             }
             else
@@ -585,6 +605,7 @@ public class AnalisisEF extends javax.swing.JFrame {
     private void jrbPorcientosDiferenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbPorcientosDiferenciasActionPerformed
         this.PanelEstadosFinancieros.setVisible(true);
         this.PanelTablaBench.setVisible(false);
+        this.btPU.setVisible(true);
     }//GEN-LAST:event_jrbPorcientosDiferenciasActionPerformed
 
     private void jbSFPorcientosDiferenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSFPorcientosDiferenciasActionPerformed
@@ -666,7 +687,26 @@ public class AnalisisEF extends javax.swing.JFrame {
     private void btPUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPUActionPerformed
         // TODO add your handling code here:
         
+        //Calculo del pe y PEU
+        int porcentaje;
+        String s=null;
+        
+        try {
+            do
+            {
+                s=Ventana.setValue("Introduce el porcentaje de ventas esperado:");
+            }while(s.equals("") || s==null);
+        } catch (Exception e) {
+        }
+        
+        porcentaje=Integer.parseInt(s);
+        
+        Ventana.ShowInformationMessage("Valor introducido="+porcentaje);
     }//GEN-LAST:event_btPUActionPerformed
+
+    private void jrbRazonesyBMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbRazonesyBMActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jrbRazonesyBMActionPerformed
 
     
     public  void agregarEdoFinancieroLista(DefaultListModel lista, File estado)

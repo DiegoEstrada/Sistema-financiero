@@ -44,7 +44,7 @@ public class PRUEBA {
         
         r.mostrarCuentas();
 
-        */
+        
         
         File a = new File("C:\\Users\\Diego EG\\Documents\\EmpresaG.txt");
         
@@ -79,8 +79,10 @@ public class PRUEBA {
         Map<String,ArrayList<String>> cuentas = edo1.importarNombreySaldo();
          
         System.out.println("Vamos a modificar una cuenta");
+        */
         
-        
+        double d=123.6874;
+        System.out.println("Reñdondeo a 2 decimales"+Redondear(d, 2));
         
         /*
         Diferencias df = new Diferencias(cuentas, cuentas);
@@ -91,6 +93,12 @@ public class PRUEBA {
     }
     public static void main(String[] args) {
         PRUEBA P = new PRUEBA();
+    }
+    
+    public static double Redondear(double numero,int digitos)
+    {
+      int cifras=(int) Math.pow(10,digitos);
+      return Math.rint(numero*cifras)/cifras;
     }
             
 }

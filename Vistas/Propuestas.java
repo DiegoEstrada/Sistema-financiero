@@ -232,11 +232,13 @@ public class Propuestas extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Realizar Propuestas");
+        setResizable(false);
 
         Fondo.setBackground(new java.awt.Color(153, 204, 255));
 
         txtNuevoSaldo.setFont(new java.awt.Font("Consolas", 0, 11)); // NOI18N
 
+        jlCambios.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jlCambios.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -288,34 +290,33 @@ public class Propuestas extends javax.swing.JFrame {
         FondoLayout.setHorizontalGroup(
             FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FondoLayout.createSequentialGroup()
-                .addGap(16, 20, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FondoLayout.createSequentialGroup()
                         .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btModificar)
                             .addGroup(FondoLayout.createSequentialGroup()
                                 .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lbCuentaAMod)
-                                    .addComponent(lbNuevoSaldo))
+                                    .addComponent(lbNuevoSaldo)
+                                    .addComponent(lbCuentaAMod))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(ComboBoxCuentasMod, 0, 96, Short.MAX_VALUE)
-                                    .addComponent(txtNuevoSaldo))
-                                .addGap(17, 17, 17))
-                            .addGroup(FondoLayout.createSequentialGroup()
-                                .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jbRegistrar)
-                                    .addComponent(btModificar))
-                                .addGap(18, 18, 18)))
+                                .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ComboBoxCuentasMod, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtNuevoSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jbRegistrar))
+                        .addGap(18, 18, 18)
                         .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbCuentasMod)))
+                            .addComponent(jScrollPane1)
+                            .addGroup(FondoLayout.createSequentialGroup()
+                                .addComponent(lbCuentasMod)
+                                .addGap(0, 379, Short.MAX_VALUE))))
                     .addComponent(btRegresar, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         FondoLayout.setVerticalGroup(
             FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FondoLayout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
+                .addContainerGap(14, Short.MAX_VALUE)
                 .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbCuentaAMod)
                     .addComponent(ComboBoxCuentasMod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -326,13 +327,13 @@ public class Propuestas extends javax.swing.JFrame {
                         .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbNuevoSaldo)
                             .addComponent(txtNuevoSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(28, 28, 28)
+                        .addGap(18, 18, 18)
                         .addComponent(btModificar)
-                        .addGap(36, 36, 36)
+                        .addGap(46, 46, 46)
                         .addComponent(jbRegistrar)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FondoLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btRegresar)

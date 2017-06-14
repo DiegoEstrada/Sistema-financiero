@@ -62,9 +62,18 @@ public class PorcientosIntegrados {
             s = aux.get(0);
             saldo = Float.parseFloat(s);
             porciento = CalcularPorcentaje(cien, saldo);
+            if(porciento<0)
+            {
+                porciento=(-1)*porciento;
+                porcientos.put(nombres.get(j), String.valueOf("("+Redondear(porciento, 2)+")"));
+            }
+            else
+            {
+                porcientos.put(nombres.get(j), String.valueOf(Redondear(porciento, 2)));
+            }
             
             //Porcentaje=String.valueOf(CalcularPorcentaje(cien,Float.parseFloat(S)));
-            porcientos.put(nombres.get(j), String.valueOf(porciento)); //Se guardan los nombres de las cuentas y los porcentajes calculados
+            //porcientos.put(nombres.get(j), String.valueOf(Redondear(porciento, 2))); //Se guardan los nombres de las cuentas y los porcentajes calculados
         }
         
         return porcientos;
@@ -139,6 +148,12 @@ public class PorcientosIntegrados {
         }
         
         return cien;
+    }
+    
+    public static double Redondear(double numero,int digitos)
+    {
+      int cifras=(int) Math.pow(10,digitos);
+      return Math.rint(numero*cifras)/cifras;
     }
     
 }

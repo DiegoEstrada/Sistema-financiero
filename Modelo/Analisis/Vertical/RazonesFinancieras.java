@@ -92,7 +92,8 @@ public class RazonesFinancieras {
         
         indicador = numerador/denominador;
         
-        rf.put(nombre, String.valueOf(indicador));
+        
+        rf.put(nombre, String.valueOf(Redondear(indicador, 2)));
         
         nombre = "Solvencia";
         
@@ -103,7 +104,7 @@ public class RazonesFinancieras {
         
         //System.out.println(""+numerador+" / "+denominador);
         
-        rf.put(nombre, String.valueOf(indicador));
+        rf.put(nombre, String.valueOf(Redondear(indicador, 2)));
         
         nombre= "Estabilidad economica";
         a=ObtenerSaldo("Suma pasivo fijo");
@@ -117,7 +118,7 @@ public class RazonesFinancieras {
         
         indicador=numerador/denominador;
         
-        rf.put(nombre, String.valueOf(indicador));
+        rf.put(nombre, String.valueOf(Redondear(indicador, 2)));
         
         nombre="Inmovilizacion de capital";
         a=ObtenerSaldo("Suma activo fijo");
@@ -125,7 +126,7 @@ public class RazonesFinancieras {
         
         indicador=a/b;
         
-        rf.put(nombre, String.valueOf(indicador));
+        rf.put(nombre, String.valueOf(Redondear(indicador, 2)));
         
         nombre="Rentabilidad en ventas";
         a=ObtenerSaldo("Utilidad neta");
@@ -133,14 +134,15 @@ public class RazonesFinancieras {
         
         indicador=a/b;
         
-        rf.put(nombre, String.valueOf(indicador));
+        rf.put(nombre, String.valueOf(Redondear(indicador, 2)));
         
         nombre="Rentabilidad en inversion";
         b=ObtenerSaldo("Capital social");
         
         indicador=a/b;
         
-        rf.put(nombre, String.valueOf(indicador));
+        rf.put(nombre, String.valueOf(Redondear(indicador, 2)));
+        
         return rf;
     }
     
@@ -156,5 +158,10 @@ public class RazonesFinancieras {
             System.out.println(nom +" = "+val );
         }
     }
+    
+    public static double Redondear(double numero,int digitos)
+    {
+      int cifras=(int) Math.pow(10,digitos);
+      return Math.rint(numero*cifras)/cifras;
+    }
 }
-
