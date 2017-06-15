@@ -1,0 +1,8 @@
+			 Estado de flujos de efectivo  			
+Saldo inicial           64305.0
+Ingresos
+Suma ingresos           0.0
+Egresos
+Proveedores             1.0
+Suma egresos            1.0
+Saldo final             64304.0

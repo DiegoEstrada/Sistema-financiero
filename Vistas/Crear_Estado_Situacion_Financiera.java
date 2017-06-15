@@ -550,7 +550,7 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
                       this.ComboBoxNombreCuenta.removeAllItems();
                       this.ComboBoxNombreCuenta.addItem("Caja");
                       this.ComboBoxNombreCuenta.addItem("Bancos");
-                      this.ComboBoxNombreCuenta.addItem("Alamacen");
+                      this.ComboBoxNombreCuenta.addItem("Almacen");
                       this.ComboBoxNombreCuenta.addItem("Clientes");
                       this.ComboBoxNombreCuenta.addItem("Deudores");
                       this.ComboBoxNombreCuenta.addItem("Documentos por cobrar");
@@ -566,10 +566,10 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
                      break;
                  case 2: //Caso Diferido
                       this.ComboBoxNombreCuenta.removeAllItems();
-                      this.ComboBoxNombreCuenta.addItem("Gastos de instalacion ");
+                      this.ComboBoxNombreCuenta.addItem("Gastos de instalacion");
                       this.ComboBoxNombreCuenta.addItem("Gastos de organizacion");
-                      this.ComboBoxNombreCuenta.addItem("Papeleria y utiles ");
-                      this.ComboBoxNombreCuenta.addItem("Propaganda y publicidad");
+                      //this.ComboBoxNombreCuenta.addItem("Papeleria y utiles ");
+                      //this.ComboBoxNombreCuenta.addItem("Propaganda y publicidad");
                      break;
                  default:
                      Ventana.ShowInformationMessage("Selecciona un tipo de cuenta"); //JOPTION

@@ -28,6 +28,8 @@ public class PuntoEquilibrio {
         this.cuentasER = cuentaser;
         this.cuentasSF = cuentassf;
         
+        
+        
     }
     
     public String calcularPE()
@@ -103,24 +105,24 @@ public class PuntoEquilibrio {
     {
         float cft=0, cien=0;
         ArrayList<String> aux;
-        if (cuentasER.containsKey("Costo de ventas") && cuentasER.containsKey("Ventas")) 
-        {
-            aux = cuentasER.get("Costo de ventas");
+        //if (cuentasER.containsKey("Costo de ventas") && cuentasER.containsKey("Ventas")) 
+        //{
+            aux = obtenerDatos("Costo de ventas");
             costoVentasS = Float.parseFloat(aux.get(0));
             
-            aux = cuentasER.get("Ventas");
+            aux = obtenerDatos("Ventas");
             cien = Float.parseFloat(aux.get(0));
             
             cft = (costoVentasS)/(cien);
-        }
-        else
-            System.out.println("Las cuentas recibidas para calcular PEU y PE no son las correctas");
+        //}
+        //else
+            //System.out.println("Las cuentas recibidas para calcular PEU y PE no son las correctas");
         return cft;
     }
     
     public float calcularUtlidad()
     {
-        float capsocial=0;
+        int capsocial=0;
         float ut;
         String saldo="";
         
@@ -143,7 +145,7 @@ public class PuntoEquilibrio {
             }
         }
         
-        capsocial = Float.parseFloat(saldo);
+        capsocial = Integer.parseInt(saldo);
         
         ut = (utilidad*capsocial)/100;
         return ut;
@@ -157,7 +159,7 @@ public class PuntoEquilibrio {
     
     public float numVentasPEU()
     {
-        String PE = calcularPE();
+        String PE = calcularPEU();
         return Float.valueOf(PE)/precioVentaU;
     }
     
@@ -173,6 +175,44 @@ public class PuntoEquilibrio {
         float cvu = obtenerCostosVariablesUnitarios();
         float nv = numVentasPEU();
         return nv*cvu*precioVentaU;
+    }
+    
+    public ArrayList<String> obtenerDatos(String cuenta)
+    {
+        ArrayList<String> datos = new ArrayList();
+        String llave;
+        
+        Iterator it = cuentasSF.keySet().iterator();
+        
+        while(it.hasNext())
+        {
+            llave = it.next().toString();
+            
+            if (llave.contains(cuenta))
+            {
+                datos = cuentasSF.get(llave);
+                break;
+            }
+        }
+        
+        if(datos.isEmpty())
+        {
+            Iterator itr = cuentasER.keySet().iterator();
+        
+        while(itr.hasNext())
+        {
+            llave = itr.next().toString();
+            
+            if (llave.contains(cuenta))
+            {
+                datos = cuentasER.get(llave);
+                break;
+            }
+        }
+        }
+              
+        
+        return datos;
     }
     
 }

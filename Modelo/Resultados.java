@@ -71,7 +71,7 @@ public class Resultados implements EstadoFinanciero {
             aux = cuenta.get(0); //Obteniendo los valores de la cuenta de ventas
             datos = aux.split(",");
             a = Float.valueOf(datos[1]);
-            wr.println(datos[0] +" "+ datos[1] );
+            wr.println(formatocuentas(datos[0], datos[1]));
             
             wr.println("Menos");
             
@@ -79,11 +79,11 @@ public class Resultados implements EstadoFinanciero {
             aux = cuenta.get(0); //Obteniendo los valores de la cuenta de Costo de ventas
             datos = aux.split(",");
             b = Float.valueOf(datos[1]);
-            wr.println(datos[0] +" "+ datos[1] );
+            wr.println(formatocuentas(datos[0], datos[1]));
             
             suma = a-b;
             
-            wr.println("Utilidad bruta  "+String.valueOf(suma));
+            wr.println(formatocuentas("Utlidad bruta",String.valueOf(suma)));
             aux = String.valueOf(suma);
             utilidades.add(aux);
             
@@ -102,7 +102,9 @@ public class Resultados implements EstadoFinanciero {
                 aux = cuenta.get(i);
                 datos = aux.split(",");
                 //System.out.println(datos[0] +"\t "+ datos[1]);
-                wr.println(datos[0]+ " "+datos[1]);
+                //wr.println(datos[0]+ " "+datos[1]);
+                wr.println(formatocuentas(datos[0], datos[1]));
+
                 gastos = gastos + Float.valueOf(datos[1]);
             }
             
@@ -110,7 +112,7 @@ public class Resultados implements EstadoFinanciero {
             
             if (calcularamortizaconydepresiacion){
                 suma = a-b-gastos-this.getAmortizacionDepresiacion();
-                System.out.println("La amoritzacoin y dpresiacion es ****" +this.getAmortizacionDepresiacion());
+                System.out.println("La amoritzacoin y depresiacion es ****" +this.getAmortizacionDepresiacion());
             }
             
             /*
@@ -132,7 +134,8 @@ public class Resultados implements EstadoFinanciero {
                 datos = aux.split(",");
                 a = Float.valueOf(datos[1]);
                 wr.println("Menos");
-                wr.println(datos[0] +" "+ datos[1] );
+                wr.println(formatocuentas(datos[0], datos[1]));
+
                 }
                 if ((cuenta = obtenerCuentasde("productos", "productos")).size()>0)
                 {
@@ -141,14 +144,15 @@ public class Resultados implements EstadoFinanciero {
                 datos = aux.split(",");
                 b = Float.valueOf(datos[1]);
                 wr.println("Mas");
-                wr.println(datos[0] +" "+ datos[1] );
+                wr.println(formatocuentas(datos[0], datos[1]));
+
                 }
                 suma =  suma + b - a; 
-                wr.println("Utilidad neta \t "+suma);
+                 wr.println(formatocuentas("Utlidad neta",String.valueOf(suma)));
             }
             else
             {
-                wr.println("Utilidad neta \t" +suma);
+                wr.println(formatocuentas("Utlidad neta",String.valueOf(suma)));
             }
             
             /*
@@ -195,6 +199,25 @@ public class Resultados implements EstadoFinanciero {
         
         
         
+    }
+    
+     public String formatocuentas(String cuenta, String saldo)
+    {
+        int espacios = 20;
+        String formato = "";
+        
+        for (int i = 0; i < espacios; i++) {
+            
+            if(i<cuenta.length()){
+                formato = formato + cuenta.charAt(i);
+            }
+            else{
+                formato = formato + " ";
+            }
+        }
+        formato = formato + " "+saldo;
+        
+        return formato;
     }
     public void modificarValorCuenta(String cuentaModificar, String nuevoSaldo)
     {
@@ -466,6 +489,26 @@ public class Resultados implements EstadoFinanciero {
                 
         
         return nombre;
+    }
+       public float obtenerSaldodeLlave(String nombrecuenta)
+    {
+        float saldo = 0;
+        String nombre;
+        Iterator it = cuentas.keySet().iterator();
+        ArrayList <String> cuenta;
+        
+        while(it.hasNext()){
+            nombre = it.next().toString();
+           
+            if(nombre.contains(nombrecuenta))
+            {
+                cuenta = (ArrayList<String>) cuentas.get(nombre);
+                saldo += Float.valueOf(cuenta.get(0));
+            }
+            
+        }
+        
+        return saldo;
     }
     
     /*

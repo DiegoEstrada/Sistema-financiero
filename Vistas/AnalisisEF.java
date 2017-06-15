@@ -5,12 +5,14 @@
  */
 package Vistas;
 
+import Modelo.Analisis.Horizontal.PuntoEquilibrio;
 import Modelo.Analisis.Vertical.BenchMarking;
 import Modelo.Analisis.Vertical.PorcientosIntegrados;
 import Modelo.Analisis.Vertical.RazonesFinancieras;
 import Modelo.Resultados;
 import Modelo.SituacionFinanciera;
 import java.io.File;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Map;
 import javax.swing.DefaultListModel;
@@ -688,27 +690,47 @@ public class AnalisisEF extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         //Calculo del pe y PEU
-        int porcentaje;
+        float porcentaje;
+        float preciounitario;
         String s=null;
+        String precio=null;
         
         try {
             do
             {
                 s=Ventana.setValue("Introduce el porcentaje de ventas esperado:");
+                precio=Ventana.setValue("Introduce el precio de venta unitario:");
             }while(s.equals("") || s==null);
         } catch (Exception e) {
         }
         
-        porcentaje=Integer.parseInt(s);
+        porcentaje=Float.parseFloat(s);
+        preciounitario=Float.parseFloat(precio);
         
-        Ventana.ShowInformationMessage("Valor introducido="+porcentaje);
+        PuntoEquilibrio peu = new PuntoEquilibrio(porcentaje, preciounitario, erX.getCuentas(),sfX.importarNombreySaldo());
+        
+        DecimalFormat df = new DecimalFormat("0.00"); 
+        
+        float valpeu;
+        valpeu = Float.parseFloat(peu.calcularPEU());
+        //nventas = Float.parseFloat(peu.numVentasPEU());
+        //cvt = Float.parseFloat(peu.c)
+        
+        Ventana.ShowInformationMessage("Punto de equilibrio con  "+porcentaje+" % de utilidad = "+Redondear(valpeu, 2));
+        Ventana.ShowInformationMessage("Número de ventas = "+Redondear(peu.numVentasPEU(), 2));
+        Ventana.ShowInformationMessage("Costo variable total = "+Redondear(peu.cvtPEU(), 2));
     }//GEN-LAST:event_btPUActionPerformed
 
     private void jrbRazonesyBMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbRazonesyBMActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jrbRazonesyBMActionPerformed
 
-    
+     public static double Redondear(double numero,int digitos)
+    {
+      int cifras=(int) Math.pow(10,digitos);
+      return Math.rint(numero*cifras)/cifras;
+    }
+     
     public  void agregarEdoFinancieroLista(DefaultListModel lista, File estado)
     {
         String defecto = "Ningun elemento seleccionado";

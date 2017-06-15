@@ -95,6 +95,12 @@ public class SituacionFinanciera implements EstadoFinanciero {
         PrintWriter wr;
         ArrayList<String> cuenta = new ArrayList<>(); 
         String datos[], aux; 
+        String ordenAC[] = {"Caja","Bancos","Almacen","Clientes","Deudores","Documentos por cobrar"};
+        String ordenAF[] = {"Terrenos","Edificios","Mobiliario y equipo","Equipo de reparto","Equipo de transporte","Equipo de computo"};
+        String ordenAD[] = {"Gastos de instalacion","Gastos de organizacion"};
+        String ordenPC[] = {"Proveedores","Deudores","Acreedores","Documentos por pagar"};
+        String ordenPF[] = {"Documentos por pagar a largo plazo","Acreedores hipotecarios"};
+                
         String nombrear = f.getName();
         float suma=0;
         int t,i;
@@ -106,11 +112,12 @@ public class SituacionFinanciera implements EstadoFinanciero {
         bw=new BufferedWriter(w);
         wr=new PrintWriter(bw);
         
-        wr.println("\t\t\t\t\tEstado de situación financira de "+nombrear+ "\t\t\t\t\t");
+        wr.println("\t\t\t\t\t"+nombrear+ "\t\t\t\t\t");
         wr.println("Activo");
         //Se comienzan a escribir las cuentas de activo cieculante, sus saldo y su suma 
         wr.println("Circulante");
         cuenta = obtenerCuentasde( "Activo", "Circulante");
+        cuenta = ordenarCuentas(cuenta, ordenAC);
         suma = obtenerSaldode("Activo", "Circulante");
         t = cuenta.size();
             //System.out.println("Tamño "+t);
@@ -119,11 +126,13 @@ public class SituacionFinanciera implements EstadoFinanciero {
           aux = cuenta.get(i);
           datos = aux.split(",");
             //System.out.println(datos[0] +"\t "+ datos[1]);
-            wr.println(datos[0]+ " "+datos[1]);
+            //wr.println(datos[0]+ " "+datos[1]);
+            wr.println(formatocuentas(datos[0], datos[1]));
             
         }
         
-        wr.println("Suma activo circulante  "+suma); //se llama a la suma de activo circulante
+        //wr.println("Suma activo circulante  "+suma); //se llama a la suma de activo circulante
+        wr.println(formatocuentas("Suma activo circulante",String.valueOf(suma)));
         
         //Se comineza a escribir las cuentas de activo fijo, sus saldos y su suma
         
@@ -142,12 +151,13 @@ public class SituacionFinanciera implements EstadoFinanciero {
         double depresiacionequcomputo = (equipocomputo*0.33);
         
         double depresacionacumulada = depresiacionedificios + depresiacionmobiliario + depresiacionequiporep + depresiacionequipotransp + depresiacionequcomputo;
-        
+       
         
         cuenta = obtenerCuentasde("Activo", "Fijo");
+        cuenta = ordenarCuentas(cuenta, ordenAF);
         suma = obtenerSaldode("Activo", "Fijo");
         if(calcularamortizaconydepresiacion){
-        suma = suma - (float)depresacionacumulada;
+        suma = suma - (int)depresacionacumulada;
         }
         t = cuenta.size();
             //System.out.println("Tamño "+t);
@@ -156,14 +166,16 @@ public class SituacionFinanciera implements EstadoFinanciero {
           aux = cuenta.get(i);
           datos = aux.split(",");
             //System.out.println(datos[0] +"\t "+ datos[1]);
-            wr.println(datos[0]+" "+datos[1]);
+            //wr.println(datos[0]+" "+datos[1]);
+            wr.println(formatocuentas(datos[0], datos[1]));
             
         }
         if (calcularamortizaconydepresiacion){
-        wr.println("Depreciacion acumulada "+(float) depresacionacumulada);
+        //wr.println("Depreciacion acumulada "+(int) depresacionacumulada);
+        wr.println(formatocuentas("Depresiacion acumulada",""+(int)depresacionacumulada));
         }
-        wr.println("Suma activo fijo  "+suma); //se llama a la suma de activo fijo 
-        
+        //wr.println("Suma activo fijo  "+suma); //se llama a la suma de activo fijo 
+        wr.println(formatocuentas("Suma activo fijo",String.valueOf(suma)));
         
         //Se comienza aescribir las cuentas de activo diferido, sus saldos y su suma 
         
@@ -176,9 +188,10 @@ public class SituacionFinanciera implements EstadoFinanciero {
         double amoriizacionacumulada = amortizaciongastosinst + amortizaciongastosorg;
         
         cuenta = obtenerCuentasde("Activo", "Diferido");
+        cuenta = ordenarCuentas(cuenta, ordenAD);
         suma = obtenerSaldode("Activo", "Diferido");
         if(calcularamortizaconydepresiacion){
-        suma  = suma - (float)amoriizacionacumulada;
+        suma  = suma - (int)amoriizacionacumulada;
         }
         t = cuenta.size();
             //System.out.println("Tamño "+t);
@@ -187,27 +200,31 @@ public class SituacionFinanciera implements EstadoFinanciero {
           aux = cuenta.get(i);
           datos = aux.split(",");
             //System.out.println(datos[0] +"\t "+ datos[1]);
-            wr.println(datos[0]+ " "+datos[1]);
+            //wr.println(datos[0]+ " "+datos[1]);
+            wr.println(formatocuentas(datos[0], datos[1]));
             
         }
         
         if(calcularamortizaconydepresiacion){
-        wr.println("Amortizacion acumulada "+(float)amoriizacionacumulada);
+        wr.println(formatocuentas("Amortizacion acumulada",""+(int)amoriizacionacumulada));
         }
-        wr.println("Suma activo diferio  "+suma); //se llama a la suma de activo fijo 
+        //wr.println("Suma activo diferio  "+suma); //se llama a la suma de activo fijo 
+        wr.println(formatocuentas("Suma activo diferido",String.valueOf(suma)));
         
         suma = obtenerSaldode("Activo", "Activo");
         if(calcularamortizaconydepresiacion){
-        suma = suma - (float)depresacionacumulada - (float)amoriizacionacumulada;
+        suma = suma - (int)depresacionacumulada - (int)amoriizacionacumulada;
         }
         
-        wr.println("Suma de activo   "+suma); //se llama a la suma de activo total 
+        //wr.println("Suma de activo   "+suma); //se llama a la suma de activo total 
+        wr.println(formatocuentas("Suma de activo",String.valueOf(suma)));
         
         //Se comeinzan a escribir las cuentas de pasivo circulante, sus saldos y su suma
         wr.println("Pasivo");
         
         wr.println("Circulante");
         cuenta = obtenerCuentasde("Pasivo", "Circulante");
+        cuenta = ordenarCuentas(cuenta, ordenPC);
         suma = obtenerSaldode("Pasivo", "Circulante");
         t = cuenta.size();
             //System.out.println("Tamño "+t);
@@ -216,17 +233,18 @@ public class SituacionFinanciera implements EstadoFinanciero {
           aux = cuenta.get(i);
           datos = aux.split(",");
             //System.out.println(datos[0] +"\t "+ datos[1]);
-            wr.println(datos[0]+ " "+datos[1]);
+            wr.println(formatocuentas(datos[0], datos[1]));
             
         }
         
-        wr.println("Suma pasivo circulante  "+suma); //se llama a la suma de activo fijo 
-        
+        //wr.println("Suma pasivo circulante  "+suma); //se llama a la suma de activo fijo 
+        wr.println(formatocuentas("Suma pasivo circulante",String.valueOf(suma)));
         
         //Se comienza a escribir las cuentas de pasivo fijo, sus saldos y su suma
         
         wr.println("Fijo");
         cuenta = obtenerCuentasde("Pasivo", "Fijo");
+        cuenta = ordenarCuentas(cuenta, ordenPF);
         suma = obtenerSaldode("Pasivo", "Fijo");
         t = cuenta.size();
             //System.out.println("Tamño "+t);
@@ -235,12 +253,12 @@ public class SituacionFinanciera implements EstadoFinanciero {
           aux = cuenta.get(i);
           datos = aux.split(",");
             //System.out.println(datos[0] +"\t "+ datos[1]);
-            wr.println(datos[0]+ " "+datos[1]);
+            wr.println(formatocuentas(datos[0], datos[1]));
             
         }
         
-        wr.println("Suma pasivo fijo  "+suma+""); //se llama a la suma de pasivo fijo 
-        
+       //wr.println("Suma pasivo fijo  "+suma+""); //se llama a la suma de pasivo fijo 
+         wr.println(formatocuentas("Suma pasivo fijo",String.valueOf(suma)));
         
         
         //Se cominezan a escribir las cuentas de capital, sus saldos y suma
@@ -255,7 +273,7 @@ public class SituacionFinanciera implements EstadoFinanciero {
        
           aux = cuenta.get(0);
           datos = aux.split(",");
-          wr.println(datos[0]+ " "+datos[1]);
+          wr.println(formatocuentas(datos[0], datos[1]));
            
           auxsuma += suma;
         
@@ -263,25 +281,28 @@ public class SituacionFinanciera implements EstadoFinanciero {
         cuenta = obtenerCuentasde("Capital", "Utilidad neta");
         suma = obtenerSaldode("Capital", "Utilidad neta");
         if(calcularamortizaconydepresiacion){
-        suma = suma - (float)amoriizacionacumulada - (float)depresacionacumulada;
+        suma = suma - (int)amoriizacionacumulada - (int)depresacionacumulada;
         }
           aux = cuenta.get(0);
           datos = aux.split(",");
           float s = Float.parseFloat(datos[1]);
             //System.out.println("--------------------------"+s);
             if(calcularamortizaconydepresiacion){
-            s = s - (float)amoriizacionacumulada - (float)depresacionacumulada;
+            s = s - (int)amoriizacionacumulada - (int)depresacionacumulada;
             }
-          wr.println(datos[0]+ " "+s);
+         //wr.println(datos[0]+ " "+s);
+         wr.println(formatocuentas(datos[0], ""+s));
         
           
         auxsuma += suma;
         
-        wr.println("Suma capital  "+auxsuma+""); //se llama a la suma de capital 
+        //wr.println("Suma capital  "+auxsuma+""); //se llama a la suma de capital 
+        wr.println(formatocuentas("Suma capital",String.valueOf(auxsuma)));
         
         suma = obtenerSaldode("Pasivo", "Pasivo");
         
-        wr.println("Suma pasivo y capital  "+(suma+auxsuma)+""); //se llama a la suma de activo fijo 
+       //wr.println("Suma pasivo y capital  "+(suma+auxsuma)+""); //se llama a la suma de activo fijo 
+       wr.println(formatocuentas("Suma de pasivo y capital",String.valueOf(suma+auxsuma)));
         
         wr.close();
         bw.close();
@@ -324,6 +345,35 @@ public class SituacionFinanciera implements EstadoFinanciero {
         } catch (IOException ex) {
             System.out.println("Excepcon IO leer archivo Situacion Financiera "+ex.getMessage());
         }
+    }
+    
+    public  ArrayList<String> ordenarCuentas(ArrayList<String> datos, String orden[])
+    {
+        ArrayList<String> ordenadas = new ArrayList();
+        int t = datos.size();
+        //String orden[] = {"Caja","Bancos","Almacen","Clientes","Deudores","Documentos por cobrar"};
+        String leyendo;
+        
+        for (int i = 0; i < orden.length; i++) { //Buscando la palabra de orden
+            for (int j = 0; j < t; j++) { //Buscando en todos los elementos de ArrayList
+                
+                leyendo = datos.get(j);
+                
+                if (leyendo.contains(orden[i])) {
+                    ordenadas.add(leyendo);
+                    break;
+                }
+                
+            }
+            
+        }
+        
+        if(ordenadas.size()==datos.size())
+            System.out.println("SE ORDENARON CORRECTAMENTE");
+        else
+            System.out.println("FALTAN CUENTAS POR AGREGAR");
+        
+        return ordenadas;
     }
     
     public void modificarValorCuenta(String cuentaModificar, String nuevoSaldo)
@@ -483,6 +533,25 @@ public class SituacionFinanciera implements EstadoFinanciero {
         edo = (sumaactivo==(sumapasivo+sumacapital))?true:false; //OK
         
         return edo;
+    }
+    
+    public String formatocuentas(String cuenta, String saldo)
+    {
+        int espacios = 35;
+        String formato = "";
+        
+        for (int i = 0; i < espacios; i++) {
+            
+            if(i<cuenta.length()){
+                formato = formato + cuenta.charAt(i);
+            }
+            else{
+                formato = formato + " ";
+            }
+        }
+        formato = formato + " "+saldo;
+        
+        return formato;
     }
     
     

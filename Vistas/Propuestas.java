@@ -7,11 +7,17 @@ package Vistas;
 
 import Modelo.Resultados;
 import Modelo.SituacionFinanciera;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -26,6 +32,14 @@ public class Propuestas extends javax.swing.JFrame {
     private Resultados er;
     private SituacionFinanciera sfProforma;
     private Resultados erProforma;
+    private ArrayList<String> historia;
+    private ArrayList<String> ingresos;
+    private ArrayList<String> egresoas;
+    private float cajaoriginal;
+    private float bancooriginal;
+    private File archivoHistoria;
+    private File archivoFlujo;
+    
     //private Map<String,ArrayList<String>> cuentasModificadasSF;
     //private Map<String,ArrayList<String>> cuentasModificadasER;
     private DefaultListModel lista;
@@ -42,6 +56,12 @@ public class Propuestas extends javax.swing.JFrame {
         //cuentasModificadasER = er.getCuentas();
         //cuentasModificadasSF = sf.getCuentas();
         
+        this.cajaoriginal = sf.obtenerSaldodeLlave("Caja");
+        this.bancooriginal =sf.obtenerSaldodeLlave("Bancos");
+        
+        this.historia = new ArrayList();
+        this.ingresos = new ArrayList();
+        this.egresoas = new ArrayList();
         
         
         String rutaoriginal = this.sf.getF().getParent();
@@ -50,6 +70,8 @@ public class Propuestas extends javax.swing.JFrame {
         String nombresProformaER = nombres[1];
         File proformaSF = new File(rutaoriginal+"\\"+nombreProformaSF);
         File proformaER = new File(rutaoriginal+"\\"+nombresProformaER);
+        archivoHistoria = new File(rutaoriginal+"\\MovimientosRealizados.txt");
+        archivoFlujo = new File(rutaoriginal+"\\EstadoFlujoEfectivo.txt");
         
         //System.out.println(proformaSF);
         //System.out.println(proformaER);
@@ -82,6 +104,8 @@ public class Propuestas extends javax.swing.JFrame {
         
         cargarCuentasCB();
     }
+    
+    
 
     public void cargarCuentasCB()
     {
@@ -165,6 +189,8 @@ public class Propuestas extends javax.swing.JFrame {
         jlCambios.setModel(lista);
     }
     
+    
+    
     public Map<String,ArrayList<String>> filtrarCuentasSuma()
     {
         String palabraAquitarSF = "Suma";
@@ -190,6 +216,146 @@ public class Propuestas extends javax.swing.JFrame {
        
         
         return cuentasFiltradas;
+    }
+    
+    public void escribirER()
+    {
+        try {
+            FileWriter w;
+            BufferedWriter bw;
+            PrintWriter wr;
+            float s = 0;
+            float r = 0;
+           
+            //f = new File(nomEdoFin);
+            w = new FileWriter(this.archivoFlujo);
+            bw=new BufferedWriter(w);
+            wr=new PrintWriter(bw);
+            
+            wr.println("\t\t\t Estado de flujos de efectivo  \t\t\t");
+            //float caja = sfProforma.obtenerSaldodeLlave("Caja");
+            //float bancos = sfProforma.obtenerSaldodeLlave("Bancos");
+            float bc = this.cajaoriginal + this.bancooriginal;
+            System.out.println("CAJA + BANCOS = "+bc);
+            wr.println(formatocuentas("Saldo inicial", String.valueOf(bc)));
+            wr.println("Ingresos");
+            for (int i = 0; i < this.ingresos.size(); i++) {
+            
+                s = s + obtnerSaldoCadena(ingresos.get(i));
+                
+                wr.println(ingresos.get(i));
+            }
+            wr.println(formatocuentas("Suma ingresos", String.valueOf(s)));
+            
+            wr.println("Egresos");
+            for (int i = 0; i < this.egresoas.size(); i++) {
+                 r = r + obtnerSaldoCadena(egresoas.get(i));
+                
+                wr.println(egresoas.get(i));
+            }
+            wr.println(formatocuentas("Suma egresos", String.valueOf(r)));
+            float u =bc+s-r;
+            wr.println(formatocuentas("Saldo final", String.valueOf(u)));
+            
+            wr.close();
+            bw.close();
+        } catch (IOException ex) {
+            System.out.println("Excepcion en EscribirER ->"+ex.getMessage());
+        }
+    }
+    
+    public float obtnerSaldoCadena(String linea)
+    {
+        String saldo = "";
+        float retorno = 0;
+        
+        for (int i = 0; i < linea.length(); i++) {
+            
+            if(((linea.charAt(i)==32) ||(linea.charAt(i)>=65 && linea.charAt(i)<=90) || ((linea.charAt(i)>=97 && linea.charAt(i)<=122)))) //Mentras este leyendo un caracter en lugar de un numero en codigo ascii
+                {
+                    //cuenta += linea.charAt(i);
+                }
+                else
+                {
+                    saldo += linea.charAt(i);
+                } 
+            
+        }
+        
+        retorno = Float.parseFloat(saldo);
+        System.out.println("SALDO A RERTORNAR->"+retorno);
+        return retorno;
+    }
+    
+     public static double Redondear(double numero,int digitos)
+    {
+      int cifras=(int) Math.pow(10,digitos);
+      return Math.rint(numero*cifras)/cifras;
+    }
+     
+    public String quitarEspacios(String cadena)
+    {
+        String limpia = "";
+        int espacios = 0;
+        
+        for (int i = 0; i < cadena.length(); i++) {
+            if (espacios < 7)
+            {
+                limpia = limpia + cadena.charAt(i);
+            }
+            else{
+                break;
+            }
+            
+            if(cadena.charAt(i)==32)
+            {
+                espacios++;
+            }
+        }
+        return limpia;
+    }
+     
+    public void escribirHistoria() throws IOException
+    {
+            FileWriter w;
+            BufferedWriter bw;
+            PrintWriter wr;
+            
+            
+           
+            //f = new File(nomEdoFin);
+            w = new FileWriter(this.archivoHistoria);
+            bw=new BufferedWriter(w);
+            wr=new PrintWriter(bw);
+            
+            wr.println("\t\t\t Movimientos Realizados  \t\t\t");
+            
+            for (int i = 0; i < this.historia.size(); i++) {
+            
+                wr.println(this.historia.get(i));
+            }
+            
+        wr.close();
+        bw.close();
+    }
+    
+     public String formatocuentas(String cuenta, String saldo)
+    {
+        int espacios = 23;
+        String formato = "";
+        
+        for (int i = 0; i < espacios; i++) {
+            
+            if(i<cuenta.length()){
+                formato = formato + cuenta.charAt(i);
+            }
+            else{
+                formato = formato + " ";
+            }
+        }
+        formato = formato + " "+saldo;
+        
+        return formato;
     }
     
     public Map<String, ArrayList<String>> filtrarCuentasUtilidad()
@@ -360,6 +526,7 @@ public class Propuestas extends javax.swing.JFrame {
         
         String cuentaACambiar = obtenerNombreSeleccionadaCB();
         String cuentaActual;
+        float dif = 0;
         ArrayList<String> datos;
       
         Map<String, ArrayList<String>> cuentasModificadasER = erProforma.getCuentas();
@@ -379,12 +546,35 @@ public class Propuestas extends javax.swing.JFrame {
             
                 if(!this.txtNuevoSaldo.getText().isEmpty())
                 {
-                    //nuevosDatos.add(this.txtNuevoSaldo.getText());
-                    //datos.set(0, txtNuevoSaldo.getText());
-                    //erProforma.eliminarCuenta(cuentaActual);
-                    erProforma.agregarCuenta(cuentaActual, this.txtNuevoSaldo.getText());
-                    agregarElemntoAJLista("Cuenta "+ cuentaActual+ " de Estado de Resultados modifcada con "+this.txtNuevoSaldo.getText());
-                    System.out.println("Cuenta en ER "+ cuentaActual+ " modificada con "+ this.txtNuevoSaldo.getText());
+                    
+                    this.historia.add("Modificando "+ cuentaACambiar+ " de "+datos.get(0)+ " por  "+this.txtNuevoSaldo.getText());
+
+                    if(cuentaActual.contains("Proveedores") || cuentaActual.contains("Acreedores") || cuentaActual.contains("Deudores") || cuentaActual.contains("Documentos por pagar")){
+                        dif = sf.obtenerSaldodeLlave(cuentaActual);
+                        dif = dif -Float.parseFloat(this.txtNuevoSaldo.getText());
+                        egresoas.add(formatocuentas(cuentaACambiar, String.valueOf(dif)));
+                    }
+                    else if(cuentaActual.contains("Ventas")){
+                        
+                        dif = er.obtenerSaldodeLlave(cuentaActual);
+                        dif = dif-Float.parseFloat(this.txtNuevoSaldo.getText());
+                        ingresos.add(formatocuentas(cuentaACambiar, String.valueOf(dif)));
+                    }
+                    
+                    else if(cuentaActual.contains("Documentos por cobrar")){
+                        
+                        dif = sf.obtenerSaldodeLlave(cuentaActual);
+                        dif = dif-Float.parseFloat(this.txtNuevoSaldo.getText());
+                        ingresos.add(formatocuentas(cuentaACambiar, String.valueOf(dif)));
+                    }
+                    
+                    
+                    erProforma.modificarValorCuenta(cuentaACambiar, this.txtNuevoSaldo.getText());
+                    //erProforma.agregarCuenta(cuentaActual, this.txtNuevoSaldo.getText());
+                    
+                    
+                    agregarElemntoAJLista("Cuenta "+ cuentaACambiar+ " de Estado de Resultados modifcada con "+this.txtNuevoSaldo.getText());
+                    System.out.println("Cuenta en ER "+ quitarEspacios(cuentaACambiar)+ " modificada con "+ this.txtNuevoSaldo.getText());
                     break;
                 }
                 //else
@@ -397,24 +587,40 @@ public class Propuestas extends javax.swing.JFrame {
         }
         
         
+        datos = null;
         
         Iterator itSF = cuentasModificadasSF.keySet().iterator();
         
         while(itSF.hasNext())
         {
             cuentaActual = itSF.next().toString(); // contiene la llave de la cuenta en iteracion 
+            datos = cuentasModificadasSF.get(cuentaActual);
             
             if(cuentaActual.contains(cuentaACambiar))
             {
-                datos = cuentasModificadasSF.get(cuentaACambiar);
-            
+               
                 if(!this.txtNuevoSaldo.getText().isEmpty())
                 {
-                    sf.modificarValorCuenta(cuentaACambiar, this.txtNuevoSaldo.getText());
+                    //System.out.println(datos.size());
+                    
+                    this.historia.add("Modificando "+ cuentaACambiar+ " de "+datos.get(2)+ " por  "+this.txtNuevoSaldo.getText());
+                    
+                    if(cuentaActual.contains("Proveedores") || cuentaActual.contains("Acreedores") || cuentaActual.contains("Deudores") || cuentaActual.contains("Documentos por pagar")){
+                        dif = sf.obtenerSaldodeLlave(cuentaActual);
+                        dif = dif -Float.parseFloat(this.txtNuevoSaldo.getText());
+                        egresoas.add(formatocuentas(cuentaACambiar, String.valueOf(dif)));
+                    }
+                    else if(cuentaActual.contains("Ventas") || cuentaActual.contains("Documentos por cobrar")){
+                        dif = sf.obtenerSaldodeLlave(cuentaActual);
+                        dif = dif-Float.parseFloat(this.txtNuevoSaldo.getText());
+                        ingresos.add(formatocuentas(cuentaACambiar, String.valueOf(dif)));
+                    }
+                    
+                    sfProforma.modificarValorCuenta(cuentaACambiar, this.txtNuevoSaldo.getText());
                     //sfProforma.eliminarCuenta(cuentaActual);
                     //sfProforma.agregarCuenta(cuentaActual, datos.get(0), datos.get(1), this.txtNuevoSaldo.getText());
-                    agregarElemntoAJLista("Cuenta "+ cuentaActual+ " de Estado de Situación  modifcada con "+this.txtNuevoSaldo.getText());
-                    System.out.println("Cuenta en SF "+ cuentaActual+ " modificada con "+ this.txtNuevoSaldo.getText());
+                    agregarElemntoAJLista("Cuenta "+ cuentaACambiar+ " de Estado de Situación  modifcada con "+this.txtNuevoSaldo.getText());
+                    System.out.println("Cuenta en SF "+ quitarEspacios(cuentaACambiar)+ " modificada con "+ this.txtNuevoSaldo.getText());
                     break;
                 }
                 
@@ -427,35 +633,45 @@ public class Propuestas extends javax.swing.JFrame {
             }
             
         }
+        
+        
+        
+        
     }//GEN-LAST:event_btModificarActionPerformed
 
     private void jbRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRegistrarActionPerformed
 
         if(this.sfProforma.verificarEstado())
         {
-           System.out.println("Cuentas bien");
-            this.sfProforma.crearEstadoFinanciero(true);
-            
-            this.sfProforma.leerEstadoFinanciero();
-                    
-            float a = sfProforma.obtenerSaldodeLlave("Amortizacion");
-            float d = sfProforma.obtenerSaldodeLlave("Depreciacion");
-            System.out.println("AMORTIZACION->>>>>"+a);
-            System.out.println("DEPRESICACION->>>>"+d);
-        
-        
-            this.erProforma.setAmprtizacionDepresiacion(a+d);
-            this.erProforma.crearEstadoFinanciero(true);
-        
-            
-            
-            Ventana.ShowInformationMessage("¡Modificaciones realizadas con exito!");
-            File fSF= this.sf.getF();
-            File fER= this.er.getF();
-            
-            AnalisisEF EF = new AnalisisEF(fSF, fER);
-            EF.setVisible(true);
-            this.setVisible(false);
+            try {
+                System.out.println("Cuentas bien");
+                this.sfProforma.crearEstadoFinanciero(true);
+                
+                this.sfProforma.leerEstadoFinanciero();
+                
+                float a = sfProforma.obtenerSaldodeLlave("Amortizacion");
+                float d = sfProforma.obtenerSaldodeLlave("Depresiacion");
+                System.out.println("AMORTIZACION->>>>>"+a);
+                System.out.println("DEPRESICACION->>>>"+d);
+                
+                
+                this.erProforma.setAmprtizacionDepresiacion(a+d);
+                this.erProforma.crearEstadoFinanciero(true);
+                
+                
+                escribirHistoria();
+                escribirER();
+                
+                Ventana.ShowInformationMessage("¡Modificaciones realizadas con exito!");
+                File fSF= this.sf.getF();
+                File fER= this.er.getF();
+                
+                AnalisisEF EF = new AnalisisEF(fSF, fER);
+                EF.setVisible(true);
+                this.setVisible(false);
+            } catch (IOException ex) {
+                System.out.println("Excepcion en el netodojbRegistrarAction ->" +ex.getMessage());;
+            }
         }
     }//GEN-LAST:event_jbRegistrarActionPerformed
 

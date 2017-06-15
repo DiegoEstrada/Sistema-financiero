@@ -1,0 +1,32 @@
+					Estado de Situacion Financiera Procter de 2014.txt					
+Activo
+Circulante
+Caja                                22397
+Bancos                              31360
+Almacen                             89028
+Documentos por cobrar               24800
+Suma activo circulante              167585.0
+Fijo
+Edificios                           85045
+Mobiliario y equipo                 39709
+Equipo de reparto                   21960
+Equipo de computo                   2031
+Suma activo fijo                    148745.0
+Diferido
+Gastos de instalacion               2504
+Suma activo diferido                2504.0
+Suma de activo                      318834.0
+Pasivo
+Circulante
+Proveedores                         33857
+Acreedores                          13235
+Documentos por pagar                16849
+Suma pasivo circulante              63941.0
+Fijo
+Documentos por pagar a largo plazo  7523
+Suma pasivo fijo                    7523.0
+Capital
+Capital social                      126294
+Utilidad neta                       121076.0
+Suma capital                        247370.0
+Suma de pasivo y capital            318834.0

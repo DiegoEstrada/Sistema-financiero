@@ -1,0 +1,8 @@
+					Estado de Resultados Procter de 2014.txt					
+Ventas               168564
+Menos
+Costo de ventas      19893
+Utlidad bruta        148671.0
+Menos
+Gastos de operacion  27595
+Utlidad neta         121076.0
