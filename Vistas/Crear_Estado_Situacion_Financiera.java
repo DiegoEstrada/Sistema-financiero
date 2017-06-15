@@ -81,6 +81,7 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Crear Estado de Situación Financiera");
+        setResizable(false);
 
         Fondo.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -105,7 +106,7 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
-        jLabel1.setText("Presione el boton para crear un nuevo Estado de Situacion Financiera");
+        jLabel1.setText("Presione el botón para crear un nuevo Estado de Situacion Financiera");
 
         javax.swing.GroupLayout PanelCrearNuevoSFLayout = new javax.swing.GroupLayout(PanelCrearNuevoSF);
         PanelCrearNuevoSF.setLayout(PanelCrearNuevoSFLayout);

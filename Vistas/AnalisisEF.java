@@ -284,7 +284,7 @@ public class AnalisisEF extends javax.swing.JFrame {
 
         jbSFPorcientosDiferencias.setBackground(new java.awt.Color(255, 255, 255));
         jbSFPorcientosDiferencias.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jbSFPorcientosDiferencias.setText("Ver Diferencias y Porcientos de Situacioón financiera");
+        jbSFPorcientosDiferencias.setText("Ver Diferencias y Porcientos de Situación Financiera");
         jbSFPorcientosDiferencias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbSFPorcientosDiferenciasActionPerformed(evt);
@@ -293,7 +293,7 @@ public class AnalisisEF extends javax.swing.JFrame {
 
         jbERPorcientosDiefernecias.setBackground(new java.awt.Color(255, 255, 255));
         jbERPorcientosDiefernecias.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jbERPorcientosDiefernecias.setText("Ver Difernecias y Porcientos Estado de Resultados");
+        jbERPorcientosDiefernecias.setText("Ver Diferencias y Porcientos Estado de Resultados");
         jbERPorcientosDiefernecias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbERPorcientosDieferneciasActionPerformed(evt);
