@@ -9,3 +9,4 @@ el usuario y los creados por el sistema. El sistema no permite la lectura de arc
 no tenga las palabras "Resultados" y/o "Situación Financiera"; por lo cual se recomienda colocar como título a cada estado finaciero
 "Estado de Situacion Finaciera de ABCD de XXXX" o "Estado de Resultados de ABCD de XXXX". Donde ABCD es el nombre de la empresa y XXXX es el
 año en el cual se realizó ese estado financiero.
+Las carpetas ALSEA SAB y Procter & Gabmle contienen estados finacieros creados, analizados y modificados con el sistema con el fin de ejemplificar la manera recomendada para almacenar los estados financieros de una empresa.
