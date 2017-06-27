@@ -56,7 +56,7 @@ public class Resultados implements EstadoFinanciero {
             ArrayList<String> cuenta = new ArrayList<>();
             ArrayList<String> utilidades = new ArrayList<>();
             String datos[], aux;
-            float a,b,gastos=0,suma=0;
+            long a,b,gastos=0,suma=0;
             int i,t;
             
            
@@ -70,7 +70,7 @@ public class Resultados implements EstadoFinanciero {
             cuenta = obtenerCuentasde("Ventas", "Ventas");
             aux = cuenta.get(0); //Obteniendo los valores de la cuenta de ventas
             datos = aux.split(",");
-            a = Float.valueOf(datos[1]);
+            a = Long.valueOf(datos[1]);
             wr.println(formatocuentas(datos[0], datos[1]));
             
             wr.println("Menos");
@@ -78,7 +78,7 @@ public class Resultados implements EstadoFinanciero {
             cuenta = obtenerCuentasde("Costo", "Costo");
             aux = cuenta.get(0); //Obteniendo los valores de la cuenta de Costo de ventas
             datos = aux.split(",");
-            b = Float.valueOf(datos[1]);
+            b = Long.valueOf(datos[1]);
             wr.println(formatocuentas(datos[0], datos[1]));
             
             suma = a-b;
@@ -105,13 +105,13 @@ public class Resultados implements EstadoFinanciero {
                 //wr.println(datos[0]+ " "+datos[1]);
                 wr.println(formatocuentas(datos[0], datos[1]));
 
-                gastos = gastos + Float.valueOf(datos[1]);
+                gastos = gastos + Long.valueOf(datos[1]);
             }
             
             suma = a-b-gastos;
             
             if (calcularamortizaconydepresiacion){
-                suma = a-b-gastos-this.getAmortizacionDepresiacion();
+                suma = (long)(a-b-gastos-this.getAmortizacionDepresiacion());
                 System.out.println("La amoritzacoin y depresiacion es ****" +this.getAmortizacionDepresiacion());
             }
             
@@ -132,7 +132,7 @@ public class Resultados implements EstadoFinanciero {
                 cuenta = obtenerCuentasde("gastos", "gastos");
                 aux = cuenta.get(0); //Obteniendo los valores de la cuenta de otros gastos finacieros
                 datos = aux.split(",");
-                a = Float.valueOf(datos[1]);
+                a = Long.valueOf(datos[1]);
                 wr.println("Menos");
                 wr.println(formatocuentas(datos[0], datos[1]));
 
@@ -142,7 +142,7 @@ public class Resultados implements EstadoFinanciero {
                 cuenta = obtenerCuentasde("productos", "productos");
                 aux = cuenta.get(0); //Obteniendo los valores de la cuenta de otros gastos finacieros
                 datos = aux.split(",");
-                b = Float.valueOf(datos[1]);
+                b = Long.valueOf(datos[1]);
                 wr.println("Mas");
                 wr.println(formatocuentas(datos[0], datos[1]));
 

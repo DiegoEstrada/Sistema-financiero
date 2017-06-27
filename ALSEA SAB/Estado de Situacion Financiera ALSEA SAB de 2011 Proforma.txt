@@ -1,0 +1,37 @@
+					Estado de Situacion Financiera ALSEA SAB de 2011 Proforma.txt					
+Activo
+Circulante
+Caja                                1864044
+Bancos                              9142327
+Almacen                             2927887
+Clientes                            1040907
+Deudores                            550051
+Documentos por cobrar               2402157
+Suma activo circulante              17927372
+Fijo
+Edificios                           4240267
+Mobiliario y equipo                 336378
+Equipo de reparto                   413993
+Equipo de transporte                141911
+Equipo de computo                   54378
+Depresiacion acumulada              402571
+Suma activo fijo                    4784356
+Diferido
+Gastos de instalacion               26174
+Amortizacion acumulada              1308
+Suma activo diferido                24866
+Suma de activo                      22736595
+Pasivo
+Circulante
+Proveedores                         2191151
+Acreedores                          1946786
+Documentos por pagar                5157247
+Suma pasivo circulante              9295184
+Fijo
+Documentos por pagar a largo plazo  2273187
+Suma pasivo fijo                    2273187
+Capital
+Capital social                      7933488
+Utilidad neta                       3234736
+Suma capital                        11168224
+Suma de pasivo y capital            22736596

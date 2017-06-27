@@ -48,26 +48,26 @@ public class PuntoEquilibrio {
     
     public String calcularPEU()
     {
-        float peu=0;
+        long peu=0;
         
-        float cft = obtenerCostosFijosTotales();
+        long cft = obtenerCostosFijosTotales();
         float cvu = obtenerCostosVariablesUnitarios();
         
         
-        System.out.println("porcriento \t \t"+cvu);
+        System.out.println("porciento \t \t"+cvu);
         System.out.println("costos fijos (gastos op) \t \t"+cft);
         System.out.println("costos variables (costo ventas) \t \t"+costoVentasS);
         System.out.println("Utilidad "+utilidad);
         
         
-        peu = (cft+calcularUtlidad())/(1-(cvu*precioVentaU/precioVentaU));
+        peu = (long)  ( (cft+calcularUtlidad())/(1-(cvu*precioVentaU/precioVentaU)) );
         
         return String.valueOf(peu);
     }
     
-    public  float obtenerCostosFijosTotales()
+    public  long obtenerCostosFijosTotales()
     {
-        float cft=0;
+        long cft=0;
         String c="";
         ArrayList<String> aux = new ArrayList();
         Set s = cuentasER.keySet();
@@ -93,7 +93,7 @@ public class PuntoEquilibrio {
         {
             
            c = aux.get(0);
-           cft = Float.parseFloat(aux.get(0));
+           cft = Long.parseLong(aux.get(0));
         }
         else
             System.out.println("Las cuentas recibidas para calcular PEU y PE no son las correctas");
@@ -108,10 +108,10 @@ public class PuntoEquilibrio {
         //if (cuentasER.containsKey("Costo de ventas") && cuentasER.containsKey("Ventas")) 
         //{
             aux = obtenerDatos("Costo de ventas");
-            costoVentasS = Float.parseFloat(aux.get(0));
+            costoVentasS = Long.parseLong(aux.get(0));
             
             aux = obtenerDatos("Ventas");
-            cien = Float.parseFloat(aux.get(0));
+            cien = Long.parseLong(aux.get(0));
             
             cft = (costoVentasS)/(cien);
         //}
@@ -157,24 +157,24 @@ public class PuntoEquilibrio {
         return Float.valueOf(PEU)/precioVentaU;
     }
     
-    public float numVentasPEU()
+    public long numVentasPEU()
     {
         String PE = calcularPEU();
-        return Float.valueOf(PE)/precioVentaU;
+        return (long) (Float.valueOf(PE)/precioVentaU);
     }
     
-    public float cvtPE()
+    public long cvtPE()
     {
         float cvu = obtenerCostosVariablesUnitarios();
-        float nv = numVentasPE();
-        return nv*cvu*precioVentaU;
+        long nv = (long) numVentasPE();
+        return (long) (nv*cvu*precioVentaU);
     }
     
-    public float cvtPEU()
+    public long cvtPEU()
     {
         float cvu = obtenerCostosVariablesUnitarios();
-        float nv = numVentasPEU();
-        return nv*cvu*precioVentaU;
+        long nv = numVentasPEU();
+        return (long)(nv*cvu*precioVentaU);
     }
     
     public ArrayList<String> obtenerDatos(String cuenta)

@@ -102,7 +102,7 @@ public class SituacionFinanciera implements EstadoFinanciero {
         String ordenPF[] = {"Documentos por pagar a largo plazo","Acreedores hipotecarios"};
                 
         String nombrear = f.getName();
-        float suma=0;
+        long suma=0;
         int t,i;
         
         //f = new File(nomEdoFin);
@@ -118,7 +118,7 @@ public class SituacionFinanciera implements EstadoFinanciero {
         wr.println("Circulante");
         cuenta = obtenerCuentasde( "Activo", "Circulante");
         cuenta = ordenarCuentas(cuenta, ordenAC);
-        suma = obtenerSaldode("Activo", "Circulante");
+        suma = (long)obtenerSaldode("Activo", "Circulante");
         t = cuenta.size();
             //System.out.println("Tamño "+t);
         for(i = 0; i<t; i++)
@@ -155,7 +155,7 @@ public class SituacionFinanciera implements EstadoFinanciero {
         
         cuenta = obtenerCuentasde("Activo", "Fijo");
         cuenta = ordenarCuentas(cuenta, ordenAF);
-        suma = obtenerSaldode("Activo", "Fijo");
+        suma = (long)obtenerSaldode("Activo", "Fijo");
         if(calcularamortizaconydepresiacion){
         suma = suma - (int)depresacionacumulada;
         }
@@ -189,7 +189,7 @@ public class SituacionFinanciera implements EstadoFinanciero {
         
         cuenta = obtenerCuentasde("Activo", "Diferido");
         cuenta = ordenarCuentas(cuenta, ordenAD);
-        suma = obtenerSaldode("Activo", "Diferido");
+        suma = (long)obtenerSaldode("Activo", "Diferido");
         if(calcularamortizaconydepresiacion){
         suma  = suma - (int)amoriizacionacumulada;
         }
@@ -211,7 +211,7 @@ public class SituacionFinanciera implements EstadoFinanciero {
         //wr.println("Suma activo diferio  "+suma); //se llama a la suma de activo fijo 
         wr.println(formatocuentas("Suma activo diferido",String.valueOf(suma)));
         
-        suma = obtenerSaldode("Activo", "Activo");
+        suma = (long)obtenerSaldode("Activo", "Activo");
         if(calcularamortizaconydepresiacion){
         suma = suma - (int)depresacionacumulada - (int)amoriizacionacumulada;
         }
@@ -225,7 +225,7 @@ public class SituacionFinanciera implements EstadoFinanciero {
         wr.println("Circulante");
         cuenta = obtenerCuentasde("Pasivo", "Circulante");
         cuenta = ordenarCuentas(cuenta, ordenPC);
-        suma = obtenerSaldode("Pasivo", "Circulante");
+        suma = (long)obtenerSaldode("Pasivo", "Circulante");
         t = cuenta.size();
             //System.out.println("Tamño "+t);
         for(i = 0; i<t; i++)
@@ -245,7 +245,7 @@ public class SituacionFinanciera implements EstadoFinanciero {
         wr.println("Fijo");
         cuenta = obtenerCuentasde("Pasivo", "Fijo");
         cuenta = ordenarCuentas(cuenta, ordenPF);
-        suma = obtenerSaldode("Pasivo", "Fijo");
+        suma = (long)obtenerSaldode("Pasivo", "Fijo");
         t = cuenta.size();
             //System.out.println("Tamño "+t);
         for(i = 0; i<t; i++)
@@ -269,7 +269,7 @@ public class SituacionFinanciera implements EstadoFinanciero {
         
         
         cuenta = obtenerCuentasde("Capital", "Capital social");
-        suma = obtenerSaldode("Capital", "Capital social");
+        suma = (long)obtenerSaldode("Capital", "Capital social");
        
           aux = cuenta.get(0);
           datos = aux.split(",");
@@ -279,7 +279,8 @@ public class SituacionFinanciera implements EstadoFinanciero {
         
           
         cuenta = obtenerCuentasde("Capital", "Utilidad neta");
-        suma = obtenerSaldode("Capital", "Utilidad neta");
+        suma = (long)obtenerSaldode("Capital", "Utilidad neta");
+            System.out.println("EN LASE SF SUMA = "+suma);
         if(calcularamortizaconydepresiacion){
         suma = suma - (int)amoriizacionacumulada - (int)depresacionacumulada;
         }
@@ -288,21 +289,22 @@ public class SituacionFinanciera implements EstadoFinanciero {
           float s = Float.parseFloat(datos[1]);
             //System.out.println("--------------------------"+s);
             if(calcularamortizaconydepresiacion){
-            s = s - (int)amoriizacionacumulada - (int)depresacionacumulada;
+            s = s + (int)amoriizacionacumulada + (int)depresacionacumulada;
             }
          //wr.println(datos[0]+ " "+s);
-         wr.println(formatocuentas(datos[0], ""+s));
+         wr.println(formatocuentas(datos[0], ""+(long)suma));
         
           
         auxsuma += suma;
         
         //wr.println("Suma capital  "+auxsuma+""); //se llama a la suma de capital 
-        wr.println(formatocuentas("Suma capital",String.valueOf(auxsuma)));
+        wr.println(formatocuentas("Suma capital",""+(long)auxsuma));
         
-        suma = obtenerSaldode("Pasivo", "Pasivo");
+        suma = (long)obtenerSaldode("Pasivo", "Pasivo");
         
-       //wr.println("Suma pasivo y capital  "+(suma+auxsuma)+""); //se llama a la suma de activo fijo 
-       wr.println(formatocuentas("Suma de pasivo y capital",String.valueOf(suma+auxsuma)));
+       //wr.println("Suma pasivo y capital  "+(suma+auxsuma)+""); //se llama a la suma de activo fijo
+       long auxsumaux = (long)(suma+auxsuma);
+       wr.println(formatocuentas("Suma de pasivo y capital",""+(long)auxsumaux));
         
         wr.close();
         bw.close();

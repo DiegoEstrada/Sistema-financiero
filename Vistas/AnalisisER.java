@@ -11,6 +11,7 @@ import Modelo.Resultados;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,11 +20,18 @@ import javax.swing.table.DefaultTableModel;
  * @author Diego EG
  */
 public class AnalisisER extends javax.swing.JFrame {
-
+    
     Resultados erX; //X es el actual
     Resultados erY; // Y es el anterior
     public AnalisisER(Resultados actual, Resultados anterior) {
         initComponents();
+        
+         //Colocando el icono del sistema 
+        try{
+            setIconImage(new ImageIcon(getClass().getResource("../Imagenes/accounting_icon.jpg")).getImage());
+        }catch (Exception e){
+            System.out.println("Error al cargar la imagen. Excepcion-> "+e.getMessage());
+        }
         
         this.erX = actual;
         this.erY = anterior;

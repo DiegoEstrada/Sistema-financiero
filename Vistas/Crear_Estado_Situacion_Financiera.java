@@ -1,10 +1,9 @@
 package Vistas;
 
-import Modelo.EstadoFinanciero;
 import Modelo.SituacionFinanciera;
 import java.io.File;
-import java.io.FileWriter;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -35,11 +34,20 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
     
     public Crear_Estado_Situacion_Financiera() {
         initComponents();
+        
+         //Colocando el icono del sistema 
+        try{
+            setIconImage(new ImageIcon(getClass().getResource("../Imagenes/accounting_icon.jpg")).getImage());
+        }catch (Exception e){
+            System.out.println("Error al cargar la imagen. Excepcion-> "+e.getMessage());
+        }
+        
         DefaultListModel l = new DefaultListModel();
         l.addElement("");
         this.jcbTipoCuenta.removeAllItems();
         this.ComboBoxNombreCuenta.removeAllItems();
         this.jlCuentasAgregadas.setModel(l);
+        this.PanelCuentas.setVisible(false);
         this.setVisible(true);
        
     }
@@ -81,6 +89,7 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Crear Estado de Situación Financiera");
+        setResizable(false);
 
         Fondo.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -105,7 +114,7 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
-        jLabel1.setText("Presione el boton para crear un nuevo Estado de Situacion Financiera");
+        jLabel1.setText("Presione el botón para crear un nuevo Estado de Situacion Financiera");
 
         javax.swing.GroupLayout PanelCrearNuevoSFLayout = new javax.swing.GroupLayout(PanelCrearNuevoSF);
         PanelCrearNuevoSF.setLayout(PanelCrearNuevoSFLayout);
@@ -278,7 +287,7 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
                     .addComponent(RdbCapital))
                 .addGap(18, 18, 18)
                 .addComponent(jcbTipoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addGap(33, 33, 33)
                 .addGroup(PanelCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lbNombreCuenta)
                     .addGroup(PanelCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -318,13 +327,12 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
         FondoLayout.setVerticalGroup(
             FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(FondoLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addContainerGap(32, Short.MAX_VALUE)
                 .addComponent(PanelCrearNuevoSF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(PanelCuentas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btRegresar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btRegresar))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -335,7 +343,7 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Fondo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(Fondo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -398,22 +406,10 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
              }
          }
         
-        
-
-        
     }//GEN-LAST:event_btAgregarCuentaActionPerformed
 
     private void jbCrearEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCrearEstadoActionPerformed
-        
-        
-        /*
-        if(this.txtNombreSF.getText().isEmpty())
-        {   
-            System.out.println("Ingresa un nombre a tu sf"); //JOPTION
-        }
-        else
-        {
-        */
+
             String nombre="";
         
             
@@ -423,9 +419,8 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
             
             try{
                 guardarestado.showSaveDialog(this);
-                this.f = guardarestado.getSelectedFile();
-                //nombre = this.guardar.getName();
-                //System.out.println(this.guardar);
+                String nomaux = guardarestado.getSelectedFile().getAbsolutePath()+".txt";
+                this.f = new File(nomaux);
                 SituacionFinanciera situacionfinanciera = new SituacionFinanciera(this.f);
                 this.sf =  situacionfinanciera;
                 if (this.f != null)
@@ -435,6 +430,8 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null,
                                 "El archivo se ha generado correctamente",
                                                         "Información",JOptionPane.INFORMATION_MESSAGE);
+                        this.PanelCrearNuevoSF.setVisible(false);
+                        this.PanelCuentas.setVisible(true);
                 }
                 
                 
@@ -483,16 +480,16 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
     }//GEN-LAST:event_jbEliminarCuentaActionPerformed
 
     private void btFinalizarSFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFinalizarSFActionPerformed
-        this.sf.mostrarCuentas();
+       this.sf.mostrarCuentas();
         if (this.sf.verificarEstado()){
         Inicio forminicio = new Inicio();
         forminicio.setVisible(true);
         this.setVisible(false);
         this.sf.crearEstadoFinanciero(false); //Envio false porque no quiero calcular depresiaciones ni amortizaciones
+        Ventana.ShowInformationMessage("Cuentas balanceadas y agregadas al archivo");
         }
         else
-            Ventana.ShowErrorMessage("Las cuentas ingresadas no estan balanceadas ");  //JOPION
-        
+            Ventana.ShowErrorMessage("Las cuentas ingresadas no estan balanceadas ");  //JOPIO
         
     }//GEN-LAST:event_btFinalizarSFActionPerformed
 
@@ -504,7 +501,7 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
 
    public void asignarValoresCBTipo()
    {
-         if (this.RdbActivo.isSelected())
+        if (this.RdbActivo.isSelected())
         {
              this.jcbTipoCuenta.removeAllItems();
              this.jcbTipoCuenta.addItem("Circulante");
@@ -528,12 +525,11 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
                       this.jcbTipoCuenta.addItem("Capital social");
                       this.jcbTipoCuenta.addItem("Utilidad neta");
                  }
-                 else
-                     Ventana.ShowInformationMessage("Selecciona una opcion"); //JOPTION
+                 //else
+                     //Ventana.ShowInformationMessage("Selecciona una opcion"); //JOPTION
              }
          }
              
-        
            
    }
    
@@ -572,7 +568,7 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
                       //this.ComboBoxNombreCuenta.addItem("Propaganda y publicidad");
                      break;
                  default:
-                     Ventana.ShowInformationMessage("Selecciona un tipo de cuenta"); //JOPTION
+                     //Ventana.ShowInformationMessage("Selecciona un tipo de cuenta"); //JOPTION
                      break;
              }
             
@@ -596,7 +592,7 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
                         this.ComboBoxNombreCuenta.addItem("Acreedores hipotecarios");
                      break;
                  default:
-                      Ventana.ShowInformationMessage("Selecciona una cuenta"); //JOPTION
+                      //Ventana.ShowInformationMessage("Selecciona una cuenta"); //JOPTION
                      break;
                 }
                          
@@ -617,12 +613,12 @@ public class Crear_Estado_Situacion_Financiera extends javax.swing.JFrame {
                             this.ComboBoxNombreCuenta.addItem("Utilidad neta");
                             break;
                         default:
-                             Ventana.ShowInformationMessage("Selecciona una cuenta"); //JOPTION
+                             //Ventana.ShowInformationMessage("Selecciona una cuenta"); //JOPTION
                             break;
                         }
                  }
-                 else
-                     Ventana.ShowInformationMessage("Selecciona un tipo de cuenta"); //JOPTION
+                 //else
+                     //Ventana.ShowInformationMessage("Selecciona un tipo de cuenta"); //JOPTION
              }
          }
    }

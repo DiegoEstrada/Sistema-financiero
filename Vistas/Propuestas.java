@@ -16,11 +16,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -37,9 +34,9 @@ public class Propuestas extends javax.swing.JFrame {
     private ArrayList<String> egresoas;
     private float cajaoriginal;
     private float bancooriginal;
+    private float utilidadNeta;
     private File archivoHistoria;
     private File archivoFlujo;
-    
     //private Map<String,ArrayList<String>> cuentasModificadasSF;
     //private Map<String,ArrayList<String>> cuentasModificadasER;
     private DefaultListModel lista;
@@ -47,6 +44,14 @@ public class Propuestas extends javax.swing.JFrame {
     
     public Propuestas(SituacionFinanciera esf, Resultados ers) {
         initComponents();
+        
+         //Colocando el icono del sistema 
+        try{
+            setIconImage(new ImageIcon(getClass().getResource("../Imagenes/accounting_icon.jpg")).getImage());
+        }catch (Exception e){
+            System.out.println("Error al cargar la imagen. Excepcion-> "+e.getMessage());
+        }
+        
         this.sf = esf;
         this.er = ers;
         
@@ -58,11 +63,11 @@ public class Propuestas extends javax.swing.JFrame {
         
         this.cajaoriginal = sf.obtenerSaldodeLlave("Caja");
         this.bancooriginal =sf.obtenerSaldodeLlave("Bancos");
+        this.utilidadNeta =sf.obtenerSaldodeLlave("Utilidad neta");
         
         this.historia = new ArrayList();
         this.ingresos = new ArrayList();
         this.egresoas = new ArrayList();
-        
         
         String rutaoriginal = this.sf.getF().getParent();
         String nombres [] = nombresNuevosArchivos();
@@ -78,6 +83,9 @@ public class Propuestas extends javax.swing.JFrame {
         
         this.sfProforma = new SituacionFinanciera(proformaSF);
         this.erProforma = new Resultados(proformaER);
+        
+        
+        
         
         Map<String,ArrayList<String>> cuentasFiltradasSF  = filtrarCuentasSuma();
         Map<String,ArrayList<String>> cuentasOriginalesER  = filtrarCuentasUtilidad();
@@ -104,8 +112,6 @@ public class Propuestas extends javax.swing.JFrame {
         
         cargarCuentasCB();
     }
-    
-    
 
     public void cargarCuentasCB()
     {
@@ -189,8 +195,6 @@ public class Propuestas extends javax.swing.JFrame {
         jlCambios.setModel(lista);
     }
     
-    
-    
     public Map<String,ArrayList<String>> filtrarCuentasSuma()
     {
         String palabraAquitarSF = "Suma";
@@ -209,6 +213,7 @@ public class Propuestas extends javax.swing.JFrame {
             {
                 datos = cuentasOriginalesSF.get(nombreactual);
                 cuentasFiltradas.put(nombreactual, datos);
+                //System.out.println("CUENTAS:: "+nombreactual+ " ->"+datos.get(2));
             }
         }
         
@@ -237,7 +242,7 @@ public class Propuestas extends javax.swing.JFrame {
             //float bancos = sfProforma.obtenerSaldodeLlave("Bancos");
             float bc = this.cajaoriginal + this.bancooriginal;
             System.out.println("CAJA + BANCOS = "+bc);
-            wr.println(formatocuentas("Saldo inicial", String.valueOf(bc)));
+            wr.println(formatocuentas("Suma inicial", ""+(long)bc));;
             wr.println("Ingresos");
             for (int i = 0; i < this.ingresos.size(); i++) {
             
@@ -245,7 +250,7 @@ public class Propuestas extends javax.swing.JFrame {
                 
                 wr.println(ingresos.get(i));
             }
-            wr.println(formatocuentas("Suma ingresos", String.valueOf(s)));
+            wr.println(formatocuentas("Suma ingresos", ""+(long)s));
             
             wr.println("Egresos");
             for (int i = 0; i < this.egresoas.size(); i++) {
@@ -253,9 +258,9 @@ public class Propuestas extends javax.swing.JFrame {
                 
                 wr.println(egresoas.get(i));
             }
-            wr.println(formatocuentas("Suma egresos", String.valueOf(r)));
+            wr.println(formatocuentas("Suma egresos", ""+(long)r));
             float u =bc+s-r;
-            wr.println(formatocuentas("Saldo final", String.valueOf(u)));
+            wr.println(formatocuentas("Saldo final", ""+(long)u));
             
             wr.close();
             bw.close();
@@ -358,6 +363,7 @@ public class Propuestas extends javax.swing.JFrame {
         return formato;
     }
     
+    
     public Map<String, ArrayList<String>> filtrarCuentasUtilidad()
     {
         String nombreactual;
@@ -375,6 +381,7 @@ public class Propuestas extends javax.swing.JFrame {
             {
                 datos = cuentasOriginalesER.get(nombreactual);
                 cuentasFiltradas.put(nombreactual, datos);
+                
             }
         }
         
@@ -390,13 +397,12 @@ public class Propuestas extends javax.swing.JFrame {
         jlCambios = new javax.swing.JList<>();
         lbCuentasMod = new javax.swing.JLabel();
         btModificar = new javax.swing.JButton();
-        btRegresar = new javax.swing.JButton();
+        btCerrar = new javax.swing.JButton();
         jbRegistrar = new javax.swing.JButton();
         lbCuentaAMod = new javax.swing.JLabel();
         ComboBoxCuentasMod = new javax.swing.JComboBox<>();
         lbNuevoSaldo = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Realizar Propuestas");
         setResizable(false);
 
@@ -424,12 +430,12 @@ public class Propuestas extends javax.swing.JFrame {
             }
         });
 
-        btRegresar.setBackground(new java.awt.Color(255, 255, 255));
-        btRegresar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        btRegresar.setText("Regresar");
-        btRegresar.addActionListener(new java.awt.event.ActionListener() {
+        btCerrar.setBackground(new java.awt.Color(255, 255, 255));
+        btCerrar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btCerrar.setText("Cerrar");
+        btCerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btRegresarActionPerformed(evt);
+                btCerrarActionPerformed(evt);
             }
         });
 
@@ -447,6 +453,11 @@ public class Propuestas extends javax.swing.JFrame {
 
         ComboBoxCuentasMod.setFont(new java.awt.Font("Times New Roman", 2, 11)); // NOI18N
         ComboBoxCuentasMod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ComboBoxCuentasMod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboBoxCuentasModActionPerformed(evt);
+            }
+        });
 
         lbNuevoSaldo.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         lbNuevoSaldo.setText("Nuevo Saldo:");
@@ -460,23 +471,24 @@ public class Propuestas extends javax.swing.JFrame {
                 .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FondoLayout.createSequentialGroup()
                         .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btModificar)
                             .addGroup(FondoLayout.createSequentialGroup()
                                 .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(lbNuevoSaldo)
                                     .addComponent(lbCuentaAMod))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(ComboBoxCuentasMod, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtNuevoSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(ComboBoxCuentasMod, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(btModificar)
+                                        .addComponent(txtNuevoSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(jbRegistrar))
                         .addGap(18, 18, 18)
                         .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1)
                             .addGroup(FondoLayout.createSequentialGroup()
                                 .addComponent(lbCuentasMod)
-                                .addGap(0, 379, Short.MAX_VALUE))))
-                    .addComponent(btRegresar, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(0, 335, Short.MAX_VALUE))))
+                    .addComponent(btCerrar, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         FondoLayout.setVerticalGroup(
@@ -499,10 +511,10 @@ public class Propuestas extends javax.swing.JFrame {
                         .addComponent(jbRegistrar)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FondoLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btRegresar)
+                        .addComponent(btCerrar)
                         .addGap(6, 6, 6))))
         );
 
@@ -523,6 +535,10 @@ public class Propuestas extends javax.swing.JFrame {
     private void btModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModificarActionPerformed
         
         //Vamos a modifiar en los dos estados el valor que modifique
+        System.out.println("Utilidad Neta SFProforma--->"+sfProforma.obtenerSaldodeLlave("Utilidad neta"));
+        //System.out.println("Utilidad Neta ERProforma--->"+erProforma.obtenerSaldodeLlave("Utilidad neta"));
+        System.out.println("Utilidad Neta SF--->"+sf.obtenerSaldodeLlave("Utilidad neta"));
+        //System.out.println("Utilidad Neta ER--->"+er.obtenerSaldodeLlave("Utilidad neta"));
         
         String cuentaACambiar = obtenerNombreSeleccionadaCB();
         String cuentaActual;
@@ -549,6 +565,7 @@ public class Propuestas extends javax.swing.JFrame {
                     
                     this.historia.add("Modificando "+ cuentaACambiar+ " de "+datos.get(0)+ " por  "+this.txtNuevoSaldo.getText());
 
+                        
                     if(cuentaActual.contains("Proveedores") || cuentaActual.contains("Acreedores") || cuentaActual.contains("Deudores") || cuentaActual.contains("Documentos por pagar")){
                         dif = sf.obtenerSaldodeLlave(cuentaActual);
                         dif = dif -Float.parseFloat(this.txtNuevoSaldo.getText());
@@ -561,16 +578,31 @@ public class Propuestas extends javax.swing.JFrame {
                         ingresos.add(formatocuentas(cuentaACambiar, String.valueOf(dif)));
                     }
                     
-                    else if(cuentaActual.contains("Documentos por cobrar")){
+                    else if( cuentaActual.contains("Documentos por cobrar" ) || cuentaActual.contains("Clientes" )|| cuentaActual.contains("Deudores" )){
                         
                         dif = sf.obtenerSaldodeLlave(cuentaActual);
                         dif = dif-Float.parseFloat(this.txtNuevoSaldo.getText());
                         ingresos.add(formatocuentas(cuentaACambiar, String.valueOf(dif)));
                     }
+                    else if(cuentaActual.contains("operacion")){
+                        
+                        dif = er.obtenerSaldodeLlave(cuentaActual);
+                        dif = dif-Float.parseFloat(this.txtNuevoSaldo.getText());
+                        if(dif<=0){
+                            dif = dif *-1;
+                            egresoas.add(formatocuentas("Intereses", String.valueOf(dif)));
+                        }
+                        else{
+                            ingresos.add(formatocuentas("Inversion", String.valueOf(dif)));
+                        }
+                         
+                        
+                    }
                     
                     
                     erProforma.modificarValorCuenta(cuentaACambiar, this.txtNuevoSaldo.getText());
                     //erProforma.agregarCuenta(cuentaActual, this.txtNuevoSaldo.getText());
+                    System.out.println(sf.obtenerSaldodeLlave("Ventas ER"));
                     
                     
                     agregarElemntoAJLista("Cuenta "+ cuentaACambiar+ " de Estado de Resultados modifcada con "+this.txtNuevoSaldo.getText());
@@ -610,13 +642,23 @@ public class Propuestas extends javax.swing.JFrame {
                         dif = dif -Float.parseFloat(this.txtNuevoSaldo.getText());
                         egresoas.add(formatocuentas(cuentaACambiar, String.valueOf(dif)));
                     }
-                    else if(cuentaActual.contains("Ventas") || cuentaActual.contains("Documentos por cobrar")){
-                        dif = sf.obtenerSaldodeLlave(cuentaActual);
+                    else if(cuentaActual.contains("Ventas")){
+                        
+                        dif = er.obtenerSaldodeLlave(cuentaActual);
                         dif = dif-Float.parseFloat(this.txtNuevoSaldo.getText());
                         ingresos.add(formatocuentas(cuentaACambiar, String.valueOf(dif)));
                     }
                     
+                    else if(cuentaActual.contains("Documentos por cobrar")){
+                        
+                        dif = sf.obtenerSaldodeLlave(cuentaActual);
+                        dif = dif-Float.parseFloat(this.txtNuevoSaldo.getText());
+                        ingresos.add(formatocuentas(cuentaACambiar, String.valueOf(dif)));
+                    }
+                   
+                   
                     sfProforma.modificarValorCuenta(cuentaACambiar, this.txtNuevoSaldo.getText());
+                    System.out.println(sf.obtenerSaldodeLlave("Ventas"));
                     //sfProforma.eliminarCuenta(cuentaActual);
                     //sfProforma.agregarCuenta(cuentaActual, datos.get(0), datos.get(1), this.txtNuevoSaldo.getText());
                     agregarElemntoAJLista("Cuenta "+ cuentaACambiar+ " de Estado de Situación  modifcada con "+this.txtNuevoSaldo.getText());
@@ -632,19 +674,25 @@ public class Propuestas extends javax.swing.JFrame {
                
             }
             
+            
         }
-        
-        
-        
-        
     }//GEN-LAST:event_btModificarActionPerformed
 
     private void jbRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRegistrarActionPerformed
 
+        //System.out.println("VAL FINAL "+ sfProforma.obtenerSaldodeLlave("Utilidad neta"));
+        
         if(this.sfProforma.verificarEstado())
         {
             try {
                 System.out.println("Cuentas bien");
+                
+                if(this.sf.getF().getName().contains("Proforma") || this.sf.getF().getName().contains("proforma"))
+                {
+                    this.sfProforma.crearEstadoFinanciero(false); //No calcular amortizaciones ni depresiaciones
+                    this.erProforma.crearEstadoFinanciero(false); //Estas fueron calculadas desde que se creeo el proforma
+                }
+                else{
                 this.sfProforma.crearEstadoFinanciero(true);
                 
                 this.sfProforma.leerEstadoFinanciero();
@@ -657,25 +705,25 @@ public class Propuestas extends javax.swing.JFrame {
                 
                 this.erProforma.setAmprtizacionDepresiacion(a+d);
                 this.erProforma.crearEstadoFinanciero(true);
-                
+                }
                 
                 escribirHistoria();
                 escribirER();
                 
                 Ventana.ShowInformationMessage("¡Modificaciones realizadas con exito!");
-                File fSF= this.sf.getF();
-                File fER= this.er.getF();
+                //File fSF= this.sf.getF();
+                //File fER= this.er.getF();
                 
-                AnalisisEF EF = new AnalisisEF(fSF, fER);
-                EF.setVisible(true);
-                this.setVisible(false);
+                //AnalisisEF EF = new AnalisisEF(fSF, fER);
+                //EF.setVisible(true);
+                //this.setVisible(false);
             } catch (IOException ex) {
-                System.out.println("Excepcion en el netodojbRegistrarAction ->" +ex.getMessage());;
+                System.out.println("Excepcion en el metodojbRegistrarAction ->" +ex.getMessage());;
             }
         }
     }//GEN-LAST:event_jbRegistrarActionPerformed
 
-    private void btRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegresarActionPerformed
+    private void btCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCerrarActionPerformed
         // TODO add your handling code here:
         File fSF= this.sf.getF();
         File fER= this.er.getF();
@@ -683,15 +731,19 @@ public class Propuestas extends javax.swing.JFrame {
         AnalisisEF EF = new AnalisisEF(fSF, fER);
         EF.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_btRegresarActionPerformed
+    }//GEN-LAST:event_btCerrarActionPerformed
+
+    private void ComboBoxCuentasModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxCuentasModActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboBoxCuentasModActionPerformed
 
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboBoxCuentasMod;
     private javax.swing.JPanel Fondo;
+    private javax.swing.JButton btCerrar;
     private javax.swing.JButton btModificar;
-    private javax.swing.JButton btRegresar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbRegistrar;
     private javax.swing.JList<String> jlCambios;

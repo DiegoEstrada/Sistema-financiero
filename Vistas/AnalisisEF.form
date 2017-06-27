@@ -446,7 +446,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Times New Roman" size="12" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Ver Diferencias y Porcientos de Situacio&#xf3;n financiera"/>
+                <Property name="text" type="java.lang.String" value="Ver Diferencias y Porcientos de Situaci&#xf3;n Financiera"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbSFPorcientosDiferenciasActionPerformed"/>
@@ -460,7 +460,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Times New Roman" size="12" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Ver Difernecias y Porcientos Estado de Resultados"/>
+                <Property name="text" type="java.lang.String" value="Ver Diferencias y Porcientos Estado de Resultados"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbERPorcientosDieferneciasActionPerformed"/>

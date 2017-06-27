@@ -1,0 +1,8 @@
+					Estado de Resultados ALSEA SAB de 2011.txt					
+Ventas               10668771
+Menos
+Costo de ventas      3787599
+Utlidad bruta        6881172
+Menos
+Gastos de operacion  3254135
+Utlidad neta         3627037

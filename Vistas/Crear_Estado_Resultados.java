@@ -6,9 +6,9 @@
 package Vistas;
 
 import Modelo.Resultados;
-import Modelo.SituacionFinanciera;
 import java.io.File;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -25,9 +25,17 @@ public class Crear_Estado_Resultados extends javax.swing.JFrame {
         
     public Crear_Estado_Resultados() {
         initComponents();
+        
+         //Colocando el icono del sistema 
+        try{
+            setIconImage(new ImageIcon(getClass().getResource("../Imagenes/accounting_icon.jpg")).getImage());
+        }catch (Exception e){
+            System.out.println("Error al cargar la imagen. Excepcion-> "+e.getMessage());
+        }
+        
         DefaultListModel l = new DefaultListModel();
         l.addElement("");
-        //this.jComboBox1.removeAllItems();
+        this.PanelER.setVisible(false);
         this.ComboBoxNombreCuenta.removeAllItems();
         this.ComboBoxNombreCuenta.removeAllItems();
         this.jlCuentasAgregadas.setModel(l);
@@ -62,6 +70,7 @@ public class Crear_Estado_Resultados extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Crear Estado de Resultados");
+        setResizable(false);
 
         Fondo.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -135,12 +144,12 @@ public class Crear_Estado_Resultados extends javax.swing.JFrame {
                                 .addComponent(txtSaldoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btAgregarCuenta)))
-                        .addGap(10, 10, 10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(PanelERLayout.createSequentialGroup()
                         .addGap(190, 190, 190)
                         .addComponent(lbCuentas)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         PanelERLayout.setVerticalGroup(
             PanelERLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,8 +170,8 @@ public class Crear_Estado_Resultados extends javax.swing.JFrame {
                         .addComponent(jbEliminarCuenta)
                         .addGap(69, 69, 69)
                         .addComponent(jbCrearEstado))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         PanelCrearER.setBackground(new java.awt.Color(153, 204, 255));
@@ -228,24 +237,25 @@ public class Crear_Estado_Resultados extends javax.swing.JFrame {
         FondoLayout.setVerticalGroup(
             FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FondoLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addContainerGap(54, Short.MAX_VALUE)
                 .addComponent(PanelCrearER, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PanelER, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btRegresar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btRegresar))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 688, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(Fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 739, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 1, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Fondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(Fondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -277,6 +287,9 @@ public class Crear_Estado_Resultados extends javax.swing.JFrame {
 
     private void btRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegresarActionPerformed
         // TODO add your handling code here:
+        Inicio I = new Inicio();
+        this.setVisible(false);
+        I.setVisible(true);
     }//GEN-LAST:event_btRegresarActionPerformed
 
     private void jbCrearArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCrearArchivoActionPerformed
@@ -286,9 +299,8 @@ public class Crear_Estado_Resultados extends javax.swing.JFrame {
             
             try{
                 guardarestado.showSaveDialog(this);
-                this.guardar = guardarestado.getSelectedFile();
-                //nombre = this.guardar.getName();
-                //System.out.println(this.guardar);
+                String nomaux = guardarestado.getSelectedFile().getAbsolutePath()+".txt";
+                this.guardar = new File(nomaux);
                 Resultados estadodeResultados = new Resultados(guardar);
                 this.er =  estadodeResultados;
                 if (this.guardar != null)
@@ -302,6 +314,8 @@ public class Crear_Estado_Resultados extends javax.swing.JFrame {
                                                         "Información",JOptionPane.INFORMATION_MESSAGE);
                         
                         asignarCuentasCB();
+                        this.PanelER.setVisible(true);
+                        this.PanelCrearER.setVisible(false);
                 }
                 
                 
@@ -342,6 +356,7 @@ public class Crear_Estado_Resultados extends javax.swing.JFrame {
         forminicio.setVisible(true);
         this.setVisible(false);
         this.er.crearEstadoFinanciero(false); //Envio falso porque no quiero caluclar depresiaciones ni amoritizaciones
+        Ventana.ShowInformationMessage(this.guardar.getName()+" creado con éxito");
     }//GEN-LAST:event_jbCrearEstadoActionPerformed
 
     public void asignarCuentasCB()

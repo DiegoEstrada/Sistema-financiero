@@ -24,6 +24,13 @@ public class Inicio extends javax.swing.JFrame {
     
     
     public Inicio() {
+        
+        //Colocando el icono del sistema 
+        try{
+            setIconImage(new ImageIcon(getClass().getResource("../Imagenes/accounting_icon.jpg")).getImage());
+        }catch (Exception e){
+            System.out.println("Error al cargar la imagen. Excepcion-> "+e.getMessage());
+        }
         estados = new File[2];
         initComponents();
         this.jpESCOM.setVisible(true);
@@ -64,7 +71,6 @@ public class Inicio extends javax.swing.JFrame {
         Rdb_Situacion_Financiera = new javax.swing.JRadioButton();
         Rdb_Estado_Resultados = new javax.swing.JRadioButton();
         btnCrear_Estado_Financiero = new javax.swing.JButton();
-        RdbFlujoEfectivo = new javax.swing.JRadioButton();
         jpRealizarAnalisis = new javax.swing.JPanel();
         jlEdosCargados = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -159,16 +165,6 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
-        RdbFlujoEfectivo.setBackground(new java.awt.Color(153, 204, 255));
-        Rdbs_Estados_Financieros.add(RdbFlujoEfectivo);
-        RdbFlujoEfectivo.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        RdbFlujoEfectivo.setText("Flujo de Efectivo");
-        RdbFlujoEfectivo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RdbFlujoEfectivoActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jpEdosfinancierosLayout = new javax.swing.GroupLayout(jpEdosfinancieros);
         jpEdosfinancieros.setLayout(jpEdosfinancierosLayout);
         jpEdosfinancierosLayout.setHorizontalGroup(
@@ -180,9 +176,6 @@ public class Inicio extends javax.swing.JFrame {
             .addGroup(jpEdosfinancierosLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(jpEdosfinancierosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpEdosfinancierosLayout.createSequentialGroup()
-                        .addComponent(RdbFlujoEfectivo)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(Rdb_Estado_Resultados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Rdb_Situacion_Financiera, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE))
                 .addContainerGap())
@@ -194,9 +187,7 @@ public class Inicio extends javax.swing.JFrame {
                 .addComponent(Rdb_Situacion_Financiera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Rdb_Estado_Resultados)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(RdbFlujoEfectivo)
-                .addGap(23, 23, 23)
+                .addGap(46, 46, 46)
                 .addComponent(btnCrear_Estado_Financiero, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(48, 48, 48))
         );
@@ -519,10 +510,6 @@ public class Inicio extends javax.swing.JFrame {
             
     }//GEN-LAST:event_btnCrear_Estado_FinancieroActionPerformed
 
-    private void RdbFlujoEfectivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RdbFlujoEfectivoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RdbFlujoEfectivoActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -634,7 +621,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel Encabezado_1;
     private javax.swing.JLabel Encabezado_2;
     private javax.swing.JPanel Fondo;
-    private javax.swing.JRadioButton RdbFlujoEfectivo;
     private javax.swing.JRadioButton Rdb_Estado_Resultados;
     private javax.swing.JRadioButton Rdb_Situacion_Financiera;
     private javax.swing.ButtonGroup Rdbs_Estados_Financieros;

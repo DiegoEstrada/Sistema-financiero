@@ -1,0 +1,8 @@
+			 Estado de flujos de efectivo  			
+Suma inicial            10994793
+Ingresos
+Inversion               11578.0
+Suma ingresos           11578
+Egresos
+Suma egresos            0
+Saldo final             11006371

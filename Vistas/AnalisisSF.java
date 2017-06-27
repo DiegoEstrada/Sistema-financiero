@@ -11,6 +11,7 @@ import Modelo.SituacionFinanciera;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -25,6 +26,13 @@ public class AnalisisSF extends javax.swing.JFrame {
     
     public AnalisisSF(SituacionFinanciera acutual, SituacionFinanciera anterior) {
         initComponents();
+        
+         //Colocando el icono del sistema 
+        try{
+            setIconImage(new ImageIcon(getClass().getResource("../Imagenes/accounting_icon.jpg")).getImage());
+        }catch (Exception e){
+            System.out.println("Error al cargar la imagen. Excepcion-> "+e.getMessage());
+        }
         
         this.sfX = acutual; 
         this.sfY = anterior;

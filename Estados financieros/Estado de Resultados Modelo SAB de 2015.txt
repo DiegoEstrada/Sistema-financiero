@@ -1,9 +1,0 @@
-					Estado de Resultados Modelo SAB de 2015.txt					
-Ventas 71403
-Menos
-Costo de ventas 9893
-Utilidad bruta  61510.0
-Menos
-Gastos de administracion 17595
-Gastos de operacion 43915.0
-Utilidad neta 	43915.0

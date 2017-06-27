@@ -16,6 +16,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Map;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -40,6 +41,7 @@ public class AnalisisEF extends javax.swing.JFrame {
     
         
     public AnalisisEF(File nsf, File ner) {
+        
         this.estados = new File[2];
         //System.out.println("--------"+nsf);
         //System.out.println("--------yyyy"+ner);
@@ -59,6 +61,13 @@ public class AnalisisEF extends javax.swing.JFrame {
         System.out.println(nombresOrdenados1.size());
         
         initComponents();
+        
+         //Colocando el icono del sistema 
+        try{
+            setIconImage(new ImageIcon(getClass().getResource("../Imagenes/accounting_icon.jpg")).getImage());
+        }catch (Exception e){
+            System.out.println("Error al cargar la imagen. Excepcion-> "+e.getMessage());
+        }
         
         //Modificando la visibilidad de los paneles
         this.PanelRamo.setVisible(true);
@@ -690,8 +699,8 @@ public class AnalisisEF extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         //Calculo del pe y PEU
-        float porcentaje;
-        float preciounitario;
+        long porcentaje;
+        long preciounitario;
         String s=null;
         String precio=null;
         
@@ -704,20 +713,21 @@ public class AnalisisEF extends javax.swing.JFrame {
         } catch (Exception e) {
         }
         
-        porcentaje=Float.parseFloat(s);
-        preciounitario=Float.parseFloat(precio);
+        porcentaje=Long.parseLong(s);
+        preciounitario=Long.parseLong(precio);
         
         PuntoEquilibrio peu = new PuntoEquilibrio(porcentaje, preciounitario, erX.getCuentas(),sfX.importarNombreySaldo());
         
-        DecimalFormat df = new DecimalFormat("0.00"); 
+         
         
-        float valpeu;
-        valpeu = Float.parseFloat(peu.calcularPEU());
+        long valpeu;
+        float aux = Float.parseFloat(peu.calcularPEU());
+        valpeu = (long)aux;
         //nventas = Float.parseFloat(peu.numVentasPEU());
         //cvt = Float.parseFloat(peu.c)
         
-        Ventana.ShowInformationMessage("Punto de equilibrio con  "+porcentaje+" % de utilidad = "+Redondear(valpeu, 2));
-        Ventana.ShowInformationMessage("Número de ventas = "+Redondear(peu.numVentasPEU(), 2));
+        Ventana.ShowInformationMessage("Punto de equilibrio con  "+porcentaje+" % de utilidad = "+(long)(Redondear((long)valpeu, 2)));
+        Ventana.ShowInformationMessage("Número de unidades = "+Redondear(peu.numVentasPEU(), 2));
         Ventana.ShowInformationMessage("Costo variable total = "+Redondear(peu.cvtPEU(), 2));
     }//GEN-LAST:event_btPUActionPerformed
 
